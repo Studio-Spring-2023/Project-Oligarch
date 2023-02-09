@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) //Input.GetKeyUp(A)
         {
             //Debug.Log("Stop");
-            rb.AddForce(-moveDirection.normalized * moveSpeed * 8f, ForceMode.Acceleration);
+            rb.AddForce(-moveDirection.normalized * moveSpeed * 8f, ForceMode.Acceleration); //newton's law of inertia, 8f can be adjusted for a bit of momentum to the stop
             
         }
     }
