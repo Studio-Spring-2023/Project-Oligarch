@@ -10,14 +10,17 @@ public class Movement : MonoBehaviour
 
     public float groundDrag;
 
+    public float slowDown;
+
     public float playerHeight;
     public LayerMask whatIsGrounded;
     bool grounded;
 
-    float horizontalInput;
-    float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
 
     Vector3 moveDirection;
+
 
     Rigidbody rb;
 
@@ -36,7 +39,6 @@ public class Movement : MonoBehaviour
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
-
 
         MyInput();
         SpeedControl();
@@ -66,6 +68,7 @@ public class Movement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
+
     }
 
     private void MovePlayer()
@@ -76,7 +79,12 @@ public class Movement : MonoBehaviour
 
         else if(!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulti, ForceMode.Force);
-
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) //Input.GetKeyUp(A)
+        {
+            //Debug.Log("Stop");
+            rb.AddForce(-moveDirection.normalized * moveSpeed * 8f, ForceMode.Acceleration);
+            
+        }
     }
 
     private void SpeedControl()
