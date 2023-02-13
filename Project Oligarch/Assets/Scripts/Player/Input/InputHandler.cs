@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles all input from the Player. 
+/// Contains static events to immediately trigger input related behavior.
+/// </summary>
 public class InputHandler : MonoBehaviour
 {
     private PlayerControls playerInputActions;
@@ -48,10 +52,10 @@ public class InputHandler : MonoBehaviour
 
         InteractControls.Interact.performed += ReceivedInteractInput;
 
-        AbilityControls.Primary.performed += AbilityPrimaryInput;
-        AbilityControls.Secondary.performed += AbilitySecondaryInput;
-        AbilityControls.Special.performed += AbilitySpecialInput;
-        AbilityControls.Ultimate.performed += AbilityUltimateInput;
+        AbilityControls.Primary.performed += PrimaryAbilityInput;
+        AbilityControls.Secondary.performed += SecondaryAbilityInput;
+        AbilityControls.Special.performed += SpecialAbilityInput;
+        AbilityControls.Ultimate.performed += UltimateAbilityInput;
 
         UIControls.Pause.performed += UIPauseInput;
         UIControls.Select.performed += UISelectInput;
@@ -65,12 +69,12 @@ public class InputHandler : MonoBehaviour
 
     private void CacheMouseScreenPos(InputAction.CallbackContext ctx)
     {
-        MovementInput = ctx.ReadValue<Vector2>();
+        MouseScreenPos = ctx.ReadValue<Vector2>();
     }
 
     private void CacheMouseScroll(InputAction.CallbackContext ctx)
     {
-        MovementInput = ctx.ReadValue<Vector2>();
+        MouseScroll = ctx.ReadValue<Vector2>();
     }
 
     public static void LockCursor()
@@ -104,26 +108,26 @@ public class InputHandler : MonoBehaviour
     #region Interact Controls
     private void ReceivedInteractInput(InputAction.CallbackContext ctx)
     {
-        //OnInteractInput?.Invoke(InputType);
+        
     }
     #endregion
 
     #region Abilities Controls
-    private void AbilityPrimaryInput(InputAction.CallbackContext ctx)
+    private void PrimaryAbilityInput(InputAction.CallbackContext ctx)
     {
 
     }
 
-    private void AbilitySecondaryInput(InputAction.CallbackContext ctx)
+    private void SecondaryAbilityInput(InputAction.CallbackContext ctx)
     {
 
     }
 
-    private void AbilitySpecialInput(InputAction.CallbackContext ctx)
+    private void SpecialAbilityInput(InputAction.CallbackContext ctx)
     {
 
     }
-    private void AbilityUltimateInput(InputAction.CallbackContext ctx)
+    private void UltimateAbilityInput(InputAction.CallbackContext ctx)
     {
 
     }
@@ -159,10 +163,10 @@ public class InputHandler : MonoBehaviour
         UIControls.Pause.performed -= UIPauseInput;
         UIControls.Select.performed -= UISelectInput;
 
-        AbilityControls.Primary.performed -= AbilityPrimaryInput;
-        AbilityControls.Secondary.performed -= AbilitySecondaryInput;
-        AbilityControls.Special.performed -= AbilitySpecialInput;
-        AbilityControls.Ultimate.performed -= AbilityUltimateInput;
+        AbilityControls.Primary.performed -= PrimaryAbilityInput;
+        AbilityControls.Secondary.performed -= SecondaryAbilityInput;
+        AbilityControls.Special.performed -= SpecialAbilityInput;
+        AbilityControls.Ultimate.performed -= UltimateAbilityInput;
 
         InteractControls.Interact.performed -= ReceivedInteractInput;
 
