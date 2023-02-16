@@ -1,5 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum AbilityInput
+{
+    Primary,
+    Secondary,
+    Special,
+    Ultimate,
+    None
+}
 
 /// <summary>
 /// Handles all input from the Player. 
@@ -7,25 +17,34 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class InputHandler : MonoBehaviour
 {
-    private PlayerControls playerInputActions;
+    //Singleton for InputHandler
+    public static InputHandler PlayerInput { get; private set; }
 
-    private PlayerControls.CameraActions CameraControls;
-    private PlayerControls.MovementActions MovementControls;
-    private PlayerControls.InteractActions InteractControls;
-    private PlayerControls.AbilitiesActions AbilityControls;
-    private PlayerControls.UIActions UIControls;
+    //Input System Maps & Actions
+	private PlayerControls playerInputActions;
+	private PlayerControls.CameraActions CameraControls;
+	private PlayerControls.MovementActions MovementControls;
+	private PlayerControls.InteractActions InteractControls;
+	private PlayerControls.AbilitiesActions AbilityControls;
+	private PlayerControls.UIActions UIControls;
 
-    public static Vector2 MouseDelta { get; private set; }
-    public static Vector2 MouseScreenPos { get; private set; }
-    public static Vector2 MouseScroll { get; private set; }
-    public static Vector2 MovementInput { get; private set; }
+	//Mouse Global Variables
+	public static Vector2 MouseDelta { get; private set; }
+	public static Vector2 MouseScreenPos { get; private set; }
+	public static Vector2 MouseScroll { get; private set; }
+	public static Vector2 MovementInput { get; private set; }
 
-    //public static event Action<InteractInput> OnInteractInput;
-    //public static event Action OnMenuInput;
+    //Ability Global Variables
+    public static AbilityInput LastAbilityInput { get; private set; }
+
+    //Events
+	public static event Action OnAbilityInput;
 
     public void Awake()
     {
-        playerInputActions = new PlayerControls();
+        PlayerInput = this;
+
+		playerInputActions = new PlayerControls();
 
         CameraControls = playerInputActions.Camera;
         MovementControls = playerInputActions.Movement;
@@ -101,7 +120,7 @@ public class InputHandler : MonoBehaviour
 
     private void CacheJumpInput(InputAction.CallbackContext ctx)
     {
-
+        
     }
     #endregion
 
@@ -115,26 +134,30 @@ public class InputHandler : MonoBehaviour
     #region Abilities Controls
     private void PrimaryAbilityInput(InputAction.CallbackContext ctx)
     {
-
-    }
+        LastAbilityInput = AbilityInput.Primary;
+        OnAbilityInput?.Invoke();
+	}
 
     private void SecondaryAbilityInput(InputAction.CallbackContext ctx)
     {
+		LastAbilityInput = AbilityInput.Secondary;
+		OnAbilityInput?.Invoke();
+	}
 
-    }
-
-    private void SpecialAbilityInput(InputAction.CallbackContext ctx)
+	private void SpecialAbilityInput(InputAction.CallbackContext ctx)
     {
-
-    }
-    private void UltimateAbilityInput(InputAction.CallbackContext ctx)
+		LastAbilityInput = AbilityInput.Special;
+		OnAbilityInput?.Invoke();
+	}
+	private void UltimateAbilityInput(InputAction.CallbackContext ctx)
     {
+		LastAbilityInput = AbilityInput.Ultimate;
+		OnAbilityInput?.Invoke();
+	}
+	#endregion
 
-    }
-    #endregion
-
-    #region UI Controls
-    private void UIPauseInput(InputAction.CallbackContext ctx)
+	#region UI Controls
+	private void UIPauseInput(InputAction.CallbackContext ctx)
     {
 
     }

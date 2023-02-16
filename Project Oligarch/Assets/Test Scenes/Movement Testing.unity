@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 1753987426}
   - component: {fileID: 1753987425}
   - component: {fileID: 1753987424}
+  - component: {fileID: 1753987429}
   - component: {fileID: 1753987428}
   m_Layer: 0
   m_Name: Player
@@ -513,6 +514,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   MoveSpeed: 0
+--- !u!114 &1753987429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753987422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9efee1249abaec344b9560c38b6c271e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2068404332
 GameObject:
   m_ObjectHideFlags: 0
