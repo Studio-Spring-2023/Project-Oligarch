@@ -13,6 +13,8 @@ public class Player_Movement_New_Input : MonoBehaviour
 
     public Transform camTarget;
 
+    public bool isLookTarget;
+
     private void Awake ( )
     {
         playerInput = new PlayerInput ( );
