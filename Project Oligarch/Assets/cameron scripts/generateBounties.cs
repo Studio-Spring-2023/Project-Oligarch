@@ -15,19 +15,8 @@ public class generateBounties : MonoBehaviour
     //! The payout at the end of the Bounty.
     //! ----- If there are sub-objectives that increase the end payout 
 
-    //public string Planet;
-    //public string bountyType;
-    //public string bountyRisk;
+    //public string[] planets = {"earth" , "mars" , "venus" , "jupiter"};
     
-      //  public string time;
-        //public string enemyDif;
-
-    //public string payout;
-    //public string subObjectives;
-
-    public void bounties(){
- 
-    public string[] planets = {"earth" , "mars" , "venus" , "jupiter"};
 
     public string[] bountyType = {"kill" , "capture" , "rescue"};
 
@@ -40,19 +29,36 @@ public class generateBounties : MonoBehaviour
     public int[] payout = {100 , 200 , 300 , 500};
 
     public string[] subObjectives = {" fastest time" , "dont get seen" , "dont get hit" , "find all loot"};
-   
-    };
-   
-   public void update()
-    { 
-        Debug.Log(planets[1]);
-        Debug.Log(bountyType[1]);
-        Debug.Log(bountyRisk[1]);
-        Debug.Log(time[1]);
-        Debug.Log(enemyDif[1]);
-        Debug.Log(payout[1]);
-        Debug.Log(subObjectives[1]);
 
+    
+    public void Main()
+    {
+        var planets = new List<string>() { "earth", "mars", "venus", "jupiter" };
+        planets.Insert( 4, "saturn" );//add saturn to the list after jupiter?
+
+        
+    }
+
+    public void Awake()
+    {
+        //Debug.Log( "planet: " + planets[1] );
+        Debug.Log( "bounty type: " + bountyType[1] );
+        Debug.Log( "bounty risk: " + bountyRisk[1] );
+        Debug.Log( "time: " + time[1] );
+        Debug.Log( "difficulty: " + enemyDif[1] );
+        Debug.Log( "payout: " + payout[1] );
+        Debug.Log( "sub objectives: " + subObjectives[1] );
+        
+       
+        
+        //! cant seem to get this to work
+
+        var Bounties = new List<string>();
+        //Bounties.AddRange(planets);
+        foreach (var item in Bounties)
+        {
+            Debug.Log( Bounties.ToString() );
+        }
     }
 
 
