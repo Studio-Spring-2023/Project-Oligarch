@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beam_Pistol_Control : MonoBehaviour
+public class projectiles : MonoBehaviour
 {
     public int dam;
-    public int bulletsPerTap;
-    public int bulletsShot;
     public int magSize;
+    public int bulletsPerTap;
     public int bulletsLeft;
+    public int bulletsShot;
 
-    public float cooldown;
+    public float timeBetweenShooting;
+    public float spread;
     public float range;
-    public float timeForShots;
+    public float reloadTime;
+    public float timeBetweenShots;
 
     public bool canHold;
     public bool shooting;
-    public bool reloading;
     public bool canShoot;
+    public bool reloading;
 
+    public Camera attackCam;
     public Transform attackPoint;
     public RaycastHit hit;
     public LayerMask isEnemy;
@@ -36,54 +39,54 @@ public class Beam_Pistol_Control : MonoBehaviour
 
     private void ShootingInput ( )
     {
-
         if ( canHold )
         {
-            shooting = Input.GetKey ( KeyCode.Mouse0);
-            Debug.Log ( "Shooting" );
+            shooting = Input.GetKey ( KeyCode.Mouse0 );
         }
         else
         {
-            shooting = Input.GetKeyDown ( KeyCode.Mouse0);
-            Debug.Log ( "Shot" );
+            shooting = Input.GetKeyDown ( KeyCode.Mouse0 );
         }
 
-        if ( Input.GetKeyDown ( KeyCode.R ) && bulletsLeft < magSize && !reloading )
+
+        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading )
+        {
             Reload ( );
+        }
 
-
-        if ( canShoot && shooting && !reloading && bulletsLeft > 0 )
+        if(canShoot && shooting && !reloading && bulletsLeft > 0 )
         {
             bulletsShot = bulletsPerTap;
             Bang ( );
         }
-
     }
 
     private void Bang ( )
     {
         canShoot= false;
 
-        Vector3 start=attackPoint.transform.position;
-        Vector3 dir= attackPoint.transform.forward;
-        Ray beamShot = new Ray ( start , start + dir );
+        float x = Random.Range ( -spread , spread );
+        float y = Random.Range ( -spread , spread );
 
-        if(Physics.Raycast(beamShot, out hit, range, isEnemy) )
+        Vector3 dir = attackCam.transform.forward + new Vector3 ( x , y , 0 );
+
+        if ( Physics.Raycast ( attackCam.transform.position , dir , out hit , range , isEnemy ) )
         {
             Debug.Log ( hit.collider.name );
 
             if ( hit.collider.CompareTag ( "Enemy" ) )
-                Debug.Log ( "Enemy took damage" );
+            {
+                Debug.Log ( "Enemy took Damage" );
+            }
         }
 
         bulletsLeft--;
         bulletsShot--;
 
-        Invoke ( "ResetShot" , cooldown );
-
-        if ( bulletsShot > 0 && bulletsLeft > 0 )
+        Invoke ( "ResetShot" , timeBetweenShooting );
+        if(bulletsShot>0 && bulletsLeft > 0 )
         {
-            Invoke ( "Bang" , timeForShots );
+            Invoke ( "Bang" , timeBetweenShooting );
         }
     }
 
@@ -95,7 +98,7 @@ public class Beam_Pistol_Control : MonoBehaviour
     private void Reload ( )
     {
         reloading= true;
-        Invoke ( "ReloadFinished" , cooldown );
+        Invoke ( "ReloadFinished" , reloadTime );
     }
 
     private void ReloadFinished ( )
@@ -106,11 +109,10 @@ public class Beam_Pistol_Control : MonoBehaviour
 
     private void OnDrawGizmos ( )
     {
-        Gizmos.DrawRay ( attackPoint.position , attackPoint.forward );
-        Gizmos.color = Color.black;
+        Gizmos.DrawLine(attackCam.transform.position,hit.point );
+        Gizmos.color= Color.black;
 
         Gizmos.DrawSphere ( hit.point , .1f );
-        Gizmos.color = Color.red;
+        Gizmos.color= Color.red;
     }
-
 }
