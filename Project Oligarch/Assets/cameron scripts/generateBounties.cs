@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMPro;
+using System;
 
 public class generateBounties : MonoBehaviour
 {
-    //TODO---------
+    //
+    // this is a little spagetti but i couldnt get them to nest, however i did in a round about way get them to randomize,
+    // now i just need to bind these to an object and see if they work....maybe? 
+    //
+    //?DONE---------
     //! Which Planet they venture to.
     //! What type of Bounty it is.
     //! The risk of the bounty, dictating time limit and enemy difficulty.
@@ -15,50 +20,62 @@ public class generateBounties : MonoBehaviour
     //! The payout at the end of the Bounty.
     //! ----- If there are sub-objectives that increase the end payout 
 
-    //public string[] planets = {"earth" , "mars" , "venus" , "jupiter"};
+    public string[] planets = {"earth" , "mars" , "venus" , "jupiter"};
     
+    public string[] bountyType = { "kill", "capture", "rescue" };
 
-    public string[] bountyType = {"kill" , "capture" , "rescue"};
+    public int[] bountyRisk = { 10, 20, 30, 50 };
 
-    public int[] bountyRisk = {10 , 20 , 30 , 50};
+    public string[] time = { "1min", "2min", "3min", "5min" };
 
-    public string[] time = {"1min" , "2min" , "3min" , "5min"};
-    
-    public string[] enemyDif = {"easy" , "medium" , "hard" , "impossible"};
-   
-    public int[] payout = {100 , 200 , 300 , 500};
+    public string[] enemyDif = { "easy", "medium", "hard", "impossible" };
 
-    public string[] subObjectives = {" fastest time" , "dont get seen" , "dont get hit" , "find all loot"};
+    public int[] payout = { 100, 200, 300, 500 };
 
-    
-    public void Main()
-    {
-        var planets = new List<string>() { "earth", "mars", "venus", "jupiter" };
-        planets.Insert( 4, "saturn" );//add saturn to the list after jupiter?
+    public string[] subObjectives = { " fastest time", "dont get seen", "dont get hit", "find all loot" };
+
+    System.Random rnd = new System.Random();
 
         
-    }
-
     public void Awake()
     {
-        //Debug.Log( "planet: " + planets[1] );
-        Debug.Log( "bounty type: " + bountyType[1] );
-        Debug.Log( "bounty risk: " + bountyRisk[1] );
-        Debug.Log( "time: " + time[1] );
-        Debug.Log( "difficulty: " + enemyDif[1] );
-        Debug.Log( "payout: " + payout[1] );
-        Debug.Log( "sub objectives: " + subObjectives[1] );
         
-       
-        
-        //! cant seem to get this to work
+        int planetLength = planets.Length;
+        int bountTypeLength = bountyType.Length;
+        int bountRiskLength = bountyRisk.Length;
+        int timeLenght = time.Length;
+        int enDifLength = enemyDif.Length;
+        int payLength = payout.Length;
+        int subObjLength = subObjectives.Length;
 
-        var Bounties = new List<string>();
-        //Bounties.AddRange(planets);
-        foreach (var item in Bounties)
+        //! this grabs random array number (following max number of list elements) and then prints the number
+       
+        int rndPlanet = rnd.Next( 0, planetLength );
+        int rndBType = rnd.Next( 0, bountTypeLength );
+        int rndBRisk= rnd.Next( 0, bountRiskLength );
+        int rndTime= rnd.Next( 0, timeLenght );
+        int rndEDif= rnd.Next( 0, enDifLength );
+        int rndPay= rnd.Next( 0, payLength );
+        int rndSubObj= rnd.Next( 0, subObjLength );
+
+        //! grabs the new number and throws it into the list 
+        Debug.Log( "planet: " + planets[rndPlanet] );
+        Debug.Log( "bounty type: " + bountyType[rndBType] );
+        Debug.Log( "bounty risk: " + bountyRisk[rndBRisk] );
+        Debug.Log( "time: " + time[rndTime] );
+        Debug.Log( "difficulty: " + enemyDif[rndEDif] );
+        Debug.Log( "payout: " + payout[rndPay] );
+        Debug.Log( "sub objectives: " + subObjectives[rndSubObj] );
+
+        Debug.Log( "-----------------------------" );
+
+        
+        //! prints the whole string finally
+        foreach (var name in bountyRisk)
         {
-            Debug.Log( Bounties.ToString() );
+            Debug.Log("bounty risk = " +  name );
         }
+        
     }
 
 
@@ -67,29 +84,5 @@ public class generateBounties : MonoBehaviour
     //?a list of each bounty member with its qualites in it that are public variables
     //? how to make a list a child of another list but have them remain editable?
     //TODO ----way to make the debug work:
-    // Debug.Log("Human = " +String.Join("",
-    //new List<int>(aHuman)
-    //         .ConvertAll(i => i.ToString())
-    //         .ToArray()));
-   //didnt work
-   // public static void Bounties(string[] args)
-  //  {
-        // maybe ------// List[] bounty = { "alex", "Ben", "Chuck" };
-        //var bounty = new List<string>();
-     //   var bounty = new List<Bounty>()
-      //  {
-      //  new Bounty(){Id = 1, Name="Alex"},
-      //  new Bounty(){Id = 2, Name="Ben"},
-      //  new Bounty(){Id = 3, Name="Chuck"},                                
-       // new Bounty(){Id = 4, Name="Dave"},
-      //  };
-        //bounty.Add("alex");
-        //bounty.Add("ben");
-        //bounty.Add("chuck");
-        //bounty.Add(null);
-        //var result = s in Bounty
-        //    where s.Name =="Ben"
-        //    select s;
-       // Debug.Log(bounty.contains("Ben"));
-  //  }
+   
 }
