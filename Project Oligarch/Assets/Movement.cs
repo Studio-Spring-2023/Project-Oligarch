@@ -9,15 +9,13 @@ public class Movement : MonoBehaviour
 
     public Transform orientation;
 
-    //Animator anim;
     public float groundDrag;
 
     public float slowDown;
 
-    public float SlideForce;
+    public float SlideForce; //slide speed
 
-    public float SlideTime = 1;
-    //private float SlideTimeStart;
+    public float SlideTime = 1; //in seconds
 
     private bool Slide;
 
@@ -34,27 +32,25 @@ public class Movement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
-    public float airMulti;
+    public float airMulti; //how fast you move in air
     public bool readyToJump;
     public KeyCode jumpkey = KeyCode.Space;
-    void Start()
+    void Start() //initialize variables
     {
         StartSpeed = moveSpeed;
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-       // anim = GetComponent<Animator>();
-        //SlideTimeStart = SlideTime;
     }
 
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded); //ground check raycast
 
         MyInput();
         SpeedControl();
 
-        if(grounded)
+        if(grounded) //drag
         {
             rb.drag = groundDrag;
         }
@@ -70,7 +66,7 @@ public class Movement : MonoBehaviour
 
     private void MyInput()
     {
-        if(!Slide)
+        if(!Slide) //default input
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
@@ -82,22 +78,22 @@ public class Movement : MonoBehaviour
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        if (Input.GetKey(jumpkey) && readyToJump && grounded && Slide)
+        if (Input.GetKey(jumpkey) && readyToJump && grounded && Slide)//cancel slide with jump
         {
             readyToJump = false;
             StartCoroutine(SlideJump());
             Invoke(nameof(ResetJump), jumpCooldown);
             StopCoroutine(SlideFunc());
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);//returns scale to normal
             Slide = false;
         }
-        if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0))
+        if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0)) //slide can only be preformed if you are moving
         {
             StartCoroutine(SlideFunc());
-            float gravMod = 25f;
+            float gravMod = 25f; 
             if (!grounded)
             {
-                rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);
+                rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
             }
         }
 
@@ -107,13 +103,13 @@ public class Movement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);//grounded movement
 
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulti, ForceMode.Force);
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) //Input.GetKeyUp(A)
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulti, ForceMode.Force);// air movement
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
         {
-            //Debug.Log("Stop");
+            
             if(!Slide)
             {
                 rb.AddForce(-moveDirection.normalized * moveSpeed * 8f, ForceMode.Acceleration);
