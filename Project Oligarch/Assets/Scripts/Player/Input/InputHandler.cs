@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 
+/// </summary>
 public enum AbilityInput
 {
     Primary,
@@ -15,45 +18,49 @@ public enum AbilityInput
 /// Handles all input from the Player. 
 /// Contains static events to immediately trigger input related behavior.
 /// </summary>
-public class InputHandler : MonoBehaviour
+public class InputHandler
 {
-    //Singleton for InputHandler
-    public static InputHandler PlayerInput { get; private set; }
-
-    //Input System Maps & Actions
+    #region Input System Map & Action Variables
 	private PlayerControls playerInputActions;
 	private PlayerControls.CameraActions CameraControls;
 	private PlayerControls.MovementActions MovementControls;
 	private PlayerControls.InteractActions InteractControls;
 	private PlayerControls.AbilitiesActions AbilityControls;
 	private PlayerControls.UIActions UIControls;
+	#endregion
 
-	//Mouse Global Variables
+	#region Mouse Input Variables
 	public static Vector2 MouseDelta { get; private set; }
 	public static Vector2 MouseScreenPos { get; private set; }
 	public static Vector2 MouseScroll { get; private set; }
-	public static Vector2 MovementInput { get; private set; }
+	#endregion
 
-    //Ability Global Variables
-    public static AbilityInput LastAbilityInput { get; private set; }
+	#region Movement Input Variables
+	public static Vector3 MovementInput { get; private set; }
+	#endregion
 
-    //Events
+	//Ability Global Variables
+	public static AbilityInput LastAbilityInput { get; private set; }
+
+	#region Events
 	public static event Action OnAbilityInput;
+	#endregion
 
-    public void Awake()
+	#region InputHandler Constructor
+	public InputHandler()
     {
-        PlayerInput = this;
-
 		playerInputActions = new PlayerControls();
 
-        CameraControls = playerInputActions.Camera;
-        MovementControls = playerInputActions.Movement;
-        InteractControls = playerInputActions.Interact;
-        AbilityControls = playerInputActions.Abilities;
-        UIControls = playerInputActions.UI;
-    }
+		CameraControls = playerInputActions.Camera;
+		MovementControls = playerInputActions.Movement;
+		InteractControls = playerInputActions.Interact;
+		AbilityControls = playerInputActions.Abilities;
+		UIControls = playerInputActions.UI;
+	}
+	#endregion
 
-    public void OnEnable()
+	#region OnEnable
+	public void OnEnable()
     {
         CameraControls.Enable();
         MovementControls.Enable();
@@ -79,9 +86,10 @@ public class InputHandler : MonoBehaviour
         UIControls.Pause.performed += UIPauseInput;
         UIControls.Select.performed += UISelectInput;
     }
+	#endregion
 
-    #region Mouse Controls
-    private void CacheMouseDelta(InputAction.CallbackContext ctx)
+	#region Mouse Controls
+	private void CacheMouseDelta(InputAction.CallbackContext ctx)
     {
         MouseDelta = ctx.ReadValue<Vector2>();
     }
@@ -108,9 +116,9 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     #region Movement Controls
-    private void CacheMovementInput(InputAction.CallbackContext ctx)
+    void CacheMovementInput(InputAction.CallbackContext ctx)
     {
-        MovementInput = ctx.ReadValue<Vector2>();
+		MovementInput = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
     }
 
     private void ClearMovementInput(InputAction.CallbackContext ctx)
@@ -179,9 +187,10 @@ public class InputHandler : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-    #endregion
+	#endregion
 
-    public void OnDisable()
+	#region OnDisable
+	public void OnDisable()
     {
         UIControls.Pause.performed -= UIPauseInput;
         UIControls.Select.performed -= UISelectInput;
@@ -207,4 +216,5 @@ public class InputHandler : MonoBehaviour
         AbilityControls.Disable();
         UIControls.Disable();
     }
+	#endregion
 }

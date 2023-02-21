@@ -7,12 +7,21 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    public static InputHandler PlayerInputHandler { get; private set; }
+
     void Awake()
     {
         DontDestroyOnLoad(this);
+
+		PlayerInputHandler = new InputHandler();
     }
 
-    void Start()
+	void OnEnable()
+	{
+        PlayerInputHandler.OnEnable();
+	}
+
+	void Start()
     {
         
     }
@@ -22,4 +31,8 @@ public class GameManager : MonoBehaviour
         
     }
 
+	void OnDisable()
+	{
+        PlayerInputHandler.OnDisable();
+	}
 }

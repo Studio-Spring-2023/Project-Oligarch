@@ -1,48 +1,40 @@
 using UnityEngine;
 
-public enum PlayerStates
-{
-    Idle,
-    Ability,
-}
 public class PlayerCore : Core
 {
-    public static Loadout AssignedLoadout { get; private set; }
+	public static Loadout AssignedLoadout { get; private set; }
 
-    [Header("Finite State Machine Variables")]
-    private FiniteStateMachine PlayerSM;
+	[Header("Movement Variables")]
+    public Rigidbody PlayerRB;
+    [Range(1f,5f)]
+    public float Drag = 1f;
+	public Vector3 Acceleration;
+	public Vector3 Velocity;
 
-	//Temporary Debug Bools
+    [Header("Camera Variables")]
+    public Vector3 CrosshairLook;
+    [Range(0.01f, 1f)]
+    public float MouseSensitivity;
+	[Range(0, 90)]
+	public float PitchClamp;
+    private float pitch;
+	private float yaw;
+
+	[Header("Temporary Debug Variables")]
 	bool castingPrimary;
-    bool castingSecondary;
-    bool castingSpecial;
-    bool castingUltimate;
+	bool castingSecondary;
+	bool castingSpecial;
+	bool castingUltimate;
 
-    public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
+	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
         LoadoutType.Ranger => new RangerLoadout(this),
         LoadoutType.Fighter => new FighterLoadout(this),
         _ => throw new System.Exception("Invalid Loadout Enum Value")
     };
 
-    public void ConstructPlayerStateMachine()
-    {
-        if (PlayerSM != null)
-            return;
-
-        PlayerSM = new FiniteStateMachine();
-
-        PlayerSM.AddState(new PlayerIdleState(PlayerSM, this));
-		PlayerSM.AddState(new PlayerAbilityState(PlayerSM, this));
-
-        PlayerSM.SwitchState(PlayerSM.States[(int)PlayerStates.Idle]);
-	}
-
     public void Awake()
     {
-        //Will be moved to the Game Manager so when the Player "starts" the game, this is constructed once and only once.
-        ConstructPlayerStateMachine();
-
         //Temporary to avoid Null Reference errors
         AssignedLoadout = AssignLoadout(LoadoutType.Ranger);
 	}
@@ -54,12 +46,23 @@ public class PlayerCore : Core
 
     private void Update()
     {
-        PlayerSM.CurrentStateUpdate();
-    }
+        yaw += InputHandler.MouseDelta.x * MouseSensitivity;
+        pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
+		pitch = Mathf.Clamp(pitch, -PitchClamp, PitchClamp);
+
+		transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+
+        Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
+
+		Acceleration = (forward.normalized * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+
+        Velocity += Acceleration;
+	}
 
 	private void FixedUpdate()
 	{
-		PlayerSM.CurrentStateFixedUpdate();
+        Velocity /= Drag;
+        PlayerRB.velocity = Velocity;
 	}
 
 	//Temporary for Debug Display of Abilities
@@ -84,5 +87,14 @@ public class PlayerCore : Core
         {
 
         }
-    }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Velocity);
+
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireSphere(transform.position + CrosshairLook, 0.25f);
+
+		Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
+		Gizmos.DrawRay(transform.position, forward);
+	}
 }

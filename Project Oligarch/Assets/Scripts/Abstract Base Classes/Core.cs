@@ -7,7 +7,11 @@ using UnityEngine;
 /// </summary>
 public abstract class Core : MonoBehaviour
 {
-    public int Health;
-    public float MoveSpeed;
+	[Header("Movement Variables")]
+	public float MoveSpeed;
+
+	[Header("Combat Variables")]
+	public int Health;
+    
 
 }
