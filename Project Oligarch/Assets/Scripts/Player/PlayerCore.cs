@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerCore : Core
 {
@@ -6,10 +7,8 @@ public class PlayerCore : Core
 
 	[Header("Movement Variables")]
     public Rigidbody PlayerRB;
-    [Range(1f,5f)]
-    public float Drag = 1f;
-	public Vector3 Acceleration;
-	public Vector3 Velocity;
+	private Vector3 Velocity;
+    private Vector3 Forward;
 
     [Header("Camera Variables")]
     public Vector3 CrosshairLook;
@@ -52,17 +51,15 @@ public class PlayerCore : Core
 
 		transform.rotation = Quaternion.Euler(pitch, yaw, 0);
 
-        Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-
-		Acceleration = (forward.normalized * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
-
-        Velocity += Acceleration;
+		Forward = new Vector3(transform.forward.x, 0, transform.forward.z);
 	}
 
 	private void FixedUpdate()
 	{
-        Velocity /= Drag;
-        PlayerRB.velocity = Velocity;
+        //Lerp MoveSpeed based on Acceleration / Deceleration timers.
+		Velocity = (Forward.normalized * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+
+		PlayerRB.velocity = Velocity;
 	}
 
 	//Temporary for Debug Display of Abilities
