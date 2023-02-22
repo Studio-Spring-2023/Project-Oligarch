@@ -48,16 +48,16 @@ public class Movement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded); //ground check raycast
 
         MyInput();
-        SpeedControl();
+        //SpeedControl();
 
-        if(grounded) //drag
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
+        //if(grounded) //drag
+        //{
+        //    rb.drag = groundDrag;
+        //}
+        //else
+        //{
+        //    rb.drag = 0;
+        //}
     }
     void FixedUpdate()
     {
@@ -78,13 +78,13 @@ public class Movement : MonoBehaviour
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        if (Input.GetKey(jumpkey) && readyToJump && grounded && Slide)//cancel slide with jump
+        if (Input.GetKey(jumpkey) && readyToJump && grounded && Slide)  //cancel slide with jump
         {
             readyToJump = false;
             StartCoroutine(SlideJump());
             Invoke(nameof(ResetJump), jumpCooldown);
             StopCoroutine(SlideFunc());
-            transform.localScale = new Vector3(1, 1, 1);//returns scale to normal
+            transform.localScale = new Vector3(1, 1, 1);  //returns scale to normal
             Slide = false;
         }
         if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0)) //slide can only be preformed if you are moving
@@ -93,26 +93,27 @@ public class Movement : MonoBehaviour
             float gravMod = 25f; 
             if (!grounded)
             {
-                rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
+                //rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
             }
         }
-
     }
 
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; //move in direction relative to camera
         if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);//grounded movement
+            rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMulti, ForceMode.Force);// air movement
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
+            rb.velocity = moveDirection.normalized * moveSpeed * airMulti;// air movement
+       // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
+           if(Moving == Vector3.zero && grounded)
         {
             
             if(!Slide)
             {
-                rb.AddForce(-moveDirection.normalized * moveSpeed * 8f, ForceMode.Acceleration);
+                //rb.velocity = new Vector3(0,0,0);
             }
              //newton's law of inertia, 8f can be adjusted for a bit of momentum to the stop
             
@@ -133,7 +134,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
