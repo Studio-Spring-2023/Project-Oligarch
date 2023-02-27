@@ -26,9 +26,14 @@ public class Movement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
 
+    public bool Slope;
+
     Vector3 moveDirection;
+    Vector3 SlopeForward;
 
     Rigidbody rb;
+
+    RaycastHit hit;
 
     public float jumpForce;
     public float jumpCooldown;
@@ -49,7 +54,27 @@ public class Movement : MonoBehaviour
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
-        
+
+       if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, whatIsGrounded)) //&& if (Vector3.Dot(hit.normal, -transform.up) > -1) => Do fake gravity? && if Jump() => stop the fake gravity?
+       {
+            if(Vector3.Dot(hit.normal, -transform.up) > -1)
+            {
+                SlopeForward = (Vector3.Cross(hit.normal, orientation.right).normalized) * -1f;
+                Slope = true;
+                Debug.DrawRay(transform.position,SlopeForward, Color.green);
+            }
+            else
+            {
+                Slope = false;
+            }
+       }
+       else
+       {
+            Slope = false;
+       }
+
+
+
 
         MyInput();
         //SpeedControl();
@@ -103,11 +128,11 @@ public class Movement : MonoBehaviour
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
         moveDirection.y = rb.velocity.y;
-        if(grounded)
+        if(grounded && !Slope)
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
-        else if(!grounded)
-            //rb.velocity = moveDirection.normalized * moveSpeed;// air movement
+        else if(Slope)
+            rb.velocity = moveDirection.normalized * moveSpeed;// air movement
        // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
            if(Moving == Vector3.zero && grounded)
         {
@@ -174,7 +199,6 @@ public class Movement : MonoBehaviour
         //return player height
         yield return null;
 
-        //rb.AddForce(
     }
     private IEnumerator SlideJump()
     {
