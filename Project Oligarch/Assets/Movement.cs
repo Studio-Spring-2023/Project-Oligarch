@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
 
     public float playerHeight;
     public LayerMask whatIsGrounded;
-    bool grounded;
+    public bool grounded;
 
     public float horizontalInput;
     public float verticalInput;
@@ -45,7 +45,11 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGrounded); //ground check raycast
+        if (!Slide)
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
+        }
+        
 
         MyInput();
         //SpeedControl();
@@ -90,23 +94,20 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0)) //slide can only be preformed if you are moving
         {
             StartCoroutine(SlideFunc());
-            float gravMod = 25f; 
-            if (!grounded)
-            {
-                //rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
-            }
+            DragDown();
         }
     }
 
     private void MovePlayer()
     {
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; //move in direction relative to camera
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
+        moveDirection.y = rb.velocity.y;
         if(grounded)
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
         else if(!grounded)
-            rb.velocity = moveDirection.normalized * moveSpeed * airMulti;// air movement
+            //rb.velocity = moveDirection.normalized * moveSpeed;// air movement
        // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
            if(Moving == Vector3.zero && grounded)
         {
@@ -134,7 +135,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
         {
-            //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
@@ -144,12 +145,24 @@ public class Movement : MonoBehaviour
         {
             readyToJump = true;
         }
+
+    private void DragDown()
+    {
+        float gravMod = 25f;
+        if (!grounded)
+        {
+            rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
+        }
+    }
     
     private IEnumerator SlideFunc()
     {
+        
         Slide = true;
         //reduce player height
         transform.localScale = new Vector3(1, 0.5f, 1);
+        //DragDown();
+        rb.velocity = new Vector3(rb.velocity.x, -20f, rb.velocity.z);
         moveSpeed *= SlideForce;
         //test heigher gravity in air
         rb.AddForce(moveDirection.normalized, ForceMode.Force);
@@ -174,4 +187,12 @@ public class Movement : MonoBehaviour
         airMulti = reset;
         moveSpeed = StartSpeed;
     }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
+        Gizmos.DrawRay(transform.position, dir);
+
+    }
+    
 }
