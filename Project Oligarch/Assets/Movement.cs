@@ -132,7 +132,7 @@ public class Movement : MonoBehaviour
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
         else if(Slope)
-            rb.velocity = moveDirection.normalized * moveSpeed;// air movement
+            //rb.velocity = moveDirection.normalized * moveSpeed;// air movement
        // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
            if(Moving == Vector3.zero && grounded)
         {
@@ -216,6 +216,9 @@ public class Movement : MonoBehaviour
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
         Gizmos.DrawRay(transform.position, dir);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, moveDirection + SlopeForward);
+
 
     }
     
