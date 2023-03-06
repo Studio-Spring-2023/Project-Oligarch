@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
     public float verticalInput;
 
     public bool Slope;
+    public bool Active;
 
     Vector3 moveDirection;
     Vector3 SlopeForward;
@@ -46,40 +47,17 @@ public class Movement : MonoBehaviour
     {
         StartSpeed = moveSpeed;
         readyToJump = true;
+        Active = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        if (!Slide)
+        if (!Slide && Active)
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
-
-       /*if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, whatIsGrounded)) //&& if (Vector3.Dot(hit.normal, -transform.up) > -1) => Do fake gravity? && if Jump() => stop the fake gravity?
-       {
-            if(Vector3.Dot(hit.normal, -transform.up) > -1 && grounded)
-            {
-                SlopeForward = SlopeDir(moveDirection, hit.normal);
-                Slope = true;
-                rb.useGravity = false;
-                Debug.DrawRay(transform.position,SlopeForward, Color.green);
-            }
-            else
-            {
-                SlopeForward = Vector3.zero;
-                Slope = false;
-                rb.useGravity = true;
-            }
-       }
-       else
-       {
-            Slope = false;
-       }*/
-
-
-
 
         MyInput();
         //SpeedControl();
@@ -105,11 +83,21 @@ public class Movement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
         }
-        
-        if(Input.GetKey(jumpkey) && readyToJump && grounded && !Slide)
+        if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide && OnSlope())
+        {
+            Active = false;
+            grounded = false;
+            readyToJump = false;
+            Debug.Log("Slope Jump");
+            rb.useGravity = true;
+            OnSlope(true);
+            StartCoroutine(Jump());
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide)
         {
             readyToJump = false;
-            Jump();
+            StartCoroutine(Jump());
             Invoke(nameof(ResetJump), jumpCooldown);
         }
         if (Input.GetKey(jumpkey) && readyToJump && grounded && Slide)  //cancel slide with jump
@@ -138,22 +126,22 @@ public class Movement : MonoBehaviour
 
         else if(OnSlope())
         {
-            Debug.Log("On Slope");
+            //Debug.Log("On Slope");
             SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
             rb.velocity =  SlopeForward * moveSpeed;
         }
            
        // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
-           if(Moving == Vector3.zero && grounded)
-        {
+        //   if(Moving == Vector3.zero && grounded)
+        //{
             
-            if(!Slide)
-            {
-                //rb.velocity = new Vector3(0,0,0);
-            }
-             //newton's law of inertia, 8f can be adjusted for a bit of momentum to the stop
+        //    if(!Slide)
+        //    {
+        //        //rb.velocity = new Vector3(0,0,0);
+        //    }
+        //     //newton's law of inertia, 8f can be adjusted for a bit of momentum to the stop
             
-        }
+        //}
     }
 
     private void SpeedControl()
@@ -165,16 +153,17 @@ public class Movement : MonoBehaviour
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
-
         }
 
-    private void Jump()
+    private IEnumerator Jump()
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
-        }
+            yield return new WaitForSeconds(0.5f);
+            Active = true;
+    }
 
     private void ResetJump()
         {
@@ -201,7 +190,6 @@ public class Movement : MonoBehaviour
         moveSpeed *= SlideForce;
         //test heigher gravity in air
         rb.AddForce(moveDirection.normalized, ForceMode.Force);
-        //Debug.Log(moveDirection.normalized * SlideForce);
         yield return new WaitForSeconds(SlideTime);
         Slide = false;
         transform.localScale = new Vector3(1, 1, 1);
@@ -222,8 +210,13 @@ public class Movement : MonoBehaviour
         moveSpeed = StartSpeed;
     }
 
-    private bool OnSlope()
+    private bool OnSlope(bool jump = false)
     {
+        if(jump == true)
+        {
+            //moveDirection.y = rb.velocity.y;
+            return false;
+        }
         if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
@@ -242,7 +235,6 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
-        //Gizmos.DrawRay(transform.position, dir);
         if(OnSlope())
         {
             Gizmos.color = Color.green;
