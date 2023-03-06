@@ -34,6 +34,8 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
 
     RaycastHit hit;
+    RaycastHit slopeHit;
+    public float SlopeAngle;
 
     public float jumpForce;
     public float jumpCooldown;
@@ -55,23 +57,26 @@ public class Movement : MonoBehaviour
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
 
-       if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, whatIsGrounded)) //&& if (Vector3.Dot(hit.normal, -transform.up) > -1) => Do fake gravity? && if Jump() => stop the fake gravity?
+       /*if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, whatIsGrounded)) //&& if (Vector3.Dot(hit.normal, -transform.up) > -1) => Do fake gravity? && if Jump() => stop the fake gravity?
        {
-            if(Vector3.Dot(hit.normal, -transform.up) > -1)
+            if(Vector3.Dot(hit.normal, -transform.up) > -1 && grounded)
             {
-                SlopeForward = (Vector3.Cross(hit.normal, orientation.right).normalized) * -1f;
+                SlopeForward = SlopeDir(moveDirection, hit.normal);
                 Slope = true;
+                rb.useGravity = false;
                 Debug.DrawRay(transform.position,SlopeForward, Color.green);
             }
             else
             {
+                SlopeForward = Vector3.zero;
                 Slope = false;
+                rb.useGravity = true;
             }
        }
        else
        {
             Slope = false;
-       }
+       }*/
 
 
 
@@ -128,11 +133,16 @@ public class Movement : MonoBehaviour
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
         moveDirection.y = rb.velocity.y;
-        if(grounded && !Slope)
+        if(grounded && !OnSlope())
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
-        else if(Slope)
-            //rb.velocity = moveDirection.normalized * moveSpeed;// air movement
+        else if(OnSlope())
+        {
+            Debug.Log("On Slope");
+            SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
+            rb.velocity =  SlopeForward * moveSpeed;
+        }
+           
        // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
            if(Moving == Vector3.zero && grounded)
         {
@@ -212,13 +222,30 @@ public class Movement : MonoBehaviour
         moveSpeed = StartSpeed;
     }
 
+    private bool OnSlope()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < SlopeAngle && angle != 0;
+        }
+
+        return false;
+
+    }
+
+    private Vector3 SlopeDir(Vector3 moveDir, Vector3 slopeNorm)
+    {
+        return Vector3.ProjectOnPlane(moveDir, slopeNorm).normalized;
+    }
+
     private void OnDrawGizmos()
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
         Gizmos.DrawRay(transform.position, dir);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, moveDirection + SlopeForward);
 
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, SlopeForward);
 
     }
     

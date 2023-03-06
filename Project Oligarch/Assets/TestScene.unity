@@ -1921,7 +1921,7 @@ Transform:
   m_GameObject: {fileID: 1043577753}
   m_LocalRotation: {x: 0.4559332, y: 0, z: 0, w: 0.890014}
   m_LocalPosition: {x: 5.02, y: 1.24, z: -2.29}
-  m_LocalScale: {x: 5.2, y: 4.78, z: 1}
+  m_LocalScale: {x: 6.9924397, y: 16.882265, z: 1.3447}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2006,6 +2006,7 @@ MonoBehaviour:
   horizontalInput: 0
   verticalInput: 0
   Slope: 0
+  SlopeAngle: 70
   jumpForce: 36
   jumpCooldown: 0.25
   airMulti: 0.4
