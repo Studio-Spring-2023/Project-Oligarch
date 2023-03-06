@@ -132,7 +132,7 @@ public class Movement : MonoBehaviour
     {
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
-        moveDirection.y = rb.velocity.y;
+       // moveDirection.y = rb.velocity.y;
         if(grounded && !OnSlope())
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
@@ -242,10 +242,13 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
-        Gizmos.DrawRay(transform.position, dir);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, SlopeForward);
+        //Gizmos.DrawRay(transform.position, dir);
+        if(OnSlope())
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(transform.position, SlopeForward);
+        }
+            
 
     }
     
