@@ -43,6 +43,9 @@ public class InputHandler
 	public static AbilityInput LastAbilityInput { get; private set; }
 
 	#region Events
+    /// <summary>
+    /// Triggers when Player presses one of the ability hotkeys
+    /// </summary>
 	public static event Action OnAbilityInput;
 	#endregion
 

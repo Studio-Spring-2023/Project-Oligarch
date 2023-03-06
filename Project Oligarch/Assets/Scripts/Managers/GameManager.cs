@@ -7,13 +7,27 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    public static GameManager GM;
+
+    #region Handler Variables
     public static InputHandler PlayerInputHandler { get; private set; }
+    public static UIHandler UIHandler { get; private set; }
+    #endregion
+
+    private void InstantiateManager()
+    {
+        if (GM != null)
+            return;
+
+        DontDestroyOnLoad(this);
+        GM = this;
+        PlayerInputHandler = new InputHandler();
+        UIHandler = GetComponent<UIHandler>();
+    }
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
-
-		PlayerInputHandler = new InputHandler();
+        InstantiateManager();
     }
 
 	void OnEnable()
