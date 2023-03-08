@@ -55,12 +55,12 @@ public class Movement : MonoBehaviour
     void Update()
     {
          MyInput();
-        if (!Slide && Active)
+        if (!Slide && Active &&!OnSlope())
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
        
-        //SpeedControl();
+        SpeedControl();
 
         //if(grounded) //drag
         //{
@@ -115,7 +115,7 @@ public class Movement : MonoBehaviour
         if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0)) //slide can only be preformed if you are moving
         {
             StartCoroutine(SlideFunc());
-            DragDown();
+           // DragDown();
         }
     }
 
@@ -133,18 +133,6 @@ public class Movement : MonoBehaviour
             SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
             rb.velocity =  SlopeForward * moveSpeed;
         }
-           
-       // if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A)  && !Input.GetKey(KeyCode.S)  && !Input.GetKey(KeyCode.D) && grounded) 
-        //   if(Moving == Vector3.zero && grounded)
-        //{
-            
-        //    if(!Slide)
-        //    {
-        //        //rb.velocity = new Vector3(0,0,0);
-        //    }
-        //     //newton's law of inertia, 8f can be adjusted for a bit of momentum to the stop
-            
-        //}
     }
 
     private void SpeedControl()
@@ -215,6 +203,7 @@ public class Movement : MonoBehaviour
 
     private bool OnSlope(bool jump = false)
     {
+        
         if(jump == true)
         {
             //moveDirection.y = rb.velocity.y;
@@ -238,6 +227,7 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
+        //Gizmos.DrawRay(transform.position,)
         if(OnSlope())
         {
             Gizmos.color = Color.green;
