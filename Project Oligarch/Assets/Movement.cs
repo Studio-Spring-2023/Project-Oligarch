@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
     public bool Slope;
     public bool Active;
 
-    Vector3 moveDirection;
+    [SerializeField] Vector3 moveDirection;
     Vector3 SlopeForward;
 
     Rigidbody rb;
@@ -60,16 +60,6 @@ public class Movement : MonoBehaviour
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
        
-        SpeedControl();
-
-        //if(grounded) //drag
-        //{
-        //    rb.drag = groundDrag;
-        //}
-        //else
-        //{
-        //    rb.drag = 0;
-        //}
     }
     void FixedUpdate()
     {
@@ -83,21 +73,21 @@ public class Movement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
         }
-        if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide && OnSlope())
-        {
-            rb.useGravity = true;
-            Active = false;
-            grounded = false;
-            readyToJump = false;
-            jumpForce = 50f;
-            Debug.Log(jumpForce);
-            OnSlope(true);
-            //rb.velocity.y = rb.velocity.y;
-            StartCoroutine(Jump());
-            Invoke(nameof(ResetJump), jumpCooldown);
-            jumpForce = 36f;
-        }
-        if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide)
+        //if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide && OnSlope())
+        //{
+        //    rb.useGravity = true;
+        //    Active = false;
+        //    grounded = false;
+        //    readyToJump = false;
+        //    jumpForce = 50f;
+        //    Debug.Log(jumpForce);
+        //    OnSlope(true);
+        //    //rb.velocity.y = rb.velocity.y;
+        //    StartCoroutine(Jump());
+        //    Invoke(nameof(ResetJump), jumpCooldown);
+        //    jumpForce = 36f;
+        //}
+        if (Input.GetKey(jumpkey) && readyToJump && (grounded || OnSlope()) && !Slide)
         {
             readyToJump = false;
             StartCoroutine(Jump());
@@ -123,7 +113,8 @@ public class Movement : MonoBehaviour
     {
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
-       // moveDirection.y = rb.velocity.y;
+        if(!OnSlope())
+            moveDirection.y = rb.velocity.y;
         if(grounded && !OnSlope())
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
 
@@ -148,7 +139,11 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Jump()
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            if(OnSlope())
+                {
+                    rb.AddForce(transform.up * jumpForce/2.75f, ForceMode.Impulse);
+                }
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
@@ -227,7 +222,7 @@ public class Movement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector3 dir = Vector3.down * (playerHeight * 0.5f + 0.015f * transform.localScale.y);
-        //Gizmos.DrawRay(transform.position,)
+        Gizmos.DrawRay(transform.position, dir);
         if(OnSlope())
         {
             Gizmos.color = Color.green;
