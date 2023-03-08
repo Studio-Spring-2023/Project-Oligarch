@@ -5,30 +5,23 @@ using UnityEngine;
 public class projectiles : MonoBehaviour
 {
     public int dam;
-    public int magSize;
-    public int bulletsPerTap;
-    public int bulletsLeft;
-    public int bulletsShot;
 
     public float timeBetweenShooting;
     public float spread;
     public float range;
-    public float reloadTime;
     public float timeBetweenShots;
 
-    public bool canHold;
     public bool shooting;
     public bool canShoot;
-    public bool reloading;
 
     public Camera attackCam;
     public Transform attackPoint;
     public RaycastHit hit;
     public LayerMask isEnemy;
+    public GameObject homingMissile;
 
     private void Awake ( )
     {
-        bulletsLeft = magSize;
         canShoot = true;
     }
 
@@ -39,24 +32,17 @@ public class projectiles : MonoBehaviour
 
     private void ShootingInput ( )
     {
-        if ( canHold )
+        if ( canShoot )
         {
             shooting = Input.GetKey ( KeyCode.Mouse0 );
         }
-        else
+        else if ( Input.GetKeyDown ( KeyCode.Mouse1 ) )
         {
-            shooting = Input.GetKeyDown ( KeyCode.Mouse0 );
+            GameObject.Instantiate ( homingMissile );
         }
 
-
-        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magSize && !reloading )
+        if(canShoot && shooting)
         {
-            Reload ( );
-        }
-
-        if(canShoot && shooting && !reloading && bulletsLeft > 0 )
-        {
-            bulletsShot = bulletsPerTap;
             Bang ( );
         }
     }
@@ -80,31 +66,14 @@ public class projectiles : MonoBehaviour
             }
         }
 
-        bulletsLeft--;
-        bulletsShot--;
-
         Invoke ( "ResetShot" , timeBetweenShooting );
-        if(bulletsShot>0 && bulletsLeft > 0 )
-        {
-            Invoke ( "Bang" , timeBetweenShooting );
-        }
+
+        Invoke ( "Bang" , timeBetweenShooting );
     }
 
     private void ResetShot ( )
     {
         canShoot = true;
-    }
-
-    private void Reload ( )
-    {
-        reloading= true;
-        Invoke ( "ReloadFinished" , reloadTime );
-    }
-
-    private void ReloadFinished ( )
-    {
-        bulletsLeft = magSize;
-        reloading = false;
     }
 
     private void OnDrawGizmos ( )
