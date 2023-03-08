@@ -1,0 +1,50 @@
+In case i lose my flashdrive, im dropping a copy of my notes into my folder on my branch
+
+--------------------------
+https://acegikmo.notion.site/Lectures-Assignments-a4419295f33f46c3af113eb74b407607
+
+the lectures
+
+
+the videos 
+https://www.youtube.com/live/tjTRXzwdU6A?feature=share&t=5721
+
+triangle solver
+https://acegikmo.com/trianglesolver/
+
+shit to add to VS
+https://weirdbearddev.com/2020/07/16/15-great-vs-code-extensions-for-unity-developers/
+
+
+dark and smokey
+jerk
+yaki
+honey bbq
+habenero
+ghost
+lemon pepper
+
+ways to make lists within lists 
+https://www.tutorialsteacher.com/csharp/csharp-list
+---------to do for bounties generation----------
+    ////////----------TODO----------///////////
+    /// Which Planet they venture to.
+    /// What type of Bounty it is.
+    /// The risk of the bounty, dictating time limit and enemy difficulty.
+    ///    ---time
+    ///    ---enemy difficulty
+    /// The payout at the end of the Bounty.
+    /// ----- If there are sub-objectives that increase the end payout 
+
+unity documentation
+https://docs.unity3d.com/Manual/ScriptingImportantClasses.html
+
+3rd person cammera occlusion
+https://forum.unity.com/threads/complete-camera-collision-detection-third-person-games.347233/
+
+
+videos to watch
+https://youtu.be/oLRINAn0cuw
+https://youtu.be/gfkTfcpWqAY
+https://youtu.be/oNwR2c2Q8gE
+https://youtu.be/YOX9LQ6v73w
