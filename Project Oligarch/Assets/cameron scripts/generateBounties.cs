@@ -53,44 +53,62 @@ public class generateBounties : MonoBehaviour
         stage4,
         stage5
     }
-    string[,] risk = new string[2, 5];
+    
+    public float planning()
+    {
+         string[,] risk = new string[2, 5];
 
-    risk[0, 0] = "1 min";
-    risk[0, 1] = "2 min";
-    risk[0, 2] = "3 min";
-    risk[0, 3] = "4 min";
-    risk[0, 4] = "5 min";
-    risk[0, 5] = "6 min";
+        risk[0, 0] = "1 min";
+        risk[0, 1] = "2 min";
+        risk[0, 2] = "3 min";
+        risk[0, 3] = "4 min";
+        risk[0, 4] = "5 min";
+      
     //--------------
-    risk[1, 0] = "stage1"
-    risk[1, 1] = "stage1"
-    risk[1, 2] = "stage1"
-    risk[1, 3] = "stage1"    
-    risk[1, 4] = "stage1"
-    risk[1, 5] = "stage1"
+    
+        risk[1, 0] = "stage1";
+        risk[1, 1] = "stage2";
+        risk[1, 2] = "stage3";   
+        risk[1, 3] = "stage4";
+        risk[1, 4] = "stage5";
 
+        if (bountyRisk == bountyRisk.low)
+        {
+            Debug.Log("the time limit is " + risk[0,0] + "enemy difficulty is " + risk[1,0]);
+        }
+    }
 
 
         public void Awake()//for testing if it works // no core mechanics allowe here.
     {
         
+            
         //Debug.Log("planet type is " + (planets)Random.Range(0, 4));
         //Debug.Log("bounty type is " + (bountyType)Random.Range(0, 3));       
         //Debug.Log("base payout is " + (basePayout)Random.Range(0, 4));
+       
+
+        Debug.Log("==========================");
+
+       
+       // Debug.Log("enemey difficulty " + risk[1,3] + " and time limit " + risk[0,3]); //!was about to test whether this debug works to print the whole list as a debug, to check if my array makes sense
+    }
+}
         
        // bountyRisk risk = bountyRisk.low; //for testing if the swapping works
-        
-        if (risk == bountyRisk.low)
-        {
+        //
+        //if (risk == bountyRisk.low)
+        //{
             //        timeLimit.Exceptional <= 4f; ----wrote this before the time enum
-            Debug.Log(timeLimit.Exceptional + " 4min cutoff");
-            Debug.Log("--------");//spacing
-            Debug.Log(enemyDifficulty.stage1);
-        }
-        else
-        {
-            Debug.Log("fail");
-        }
+        //    Debug.Log(timeLimit.Exceptional + " 4min cutoff");
+         //   Debug.Log("--------");//spacing
+          //  Debug.Log(enemyDifficulty.stage1);
+        //}
+        //else
+        //{
+        //    Debug.Log("fail");
+       // }
+        
 
         //public int[] payout = { 100, 200, 300, 500 }; ---multiplied by how fast complete,
         //tiers
@@ -123,12 +141,12 @@ public class generateBounties : MonoBehaviour
         // 50% more rewards
         //dont open shop
         //2x rewards and random chest
-    }
+   // }
 
     
 
 
-}
+//}
 
 //
 //wyatt says:
