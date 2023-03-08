@@ -54,12 +54,12 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+         MyInput();
         if (!Slide && Active)
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
-
-        MyInput();
+       
         //SpeedControl();
 
         //if(grounded) //drag
@@ -85,14 +85,17 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide && OnSlope())
         {
+            rb.useGravity = true;
             Active = false;
             grounded = false;
             readyToJump = false;
-            Debug.Log("Slope Jump");
-            rb.useGravity = true;
+            jumpForce = 50f;
+            Debug.Log(jumpForce);
             OnSlope(true);
+            //rb.velocity.y = rb.velocity.y;
             StartCoroutine(Jump());
             Invoke(nameof(ResetJump), jumpCooldown);
+            jumpForce = 36f;
         }
         if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide)
         {
