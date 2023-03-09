@@ -12,7 +12,7 @@ namespace Meryel.UnityCodeAssist.Editor
 {
     public class Assister
     {
-        public const string Version = "1.0.0.18";
+        public const string Version = "1.0.0.19";
 
 #if MERYEL_UCA_LITE_VERSION
         public const string Title = "Code Assist Lite";

@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "UnityCodeAssistSynchronizerModel/1.0.0.17": {
+      "UnityCodeAssistSynchronizerModel/1.0.0.18": {
         "dependencies": {
           "NETStandard.Library": "2.0.3"
         },
@@ -24,7 +24,7 @@
     }
   },
   "libraries": {
-    "UnityCodeAssistSynchronizerModel/1.0.0.17": {
+    "UnityCodeAssistSynchronizerModel/1.0.0.18": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -78,7 +78,7 @@ namespace Meryel.UnityCodeAssist.Editor
             return null;
         }
 
-        public static bool FindInstanceOfType(string typeName, out GameObject? gameObjectInstanceOfType, out ScriptableObject? scriptableObjectInstanceOfType)
+        public static bool FindInstanceOfType(string typeName, string docPath, out GameObject? gameObjectInstanceOfType, out ScriptableObject? scriptableObjectInstanceOfType)
         {
             gameObjectInstanceOfType = null;
             scriptableObjectInstanceOfType = null;
@@ -89,7 +89,9 @@ namespace Meryel.UnityCodeAssist.Editor
                 return false;
 
 
-            var obj = GetObjectOfType(type);
+            var obj = GetObjectOfType(type, out var requestVerboseType);
+            if (requestVerboseType)
+                NetMQInitializer.Publisher?.SendRequestVerboseType(typeName, docPath);
 
             if (obj != null && obj is GameObject go)
             {
@@ -105,10 +107,21 @@ namespace Meryel.UnityCodeAssist.Editor
             return false;
         }
 
-        static UnityEngine.Object? GetObjectOfType(Type type)
+        static UnityEngine.Object? GetObjectOfType(Type type, out bool requestVerboseType)
         {
-            UnityEngine.Object? obj;
+            var isMonoBehaviour = type.IsSubclassOf(typeof(MonoBehaviour));
+            var isScriptableObject = type.IsSubclassOf(typeof(ScriptableObject));
+            
+            if (!isMonoBehaviour && !isScriptableObject)
+            {
+                Serilog.Log.Warning("{Type} is not a valid Unity object", type.ToString());
+                requestVerboseType = true;
+                return null;
+            }
+            requestVerboseType = false;
 
+
+            UnityEngine.Object? obj;
 
             obj = getObjectToSend(Selection.activeGameObject, type);
             if (obj != null)
@@ -151,8 +164,8 @@ namespace Meryel.UnityCodeAssist.Editor
             }
             catch (Exception ex)
             {
-                var isMonoBehaviour = type.IsSubclassOf(typeof(MonoBehaviour));
-                var isScriptableObject = type.IsSubclassOf(typeof(ScriptableObject));
+                //var isMonoBehaviour = type.IsSubclassOf(typeof(MonoBehaviour));
+                //var isScriptableObject = type.IsSubclassOf(typeof(ScriptableObject));
                 Serilog.Log.Warning(ex, "FindObjectOfType failed for {Type}, mb:{isMB}, so:{isSO}", type.ToString(), isMonoBehaviour, isScriptableObject);
             }
 
@@ -169,8 +182,8 @@ namespace Meryel.UnityCodeAssist.Editor
             }
             catch (Exception ex)
             {
-                var isMonoBehaviour = type.IsSubclassOf(typeof(MonoBehaviour));
-                var isScriptableObject = type.IsSubclassOf(typeof(ScriptableObject));
+                //var isMonoBehaviour = type.IsSubclassOf(typeof(MonoBehaviour));
+                //var isScriptableObject = type.IsSubclassOf(typeof(ScriptableObject));
                 Serilog.Log.Warning(ex, "FindObjectsOfTypeAll failed for {Type}, mb:{isMB}, so:{isSO}", type.ToString(), isMonoBehaviour, isScriptableObject);
             }
 

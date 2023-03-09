@@ -52,6 +52,7 @@ namespace Meryel.UnityCodeAssist.Editor
 
         private static void EditorSceneManager_sceneOpened(Scene scene, OpenSceneMode mode)
         {
+            Serilog.Log.Debug("Monitor {Event} scene:{Scene} mode:{Mode}", nameof(EditorSceneManager_sceneOpened), scene.name, mode);
             //Debug.Log("EditorSceneManager_sceneOpened");
             OnHierarchyChanged();
         }

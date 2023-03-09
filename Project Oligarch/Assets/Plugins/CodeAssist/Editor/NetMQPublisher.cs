@@ -545,6 +545,15 @@ namespace Meryel.UnityCodeAssist.Editor
             SendAux(dataOfER);
         }
 
+        public void SendRequestVerboseType(string type, string docPath)
+        {
+            var dataOfRVT = new Synchronizer.Model.RequestVerboseType()
+            {
+                Type = type,
+                DocPath = docPath,
+            };
+            SendAux(dataOfRVT);
+        }
 
 
 
@@ -674,9 +683,11 @@ namespace Meryel.UnityCodeAssist.Editor
             if (requestScript.DeclaredTypes == null || requestScript.DeclaredTypes.Length == 0)
                 return;
 
+            var documentPath = requestScript.DocumentPath;
+
             foreach (var declaredType in requestScript.DeclaredTypes)
             {
-                if (ScriptFinder.FindInstanceOfType(declaredType, out var go, out var so))
+                if (ScriptFinder.FindInstanceOfType(declaredType, documentPath, out var go, out var so))
                 {
                     if (go != null)
                         SendGameObject(go);
@@ -721,6 +732,11 @@ namespace Meryel.UnityCodeAssist.Editor
         void Synchronizer.Model.IProcessor.Process(Synchronizer.Model.ErrorReport errorReport)
         {
             Serilog.Log.Warning("Unity/Server shouldn't call Synchronizer.Model.IProcessor.Process(Synchronizer.Model.ErrorReport)");
+        }
+
+        void Synchronizer.Model.IProcessor.Process(Synchronizer.Model.RequestVerboseType requestVerboseType)
+        {
+            Serilog.Log.Warning("Unity/Server shouldn't call Synchronizer.Model.IProcessor.Process(Synchronizer.Model.RequestVerboseType)");
         }
     }
 }

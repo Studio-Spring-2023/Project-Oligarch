@@ -80,6 +80,8 @@ public class generateBounties : MonoBehaviour
     int scalePayout200 = (int)basePayout.TwoHundred;
     int scalePayout300 = (int)basePayout.ThreeHundred;
     int scalePayout400 = (int)basePayout.FourHundred;
+    //this is the method for bounties completed which is multiplied with the base payout (for late game money buff)
+    int bountiesCompleted = 1; //to be increased by a later function
 
 
     //the line that creates the item used to randomize things later
@@ -89,19 +91,21 @@ public class generateBounties : MonoBehaviour
     private bountyType rndBounty;
     
 
+
+
     public void Start()//for testing if it works // no core mechanics allowe here.
     {
         
         //does the math for the scaling of the payout for the "exceptional" time limit
-        int exceptionalMath = (int)(scalePayout100 * 1.5f);
+        int exceptionalMath = (int)(scalePayout100 * 1.5f * bountiesCompleted);
         Debug.Log("100*1.5 = " + exceptionalMath);
 
         //does the math for the average payout of the "average" time limit
-        int averageMath = (int)(scalePayout100 * 1f);
+        int averageMath = (int)(scalePayout100 * 1f * bountiesCompleted);
         Debug.Log("100 * 1 = " + averageMath);
 
         //does the math for the "poor" scaling payout time limit
-        int poorMath = (int)(scalePayout100 * .5f);
+        int poorMath = (int)(scalePayout100 * .5f * bountiesCompleted);
         Debug.Log("100 * .5 = " + poorMath);
 
         //the array that holds the time limits info in column 0, and the enemy difficulty stage in column 1
