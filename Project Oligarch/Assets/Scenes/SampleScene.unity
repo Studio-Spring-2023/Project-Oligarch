@@ -167,3 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e45205895f14724ca5bc9cfaae64775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Planets: 0
+  types: 0
+  payoutBase: 100
+  risks: 0
+  time: 0
+  EnemyDifficulty: 0
