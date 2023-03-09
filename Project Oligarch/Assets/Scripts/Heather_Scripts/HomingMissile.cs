@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
 public class HomingMissile : MonoBehaviour
@@ -10,6 +11,7 @@ public class HomingMissile : MonoBehaviour
 
     public float force;
     public float rotationForce;
+
 
     private void Awake ( )
     {
@@ -23,5 +25,11 @@ public class HomingMissile : MonoBehaviour
         Vector3 rotationAmount = Vector3.Cross ( transform.forward , dir );
         rb.angularVelocity = rotationAmount * rotationForce;
         rb.velocity = transform.forward * force;
+    }
+
+    private void OnCollisionEnter ( Collision boom )
+    {
+        FindObjectOfType<Enemy_health> ( ).LoseLife ( 5);
+        Destroy ( gameObject );
     }
 }

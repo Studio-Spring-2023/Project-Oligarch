@@ -14,7 +14,6 @@ public class projectiles : MonoBehaviour
     public bool shooting;
     public bool canShoot;
 
-    public Camera attackCam;
     public Transform attackPoint;
     public RaycastHit hit;
     public LayerMask isEnemy;
@@ -36,7 +35,8 @@ public class projectiles : MonoBehaviour
         {
             shooting = Input.GetKey ( KeyCode.Mouse0 );
         }
-        else if ( Input.GetKeyDown ( KeyCode.Mouse1 ) )
+       
+        if ( Input.GetKeyDown ( KeyCode.Mouse1 ) )
         {
             GameObject.Instantiate ( homingMissile );
         }
@@ -54,21 +54,19 @@ public class projectiles : MonoBehaviour
         float x = Random.Range ( -spread , spread );
         float y = Random.Range ( -spread , spread );
 
-        Vector3 dir = attackCam.transform.forward + new Vector3 ( x , y , 0 );
+        Vector3 dir = attackPoint.transform.forward + new Vector3 ( x , y , 0 );
 
-        if ( Physics.Raycast ( attackCam.transform.position , dir , out hit , range , isEnemy ) )
+        if ( Physics.Raycast ( attackPoint.transform.position , dir , out hit , range , isEnemy ) )
         {
             Debug.Log ( hit.collider.name );
 
             if ( hit.collider.CompareTag ( "Enemy" ) )
             {
-                Debug.Log ( "Enemy took Damage" );
+                FindObjectOfType<Enemy_health> ( ).LoseLife ( 1 );
             }
         }
 
         Invoke ( "ResetShot" , timeBetweenShooting );
-
-        Invoke ( "Bang" , timeBetweenShooting );
     }
 
     private void ResetShot ( )
@@ -78,7 +76,7 @@ public class projectiles : MonoBehaviour
 
     private void OnDrawGizmos ( )
     {
-        Gizmos.DrawLine(attackCam.transform.position,hit.point );
+        Gizmos.DrawLine(attackPoint.transform.position,hit.point );
         Gizmos.color= Color.black;
 
         Gizmos.DrawSphere ( hit.point , .1f );

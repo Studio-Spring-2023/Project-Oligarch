@@ -201,12 +201,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.02108054, y: -0.011797072, z: 0.0002487612, w: 0.9997082}
-  m_LocalPosition: {x: 0.86, y: -0.19000006, z: -2.095208}
+  m_LocalPosition: {x: 1.8414202, y: 3.6599998, z: -3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 843520050}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 2.416, y: -1.352, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -604,7 +604,7 @@ Transform:
   m_Children:
   - {fileID: 984568021}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &598858066
 MonoBehaviour:
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781a95409256f16468db5c6a1308c410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camControl: {fileID: 1863142860}
+  camControl: {fileID: 0}
   camTarget: {fileID: 984568021}
   settings:
     forwardSpeed: 1
@@ -739,7 +739,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &843520049
 GameObject:
@@ -768,8 +768,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 330585546}
+  m_Children: []
   m_Father: {fileID: 1863142859}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -815,7 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1747889037}
-  - component: {fileID: 1747889038}
+  - component: {fileID: 1747889039}
   m_Layer: 0
   m_Name: BeamPistol
   m_TagString: Untagged
@@ -836,9 +835,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1747889038
+--- !u!114 &1747889039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -847,26 +846,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1747889036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea1bc07d3170164381d48775288cf0b, type: 3}
+  m_Script: {fileID: 11500000, guid: faab4ad4a2b474448a9b537af57ebd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dam: 1
-  bulletsPerTap: 3
-  bulletsShot: 0
-  magSize: 3
-  bulletsLeft: 0
-  cooldown: 0.5
+  timeBetweenShooting: 0
+  spread: 0
   range: 20
-  timeForShots: 0
-  canHold: 0
+  timeBetweenShots: 0
   shooting: 0
-  reloading: 0
   canShoot: 0
   attackCam: {fileID: 486359112}
   attackPoint: {fileID: 487603126}
   isEnemy:
     serializedVersion: 2
     m_Bits: 8
+  homingMissile: {fileID: 5716205272478410715, guid: f539bba57fb96e341abaee2bf945443d,
+    type: 3}
 --- !u!1 &1863142858
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +894,7 @@ Transform:
   m_Children:
   - {fileID: 843520050}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1863142860
 MonoBehaviour:

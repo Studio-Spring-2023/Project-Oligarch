@@ -129,5 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  force: 10
-  rotationForce: 500
+  isEnemy:
+    serializedVersion: 2
+    m_Bits: 8
+  force: 15
+  rotationForce: 20
+  range: 20
+  canFollow: 0
