@@ -9,12 +9,14 @@ public class Movement : MonoBehaviour
 
     public Transform orientation;
 
+    [Tooltip("This should be a smaller number as this is what movespeed is multiplied by to get how far you travel in a slide")]
     public float SlideForce; //slide speed
-
+    [Tooltip("How long a slide will last in seconds")]
     public float SlideTime = 1; //in seconds
 
     private bool Slide;
     private bool canSlide = true;
+    [Tooltip("Slide cooldown in seconds")]
     public float SlideCooldown;
 
     private float playerHeight = 2f;
@@ -34,8 +36,9 @@ public class Movement : MonoBehaviour
 
     RaycastHit hit;
     RaycastHit slopeHit;
+    [Tooltip("Largest angle at which our character controller will consider a surface a slope, higher for steeper angles")]
     [Range(0,90)]
-    public float SlopeAngle;
+    public float MaxSlopeAngle;
 
     public float jumpForce;
     public float jumpCooldown;
@@ -100,13 +103,11 @@ public class Movement : MonoBehaviour
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
         }
-        Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
         if(!OnSlope())
             moveDirection.y = rb.velocity.y;
         if(grounded && !OnSlope())
             rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
-
         else if(OnSlope())
         {
             SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
@@ -121,9 +122,7 @@ public class Movement : MonoBehaviour
             if(OnSlope())
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                   // rb.AddForce(transform.up * jumpForce/4f, ForceMode.Impulse);
                 }
-
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
             yield return new WaitForSeconds(0.5f);
@@ -146,16 +145,13 @@ public class Movement : MonoBehaviour
     /// <summary>
     /// Make the Player Slide across a surface, doesn't work in the air currently
     /// </summary>
-    /// <returns></returns>
     private IEnumerator SlideFunc()
     {
         canSlide = false;
         Slide = true;
-        //reduce player height
-        transform.localScale = new Vector3(1, 0.5f, 1);
+        transform.localScale = new Vector3(1, 0.5f, 1);//reduce player height
         rb.velocity = new Vector3(rb.velocity.x, -20f, rb.velocity.z);
         moveSpeed *= SlideForce;
-        //test heigher gravity in air
         rb.AddForce(moveDirection.normalized, ForceMode.Force);
         yield return new WaitForSeconds(SlideTime);
         Slide = false;
@@ -165,6 +161,9 @@ public class Movement : MonoBehaviour
         canSlide = true;
         yield return null;
     }
+    /// <summary>
+    /// Cancel out of slide with a jump preserving momentum
+    /// </summary>
     private IEnumerator SlideJump()
     {
         float reset = airMulti;
@@ -176,7 +175,11 @@ public class Movement : MonoBehaviour
         airMulti = reset;
         moveSpeed = StartSpeed;
     }
-
+    /// <summary>
+    /// Checks if the Player is on a slope or not
+    /// </summary>
+    /// <param name="jump"> bool to check if we are jumping or not</param>
+    /// <returns>if we are on a slope</returns>
     private bool OnSlope(bool jump = false)
     {
         
@@ -184,16 +187,18 @@ public class Movement : MonoBehaviour
         {
             return false;
         }
-        if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.15f))
+        if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.15f)) //slope check
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < SlopeAngle && angle != 0;
+            return angle < MaxSlopeAngle && angle != 0;
         }
 
         return false;
 
     }
-
+    /// <summary>
+    /// Gives us a direction along our slope
+    /// </summary>
     private Vector3 SlopeDir(Vector3 moveDir, Vector3 slopeNorm)
     {
         return Vector3.ProjectOnPlane(moveDir, slopeNorm).normalized;
