@@ -9,41 +9,41 @@ public class Movement : MonoBehaviour
 
     public Transform orientation;
 
-    public float groundDrag;
-
-    public float slowDown;
-
     public float SlideForce; //slide speed
 
     public float SlideTime = 1; //in seconds
 
     private bool Slide;
+    private bool canSlide = true;
+    public float SlideCooldown;
 
-    public float playerHeight;
+    private float playerHeight = 2f;
     public LayerMask whatIsGrounded;
-    public bool grounded;
+    private bool grounded;
 
-    public float horizontalInput;
-    public float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
 
-    public bool Slope;
-    public bool Active;
+    private bool Slope;
+    private bool Active;
 
-    [SerializeField] Vector3 moveDirection;
+    Vector3 moveDirection;
     Vector3 SlopeForward;
 
     Rigidbody rb;
 
     RaycastHit hit;
     RaycastHit slopeHit;
+    [Range(0,90)]
     public float SlopeAngle;
 
     public float jumpForce;
     public float jumpCooldown;
-    public float airMulti; //how fast you move in air
-    public bool readyToJump;
+    public float airMulti;
+    private bool readyToJump;
     public KeyCode jumpkey = KeyCode.Space;
-    void Start() //initialize variables
+
+    private void Start()
     {
         StartSpeed = moveSpeed;
         readyToJump = true;
@@ -52,20 +52,18 @@ public class Movement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
-    void Update()
+    private void Update()
     {
-         MyInput();
-        if (!Slide && Active &&!OnSlope())
-        {
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
-        }
+        MyInput();
        
     }
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         MovePlayer();
     }
-
+    /// <summary>
+    /// This is getting edge cases to properly calculate physics
+    /// </summary>
     private void MyInput()
     {
         if(!Slide) //default input
@@ -73,21 +71,7 @@ public class Movement : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
         }
-        //if (Input.GetKey(jumpkey) && readyToJump && grounded && !Slide && OnSlope())
-        //{
-        //    rb.useGravity = true;
-        //    Active = false;
-        //    grounded = false;
-        //    readyToJump = false;
-        //    jumpForce = 50f;
-        //    Debug.Log(jumpForce);
-        //    OnSlope(true);
-        //    //rb.velocity.y = rb.velocity.y;
-        //    StartCoroutine(Jump());
-        //    Invoke(nameof(ResetJump), jumpCooldown);
-        //    jumpForce = 36f;
-        //}
-        if (Input.GetKey(jumpkey) && readyToJump && (grounded || OnSlope()) && !Slide)
+        if (Input.GetKey(jumpkey) && readyToJump && (grounded || OnSlope()) && !Slide) //jumping
         {
             readyToJump = false;
             StartCoroutine(Jump());
@@ -102,15 +86,20 @@ public class Movement : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);  //returns scale to normal
             Slide = false;
         }
-        if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0)) //slide can only be preformed if you are moving
+        if (Input.GetButtonDown("AbilityMove") && (horizontalInput != 0 || verticalInput != 0) && (grounded || OnSlope()) && canSlide) //slide can only be preformed if you are moving
         {
             StartCoroutine(SlideFunc());
-           // DragDown();
         }
     }
-
+    /// <summary>
+    /// Moves Player when on flat ground or on slope
+    /// </summary>
     private void MovePlayer()
     {
+        if (!Slide && Active && !OnSlope())
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.015f * transform.localScale.y, whatIsGrounded); //ground check raycast
+        }
         Vector3 Moving = new Vector3(horizontalInput, 0, verticalInput); //this is just to check if we are moving
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;//move in direction relative to camera
         if(!OnSlope())
@@ -120,29 +109,19 @@ public class Movement : MonoBehaviour
 
         else if(OnSlope())
         {
-            //Debug.Log("On Slope");
             SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
             rb.velocity =  SlopeForward * moveSpeed;
         }
     }
-
-    private void SpeedControl()
-        {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-            if(flatVel.magnitude > moveSpeed)
-            {
-                Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-            }
-        }
-
+    /// <summary>
+    /// Make the Player Jump
+    /// </summary>
     private IEnumerator Jump()
         {
-            //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             if(OnSlope())
                 {
-                    rb.AddForce(transform.up * jumpForce/2.75f, ForceMode.Impulse);
+                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                   // rb.AddForce(transform.up * jumpForce/4f, ForceMode.Impulse);
                 }
 
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -164,25 +143,27 @@ public class Movement : MonoBehaviour
             rb.AddForce(-transform.up * gravMod, ForceMode.Impulse);//snaps to ground
         }
     }
-    
+    /// <summary>
+    /// Make the Player Slide across a surface, doesn't work in the air currently
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator SlideFunc()
     {
-        
+        canSlide = false;
         Slide = true;
         //reduce player height
         transform.localScale = new Vector3(1, 0.5f, 1);
-        //DragDown();
         rb.velocity = new Vector3(rb.velocity.x, -20f, rb.velocity.z);
         moveSpeed *= SlideForce;
         //test heigher gravity in air
         rb.AddForce(moveDirection.normalized, ForceMode.Force);
         yield return new WaitForSeconds(SlideTime);
         Slide = false;
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3(1, 1, 1);//return player height
         moveSpeed = StartSpeed;
-        //return player height
+        yield return new WaitForSeconds(SlideCooldown);
+        canSlide = true;
         yield return null;
-
     }
     private IEnumerator SlideJump()
     {
@@ -201,10 +182,9 @@ public class Movement : MonoBehaviour
         
         if(jump == true)
         {
-            //moveDirection.y = rb.velocity.y;
             return false;
         }
-        if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.3f))
+        if(Physics.Raycast(transform.position, Vector3.down,out slopeHit, playerHeight * 0.5f + 0.15f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < SlopeAngle && angle != 0;
