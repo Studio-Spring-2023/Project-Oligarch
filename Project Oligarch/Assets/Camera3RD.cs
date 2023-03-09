@@ -8,17 +8,8 @@ public class Camera : MonoBehaviour
     public Transform PlayerObj;
     public Transform player;
     public Rigidbody rb;
-
-    
-
     public float rotationSpeed;
-    void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-    }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
@@ -31,7 +22,6 @@ public class Camera : MonoBehaviour
         if(inputDir != Vector3.zero)
         {
             PlayerObj.forward = Vector3.Slerp(PlayerObj.forward, inputDir.normalized, Time.deltaTime);
-
         }
     }
 }
