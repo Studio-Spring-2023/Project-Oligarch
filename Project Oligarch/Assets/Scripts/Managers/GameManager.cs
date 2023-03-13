@@ -22,18 +22,26 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
         GM = this;
         PlayerInputHandler = new InputHandler();
-        UIHandler = GetComponent<UIHandler>();
+        UIHandler = new UIHandler();
     }
 
     void Awake()
     {
-        InstantiateManager();
-    }
+		InstantiateManager();
+
+		//Don't want left click to be registering as an input when we start in the main menu.
+		PlayerInputHandler.DisableAbilityInputs();
+	}
 
 	void OnEnable()
 	{
         PlayerInputHandler.OnEnable();
 	}
+
+    public void MenuStartButtonPressed()
+    {
+        UIHandler.MenuFunctions.StartGame();
+    }
 
 	void Start()
     {

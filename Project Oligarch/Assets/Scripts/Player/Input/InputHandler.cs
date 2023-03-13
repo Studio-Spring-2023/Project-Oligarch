@@ -42,11 +42,8 @@ public class InputHandler
 	//Ability Global Variables
 	public static AbilityInput LastAbilityInput { get; private set; }
 
-	#region Events
-    /// <summary>
-    /// Triggers when Player presses one of the ability hotkeys
-    /// </summary>
-	public static event Action OnAbilityInput;
+    #region Events
+    public static Action OnJumpInput;
 	#endregion
 
 	#region InputHandler Constructor
@@ -68,7 +65,6 @@ public class InputHandler
         CameraControls.Enable();
         MovementControls.Enable();
         InteractControls.Enable();
-        AbilityControls.Enable();
         UIControls.Enable();
 
         CameraControls.MouseDelta.performed += CacheMouseDelta;
@@ -131,39 +127,45 @@ public class InputHandler
 
     private void CacheJumpInput(InputAction.CallbackContext ctx)
     {
-        
-    }
+        OnJumpInput?.Invoke();
+	}
     #endregion
 
     #region Interact Controls
     private void ReceivedInteractInput(InputAction.CallbackContext ctx)
     {
-        
+        Debug.Log("Interact Pressed");
     }
-    #endregion
+	#endregion
 
-    #region Abilities Controls
+	#region Abilities Controls
+	public void EnableAbilityInputs()
+	{
+		AbilityControls.Enable();
+	}
+
+	public void DisableAbilityInputs()
+    {
+		AbilityControls.Disable();
+	}
+
     private void PrimaryAbilityInput(InputAction.CallbackContext ctx)
     {
-        LastAbilityInput = AbilityInput.Primary;
-        OnAbilityInput?.Invoke();
+		PlayerCore.AssignedLoadout.Primary();
 	}
 
     private void SecondaryAbilityInput(InputAction.CallbackContext ctx)
     {
-		LastAbilityInput = AbilityInput.Secondary;
-		OnAbilityInput?.Invoke();
+		PlayerCore.AssignedLoadout.Secondary();
 	}
 
 	private void SpecialAbilityInput(InputAction.CallbackContext ctx)
     {
-		LastAbilityInput = AbilityInput.Special;
-		OnAbilityInput?.Invoke();
+		PlayerCore.AssignedLoadout.Special();
 	}
 	private void UltimateAbilityInput(InputAction.CallbackContext ctx)
     {
-		LastAbilityInput = AbilityInput.Ultimate;
-		OnAbilityInput?.Invoke();
+        PlayerCore.AssignedLoadout.Ultimate();
 	}
 	#endregion
 
@@ -175,7 +177,7 @@ public class InputHandler
 
     private void UISelectInput(InputAction.CallbackContext ctx)
     {
-
+        Debug.Log("UI Select Input");
     }
 
     public static void EnterUIMode()

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Main Scenes/Test Scenes/Movement Testing.unity
+    guid: 004bd9ebffd7ae648a41cde4185f0314
+  - enabled: 1
     path: Assets/Main Scenes/Main Menu.unity
     guid: f386c74b8148a3847b031785019f43c8
   - enabled: 1
@@ -17,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Scenes/Olympia.unity
     guid: 897fa13e05991414ab192f2109c83957
-  - enabled: 1
-    path: Assets/Main Scenes/Test Scenes/Movement Testing.unity
-    guid: 004bd9ebffd7ae648a41cde4185f0314
   m_configObjects: {}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIHandler : MonoBehaviour
+public class UIHandler
 {
     public MainMenu MenuFunctions;
 
@@ -27,6 +27,10 @@ public class UIHandler : MonoBehaviour
 
     public struct PlayerShip
     {
-
+        public void StartRun()
+        {
+			
+			GameManager.PlayerInputHandler.EnableAbilityInputs();
+		}
     }
 }

@@ -11,7 +11,7 @@ public class RangerLoadout : Loadout
     {
         Debug.Log("Ranger Primary");
 
-        Physics.Raycast(Player.transform.position, Player.transform.forward, 15);
+        //Physics.Raycast(Player.transform.position, Player.transform.forward, 15);
     }
 
     public override void Secondary()
