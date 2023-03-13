@@ -1,68 +1,72 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum RiskLevel
+{
+    Low,
+    Medium,
+    Extreme,
+    Max
+}
+
+enum PlanetType
+{
+    Decus,
+    Olympia,
+    Max
+}
+
+enum BountyType
+{
+    Kill,
+    Capture,
+    Rescue,
+    Max
+}
+
 public class BountyHandler : MonoBehaviour
 {
+	//For debug purposes
 	public GameObject[] BountyObjects;
 
-	enum RiskLevel
+    class GeneratedBounty
 	{
-		Low,
-		Medium,
-		Extreme,
-		Max
-	}
+        public RiskLevel Risk;
+        public PlanetType Planet;
+        public BountyType Type;
 
-	enum PlanetType
-	{
-		Decus,
-		Olympia,
-		Max
-	}
+		public GameObject AttachedObject;
 
-	enum BountyType
-	{
-		Kill,
-		Capture,
-		Rescue,
-		Max
-	}
-
-	class Bounty
-	{
-		public RiskLevel Risk;
-		public PlanetType Planet;
-		public BountyType Type;
-
-		public Bounty(RiskLevel risk, PlanetType planet, BountyType type)
+		public GeneratedBounty(RiskLevel risk, PlanetType planet, BountyType type)
 		{
 			Risk = risk;
 			Planet = planet;
 			Type = type;
 
-			CreateUniqueBountyDetails();
+			GenerateUniqueBountyDetails();
 		}
-		
-		void CreateUniqueBountyDetails()
-		{
-			switch(Type)
-			{
-				case BountyType.Kill:
-					break;
 
-				case BountyType.Capture:
-					break;
+		void GenerateUniqueBountyDetails()
+        {
+            switch (Type)
+            {
+                case BountyType.Kill:
+                    break;
 
-				case BountyType.Rescue:
-					break;
-			}
-		}
-	}
+                case BountyType.Capture:
+                    break;
+
+                case BountyType.Rescue:
+                    break;
+            }
+        }
+    }
 
 	private void Awake()
 	{
-		Bounty[] bounties = GenerateBounties();
+		GeneratedBounty[] bounties = GenerateBounties();
 		Debug.Log(bounties.Length);
 
 		for (int i = 0; i <= bounties.Length - 1; i++)
@@ -92,12 +96,12 @@ public class BountyHandler : MonoBehaviour
 		}
 	}
 
-	static Bounty[] GenerateBounties()
+	GeneratedBounty[] GenerateBounties()
 	{
 		UnityEngine.Random.InitState(System.DateTime.Now.Second);
 		int numberOfBounties = Random.Range(2,6);
 
-		Bounty[] Bounties = new Bounty[numberOfBounties];
+		GeneratedBounty[] Bounties = new GeneratedBounty[numberOfBounties];
 
 		for (int i = 0; i < numberOfBounties; i++)
 		{
@@ -105,7 +109,7 @@ public class BountyHandler : MonoBehaviour
 			RiskLevel risk = (RiskLevel)UnityEngine.Random.Range(0, (int)RiskLevel.Max);
 			PlanetType planet = (PlanetType)UnityEngine.Random.Range(0, (int)PlanetType.Max);
 
-			Bounties[i] = new Bounty(risk, planet, type);
+			Bounties[i] = new GeneratedBounty(risk, planet, type);
 		}
 
 		return Bounties;

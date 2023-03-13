@@ -184,8 +184,12 @@ MonoBehaviour:
   CameraTransform: {fileID: 0}
   CameraAnchorVerticalOffset: 1.4
   CameraDistance: -4.5
-  CrosshairPoint: {x: 4, y: 1.25}
+  CrosshairPoint: {x: 0, y: 1.25, z: 4}
   MouseSensitivity: 0.37
+  InterDistanceCheck: 0.28
+  Interactables:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1239547620105552870
 GameObject:
   m_ObjectHideFlags: 0

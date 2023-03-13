@@ -26,7 +26,7 @@ public class PlayerCore : Core
 	public float CameraAnchorVerticalOffset;
 	[Range(-4f, -8f)]
 	public float CameraDistance;
-	public Vector2 CrosshairPoint;
+	public Vector3 CrosshairPoint;
 	[Range(0.01f, 1f)]
     public float MouseSensitivity;
 	private float pitchClamp = 85;
@@ -36,7 +36,11 @@ public class PlayerCore : Core
 		transform.position.y + CameraAnchorVerticalOffset, 
 		transform.position.z);
 
-	[Header("Temporary Debug Variables")]
+	[Header("Interact Variables")]
+	public float InterDistanceCheck;
+	public LayerMask Interactables;
+
+    [Header("Temporary Debug Variables")]
 	bool castingPrimary;
 	bool castingSecondary;
 	bool castingSpecial;
@@ -125,7 +129,7 @@ public class PlayerCore : Core
 		CameraTransform.position = rotatedCameraOffset;
 
 		//Crosshair Point
-		Vector3 rotatedCrosshairPoint = desiredRotation * new Vector3(0, CrosshairPoint.y, CrosshairPoint.x);
+		Vector3 rotatedCrosshairPoint = desiredRotation * CrosshairPoint;
 		rotatedCrosshairPoint += CameraAnchorPos;
 
 		Vector3 dirToLook = (rotatedCrosshairPoint - CameraTransform.position).normalized;
@@ -135,7 +139,10 @@ public class PlayerCore : Core
 
 	public void Interact()
     {
+		Vector3 lookDir = CrosshairPoint - CameraTransform.position;
 
+		Ray interRay = new Ray(CameraTransform.position, lookDir);
+		Physics.Raycast(interRay, InterDistanceCheck, Interactables);
     }
 
 	private void OnDisable()
@@ -167,12 +174,12 @@ public class PlayerCore : Core
         }
 
 		//Velocity vector
-        Gizmos.color = Color.white;
-        Gizmos.DrawRay(transform.position, Velocity);
+        //Gizmos.color = Color.white;
+        //Gizmos.DrawRay(transform.position, Velocity);
 
 		//Forward direction the Player will move in
-		Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-		Gizmos.DrawRay(transform.position, forward);
+		//Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
+		//Gizmos.DrawRay(transform.position, forward);
 
 		//CameraPos, Anchor, and the Look Point
 		Quaternion desiredRotation = Quaternion.Euler(pitch, wrapPi(yaw), 0);
@@ -183,7 +190,7 @@ public class PlayerCore : Core
 		rotatedCameraOffset += CameraAnchorPos;
 
 		//Crosshair Point
-		Vector3 rotatedCrosshairPoint = desiredRotation * new Vector3(0, CrosshairPoint.y, CrosshairPoint.x);
+		Vector3 rotatedCrosshairPoint = desiredRotation * CrosshairPoint;
 		rotatedCrosshairPoint += CameraAnchorPos;
 
 		Gizmos.color = Color.red;
@@ -206,7 +213,14 @@ public class PlayerCore : Core
 		//Ground ray
 		Gizmos.color = Color.white;
 		Gizmos.DrawRay(transform.position, Vector3.down * GroundCheckDistance);
-	}
+
+		//Interact Ray
+		Gizmos.color = Color.yellow;
+        Vector3 lookDir = rotatedCrosshairPoint - CameraTransform.position;
+		Gizmos.DrawRay(CameraTransform.position, lookDir);
+
+        Ray interRay = new Ray(CameraTransform.position, lookDir * InterDistanceCheck);
+    }
 
 	float wrapPi(float theta)
 	{

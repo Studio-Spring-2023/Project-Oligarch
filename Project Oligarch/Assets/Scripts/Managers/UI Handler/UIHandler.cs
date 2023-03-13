@@ -29,7 +29,6 @@ public class UIHandler
     {
         public void StartRun()
         {
-			
 			GameManager.PlayerInputHandler.EnableAbilityInputs();
 		}
     }
