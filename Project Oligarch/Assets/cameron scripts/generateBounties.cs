@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using JetBrains.Annotations;
-
+using UnityEngine.UI;
 
 public class generateBounties : MonoBehaviour
 {
@@ -91,6 +91,19 @@ public class generateBounties : MonoBehaviour
     private bountyType rndBounty;
     
 
+    //text creations
+        //creating the text element for the exceptional time limit 
+    public Text exceptionalMathText;
+        //creating the text element for the average time limit 
+    public Text averageMathText;
+        //creating the text element for the poor time limit 
+    public Text poorMathText;
+
+/*
+    public Text exceptionalMathText;
+    public Text exceptionalMathText;
+    public Text exceptionalMathText;
+*/  
 
 
     public void Start()//for testing if it works // no core mechanics allowe here.
@@ -98,7 +111,7 @@ public class generateBounties : MonoBehaviour
         
         //does the math for the scaling of the payout for the "exceptional" time limit
         int exceptionalMath = (int)(scalePayout100 * 1.5f * bountiesCompleted);
-        Debug.Log("100*1.5 = " + exceptionalMath);
+        exceptionalMathText.text = "Exceptional Time! 100*1.5 = " + exceptionalMath;
 
         //does the math for the average payout of the "average" time limit
         int averageMath = (int)(scalePayout100 * 1f * bountiesCompleted);
