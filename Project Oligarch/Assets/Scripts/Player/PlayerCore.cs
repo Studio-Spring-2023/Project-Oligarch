@@ -35,16 +35,15 @@ public class PlayerCore : Core
 	private Vector3 CameraAnchorPos => new Vector3(transform.position.x, 
 		transform.position.y + CameraAnchorVerticalOffset, 
 		transform.position.z);
+	private Quaternion DesiredRotation => Quaternion.Euler(pitch, wrapPi(yaw), 0);
+	private Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
 
 	[Header("Interact Variables")]
-	public float InterDistanceCheck;
+	public float InterCheckMaxDistance;
 	public LayerMask Interactables;
 
-    [Header("Temporary Debug Variables")]
-	bool castingPrimary;
-	bool castingSecondary;
-	bool castingSpecial;
-	bool castingUltimate;
+	[Header("Crosshair Variables")]
+	public RectTransform Crosshair;
 
 	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
@@ -67,6 +66,7 @@ public class PlayerCore : Core
 	private void OnEnable()
 	{
 		InputHandler.OnJumpInput += AttemptJump;
+		InputHandler.OnInteractInput += Interact;
 	}
 
 	private void Update()
@@ -111,68 +111,51 @@ public class PlayerCore : Core
 	private void LateUpdate()
 	{
 		UpateCameraRotation();
+		DrawCrosshair();
 	}
 
 	public void UpateCameraRotation()
     {
 		//Body Rotation done seperate from Camera to prevent stutter
 		Quaternion desiredYRotation = Quaternion.Euler(0, wrapPi(yaw), 0);
-		Quaternion combinedRotation = desiredYRotation;
-		PlayerRB.MoveRotation(combinedRotation);
+		PlayerRB.MoveRotation(desiredYRotation);
 
 		//Camera rotation
-		Quaternion desiredRotation = Quaternion.Euler(pitch, wrapPi(yaw), 0);
+		Vector3 rotatedCameraOffsetPos = (DesiredRotation * new Vector3(0, 0, CameraDistance)) + CameraAnchorPos;
+		CameraTransform.position = rotatedCameraOffsetPos;
 
-		Vector3 rotatedCameraOffset = desiredRotation * new Vector3(0, 0, CameraDistance);
-		rotatedCameraOffset += CameraAnchorPos;
-
-		CameraTransform.position = rotatedCameraOffset;
-
-		//Crosshair Point
-		Vector3 rotatedCrosshairPoint = desiredRotation * CrosshairPoint;
-		rotatedCrosshairPoint += CameraAnchorPos;
-
-		Vector3 dirToLook = (rotatedCrosshairPoint - CameraTransform.position).normalized;
+		//Crosshair Point rotation
+		Vector3 dirToLook = (RotatedCrosshairPoint - CameraTransform.position).normalized;
 
 		CameraTransform.rotation = Quaternion.LookRotation(dirToLook);
 	}
 
+	//This will be moved to UIHandler, but for now I put it here since it was easier
+	//TODO: Move this to UIHandler
+	public void DrawCrosshair()
+	{
+		Vector2 CrosshairScreenSpace = Camera.main.WorldToScreenPoint(RotatedCrosshairPoint);
+		Crosshair.transform.position = CrosshairScreenSpace;
+	}
+
 	public void Interact()
     {
-		Vector3 lookDir = CrosshairPoint - CameraTransform.position;
+		Vector3 lookDir = RotatedCrosshairPoint - CameraTransform.position;
 
 		Ray interRay = new Ray(CameraTransform.position, lookDir);
-		Physics.Raycast(interRay, InterDistanceCheck, Interactables);
+		if (Physics.Raycast(interRay, out RaycastHit hit, InterCheckMaxDistance, Interactables))
+			hit.transform.gameObject.GetComponent<Interactable>().InteractedWith();
     }
 
 	private void OnDisable()
 	{
 		InputHandler.OnJumpInput -= AttemptJump;
+		InputHandler.OnInteractInput -= Interact;
 	}
 
 	//Temporary for Debug Display of Abilities
 	private void OnDrawGizmos()
     {
-        if (castingPrimary)
-        {
-
-        }
-
-        if (castingSecondary)
-        {
-
-        }
-
-        if (castingSpecial)
-        {
-
-        }
-
-        if (castingUltimate)
-        {
-
-        }
-
 		//Velocity vector
         //Gizmos.color = Color.white;
         //Gizmos.DrawRay(transform.position, Velocity);
@@ -189,10 +172,6 @@ public class PlayerCore : Core
 		Vector3 rotatedCameraOffset = desiredRotation * new Vector3(0, 0, CameraDistance);
 		rotatedCameraOffset += CameraAnchorPos;
 
-		//Crosshair Point
-		Vector3 rotatedCrosshairPoint = desiredRotation * CrosshairPoint;
-		rotatedCrosshairPoint += CameraAnchorPos;
-
 		Gizmos.color = Color.red;
 		Gizmos.DrawRay(CameraAnchorPos, new Vector3(cameraRotationMatrix[0, 0], cameraRotationMatrix[1, 0], cameraRotationMatrix[2, 0]).normalized);
 		Gizmos.color = Color.green;
@@ -205,21 +184,19 @@ public class PlayerCore : Core
 
 		//Crosshair Look Point
 		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere(rotatedCrosshairPoint, 0.25f);
+		Gizmos.DrawWireSphere(RotatedCrosshairPoint, 0.25f);
 
 		//Direction from camera to crosshair point
-		Gizmos.DrawRay(CameraTransform.position, (rotatedCrosshairPoint - CameraTransform.position).normalized);
+		Gizmos.DrawRay(CameraTransform.position, (RotatedCrosshairPoint - CameraTransform.position).normalized);
 
 		//Ground ray
 		Gizmos.color = Color.white;
 		Gizmos.DrawRay(transform.position, Vector3.down * GroundCheckDistance);
 
 		//Interact Ray
-		Gizmos.color = Color.yellow;
-        Vector3 lookDir = rotatedCrosshairPoint - CameraTransform.position;
-		Gizmos.DrawRay(CameraTransform.position, lookDir);
-
-        Ray interRay = new Ray(CameraTransform.position, lookDir * InterDistanceCheck);
+        Vector3 lookDir = RotatedCrosshairPoint - CameraTransform.position;
+		Gizmos.color = Color.red;
+		Gizmos.DrawRay(CameraTransform.position, lookDir.normalized * InterCheckMaxDistance);
     }
 
 	float wrapPi(float theta)

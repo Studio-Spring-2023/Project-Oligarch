@@ -44,6 +44,7 @@ public class InputHandler
 
     #region Events
     public static Action OnJumpInput;
+	public static Action OnInteractInput;
 	#endregion
 
 	#region InputHandler Constructor
@@ -134,8 +135,8 @@ public class InputHandler
     #region Interact Controls
     private void ReceivedInteractInput(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Interact Pressed");
-    }
+		OnInteractInput?.Invoke();
+	}
 	#endregion
 
 	#region Abilities Controls

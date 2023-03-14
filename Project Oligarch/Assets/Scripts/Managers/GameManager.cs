@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public static void AssignActiveBounty(Generat)
+    {
+
+    }
+
 	void OnDisable()
 	{
         PlayerInputHandler.OnDisable();

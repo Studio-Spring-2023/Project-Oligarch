@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +28,7 @@ enum BountyType
 public class BountyHandler : MonoBehaviour
 {
 	//For debug purposes
-	public GameObject[] BountyObjects;
+	public Vector3[] HolotableBountyTransforms;
 
     class GeneratedBounty
 	{
@@ -76,30 +75,21 @@ public class BountyHandler : MonoBehaviour
 			switch (bounties[i].Type)
 			{
 				case BountyType.Kill:
-					BountyObjects[i].GetComponent<Renderer>().sharedMaterial.color = Color.red;
 					continue;
 
 				case BountyType.Capture:
-					BountyObjects[i].GetComponent<Renderer>().sharedMaterial.color = Color.blue;
 					continue;
 
 				case BountyType.Rescue:
-					BountyObjects[i].GetComponent<Renderer>().sharedMaterial.color = Color.green;
 					continue;
 			}
-		}
-
-		for (int i = bounties.Length; i <= (BountyObjects.Length - 1); i++)
-		{
-			Debug.Log("BountyObj index: " + i);
-			BountyObjects[i].GetComponent<Renderer>().sharedMaterial.color = Color.white;
 		}
 	}
 
 	GeneratedBounty[] GenerateBounties()
 	{
 		UnityEngine.Random.InitState(System.DateTime.Now.Second);
-		int numberOfBounties = Random.Range(2,6);
+		int numberOfBounties = Random.Range(2, 6);
 
 		GeneratedBounty[] Bounties = new GeneratedBounty[numberOfBounties];
 
@@ -113,5 +103,14 @@ public class BountyHandler : MonoBehaviour
 		}
 
 		return Bounties;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Matrix4x4 translate = Matrix4x4.Translate(transform.position);
+		foreach(Vector3 t in HolotableBountyTransforms)
+		{
+			Gizmos.DrawWireSphere(translate * t, 0.25f);
+		}
 	}
 }
