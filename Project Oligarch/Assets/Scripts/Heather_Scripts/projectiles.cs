@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class projectiles : MonoBehaviour
 {
-    public int dam;
+    public int Dam;
 
-    public float timeBetweenShooting;
-    public float spread;
-    public float range;
-    public float timeBetweenShots;
+    public float TimeBetweenShooting;
+    public float Spread;
+    public float Range;
+    public float TimeBetweenShots;
 
-    public bool shooting;
-    public bool canShoot;
+    public bool Shooting;
+    public bool CanShoot;
 
-    public Transform attackPoint;
-    public RaycastHit hit;
-    public LayerMask isEnemy;
-    public GameObject homingMissile;
+    public Transform AttackPoint;
+    public RaycastHit Hit;
+    public LayerMask IsEnemy;
+    public GameObject HomingMissile;
 
     private void Awake ( )
     {
-        canShoot = true;
+        CanShoot = true;
     }
 
     private void Update ( )
@@ -31,55 +31,55 @@ public class projectiles : MonoBehaviour
 
     private void ShootingInput ( )
     {
-        if ( canShoot )
+        if ( CanShoot )
         {
-            shooting = Input.GetKey ( KeyCode.Mouse0 );
+            Shooting = Input.GetKey ( KeyCode.Mouse0 );
         }
        
         if ( Input.GetKeyDown ( KeyCode.Mouse1 ) )
         {
-            GameObject.Instantiate ( homingMissile );
+            GameObject.Instantiate ( HomingMissile );
         }
 
-        if(canShoot && shooting)
+        if(CanShoot && Shooting)
         {
-            Bang ( );
+            bang ( );
         }
     }
 
-    private void Bang ( )
+    private void bang ( )
     {
-        canShoot= false;
+        CanShoot= false;
 
-        float x = Random.Range ( -spread , spread );
-        float y = Random.Range ( -spread , spread );
+        float x = Random.Range ( -Spread , Spread );
+        float y = Random.Range ( -Spread , Spread );
 
-        Vector3 dir = attackPoint.transform.forward + new Vector3 ( x , y , 0 );
+        Vector3 dir = AttackPoint.transform.forward + new Vector3 ( x , y , 0 );
 
-        if ( Physics.Raycast ( attackPoint.transform.position , dir , out hit , range , isEnemy ) )
+        if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Range , IsEnemy ) )
         {
-            Debug.Log ( hit.collider.name );
+            Debug.Log ( Hit.collider.name );
 
-            if ( hit.collider.CompareTag ( "Enemy" ) )
+            if ( Hit.collider.CompareTag ( "Enemy" ) )
             {
                 FindObjectOfType<Enemy_health> ( ).LoseLife ( 1 );
             }
         }
 
-        Invoke ( "ResetShot" , timeBetweenShooting );
+        Invoke ( "resetShot" , TimeBetweenShooting );
     }
 
-    private void ResetShot ( )
+    private void resetShot ( )
     {
-        canShoot = true;
+        CanShoot = true;
     }
 
     private void OnDrawGizmos ( )
     {
-        Gizmos.DrawLine(attackPoint.transform.position,hit.point );
+        Gizmos.DrawLine(AttackPoint.transform.position,Hit.point );
         Gizmos.color= Color.black;
 
-        Gizmos.DrawSphere ( hit.point , .1f );
+        Gizmos.DrawSphere ( Hit.point , .1f );
         Gizmos.color= Color.red;
     }
 }
