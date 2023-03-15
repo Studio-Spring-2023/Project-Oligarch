@@ -57,13 +57,13 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll_Speed: 0.5
-    - _ambient_occlusion: 0.607
+    - _ambient_occlusion: 0.593
     - _angle_offset: 3.63
-    - _dither: 0.44
+    - _dither: 0.39
     - _smoothness: 0
     m_Colors:
-    - _Fresnel_Color: {r: 0, g: 4.2662497, b: 21.112133, a: 0}
-    - _Main_Color: {r: 0, g: 0.6666667, b: 0.7490196, a: 0.46666667}
-    - _glow_color: {r: 0.08235294, g: 0.7490196, b: 0.7058824, a: 0}
+    - _Fresnel_Color: {r: 0, g: 7.58972, b: 21.112133, a: 0}
+    - _Main_Color: {r: 0, g: 0.7490196, b: 0.726296, a: 0.46666667}
+    - _glow_color: {r: 0.000103308324, g: 0.0007314645, b: 0.00008042278, a: 0}
     - _specular_color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -23,9 +23,6 @@
         },
         {
             "m_Id": "accb2397e8df442181b8a7282a18b7ac"
-        },
-        {
-            "m_Id": "a41fb19590f3433ba8a6e2771cf79f64"
         }
     ],
     "m_Keywords": [],
@@ -1037,10 +1034,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1190.0001220703125,
-            "y": 357.0,
-            "width": 135.0,
-            "height": 34.000030517578128
+            "x": -1190.400146484375,
+            "y": 356.79998779296877,
+            "width": 134.4000244140625,
+            "height": 33.600067138671878
         }
     },
     "m_Slots": [
@@ -1439,35 +1436,6 @@
 }
 
 {
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "a41fb19590f3433ba8a6e2771cf79f64",
-    "m_Guid": {
-        "m_GuidSerialized": "50c91c33-52bb-4630-aa46-d08d3ab6bf04"
-    },
-    "m_Name": "glow color",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "glow color",
-    "m_DefaultReferenceName": "_glow_color",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 0.06290490925312042,
-        "g": 0.5849056243896484,
-        "b": 0.5472148060798645,
-        "a": 0.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 1
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "a5b0fa10102448328abe1025642f72ef",
@@ -1616,9 +1584,6 @@
         },
         {
             "m_Id": "accb2397e8df442181b8a7282a18b7ac"
-        },
-        {
-            "m_Id": "a41fb19590f3433ba8a6e2771cf79f64"
         }
     ]
 }
@@ -2209,10 +2174,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1725.54345703125,
-            "y": -32.38282012939453,
-            "width": 0.0,
-            "height": 0.0
+            "x": -1653.60009765625,
+            "y": -95.9999771118164,
+            "width": 208.0,
+            "height": 325.6000061035156
         }
     },
     "m_Slots": [
@@ -2327,10 +2292,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -445.0000305175781,
-            "y": 749.0,
-            "width": 208.00003051757813,
-            "height": 301.9998779296875
+            "x": -462.3999938964844,
+            "y": 685.5999755859375,
+            "width": 208.00010681152345,
+            "height": 301.5999755859375
         }
     },
     "m_Slots": [
