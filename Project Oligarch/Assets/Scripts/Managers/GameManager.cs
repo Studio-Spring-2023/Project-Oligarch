@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
         GM = this;
         PlayerInputHandler = new InputHandler();
-        UIHandler = new UIHandler();
+		UIHandler = new UIHandler();
     }
 
     void Awake()
@@ -43,6 +43,14 @@ public class GameManager : MonoBehaviour
         UIHandler.MenuFunctions.StartGame();
     }
 
+    public void AssignActiveBounty()
+    {
+        //Right now we're skipping a UI screen that would give us more details on a bounty
+        //And just immediately assigning the bounty to the game manager so when we attempt
+        //to launch the game, it takes us where we need to go
+
+    }
+
 	void Start()
     {
         
@@ -53,10 +61,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public static void AssignActiveBounty(Generat)
-    {
-
-    }
+    
 
 	void OnDisable()
 	{

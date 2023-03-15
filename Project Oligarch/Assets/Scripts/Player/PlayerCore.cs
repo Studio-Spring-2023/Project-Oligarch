@@ -29,6 +29,10 @@ public class PlayerCore : Core
 	public Vector3 CrosshairPoint;
 	[Range(0.01f, 1f)]
     public float MouseSensitivity;
+	[Range(1f, 5f)]
+	public float CameraIntersectionCheckDistance;
+	[Range(1f, 5f)]
+	public float CameraIntersetOffsetDistance;
 	private float pitchClamp = 85;
     private float pitch;
 	private float yaw;
@@ -37,6 +41,7 @@ public class PlayerCore : Core
 		transform.position.z);
 	private Quaternion DesiredRotation => Quaternion.Euler(pitch, wrapPi(yaw), 0);
 	private Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
+	private Vector3 CameraCollisionOffset => CameraTransform.forward * CameraIntersetOffsetDistance;
 
 	[Header("Interact Variables")]
 	public float InterCheckMaxDistance;
@@ -120,14 +125,30 @@ public class PlayerCore : Core
 		Quaternion desiredYRotation = Quaternion.Euler(0, wrapPi(yaw), 0);
 		PlayerRB.MoveRotation(desiredYRotation);
 
-		//Camera rotation
+		//Camera Position Rotation
 		Vector3 rotatedCameraOffsetPos = (DesiredRotation * new Vector3(0, 0, CameraDistance)) + CameraAnchorPos;
 		CameraTransform.position = rotatedCameraOffsetPos;
 
-		//Crosshair Point rotation
-		Vector3 dirToLook = (RotatedCrosshairPoint - CameraTransform.position).normalized;
+		//After rotating, check for intersections between the camera and the world
+		Vector3 dirFromCameraToCrosshair = (RotatedCrosshairPoint - CameraTransform.position);
 
-		CameraTransform.rotation = Quaternion.LookRotation(dirToLook);
+		//Want to check from the camera anchor position, because we only want to move the camera if an object intersects between that point
+		//and our camera
+
+		//TODO: Change this to shoot the ray from the Player's head, because you want to see your character
+		//if the character isnt in your view port, then that's a problem
+		Vector3 adjustedCameraAnchor = (dirFromCameraToCrosshair * 0.5f);
+		Ray hitRay = new Ray(rotatedCameraOffsetPos + adjustedCameraAnchor, -adjustedCameraAnchor.normalized);
+		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
+		{
+			Debug.Log("Object Obstructing View");
+			Vector3 CameraCollisionOffset = CameraTransform.forward * CameraIntersetOffsetDistance;
+
+			CameraTransform.position = collidedObj.point + CameraCollisionOffset;
+		}
+
+		//Look in the direction of the crosshair
+		CameraTransform.rotation = Quaternion.LookRotation(dirFromCameraToCrosshair.normalized);
 	}
 
 	//This will be moved to UIHandler, but for now I put it here since it was easier
@@ -181,23 +202,27 @@ public class PlayerCore : Core
 
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawWireSphere(rotatedCameraOffset, 0.25f);
+		if (!Application.isPlaying)
+			CameraTransform.position = rotatedCameraOffset;
 
 		//Crosshair Look Point
 		Gizmos.color = Color.blue;
 		Gizmos.DrawWireSphere(RotatedCrosshairPoint, 0.25f);
-
-		//Direction from camera to crosshair point
-		Gizmos.DrawRay(CameraTransform.position, (RotatedCrosshairPoint - CameraTransform.position).normalized);
 
 		//Ground ray
 		Gizmos.color = Color.white;
 		Gizmos.DrawRay(transform.position, Vector3.down * GroundCheckDistance);
 
 		//Interact Ray
-        Vector3 lookDir = RotatedCrosshairPoint - CameraTransform.position;
+        Vector3 dirFromCameraToCrosshair = RotatedCrosshairPoint - CameraTransform.position;
 		Gizmos.color = Color.red;
-		Gizmos.DrawRay(CameraTransform.position, lookDir.normalized * InterCheckMaxDistance);
-    }
+		Gizmos.DrawRay(RotatedCrosshairPoint, dirFromCameraToCrosshair.normalized * 1.25f);
+
+		//Camera Intersection Test
+		Gizmos.color = Color.yellow;
+		Vector3 adjustedCameraAnchor = dirFromCameraToCrosshair * 0.5f;
+		Gizmos.DrawRay(rotatedCameraOffset + adjustedCameraAnchor, -adjustedCameraAnchor * CameraIntersectionCheckDistance);
+	}
 
 	float wrapPi(float theta)
 	{
