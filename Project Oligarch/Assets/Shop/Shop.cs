@@ -4,31 +4,19 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    public enum CommonItems
+    public enum Items //this is just for clarity rn
     {
-        MREPack,
-        TacticalGloves,
-        SharpDarts,
-        MAX
-    }
-    public enum UncommonItems
-    {
-        BTCleaver,
-        CleanCuts,
-        KiteShield,
-        MAX
-    }
-    public enum RareItems
-    {
-        HitList,
-        Mom,
-        Envy,
-        MAX
-    }
-    public enum LegendaryItems
-    {
-        HealingCrystal,
-        Voodoo,
+        MREPack = 0,
+        TacticalGloves = 0,
+        SharpDarts = 0,
+        BTCleaver = 1,
+        CleanCuts = 1,
+        KiteShield = 1,
+        HitList = 2,
+        Mom = 2,
+        Envy = 2,        
+        HealingCrystal = 3,
+        Voodoo = 3,
         MAX
     }
     public enum Rarity
@@ -41,17 +29,21 @@ public class Shop : MonoBehaviour
 
     [SerializeField] GameObject ShopStall;
     [SerializeField] GameObject ShopSection;
-    public List<GameObject> ShopList = new List<GameObject>();
+    public List<ShopItem> ShopList = new List<ShopItem>();
+    public List<GameObject> SectionList = new List<GameObject>();
+    [SerializeField]  public Dictionary<Items, Rarity> ShopItems = new Dictionary<Items,Rarity>();
     [Tooltip("Increases shop spawn odds by percentage")]
     public int OddsMod;
     public int ShopCount;
 
     private void Start()
     {
-        ShopCount = ShopList.Count;
+        ShopCount = SectionList.Count;
         NewShop();
         GenerateShop(transform.position, ShopCount);
         RandomShopRarity();
+        AssignShopItems();
+        //RollCommon();
     }
 
 
@@ -61,10 +53,10 @@ public class Shop : MonoBehaviour
         //Instantiate(shopPrefab at shopPosition);
         float off = 0;
         Instantiate(ShopStall, shopPosition, Quaternion.identity);
-        for (int i = 0; i < ShopList.Count; i++)
+        for (int i = 0; i < SectionList.Count; i++)
         {
             Vector3 Offset = shopPosition + (transform.right * off);
-            Instantiate(ShopList[i], Offset, Quaternion.identity);
+            Instantiate(SectionList[i], Offset, Quaternion.identity);
             off++;
         }
         NewShop();
@@ -73,16 +65,21 @@ public class Shop : MonoBehaviour
 
     //shop items spin and float using sign wave
 
+    private void AssignShopItems()
+    {
+
+    }
+
     public void NewShop()//(ShopType rarity)
     {
         for(int i = 0; i < ShopCount; i++)
         {
-            ShopList[i] = ShopSection;
+            SectionList[i] = ShopSection;
         }
         //this should give us new shop odds in the future
     }
 
-    private Rarity RandomShopRarity()
+    private Rarity RandomShopRarity() //Rarity roll
     {
         int Odds = Random.Range(0,100) + OddsMod;
         Rarity rarity = Rarity.Common;
@@ -108,5 +105,12 @@ public class Shop : MonoBehaviour
 
         return rarity;
     }
+
+    /*private CommonItems RollCommon()
+    {
+        CommonItems Item = Random.Range(0, (int)CommonItems.MAX - 1);
+        Debug.Log(Item);
+        return Item;
+    }*/
 
 }

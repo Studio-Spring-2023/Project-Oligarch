@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ShopStall : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //[SerializeField] Shop shop;
+   // Dictionary<shop.Item, int> ShopItems = new Dictionary<shop.Items, int>();
     void Awake()
     {
-        //foreach i in itemCarriers
-        //Instantiate(ItemsCarriers at place with offset to right increasing with i);
+        
     }
 
     // Update is called once per frame
@@ -16,4 +16,5 @@ public class ShopStall : MonoBehaviour
     {
         
     }
+    //ontriggerenter display lowest price in list
 }
