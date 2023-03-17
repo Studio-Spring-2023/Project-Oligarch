@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: VooDooCurse
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 3
+  DisplayPrefab: {fileID: 3186081314074222689, guid: a8d091a0d4555734b904b5757838d4f7,
+    type: 3}
+  DisplayName: VooDoo Curse
+  price: 64
+  Description: Hella Debuffs

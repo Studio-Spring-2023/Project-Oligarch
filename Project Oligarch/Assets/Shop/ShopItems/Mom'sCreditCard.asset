@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: Mom'sCreditCard
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 2
+  DisplayPrefab: {fileID: 2008664228719672763, guid: c8d4acf64d565ae4c91f69b12be9568d,
+    type: 3}
+  DisplayName: Mom's Credit Card
+  price: 45
+  Description: Need those V Bucks

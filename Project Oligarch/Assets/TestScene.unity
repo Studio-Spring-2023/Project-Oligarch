@@ -2139,8 +2139,18 @@ MonoBehaviour:
   ShopSection: {fileID: 659012831578490827, guid: 4bd921fec9da0c74cb813d7d73bb077a,
     type: 3}
   ShopList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 2e825d48dd3f7ae4c9a1d236db4df170, type: 2}
+  - {fileID: 11400000, guid: ccc70bc2aa456434b95a3809b16e9c32, type: 2}
+  - {fileID: 11400000, guid: 5dbd3fd8a0f7d794bbeefe64b65a95ba, type: 2}
+  - {fileID: 11400000, guid: dd73755ce81677e439ad06d6765fece3, type: 2}
+  - {fileID: 11400000, guid: aac9ab5e3dfa1d04ea08c88a2cb6da4f, type: 2}
+  - {fileID: 11400000, guid: bf1bb783da0e4fb4c8e59b104b283f0f, type: 2}
+  - {fileID: 11400000, guid: ffcd8e5065e698246afa92c07b762196, type: 2}
+  - {fileID: 11400000, guid: 74793031db20f354ea6c693b9fa2d3c3, type: 2}
+  - {fileID: 11400000, guid: bf8516a011cabec4a899c92baccee478, type: 2}
+  - {fileID: 11400000, guid: 8519ea4b813deec4489161f14a7b5921, type: 2}
+  - {fileID: 11400000, guid: b1960a2a219b1b542a2ffce365006591, type: 2}
+  SectionList:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

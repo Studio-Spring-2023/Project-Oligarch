@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: HealingCrystal
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 3
+  DisplayPrefab: {fileID: 38978230058416740, guid: 5b3cb4157e1085d4281e3c29cee17ad3,
+    type: 3}
+  DisplayName: Healing Crystal
+  price: 79
+  Description: Be the support

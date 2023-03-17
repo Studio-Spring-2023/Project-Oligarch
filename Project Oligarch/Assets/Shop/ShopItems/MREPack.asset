@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: MREPack
   m_EditorClassIdentifier: 
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 0
+  DisplayPrefab: {fileID: 8566849889253097259, guid: 22b0fe7e3646e444592e2f62696158b4,
+    type: 3}
+  DisplayName: MRE Pack
+  price: 13
+  Description: heals?

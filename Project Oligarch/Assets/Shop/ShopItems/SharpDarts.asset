@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: SharpDarts
   m_EditorClassIdentifier: 
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 0
+  DisplayPrefab: {fileID: 6349948248038550786, guid: 28352831bedea0d40ab393bfa66ae20b,
+    type: 3}
+  DisplayName: Sharp Darts
+  price: 15
+  Description: Is that you tri tip dagger?

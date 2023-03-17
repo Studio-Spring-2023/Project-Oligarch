@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: KiteShield
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 1
+  DisplayPrefab: {fileID: 5776805754676680367, guid: d9dfc8bdf94ba20488fa54734efdd9b8,
+    type: 3}
+  DisplayName: Kite Shield
+  price: 47
+  Description: run fast, eat...

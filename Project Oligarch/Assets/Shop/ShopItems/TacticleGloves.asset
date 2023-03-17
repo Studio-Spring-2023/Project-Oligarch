@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TacticleGloves
   m_EditorClassIdentifier: 
   rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  DisplayPrefab: {fileID: 4515739562147400037, guid: 48c88891ded917c4da7b32b025433043,
+    type: 3}
+  DisplayName: Tacticle Glove
+  price: 12
+  Description: AS +

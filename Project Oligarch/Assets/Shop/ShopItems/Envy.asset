@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: Envy
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 2
+  DisplayPrefab: {fileID: 7358277476375385737, guid: da4941d47a35ee94f8634497aeb1e25b,
+    type: 3}
+  DisplayName: Envy
+  price: 26
+  Description: EV

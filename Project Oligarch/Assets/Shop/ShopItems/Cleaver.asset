@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
   m_Name: Cleaver
   m_EditorClassIdentifier: 
-  rarity: 0
-  DisplayPrefab: {fileID: 0}
-  DisplayName: 
-  price: 0
-  Description: 
+  rarity: 1
+  DisplayPrefab: {fileID: 637906221506901447, guid: 03920d546b3090948b32cf6800a4d0d5,
+    type: 3}
+  DisplayName: Blood Thirsty Cleavor
+  price: 25
+  Description: Life steal
