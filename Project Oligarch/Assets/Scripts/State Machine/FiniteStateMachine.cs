@@ -3,33 +3,25 @@ using UnityEngine;
 
 public class FiniteStateMachine
 {
-    public List<State> States = new List<State>();
+    private Stack<FSMState> stateStack = new Stack<FSMState>();
 
-    State currentState;
+    public delegate void FSMState(FiniteStateMachine FSM, GameObject entity);
 
-    public State GetCurrentState() => currentState;
-
-	public void CurrentStateUpdate() => currentState.Update();
-
-	public void CurrentStateFixedUpdate() => currentState.FixedUpdate();
-
-    public State FindState(int stateIndex)
+    public void Update(GameObject entity)
     {
-        return States[stateIndex];
+        if (stateStack.Peek() != null)
+            stateStack.Peek().Invoke(this, entity);
+        else
+            Debug.Log("<color=red>[FiniteStateMachine]</color>: State Stack is empty.");
     }
 
-    public void AddState(State stateToAdd)
+    public void PopState()
     {
-        States.Add(stateToAdd);
+        stateStack.Pop();
     }
 
-	public void SwitchState(State newState)
+    public void PushState(FSMState stateToAdd)
     {
-        if (currentState != null)
-            currentState.OnStateExit();
-
-        currentState = newState;
-
-        currentState.OnStateEnter();
+        stateStack.Push(stateToAdd);
     }
 }
