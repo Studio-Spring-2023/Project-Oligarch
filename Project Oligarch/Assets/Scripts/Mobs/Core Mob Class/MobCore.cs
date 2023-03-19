@@ -10,9 +10,9 @@ using UnityEngine.Rendering.Universal;
 /// </summary>
 public abstract class MobCore : Core, IGoap
 {
-	protected Mesh EntityMesh;
+	public int MeleeDamage;
 
-    protected NavMeshAgent EntityNavAgent;
+	protected NavMeshAgent EntityNavAgent;
 
 	#region GOAP and FSM Variables
 	protected FiniteStateMachine FSM;
@@ -31,24 +31,33 @@ public abstract class MobCore : Core, IGoap
 	protected GoapPlanner planner;
 	#endregion
 
+	#region Awake Function
 	protected virtual void Awake()
 	{
+		//Retrieve the NavAgent on our entity.
+		EntityNavAgent = GetComponent<NavMeshAgent>();
+
+		//We don't want the nav agent to update the position since
+		//it has all sorts of drag and nasty stuff 
+		EntityNavAgent.updateRotation = false;
+
 		//Create a new instance of a state machine for our entity
 		FSM = new FiniteStateMachine();
 
 		//Create a new instance of the GOAP planner
 		planner = new GoapPlanner();
 
-		//this will assign the available actions to this entity
+		//Assigns the actions that we wish the entity to have.
 		GenerateAvailableEntityActions();
 
+		//The stack of actions that the entity will get from the planner
 		currentEntityActions = new Stack<GoapAction>();
 
-		//Create our action pool for our entity
+		//Create our goal pool for our entity.
 		currentGoalPool = new HashSet<KeyValuePair<string, object>>();
 		GenerateStartingGoalState();
 
-		//Assigns the delegate to custom state classes depending on the mob
+		//Assigns the state delegates to their defaults.
 		CreateIdleState();
 		CreateMoveToState();
 		CreatePerformActionState();
@@ -57,28 +66,126 @@ public abstract class MobCore : Core, IGoap
 		//based on the world state and contextual variables
 		FSM.PushState(Idle);
 	}
+	#endregion
 
 	private void Update()
 	{
 		//Calls the FSM to update, which is calling our "Idle," "MoveTo," or "PerformAction" state. 
 		//These states continuously trigger until their condition is set to true, which is dictated by
 		//the specific action that is being triggered.
-		FSM.Update(gameObject);
+		FSM.Update(this);
 	}
+
+	#region Create FSM States
+	private void CreateIdleState()
+	{
+		Idle = (FSM, entity) =>
+		{
+			Stack<GoapAction> plan = planner.BuildPlan(this, 
+				availableEntityActionPool, 
+				MobManager.GetMatchingWorldProperties(currentGoalPool), 
+				currentGoalPool);
+
+			if (plan != null)
+			{
+				currentEntityActions = plan;
+				PlanFound(currentGoalPool, currentEntityActions);
+				FSM.PushState(PerformAction);
+			}
+			else
+			{
+				PlanFailed(currentGoalPool);
+			}
+		};
+	}
+
+	private void CreateMoveToState()
+	{
+		MoveTo = (FSM, entity) =>
+		{
+			GoapAction actionToAttempt = currentEntityActions.Peek();
+
+			//First check to make sure the target of the action isn't null, because
+			//if it is, we got a problem.
+			if (actionToAttempt.TargetObject == null)
+			{
+				Debug.Log($"<color=red>[StageOneHumanoid] on {entity}: Action target is null. Entity requires target for MoveTo." +
+					$"Did you forget to add a target to the action?");
+				FSM.PopState(); //Pops out the MoveTo state.
+				FSM.PopState(); //Pops out the PerformAction state.
+				FSM.PushState(Idle);
+				return;
+			}
+
+			//MoveSelf returns true once we are within proximity based on the actions requirements.
+			if (MoveSelf(actionToAttempt))
+				FSM.PopState();
+		};
+	}
+
+	private void CreatePerformActionState()
+	{
+		PerformAction = (FSM, entity) =>
+		{
+			GoapAction actionToAttempt = currentEntityActions.Peek();
+
+			//Check if we finished our action, then remove it if we did.
+			if (actionToAttempt.isDone())
+				currentEntityActions.Pop();
+
+			//Now check if we don't have any actions in our plan, which
+			//means we should return to Idle and get ourselves a new plan.
+			//This situation can occur if the entity finishes their last action in the 
+			//previous run of this function.
+			if (!hasPlan())
+			{
+				Debug.Log($"<color=orange>[StageOneHumanoid] on {entity}</color>: " +
+					$"No actions left to perform, getting a new plan.");
+				FSM.PopState();
+				FSM.PushState(Idle);
+				return;
+			}
+
+			//If we reach this point, we still have an action plan. So let's check to see
+			//If we are in range to perform our action. Also need to re-peek at the currentEntityActions
+			//In case we did finish a previous action and ensure we have the most up-to-date one.
+			actionToAttempt = currentEntityActions.Peek();
+			bool inProximity = !actionToAttempt.MustBeInProximity() || actionToAttempt.IsInProximity();
+
+			if (inProximity)
+			{
+				bool success = actionToAttempt.PerformAction(entity);
+
+				//We didn't succeed, so that means something's wrong with that action.
+				//This could mean the world changed between the entity moving to this action or 
+				//something else happened while they were working on it.
+				if (!success)
+				{
+					FSM.PopState();
+					FSM.PushState(Idle);
+					PlanAborted(actionToAttempt);
+				}
+			}
+			else
+			{
+				//We aren't in range, so we need to get over to where this action is at.
+				FSM.PushState(MoveTo);
+			}
+		};
+	}
+	#endregion
+
+	#region Abstract Functions
+	public abstract bool MoveSelf(GoapAction nextAction);
 
 	protected abstract void GenerateAvailableEntityActions();
 
-	protected abstract void CreateIdleState();
-
-	protected abstract void CreateMoveToState();
-
-	protected abstract void CreatePerformActionState();
-
-	public abstract bool MoveSelf(GoapAction nextAction);
-
 	protected abstract void GenerateStartingGoalState();
+	#endregion
 
 	#region Helper and Debugging Functions
+	protected bool hasPlan() => (currentEntityActions.Count > 0);
+
 	protected void AddActionToPool(GoapAction actionToAdd)
 	{
 		availableEntityActionPool.Add(actionToAdd);
@@ -129,9 +236,9 @@ public abstract class MobCore : Core, IGoap
 		foreach (KeyValuePair<string, object> goal in failedGoal)
 		{
 			plan += goal.Key + ": " + goal.Value;
-			plan += ", ";
+			plan += "; ";
 		}
-		Debug.Log($"<color=red>[MobCore]</color>: Failed to create plan following goal: ");
+		Debug.Log($"<color=red>[MobCore]</color>: Failed to create plan following goal: {plan}");
 	}
 
 	public void PlanAborted(GoapAction actionThatAborted)
@@ -145,34 +252,34 @@ public abstract class MobCore : Core, IGoap
 		foreach (GoapAction action in planOfAction)
 		{
 			plan += action.GetType().Name;
-			plan += ", ";
+			plan += "; ";
 		}	
 
-		Debug.Log($"<color=green>[MobCore]</color>: Found Plan {plan}.");
+		Debug.Log($"<color=green>[MobCore]</color>: Found Plan: {plan}");
 	}
 
-	public void PrintActionPool(GameObject entity)
+	protected void PrintActionPool(GameObject entity)
 	{
 		string actions = "";
 		foreach (GoapAction action in availableEntityActionPool)
 		{
 			actions += action.GetType().Name;
-			actions += ", ";
+			actions += "; ";
 		}
 
-		Debug.Log($"[MobCore] on {entity}: Current Action Pool: {actions}.");
+		Debug.Log($"<color=yellow>[MobCore]</color> on {entity}: Current Action Pool: {actions}");
 	}
 
-	public void PrintGoalPool(GameObject entity)
+	protected void PrintGoalPool(GameObject entity)
 	{
 		string goals = "";
 		foreach (KeyValuePair<string, object> goal in currentGoalPool)
 		{
-			goals += goal.Key + ": " + goal.Value;
-			goals += ", ";
+			goals += goal.Key + " - " + goal.Value;
+			goals += "; ";
 		}
 
-		Debug.Log($"[MobCore] on {entity}: Current Goal Pool: {goals}.");
+		Debug.Log($"<color=yellow>[MobCore]</color> on {entity}: Current Goal Pool: {goals}");
 	}
 	#endregion
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class GoapAction
 {
+	protected LayerMask PlayerMask;
+
 	protected HashSet<KeyValuePair<string, object>> preconditions;
     protected HashSet<KeyValuePair<string, object>> effects;
 
@@ -18,16 +20,25 @@ public abstract class GoapAction
     {
         preconditions = new HashSet<KeyValuePair<string, object>>();
         effects = new HashSet<KeyValuePair<string, object>>();
-    }
 
-    public abstract void ResetAction();
+		PlayerMask = LayerMask.GetMask("Player");
+	}
 
-    public abstract void PerformAction(GameObject entity);
+    public void ResetAction()
+	{
+		inProximity = false;
+
+		OnReset();
+	}
+
+	protected abstract void OnReset();
+
+    public abstract bool PerformAction(MobCore entity);
 
     //Contextual preconditions are where we can check our surroundings on a per-action basis
     //to see wether it is reasonable for our entity to try to even attempt that action
     //in the first place, like is something within range or is the player within range?
-    public abstract bool CheckProceduralPrecondition(GameObject entity);
+    public abstract bool CheckProceduralPrecondition(MobCore entity);
 
 	#region Precondition, Effect, and Helper Functions
 	protected void AddPrecondition(string key, object value)

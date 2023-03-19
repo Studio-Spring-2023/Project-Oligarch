@@ -5,9 +5,9 @@ public class FiniteStateMachine
 {
     private Stack<FSMState> stateStack = new Stack<FSMState>();
 
-    public delegate void FSMState(FiniteStateMachine FSM, GameObject entity);
+    public delegate void FSMState(FiniteStateMachine FSM, MobCore entity);
 
-    public void Update(GameObject entity)
+    public void Update(MobCore entity)
     {
         if (stateStack.Peek() != null)
             stateStack.Peek().Invoke(this, entity);

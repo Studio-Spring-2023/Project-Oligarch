@@ -1,16 +1,18 @@
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerCore : Core
 {
+	public static Transform Transform { get; private set; }
 	public static Loadout AssignedLoadout { get; private set; }
 
 	[Header("Movement Variables")]
-    public Rigidbody PlayerRB;
+    private Rigidbody PlayerRB;
 	private Vector3 Velocity;
     private Vector3 Forward;
-	[Range(1f, 5f)]
+	[Range(1f, 8f)]
 	public float JumpForce;
 	[Range(-0.5f, -5f)]
 	public float GravityForce;
@@ -50,6 +52,8 @@ public class PlayerCore : Core
 	[Header("Crosshair Variables")]
 	public RectTransform Crosshair;
 
+	private bool jump;
+
 	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
         LoadoutType.Ranger => new RangerLoadout(this),
@@ -59,6 +63,10 @@ public class PlayerCore : Core
 
     public void Awake()
     {
+		PlayerRB = GetComponent<Rigidbody>();
+
+		Transform = transform;
+
         //Temporary to avoid Null Reference errors
         AssignedLoadout = AssignLoadout(LoadoutType.Ranger);
 	}
@@ -87,26 +95,39 @@ public class PlayerCore : Core
 		{
 			//We are floating, get our ass on the ground.
 			grounded = false;
-			Velocity += gravity;
 		}
 		else
 		{
 			grounded = true;
-			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+			
 		}
 	}
 
 	public void AttemptJump()
 	{
-		Debug.Log("tried to jump");
-		if (grounded)
+		if (!jump)
 		{
-			PlayerRB.AddForce(0, JumpForce, 0, ForceMode.Impulse);
+			jump = true;
 		}
 	}
 
 	private void FixedUpdate()
 	{
+		if (grounded)
+		{
+			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+		}
+		else
+		{
+			Velocity += gravity;
+		}
+
+		if (jump)
+		{
+			Velocity += Vector3.up * JumpForce;
+			jump = false;
+		}
+
 		//Lerp MoveSpeed based on Acceleration / Deceleration timers.
 		PlayerRB.velocity = Velocity;
 
@@ -141,7 +162,7 @@ public class PlayerCore : Core
 		Ray hitRay = new Ray(rotatedCameraOffsetPos + adjustedCameraAnchor, -adjustedCameraAnchor.normalized);
 		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
 		{
-			Debug.Log("Object Obstructing View");
+			//Debug.Log("Object Obstructing View");
 			Vector3 CameraCollisionOffset = CameraTransform.forward * CameraIntersetOffsetDistance;
 
 			CameraTransform.position = collidedObj.point + CameraCollisionOffset;
@@ -167,6 +188,11 @@ public class PlayerCore : Core
 		if (Physics.Raycast(interRay, out RaycastHit hit, InterCheckMaxDistance, Interactables))
 			hit.transform.gameObject.GetComponent<Interactable>().InteractedWith();
     }
+
+	public static void Damaged(int damage)
+	{
+		Debug.Log($"<color=green>[PlayerCore]</color>: Player took {damage} damage.");
+	}
 
 	private void OnDisable()
 	{

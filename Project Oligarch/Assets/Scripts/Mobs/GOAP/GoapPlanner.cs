@@ -7,14 +7,24 @@ public class GoapPlanner
     //This is the entry point function of the GOAP Planner, and is what all Mobs will call in an attempt
     //to construct a valid action plan.
 
-    public Stack<GoapAction> BuildPlan(GameObject entity, 
+    public Stack<GoapAction> BuildPlan(MobCore entity, 
         HashSet<GoapAction> entityActionPool, 
         HashSet<KeyValuePair<string, object>> startingWorldState, 
         HashSet<KeyValuePair<string, object>> desiredEntityGoals)
     {
-        
-        //Will probably need to reset actions, but unsure if this use case applies to our game
-        //entity.resetActions
+        if (startingWorldState == null)
+        {
+            Debug.Log($"<color=red>[Goap Planner]</color> on {entity}: Critical error, startingWorldState given to BuildPlan was null. " +
+                $"Make sure you are updating an entities beliefs properly.");
+            return null;
+        }
+
+        //Will probably need to reset actions,
+        //but unsure if this use case applies to our game
+        foreach (GoapAction action in entityActionPool)
+        {
+			action.ResetAction();
+		}
 
         //First, check all of our available actions, which ones meet our contextual preconditions
         HashSet<GoapAction> useableActions = new HashSet<GoapAction>();
@@ -82,7 +92,7 @@ public class GoapPlanner
         bool foundPath = false;
 
         //Begin iterating through the usable actions
-        foreach(GoapAction possibleAction in usableActions)
+        foreach (GoapAction possibleAction in usableActions)
         {
             //We first need to check if the possible actions between the parent state and the action
             //match up. We're checking to see if the preconditions of the action are fulfilled by
@@ -100,7 +110,7 @@ public class GoapPlanner
                 Node newNode = new Node(parentNode, parentNode.runningCost + possibleAction.ActionCost, combinedState, possibleAction);
 
                 //Check if we have reached a state where our entity goals align with our combined state.
-                //The combined state was the result of applying an actions effects to our world state
+                //The combined state was the result of applying an actions effects to the world state
                 if (DoPreconditionsMatch(desiredEntityGoals, combinedState))
                 {
                     //We have found a node that reaches our desired goal, so we should add it to our 
