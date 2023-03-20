@@ -19,7 +19,7 @@ public class Shop : MonoBehaviour
         Voodoo = 3,
         MAX
     }
-    public enum Rarity
+    public enum ShopRarity
     {
         Common,
         Uncommon,
@@ -30,8 +30,12 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject ShopStall;
     [SerializeField] GameObject ShopSection;
     public List<ShopItem> ShopList = new List<ShopItem>();
+   [SerializeField]  private List<ShopItem> CommonItems = new List<ShopItem>();
+   [SerializeField]  private List<ShopItem> UnCommonItems = new List<ShopItem>();
+   [SerializeField]  private List<ShopItem> RareItems = new List<ShopItem>();
+   [SerializeField]  private List<ShopItem> LegendaryItems = new List<ShopItem>();
     public List<GameObject> SectionList = new List<GameObject>();
-    [SerializeField]  public Dictionary<Items, Rarity> ShopItems = new Dictionary<Items,Rarity>();
+    //[SerializeField]  public Dictionary<Items, ShopRarity> ShopItems = new Dictionary<Items,ShopRarity>();
     [Tooltip("Increases shop spawn odds by percentage")]
     public int OddsMod;
     public int ShopCount;
@@ -41,7 +45,7 @@ public class Shop : MonoBehaviour
         ShopCount = SectionList.Count;
         NewShop();
         GenerateShop(transform.position, ShopCount);
-        RandomShopRarity();
+        RandomShopShopRarity();
         AssignShopItems();
         //RollCommon();
     }
@@ -67,10 +71,28 @@ public class Shop : MonoBehaviour
 
     private void AssignShopItems()
     {
-
+        foreach (ShopItem i in ShopList)
+        {
+            if(i.rarity == ShopItem.Rarity.Common)
+            {
+                CommonItems.Add(i);
+            }
+            if(i.rarity == ShopItem.Rarity.Uncommon)
+            {
+                UnCommonItems.Add(i);
+            }
+            if(i.rarity == ShopItem.Rarity.Rare)
+            {
+                RareItems.Add(i);
+            }
+            if(i.rarity == ShopItem.Rarity.Legendary)
+            {
+                LegendaryItems.Add(i);
+            }
+        }
     }
 
-    public void NewShop()//(ShopType rarity)
+    public void NewShop()//(ShopType ShopRarity)
     {
         for(int i = 0; i < ShopCount; i++)
         {
@@ -79,38 +101,51 @@ public class Shop : MonoBehaviour
         //this should give us new shop odds in the future
     }
 
-    private Rarity RandomShopRarity() //Rarity roll
+    private ShopRarity RandomShopShopRarity() //ShopRarity roll
     {
         int Odds = Random.Range(0,100) + OddsMod;
-        Rarity rarity = Rarity.Common;
+        ShopRarity ShopRarity = ShopRarity.Common;
 
         if(Odds <= 75 )
         {
-            rarity = Rarity.Common;
+            ShopRarity = ShopRarity.Common;
         }
         if(Odds > 75 && Odds <= 94)
         {
-            rarity = Rarity.Uncommon;
+            ShopRarity = ShopRarity.Uncommon;
         }
         if(Odds > 94 && Odds <= 99)
         {
-            rarity = Rarity.Rare;
+            ShopRarity = ShopRarity.Rare;
         }
         if(Odds == 100)
         {
-            rarity = Rarity.Legendary;
+            ShopRarity = ShopRarity.Legendary;
         }
         Debug.Log(Odds);
-        Debug.Log(rarity);
+        Debug.Log(ShopRarity);
 
-        return rarity;
+        return ShopRarity;
     }
 
-    /*private CommonItems RollCommon()
+    /*private ShopItems RollCommon()
     {
-        CommonItems Item = Random.Range(0, (int)CommonItems.MAX - 1);
-        Debug.Log(Item);
-        return Item;
+        if(Odds <= 75 )
+        {
+            ShopRarity = ShopRarity.Common;
+        }
+        if(Odds > 75 && Odds <= 94)
+        {
+            ShopRarity = ShopRarity.Uncommon;
+        }
+        if(Odds > 94 && Odds <= 99)
+        {
+            ShopRarity = ShopRarity.Rare;
+        }
+        if(Odds == 100)
+        {
+            ShopRarity = ShopRarity.Legendary;
+        }
     }*/
 
 }
