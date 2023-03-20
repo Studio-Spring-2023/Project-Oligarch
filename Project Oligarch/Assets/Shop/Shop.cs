@@ -24,7 +24,8 @@ public class Shop : MonoBehaviour
         Common,
         Uncommon,
         Rare,
-        Legendary
+        Legendary,
+        Null
     }
 
     [SerializeField] GameObject ShopStall;
@@ -35,6 +36,8 @@ public class Shop : MonoBehaviour
    [SerializeField]  private List<ShopItem> RareItems = new List<ShopItem>();
    [SerializeField]  private List<ShopItem> LegendaryItems = new List<ShopItem>();
     public List<GameObject> SectionList = new List<GameObject>();
+
+   [SerializeField]  private List<ShopItem> ShopPool = new List<ShopItem>();
     //[SerializeField]  public Dictionary<Items, ShopRarity> ShopItems = new Dictionary<Items,ShopRarity>();
     [Tooltip("Increases shop spawn odds by percentage")]
     public int OddsMod;
@@ -47,6 +50,7 @@ public class Shop : MonoBehaviour
         GenerateShop(transform.position, ShopCount);
         RandomShopShopRarity();
         AssignShopItems();
+        GenerateShopPool();
         //RollCommon();
     }
 
@@ -66,8 +70,16 @@ public class Shop : MonoBehaviour
         NewShop();
         
     }
+    private void GenerateShopPool()
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            ShopPool.Add(RollRarity(ShopRarity.Common));
+        }
+    }
 
     //shop items spin and float using sign wave
+#region InitalizeShop
 
     private void AssignShopItems()
     {
@@ -101,6 +113,9 @@ public class Shop : MonoBehaviour
         //this should give us new shop odds in the future
     }
 
+#endregion
+
+#region RarityRolls 
     private ShopRarity RandomShopShopRarity() //ShopRarity roll
     {
         int Odds = Random.Range(0,100) + OddsMod;
@@ -118,7 +133,7 @@ public class Shop : MonoBehaviour
         {
             ShopRarity = ShopRarity.Rare;
         }
-        if(Odds == 100)
+        if(Odds > 99)
         {
             ShopRarity = ShopRarity.Legendary;
         }
@@ -128,24 +143,137 @@ public class Shop : MonoBehaviour
         return ShopRarity;
     }
 
-    /*private ShopItems RollCommon()
+    public ShopItem RollRarity(ShopRarity shopRarity)
     {
-        if(Odds <= 75 )
+        float Odds = Random.Range(0f,100f);
+        switch(shopRarity)
         {
-            ShopRarity = ShopRarity.Common;
+            case ShopRarity.Common:
+            {
+                if(Odds <= 80f )
+                {
+                    return RollItem(ShopRarity.Common);
+                }
+                else if(Odds >80f && Odds <= 94.5f)
+                {
+                    return RollItem(ShopRarity.Uncommon);
+                }
+                else if(Odds > 94.5f && Odds <= 99.5f)
+                {
+                    return RollItem(ShopRarity.Rare);
+                }
+                else if(Odds > 99.5f)
+                {
+                    return RollItem(ShopRarity.Legendary);
+                }
+                break;
+            }
+            case ShopRarity.Uncommon:
+            {
+                if(Odds <= 80f )
+                {
+                    return RollItem(ShopRarity.Common);
+                }
+                else if(Odds > 80f && Odds <= 94.5f)
+                {
+                    return RollItem(ShopRarity.Uncommon);
+                }
+                else if(Odds > 94.5f && Odds <= 99.5f)
+                {
+                    return RollItem(ShopRarity.Rare);
+                }
+                else if(Odds > 99.5f)
+                {
+                    return RollItem(ShopRarity.Legendary);
+                }
+                break;
+            }
+            case ShopRarity.Rare:
+            {
+                if(Odds <= 80f )
+                {
+                    return RollItem(ShopRarity.Common);
+                }
+                else if(Odds >80f && Odds <= 94.5f)
+                {
+                    return RollItem(ShopRarity.Uncommon);
+                }
+                else if(Odds > 94.5f && Odds <= 99.5f)
+                {
+                    return RollItem(ShopRarity.Rare);
+                }
+                else if(Odds > 99.5f)
+                {
+                    return RollItem(ShopRarity.Legendary);
+                }
+                break;
+            }
+            case ShopRarity.Legendary:
+            {
+                if(Odds <= 80f )
+                {
+                    return RollItem(ShopRarity.Common);
+                }
+                else if(Odds >80f && Odds <= 94.5f)
+                {
+                    return RollItem(ShopRarity.Uncommon);
+                }
+                else if(Odds > 94.5f && Odds <= 99.5f)
+                {
+                    return RollItem(ShopRarity.Rare);
+                }
+                else if(Odds > 99.5f)
+                {
+                    return RollItem(ShopRarity.Legendary);
+                }
+                break;
+            }
+            default:
+            {
+                Debug.Log("Something went wrong :(");
+                break;
+            }   
+                
         }
-        if(Odds > 75 && Odds <= 94)
-        {
-            ShopRarity = ShopRarity.Uncommon;
-        }
-        if(Odds > 94 && Odds <= 99)
-        {
-            ShopRarity = ShopRarity.Rare;
-        }
-        if(Odds == 100)
-        {
-            ShopRarity = ShopRarity.Legendary;
-        }
-    }*/
+        return ShopList[0];
+    }
+
+    public ShopItem RollItem(ShopRarity ItemRarity)
+    {
+        int randIndex;
+
+            switch(ItemRarity)
+            {
+                case ShopRarity.Common:
+                {
+                    randIndex = Random.Range(1,CommonItems.Count);
+                    return CommonItems[randIndex];
+                }
+                case ShopRarity.Uncommon:
+                {
+                    randIndex = Random.Range(0,UnCommonItems.Count);
+                    return UnCommonItems[randIndex];
+                }                   
+                case ShopRarity.Rare:
+                {
+                    randIndex = Random.Range(0,RareItems.Count);
+                    return RareItems[randIndex];
+                }
+                case ShopRarity.Legendary:
+                {
+                    randIndex = Random.Range(0,LegendaryItems.Count);
+                    return LegendaryItems[randIndex]; 
+                }
+                default:
+                {
+                    Debug.Log("Something went wrong :(");
+                    break;
+                }
+            }
+            return ShopList[0];
+            
+
+    }
+#endregion
 
 }

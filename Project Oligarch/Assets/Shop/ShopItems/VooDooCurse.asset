@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 3186081314074222689, guid: a8d091a0d4555734b904b5757838d4f7,
     type: 3}
   DisplayName: VooDoo Curse
-  price: 64
+  price: 450
   Description: Hella Debuffs

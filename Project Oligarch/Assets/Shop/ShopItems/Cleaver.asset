@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 637906221506901447, guid: 03920d546b3090948b32cf6800a4d0d5,
     type: 3}
   DisplayName: Blood Thirsty Cleavor
-  price: 25
+  price: 90
   Description: Life steal

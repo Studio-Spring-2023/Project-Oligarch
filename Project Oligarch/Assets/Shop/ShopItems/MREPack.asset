@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 8566849889253097259, guid: 22b0fe7e3646e444592e2f62696158b4,
     type: 3}
   DisplayName: MRE Pack
-  price: 13
+  price: 50
   Description: heals?

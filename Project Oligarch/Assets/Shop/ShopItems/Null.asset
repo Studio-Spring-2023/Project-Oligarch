@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
-  m_Name: CleanCuts
+  m_Name: Null
   m_EditorClassIdentifier: 
-  rarity: 1
+  rarity: 0
   DisplayPrefab: {fileID: 4764771659689908134, guid: fe204c3cb5ee7b2419c88543b778399c,
     type: 3}
-  DisplayName: Clean Cuts
-  price: 90
-  Description: CC
+  DisplayName: sdf
+  price: 0
+  Description: sdf

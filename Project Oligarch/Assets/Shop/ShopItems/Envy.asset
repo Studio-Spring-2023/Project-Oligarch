@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 7358277476375385737, guid: da4941d47a35ee94f8634497aeb1e25b,
     type: 3}
   DisplayName: Envy
-  price: 26
+  price: 200
   Description: EV

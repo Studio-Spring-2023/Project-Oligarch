@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 7850905245659598223, guid: f33c72b759e541e459bef42fe762e7bc,
     type: 3}
   DisplayName: Hit List
-  price: 36
+  price: 200
   Description: Grim Reaper

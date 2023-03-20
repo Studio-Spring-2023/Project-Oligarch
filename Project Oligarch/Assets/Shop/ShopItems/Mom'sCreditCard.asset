@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 2008664228719672763, guid: c8d4acf64d565ae4c91f69b12be9568d,
     type: 3}
   DisplayName: Mom's Credit Card
-  price: 45
+  price: 200
   Description: Need those V Bucks

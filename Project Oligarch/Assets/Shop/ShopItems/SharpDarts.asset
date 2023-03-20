@@ -16,5 +16,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 6349948248038550786, guid: 28352831bedea0d40ab393bfa66ae20b,
     type: 3}
   DisplayName: Sharp Darts
-  price: 15
+  price: 50
   Description: Is that you tri tip dagger?
