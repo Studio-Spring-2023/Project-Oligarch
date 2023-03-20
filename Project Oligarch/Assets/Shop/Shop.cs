@@ -48,7 +48,6 @@ public class Shop : MonoBehaviour
         ShopCount = SectionList.Count;
         NewShop();
         GenerateShop(transform.position, ShopCount);
-        RandomShopShopRarity();
         AssignShopItems();
         GenerateShopPool();
         //RollCommon();
@@ -72,9 +71,10 @@ public class Shop : MonoBehaviour
     }
     private void GenerateShopPool()
     {
+        ShopRarity rare = RandomShopRarity();
         for(int i = 0; i < 9; i++)
         {
-            ShopPool.Add(RollRarity(ShopRarity.Common));
+            ShopPool.Add(RollRarity(rare));
         }
     }
 
@@ -116,7 +116,7 @@ public class Shop : MonoBehaviour
 #endregion
 
 #region RarityRolls 
-    private ShopRarity RandomShopShopRarity() //ShopRarity roll
+    private ShopRarity RandomShopRarity() //ShopRarity roll
     {
         int Odds = Random.Range(0,100) + OddsMod;
         ShopRarity ShopRarity = ShopRarity.Common;
