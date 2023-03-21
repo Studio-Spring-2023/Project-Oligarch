@@ -14,8 +14,8 @@ TagManager:
   - Ground
   - Interactables
   - Player
-  - 
-  - 
+  - Enemies
+  - Throwable
   - 
   - 
   - 

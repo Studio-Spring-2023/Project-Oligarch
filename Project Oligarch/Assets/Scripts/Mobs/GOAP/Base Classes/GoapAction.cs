@@ -12,7 +12,8 @@ public abstract class GoapAction
 
 	public float ActionCost;
 
-    public GameObject TargetObject;
+    public GameObject TargetObject { get; protected set; }
+	public float TargetPositionOffset { get; protected set; }
 
 	protected bool inProximity;
 

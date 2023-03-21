@@ -14,11 +14,9 @@ public class PlayerCore : Core
     private Vector3 Forward;
 	[Range(1f, 8f)]
 	public float JumpForce;
-	[Range(-0.5f, -5f)]
-	public float GravityForce;
 	public float GroundCheckDistance;
 	private bool grounded;
-	private Vector3 gravity => new Vector3(0, GravityForce, 0);
+	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
 
 	[Header("Camera Variables")]

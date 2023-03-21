@@ -10,9 +10,16 @@ using UnityEngine.Rendering.Universal;
 /// </summary>
 public abstract class MobCore : Core, IGoap
 {
-	public int MeleeDamage;
+	[Range(1f, 25f)]
+	public int Damage;
+
+	[Range(1f, 25f)]
+	public float MaxMovementOffset;
+	[Range(1f, 25f)]
+	public float MinMovementOffset;
 
 	protected NavMeshAgent EntityNavAgent;
+	protected NavMeshPath EntityNavPath;
 
 	#region GOAP and FSM Variables
 	protected FiniteStateMachine FSM;
@@ -36,6 +43,9 @@ public abstract class MobCore : Core, IGoap
 	{
 		//Retrieve the NavAgent on our entity.
 		EntityNavAgent = GetComponent<NavMeshAgent>();
+
+		//Generate an empty nav path for use later.
+		EntityNavPath = new NavMeshPath();
 
 		//We don't want the nav agent to update the position since
 		//it has all sorts of drag and nasty stuff 
@@ -139,7 +149,7 @@ public abstract class MobCore : Core, IGoap
 			//previous run of this function.
 			if (!hasPlan())
 			{
-				Debug.Log($"<color=orange>[StageOneHumanoid] on {entity}</color>: " +
+				Debug.Log($"<color=orange>[MobCore] on {entity}</color>: " +
 					$"No actions left to perform, getting a new plan.");
 				FSM.PopState();
 				FSM.PushState(Idle);

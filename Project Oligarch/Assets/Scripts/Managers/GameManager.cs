@@ -8,6 +8,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager GM;
+    [Range(-0.5f, -9.8f)]
+    public float GravityConstant;
+    public static float Gravity;
 
     #region Handler Variables
     public static InputHandler PlayerInputHandler { get; private set; }
@@ -23,7 +26,8 @@ public class GameManager : MonoBehaviour
         GM = this;
         PlayerInputHandler = new InputHandler();
 		UIHandler = new UIHandler();
-    }
+        Gravity = GravityConstant;
+	}
 
     void Awake()
     {
