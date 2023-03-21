@@ -15,17 +15,17 @@ PrefabInstance:
     - target: {fileID: 3697612172513172130, guid: fe204c3cb5ee7b2419c88543b778399c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.019694
+      value: -6.8500004
       objectReference: {fileID: 0}
     - target: {fileID: 3697612172513172130, guid: fe204c3cb5ee7b2419c88543b778399c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: -0.34709042
       objectReference: {fileID: 0}
     - target: {fileID: 3697612172513172130, guid: fe204c3cb5ee7b2419c88543b778399c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.9574733
+      value: 2.61654
       objectReference: {fileID: 0}
     - target: {fileID: 3697612172513172130, guid: fe204c3cb5ee7b2419c88543b778399c,
         type: 3}
@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 4764771659689908134, guid: fe204c3cb5ee7b2419c88543b778399c,
         type: 3}
       propertyPath: m_Name
-      value: KiteShield
+      value: KiteShield Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe204c3cb5ee7b2419c88543b778399c, type: 3}

@@ -15,17 +15,17 @@ PrefabInstance:
     - target: {fileID: 553028715154698799, guid: 22b0fe7e3646e444592e2f62696158b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.019694
+      value: -8.85
       objectReference: {fileID: 0}
     - target: {fileID: 553028715154698799, guid: 22b0fe7e3646e444592e2f62696158b4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: -0.34709042
       objectReference: {fileID: 0}
     - target: {fileID: 553028715154698799, guid: 22b0fe7e3646e444592e2f62696158b4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.9574733
+      value: 2.61654
       objectReference: {fileID: 0}
     - target: {fileID: 553028715154698799, guid: 22b0fe7e3646e444592e2f62696158b4,
         type: 3}
@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 8566849889253097259, guid: 22b0fe7e3646e444592e2f62696158b4,
         type: 3}
       propertyPath: m_Name
-      value: TacticleGloves
+      value: TacticleGloves Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b0fe7e3646e444592e2f62696158b4, type: 3}

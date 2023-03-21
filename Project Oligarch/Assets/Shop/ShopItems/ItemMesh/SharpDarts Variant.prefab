@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4515739562147400037, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
       propertyPath: m_Name
-      value: SharpDarts
+      value: SharpDarts Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5756850531509060705, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
@@ -20,17 +20,17 @@ PrefabInstance:
     - target: {fileID: 5756850531509060705, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.019694
+      value: -8.85
       objectReference: {fileID: 0}
     - target: {fileID: 5756850531509060705, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.03
+      value: 3.3326437
       objectReference: {fileID: 0}
     - target: {fileID: 5756850531509060705, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.9574733
+      value: 2.61654
       objectReference: {fileID: 0}
     - target: {fileID: 5756850531509060705, guid: 48c88891ded917c4da7b32b025433043,
         type: 3}
