@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ShopSection : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public ShopItem CurrItem;
+    private float Price;
     void Start()
     {
-        
+        Price = CurrItem.price;
     }
 
     // Update is called once per frame

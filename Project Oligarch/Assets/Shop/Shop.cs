@@ -31,11 +31,12 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject ShopStall;
     [SerializeField] GameObject ShopSection;
     public List<ShopItem> ShopList = new List<ShopItem>();
-   [SerializeField]  private List<ShopItem> CommonItems = new List<ShopItem>();
-   [SerializeField]  private List<ShopItem> UnCommonItems = new List<ShopItem>();
-   [SerializeField]  private List<ShopItem> RareItems = new List<ShopItem>();
-   [SerializeField]  private List<ShopItem> LegendaryItems = new List<ShopItem>();
-    public List<GameObject> SectionList = new List<GameObject>();
+    [SerializeField]  private List<ShopItem> CommonItems = new List<ShopItem>();
+    [SerializeField]  private List<ShopItem> UnCommonItems = new List<ShopItem>();
+    [SerializeField]  private List<ShopItem> RareItems = new List<ShopItem>();
+    [SerializeField]  private List<ShopItem> LegendaryItems = new List<ShopItem>();
+    public List<GameObject> ObjSectionList = new List<GameObject>();
+    [SerializeField] private List<ShopSection> StallList = new List<ShopSection>();
 
    [SerializeField]  private List<ShopItem> ShopPool = new List<ShopItem>();
     //[SerializeField]  public Dictionary<Items, ShopRarity> ShopItems = new Dictionary<Items,ShopRarity>();
@@ -45,28 +46,30 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        ShopCount = SectionList.Count;
-        NewShop();
-        GenerateShop(transform.position, ShopCount);
+        ShopCount = ObjSectionList.Count;
         AssignShopItems();
         GenerateShopPool();
+        GenerateShop(transform.position, ShopCount);
+        NewShop(3);
         //RollCommon();
     }
 
 
     public void GenerateShop(Vector3 shopPosition, int shopSize)
     {
-        //Give i shopSection item info with item + price
-        //Instantiate(shopPrefab at shopPosition);
+        //GenerateShopPool();
+
         float off = 0;
+        GameObject currStall;
         Instantiate(ShopStall, shopPosition, Quaternion.identity);
-        for (int i = 0; i < SectionList.Count; i++)
+        for (int i = 0; i < shopSize; i++)
         {
             Vector3 Offset = shopPosition + (transform.right * off);
-            Instantiate(SectionList[i], Offset, Quaternion.identity);
+            currStall = Instantiate(ShopSection, Offset, Quaternion.identity);
+            ObjSectionList[i] = currStall;
             off++;
         }
-        NewShop();
+        //NewShop(3);
         
     }
     private void GenerateShopPool()
@@ -76,6 +79,23 @@ public class Shop : MonoBehaviour
         {
             ShopPool.Add(RollRarity(rare));
         }
+    }
+    
+    public void NewShop(int count)//(ShopType ShopRarity)
+    {
+        int randIndex;
+        for(int i = 0; i < count; i++)
+        {
+            StallList[i] = ObjSectionList[i].GetComponent<ShopSection>();
+        }
+        for(int i = 0; i < StallList.Count; i++)
+        {
+            randIndex = Random.Range(1,ShopPool.Count);
+            Debug.Log(randIndex);
+            StallList[i].CurrItem = ShopPool[randIndex];
+            Debug.Log(StallList[i].CurrItem);
+        }
+        //this should give us new shop odds in the future
     }
 
     //shop items spin and float using sign wave
@@ -104,14 +124,6 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public void NewShop()//(ShopType ShopRarity)
-    {
-        for(int i = 0; i < ShopCount; i++)
-        {
-            SectionList[i] = ShopSection;
-        }
-        //this should give us new shop odds in the future
-    }
 
 #endregion
 
@@ -170,19 +182,19 @@ public class Shop : MonoBehaviour
             }
             case ShopRarity.Uncommon:
             {
-                if(Odds <= 80f )
+                if(Odds <= 30f )
                 {
                     return RollItem(ShopRarity.Common);
                 }
-                else if(Odds > 80f && Odds <= 94.5f)
+                else if(Odds > 30f && Odds <= 90f)
                 {
                     return RollItem(ShopRarity.Uncommon);
                 }
-                else if(Odds > 94.5f && Odds <= 99.5f)
+                else if(Odds > 90f && Odds <= 99f)
                 {
                     return RollItem(ShopRarity.Rare);
                 }
-                else if(Odds > 99.5f)
+                else if(Odds > 99f)
                 {
                     return RollItem(ShopRarity.Legendary);
                 }
@@ -190,19 +202,19 @@ public class Shop : MonoBehaviour
             }
             case ShopRarity.Rare:
             {
-                if(Odds <= 80f )
+                if(Odds <= 15f )
                 {
                     return RollItem(ShopRarity.Common);
                 }
-                else if(Odds >80f && Odds <= 94.5f)
+                else if(Odds > 15f && Odds <= 45f)
                 {
                     return RollItem(ShopRarity.Uncommon);
                 }
-                else if(Odds > 94.5f && Odds <= 99.5f)
+                else if(Odds > 45f && Odds <= 95f)
                 {
                     return RollItem(ShopRarity.Rare);
                 }
-                else if(Odds > 99.5f)
+                else if(Odds > 95f)
                 {
                     return RollItem(ShopRarity.Legendary);
                 }
@@ -210,19 +222,19 @@ public class Shop : MonoBehaviour
             }
             case ShopRarity.Legendary:
             {
-                if(Odds <= 80f )
+                if(Odds <= 0.5f )
                 {
                     return RollItem(ShopRarity.Common);
                 }
-                else if(Odds >80f && Odds <= 94.5f)
+                else if(Odds > 0.5f && Odds <= 35.5f)
                 {
                     return RollItem(ShopRarity.Uncommon);
                 }
-                else if(Odds > 94.5f && Odds <= 99.5f)
+                else if(Odds > 35.5f && Odds <= 80.5f)
                 {
                     return RollItem(ShopRarity.Rare);
                 }
-                else if(Odds > 99.5f)
+                else if(Odds > 80.5f)
                 {
                     return RollItem(ShopRarity.Legendary);
                 }
@@ -275,5 +287,6 @@ public class Shop : MonoBehaviour
 
     }
 #endregion
+
 
 }
