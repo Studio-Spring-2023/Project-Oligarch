@@ -75,7 +75,7 @@ public class Shop : MonoBehaviour
     private void GenerateShopPool()
     {
         ShopRarity rare = RandomShopRarity();
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 8; i++)
         {
             ShopPool.Add(RollRarity(rare));
         }
@@ -91,14 +91,14 @@ public class Shop : MonoBehaviour
         for(int i = 0; i < StallList.Count; i++)
         {
             randIndex = Random.Range(1,ShopPool.Count);
-            Debug.Log(randIndex);
+           // Debug.Log(randIndex);
             StallList[i].CurrItem = ShopPool[randIndex];
+            ShopPool.RemoveAt(randIndex);
             Debug.Log(StallList[i].CurrItem);
         }
         //this should give us new shop odds in the future
     }
 
-    //shop items spin and float using sign wave
 #region InitalizeShop
 
     private void AssignShopItems()

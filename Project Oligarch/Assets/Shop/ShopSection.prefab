@@ -116,6 +116,7 @@ MonoBehaviour:
   HoverHeight: 0.3
   HoverSpeed: 2
   Item: {fileID: 0}
+  RotateSpeed: 50
 --- !u!1 &1037791898264941169
 GameObject:
   m_ObjectHideFlags: 0
