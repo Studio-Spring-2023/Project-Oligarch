@@ -9,7 +9,7 @@ public class ShopSection : MonoBehaviour
     private Vector3 startPoint;
     public float HoverHeight;
     public float HoverSpeed;
-    private float Price;
+    private int Price;
     [SerializeField] private GameObject Item;
     public float RotateSpeed;
     void Start()

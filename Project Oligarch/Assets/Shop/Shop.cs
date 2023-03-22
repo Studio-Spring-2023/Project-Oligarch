@@ -36,9 +36,10 @@ public class Shop : MonoBehaviour
     [SerializeField]  private List<ShopItem> RareItems = new List<ShopItem>();
     [SerializeField]  private List<ShopItem> LegendaryItems = new List<ShopItem>();
     public List<GameObject> ObjSectionList = new List<GameObject>();
+    public List<ShopItem> CurrentItems = new List<ShopItem>();
     [SerializeField] private List<ShopSection> StallList = new List<ShopSection>();
 
-   [SerializeField]  private List<ShopItem> ShopPool = new List<ShopItem>();
+   [SerializeField]  public List<ShopItem> ShopPool = new List<ShopItem>();
     //[SerializeField]  public Dictionary<Items, ShopRarity> ShopItems = new Dictionary<Items,ShopRarity>();
     [Tooltip("Increases shop spawn odds by percentage")]
     public int OddsMod;
@@ -50,8 +51,7 @@ public class Shop : MonoBehaviour
         AssignShopItems();
         GenerateShopPool();
         GenerateShop(transform.position, ShopCount);
-        NewShop(3);
-        //RollCommon();
+        NewShop(3);   
     }
 
 
@@ -93,10 +93,11 @@ public class Shop : MonoBehaviour
             randIndex = Random.Range(1,ShopPool.Count);
            // Debug.Log(randIndex);
             StallList[i].CurrItem = ShopPool[randIndex];
+            CurrentItems.Add(ShopPool[randIndex]);
             ShopPool.RemoveAt(randIndex);
             Debug.Log(StallList[i].CurrItem);
         }
-        //this should give us new shop odds in the future
+        
     }
 
 #region InitalizeShop
