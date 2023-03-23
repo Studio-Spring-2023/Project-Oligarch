@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopSection : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ShopSection : MonoBehaviour
     public float HoverHeight;
     public float HoverSpeed;
     private int Price;
+    [SerializeField] TextMeshPro priceText;
     [SerializeField] private GameObject Item;
     public float RotateSpeed;
     void Start()
@@ -17,6 +19,7 @@ public class ShopSection : MonoBehaviour
         Price = CurrItem.price;
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
         startPoint = HoverPoint.position;
+        priceText = GetComponentInChildren<TextMeshPro>();
     }
 
     // Update is called once per frame
