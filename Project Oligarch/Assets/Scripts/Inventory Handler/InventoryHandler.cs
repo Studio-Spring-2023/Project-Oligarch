@@ -28,6 +28,8 @@ using UnityEngine;
         ExposedWires,
         OverchargedTeslaCoil,
         HoldingGrudges,
+       //end common ^
+
         //uncommon
         BloodThirstyCleaver,
         Soda,
@@ -50,6 +52,8 @@ using UnityEngine;
         BlowTorch,
         BatteryPack,
         InsidersInfo,
+        //end uncommon ^
+
         //rare
         CounterWeight,
         Envy,
@@ -63,6 +67,8 @@ using UnityEngine;
         LargePockets,
         MomsCreditCard,
         HitList,
+        //end rare ^
+
         //legendary
         MiniatureWindmill,
         CloakingArmband,
@@ -72,6 +78,8 @@ using UnityEngine;
         ScrapMechanincsWrench,
         HealingCrystals,
         VoodooCurse, 
+        //end legendary ^
+
         Max
     }
 

@@ -20,4 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Scenes/Olympia.unity
     guid: 897fa13e05991414ab192f2109c83957
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: f92d22305f2948c45b62739455d13676,
+      type: 2}
