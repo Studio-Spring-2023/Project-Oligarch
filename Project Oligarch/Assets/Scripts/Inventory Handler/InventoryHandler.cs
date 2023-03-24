@@ -77,7 +77,7 @@ using UnityEngine;
 
 public class InventoryHandler : MonoBehaviour
 {
-   public static Dictionary<Items, int> PlayerItems = new Dictionary<Items, int>;
+   public static Dictionary<Items, int> PlayerItems = new Dictionary<Items, int>();
 
     public void Awake()
     {
@@ -93,7 +93,7 @@ public class InventoryHandler : MonoBehaviour
             
         }
     }
-    private void void ResetInventory()
+    private void ResetInventory()
     {
         for (int i =0; i < ((int)Items.Max); i++)
         {
