@@ -14,12 +14,17 @@ public class ShopSection : MonoBehaviour
     [SerializeField] TextMeshPro priceText;
     [SerializeField] private GameObject Item;
     public float RotateSpeed;
+    public float growSpeed;
+    private bool grow;
+    public float distCheck;
     void Start()
     {
         Price = CurrItem.price;
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
         startPoint = HoverPoint.position;
         priceText = GetComponentInChildren<TextMeshPro>();
+        priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        priceText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,6 +32,18 @@ public class ShopSection : MonoBehaviour
     {
         HoverItem();
         SpinItem();
+        if(inFront())
+        {
+            priceText.text = Price.ToString();
+            priceText.gameObject.SetActive(true);
+            Debug.Log("Hit");
+            PopTextOut();
+        }
+        else
+        {
+            priceText.gameObject.SetActive(false);
+            priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        }
     }
 
     private void HoverItem()
@@ -37,5 +54,33 @@ public class ShopSection : MonoBehaviour
     private void SpinItem()
     {
         Item.transform.Rotate(0,RotateSpeed * Time.deltaTime,0);
+    }
+
+    private bool inFront()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.forward, out hit, distCheck))
+            {
+                if(hit.transform.tag == "Player")
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false;
+                }
+            }
+        return false;
+    }
+    private void PopTextOut()
+    {
+        if (priceText.rectTransform.localScale.x < 1f)
+        {
+            priceText.rectTransform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * growSpeed;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, -transform.forward * distCheck);
     }
 }
