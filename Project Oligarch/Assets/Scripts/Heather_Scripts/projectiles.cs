@@ -5,14 +5,20 @@ using UnityEngine;
 public class projectiles : MonoBehaviour
 {
     public int Dam;
+    public int BulletsToShoot;
+    public int BulletsPerTap;
+    public int BulletsLeft;
+    public int BulletsShot;
 
     public float TimeBetweenShooting;
     public float Spread;
     public float Range;
+    private float reloadTime;
     public float TimeBetweenShots;
 
     public bool Shooting;
     public bool CanShoot;
+    private bool reloading;
 
     public Transform AttackPoint;
     public RaycastHit Hit;
@@ -21,6 +27,8 @@ public class projectiles : MonoBehaviour
 
     private void Awake ( )
     {
+        BulletsLeft=BulletsToShoot;
+        BulletsPerTap = BulletsToShoot;
         CanShoot = true;
     }
 
@@ -41,8 +49,13 @@ public class projectiles : MonoBehaviour
             GameObject.Instantiate ( HomingMissile );
         }
 
-        if(CanShoot && Shooting)
+        if ( BulletsLeft < BulletsToShoot && !reloading )
+            reload ( );
+
+
+        if ( CanShoot && Shooting && !reloading && BulletsLeft > 0 )
         {
+            BulletsShot = BulletsPerTap;
             bang ( );
         }
     }
@@ -65,13 +78,30 @@ public class projectiles : MonoBehaviour
                 FindObjectOfType<Enemy_health> ( ).LoseLife ( 1 );
             }
         }
+        BulletsLeft--;
+        BulletsShot--;
 
         Invoke ( "resetShot" , TimeBetweenShooting );
+
+        if ( BulletsShot > 0 && BulletsLeft > 0 )
+            Invoke ( "bang" , TimeBetweenShots );
     }
 
     private void resetShot ( )
     {
         CanShoot = true;
+    }
+
+    private void reload()
+    {
+        reloading = true;
+        Invoke ( "reloadFinished" , reloadTime );
+    }
+
+    private void reloadFinished ( )
+    {
+        BulletsLeft = BulletsToShoot;
+        reloading = false;
     }
 
     private void OnDrawGizmos ( )
