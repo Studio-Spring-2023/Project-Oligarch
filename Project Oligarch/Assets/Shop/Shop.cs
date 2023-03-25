@@ -91,7 +91,7 @@ public class Shop : MonoBehaviour
         }
         for(int i = 0; i < StallList.Count; i++)
         {
-            randIndex = Random.Range(1,ShopPool.Count);
+            randIndex = Random.Range(0,ShopPool.Count);
             StallList[i].CurrItem = ShopPool[randIndex];
             CurrentItems.Add(ShopPool[randIndex]);
             ShopPool.RemoveAt(randIndex);
@@ -108,7 +108,7 @@ public class Shop : MonoBehaviour
             return;
         }
         int randIndex;
-        randIndex = Random.Range(1, ShopPool.Count);
+        randIndex = Random.Range(0, ShopPool.Count);
         StallList[stallNum].CurrItem = ShopPool[randIndex];
         CurrentItems.Add(ShopPool[randIndex]);
         ShopPool.RemoveAt(randIndex);

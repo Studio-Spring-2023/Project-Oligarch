@@ -40,6 +40,10 @@ public class ShopSection : MonoBehaviour
             Price = CurrItem.price;
             Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
         }
+        else if (Item == null)
+        {
+            DestroySelf();
+        }
         HoverItem();
         SpinItem();
         if(inFront())
