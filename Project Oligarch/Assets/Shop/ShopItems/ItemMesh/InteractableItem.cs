@@ -18,19 +18,15 @@ public class InteractableItem : MonoBehaviour
         HealingCrystal,
         Voodoo
     }
-
+    public ShopSection Section;
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            Bought();
+            Section.Bought();
         }
     }
 
-    void Bought()
-    {
-        Debug.Log("Bought Item");
-        Destroy(gameObject);
-    }
+
 }

@@ -14,6 +14,7 @@ public class ShopSection : MonoBehaviour
     private int Price;
     [SerializeField] TextMeshPro priceText;
     [SerializeField] private GameObject Item;
+    [SerializeField] Money money;
     public float RotateSpeed;
     public float growSpeed;
     private bool grow;
@@ -22,9 +23,11 @@ public class ShopSection : MonoBehaviour
     
     void Start()
     {
+        money = GameObject.FindWithTag("Manager").GetComponent<Money>();
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         Price = CurrItem.price;
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
+        Item.GetComponent<InteractableItem>().Section = this;
         startPoint = HoverPoint.position;
         priceText = GetComponentInChildren<TextMeshPro>();
         priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
@@ -39,13 +42,17 @@ public class ShopSection : MonoBehaviour
             shop.ReplaceItem(placeInList);
             Price = CurrItem.price;
             Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
+            Item.GetComponent<InteractableItem>().Section = this;
         }
         else if (Item == null)
         {
             DestroySelf();
         }
-        HoverItem();
-        SpinItem();
+        if(Item != null)
+        {
+            HoverItem();
+            SpinItem();
+        }
         if(inFront())
         {
             priceText.text = Price.ToString();
@@ -100,5 +107,14 @@ public class ShopSection : MonoBehaviour
     public void DestroySelf()
     {
         Destroy(gameObject);
+    }
+    public void Bought()
+    {
+        if(money.Credits >= Price)
+        {
+            Destroy(Item);
+            money.Credits -= Price;
+        }
+        
     }
 }
