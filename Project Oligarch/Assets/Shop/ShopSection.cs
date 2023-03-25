@@ -6,6 +6,7 @@ using TMPro;
 public class ShopSection : MonoBehaviour
 {
     public ShopItem CurrItem;
+    public Shop shop;
     public Transform HoverPoint;
     private Vector3 startPoint;
     public float HoverHeight;
@@ -17,8 +18,11 @@ public class ShopSection : MonoBehaviour
     public float growSpeed;
     private bool grow;
     public float distCheck;
+    public int placeInList;
+    
     void Start()
     {
+        shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         Price = CurrItem.price;
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
         startPoint = HoverPoint.position;
@@ -30,6 +34,12 @@ public class ShopSection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Item == null && shop.ShopPool.Count > 0)
+        {
+            shop.ReplaceItem(placeInList);
+            Price = CurrItem.price;
+            Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
+        }
         HoverItem();
         SpinItem();
         if(inFront())
@@ -82,5 +92,9 @@ public class ShopSection : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, -transform.forward * distCheck);
+    }
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

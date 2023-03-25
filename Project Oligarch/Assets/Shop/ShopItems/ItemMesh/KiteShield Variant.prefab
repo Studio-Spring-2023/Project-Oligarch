@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3697612172513172130, guid: fe204c3cb5ee7b2419c88543b778399c,
@@ -67,5 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KiteShield Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5476848260150227917, guid: fe204c3cb5ee7b2419c88543b778399c, type: 3}
+    - {fileID: 4937596235977077675, guid: fe204c3cb5ee7b2419c88543b778399c, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe204c3cb5ee7b2419c88543b778399c, type: 3}

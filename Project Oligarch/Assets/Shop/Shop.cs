@@ -87,17 +87,32 @@ public class Shop : MonoBehaviour
         for(int i = 0; i < count; i++)
         {
             StallList[i] = ObjSectionList[i].GetComponent<ShopSection>();
+            StallList[i].placeInList = i;
         }
         for(int i = 0; i < StallList.Count; i++)
         {
             randIndex = Random.Range(1,ShopPool.Count);
-           // Debug.Log(randIndex);
             StallList[i].CurrItem = ShopPool[randIndex];
             CurrentItems.Add(ShopPool[randIndex]);
             ShopPool.RemoveAt(randIndex);
             Debug.Log(StallList[i].CurrItem);
         }
         
+    }
+
+    public void ReplaceItem(int stallNum)
+    {
+        if(ShopPool.Count <= 0)
+        {
+            StallList[stallNum].DestroySelf();
+            return;
+        }
+        int randIndex;
+        randIndex = Random.Range(1, ShopPool.Count);
+        StallList[stallNum].CurrItem = ShopPool[randIndex];
+        CurrentItems.Add(ShopPool[randIndex]);
+        ShopPool.RemoveAt(randIndex);
+        Debug.Log(StallList[stallNum].CurrItem);
     }
 
 #region InitalizeShop
