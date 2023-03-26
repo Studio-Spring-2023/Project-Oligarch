@@ -13,6 +13,8 @@ public class ShopSection : MonoBehaviour
     public float HoverSpeed;
     private int Price;
     [SerializeField] TextMeshPro priceText;
+    [SerializeField] TextMeshProUGUI itemName;
+    [SerializeField] TextMeshProUGUI itemDesc;
     [SerializeField] private GameObject Item;
     [SerializeField] Money money;
     public float RotateSpeed;
@@ -23,6 +25,8 @@ public class ShopSection : MonoBehaviour
     
     void Start()
     {
+        itemName = GameObject.FindWithTag("ItemName").GetComponent<TextMeshProUGUI>(); //yeah I know this is pretty bad
+        itemDesc = GameObject.FindWithTag("ItemDesc").GetComponent<TextMeshProUGUI>();
         money = GameObject.FindWithTag("Manager").GetComponent<Money>();
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         Price = CurrItem.price;
@@ -32,6 +36,8 @@ public class ShopSection : MonoBehaviour
         priceText = GetComponentInChildren<TextMeshPro>();
         priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         priceText.gameObject.SetActive(false);
+        itemName.enabled = false;
+        itemDesc.enabled = false;
     }
 
     // Update is called once per frame
@@ -59,6 +65,9 @@ public class ShopSection : MonoBehaviour
             priceText.gameObject.SetActive(true);
             Debug.Log("Hit");
             PopTextOut();
+            Descriptions();
+            itemName.enabled = true;
+            itemDesc.enabled = true;
         }
         else
         {
@@ -99,6 +108,12 @@ public class ShopSection : MonoBehaviour
         {
             priceText.rectTransform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * growSpeed;
         }
+    }
+    private void Descriptions()
+    {
+        itemDesc.text = CurrItem.Description;
+        itemName.text = CurrItem.DisplayName;
+
     }
     private void OnDrawGizmos()
     {

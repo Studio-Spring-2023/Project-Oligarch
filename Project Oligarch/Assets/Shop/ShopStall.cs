@@ -8,6 +8,8 @@ public class ShopStall : MonoBehaviour
     [SerializeField] Shop shop;
     [SerializeField] private List<ShopItem> Items = new List<ShopItem>();
     [SerializeField] TextMeshPro priceText;
+    [SerializeField] TextMeshProUGUI itemName;
+    [SerializeField] TextMeshProUGUI itemDesc;
     public float innerRadius;
     private int minPrice;
     public float growSpeed;
@@ -15,6 +17,8 @@ public class ShopStall : MonoBehaviour
     private bool inside;
     void Awake()
     {
+        itemName = GameObject.FindWithTag("ItemName").GetComponent<TextMeshProUGUI>(); 
+        itemDesc = GameObject.FindWithTag("ItemDesc").GetComponent<TextMeshProUGUI>();
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         priceText = GetComponentInChildren<TextMeshPro>();
         priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
@@ -66,6 +70,8 @@ public class ShopStall : MonoBehaviour
             grow = false;
             priceText.gameObject.SetActive(false);
             priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            itemName.enabled = false;
+            itemDesc.enabled = false;
         }
 
     }
