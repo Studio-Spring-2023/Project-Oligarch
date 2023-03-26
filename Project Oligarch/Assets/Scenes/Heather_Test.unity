@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 1747889039}
   m_Layer: 0
   m_Name: BeamPistol
-  m_TagString: Untagged
+  m_TagString: Pistol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
