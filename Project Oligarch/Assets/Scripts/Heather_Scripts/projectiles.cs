@@ -7,8 +7,8 @@ public class projectiles : MonoBehaviour
     public int Dam;
     public int BulletsToShoot;
     public int BulletsPerTap;
-    public int BulletsLeft;
-    public int BulletsShot;
+    private int BulletsLeft;
+    private int BulletsShot;
 
     public float TimeBetweenShooting;
     public float Spread;
@@ -75,7 +75,7 @@ public class projectiles : MonoBehaviour
 
             if ( Hit.collider.CompareTag ( "Enemy" ) )
             {
-                FindObjectOfType<Enemy_health> ( ).LoseLife ( 1 );
+                Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( 1 );
             }
         }
         BulletsLeft--;
@@ -106,10 +106,10 @@ public class projectiles : MonoBehaviour
 
     private void OnDrawGizmos ( )
     {
-        Gizmos.DrawLine(AttackPoint.transform.position,Hit.point );
-        Gizmos.color= Color.black;
+        Gizmos.color = Color.black;
+        Gizmos.DrawRay(AttackPoint.transform.position, AttackPoint.transform.forward );
 
-        Gizmos.DrawSphere ( Hit.point , .1f );
-        Gizmos.color= Color.red;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere ( Hit.point , .1f );        
     }
 }
