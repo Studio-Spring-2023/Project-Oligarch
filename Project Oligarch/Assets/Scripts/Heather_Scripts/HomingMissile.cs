@@ -7,8 +7,9 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(Rigidbody))]
 public class HomingMissile : MonoBehaviour
 {
-    public Transform target;
+    public GameObject target;
     private Rigidbody rb;
+    public projectiles projectiles;
 
     public float force;
     public float rotationForce;
@@ -17,16 +18,18 @@ public class HomingMissile : MonoBehaviour
     private void Awake ( )
     {
         rb = this.GetComponent<Rigidbody>();
+        transform.SetParent ( GameObject.FindGameObjectWithTag ( "Pistol" ).transform );
+        projectiles=GetComponentInParent<projectiles> ();
     }
 
     private void Update ( )
     {
-        target = 
+        target = projectiles.Hit.collider.gameObject;
     }
 
     private void FixedUpdate ( )
     {
-            Vector3 dir = ( target.position - rb.position ).normalized;
+            Vector3 dir = ( target.transform.position - rb.position ).normalized;
             Vector3 rotationAmount = Vector3.Cross ( transform.forward , dir );
             rb.angularVelocity = rotationAmount * rotationForce;
             rb.velocity = transform.forward * force;
