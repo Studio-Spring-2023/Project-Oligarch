@@ -1,91 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
- public enum Items
-    {
-        //common
-        MREPack,
-        SyntheticWeave,
-        TacticalGloves,
-        SharpDarts,
-        SteelToedBoots, 
-        FMJBullet,
-        FleetingSupercharger,
-        BrokenSupercharger,
-        GlassSpurs,
-        BrokenSpurs,
-        QuickReloadBandolier,
-        WornWhetstone,
-        EmergencyMedkit,
-        LuckyTrinket,
-        Adrenaline,
-        IonShielding,
-        SteelTonfa,
-        _4XBinoculars,
-        HiddenKnife,
-        ExposedWires,
-        OverchargedTeslaCoil,
-        HoldingGrudges,
-       //end common ^
-
-        //uncommon
-        BloodThirstyCleaver,
-        Soda,
-        AlAssistedTreatment,
-        ExecutionersAxe,
-        OpeningGambit,
-        EMP,
-        CleanTuts,
-        LingeringHeart,
-        EngineExhaust,
-        ChargedBattery,
-        ThrusterPack,
-        Aerodynamics,
-        SpikyShield,
-        KiteShield,
-        BackupArsenal,
-        PocketKnife,
-        DoubleTime,
-        HealthInAJar,
-        BlowTorch,
-        BatteryPack,
-        InsidersInfo,
-        //end uncommon ^
-
-        //rare
-        CounterWeight,
-        Envy,
-        Protien,
-        DeathTaxes,
-        InvertedHourglass,
-        AutomatedReloading,
-        Speedometer,
-        DuctTapedGrenades,
-        BarrierSiphon,
-        LargePockets,
-        MomsCreditCard,
-        HitList,
-        //end rare ^
-
-        //legendary
-        MiniatureWindmill,
-        CloakingArmband,
-        LotteryWheel,
-        TargetingSystems,
-        MintCondintionBullseye,
-        ScrapMechanincsWrench,
-        HealingCrystals,
-        VoodooCurse, 
-        //end legendary ^
-
-        Max
-    }
+using UnityEngine.InputSystem;
 
 public class InventoryHandler : MonoBehaviour
 {
-   public static Dictionary<Items, int> PlayerItems = new Dictionary<Items, int>();
+   public static Dictionary<ItemEnum.Items, int> PlayerItems = new Dictionary<ItemEnum.Items, int>();
+    
 
     public void Awake()
     {
@@ -95,37 +17,43 @@ public class InventoryHandler : MonoBehaviour
     }
     private void GenerateEmptyInventory()
     {
-        for (int i =0; i < ((int)Items.Max); i++)
+        for (int i =0; i < ((int)ItemEnum.Items.Max); i++)
         {
-            PlayerItems.Add((Items)i,0);
+            PlayerItems.Add((ItemEnum.Items)i,0);
             
         }
     }
     private void ResetInventory()
     {
-        for (int i =0; i < ((int)Items.Max); i++)
+        for (int i =0; i < ((int)ItemEnum.Items.Max); i++)
         {
-            PlayerItems[(Items)i] = 0;
+            PlayerItems[(ItemEnum.Items)i] = 0;
             
         }
     }
     private void PrintInvetory()
     {
-        foreach (KeyValuePair<Items, int> pair in PlayerItems)
+        foreach (KeyValuePair<ItemEnum.Items, int> pair in PlayerItems)
         {
             Debug.Log($"{pair.Key}: {PlayerItems[pair.Key]}");
         }
     }
-    public void ItemAdded(Items ItemAdded)
+    /*
+    public void ItemAdded( ItemEnum.Items ItemAdded)
     {
-
+        int count;
+        PlayerItems.TryGetValue(key, out count );
+        PlayerItems[key] = count + 1;
     }
     
-    public void ItemRemove(Items ItemRemove)
+    public void ItemRemove( ItemEnum.Items ItemRemove )
     {
-
+        int count;
+        PlayerItems.TryGetValue(key, out count );
+        PlayerItems[key] = count - 1;
     }
-    public int HowManyItemsDoIHave(Items itemToCheck)
+    */
+    public int HowManyItemsDoIHave( ItemEnum.Items itemToCheck )
     {
         return PlayerItems[itemToCheck];
     }

@@ -8,7 +8,7 @@ public class PlayerCore : Core
 
 	[Header("Movement Variables")]
     public Rigidbody PlayerRB;
-	private Vector3 Velocity;
+	public Vector3 Velocity;
     private Vector3 Forward;
 	[Range(1f, 5f)]
 	public float JumpForce;
@@ -95,6 +95,12 @@ public class PlayerCore : Core
 			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
 		}
 	}
+	public void Moving()
+    {
+		grounded = true;
+		Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+	}
+
 
 	public void AttemptJump()
 	{
