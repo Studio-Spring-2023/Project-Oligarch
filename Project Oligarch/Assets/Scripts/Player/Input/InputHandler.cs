@@ -45,10 +45,11 @@ public class InputHandler
     #region Events
     public static Action OnJumpInput;
 	public static Action OnInteractInput;
-	#endregion
+    public static Action OnSpecialInput;
+    #endregion
 
-	#region InputHandler Constructor
-	public InputHandler()
+    #region InputHandler Constructor
+    public InputHandler()
     {
 		playerInputActions = new PlayerControls();
 

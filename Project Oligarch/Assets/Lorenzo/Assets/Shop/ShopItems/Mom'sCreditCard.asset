@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
+  m_Name: Mom'sCreditCard
+  m_EditorClassIdentifier: 
+  rarity: 2
+  DisplayPrefab: {fileID: 2008664228719672763, guid: c8d4acf64d565ae4c91f69b12be9568d,
+    type: 3}
+  DisplayName: Mom's Credit Card
+  price: 200
+  Description: Need those V Bucks

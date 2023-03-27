@@ -1,5 +1,7 @@
+using System.Collections;
 using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -7,7 +9,12 @@ public class PlayerCore : Core
 {
 	public static Transform Transform { get; private set; }
 	public static Loadout AssignedLoadout { get; private set; }
-
+	[Header("Slide Variables")]
+	bool canSlide;
+	public bool Slide;
+	public float SlideTime;
+	public float SlideCooldown;
+	public float SlideForce;
 	[Header("Movement Variables")]
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
@@ -78,7 +85,7 @@ public class PlayerCore : Core
 	{
 		InputHandler.OnJumpInput += AttemptJump;
 		InputHandler.OnInteractInput += Interact;
-	}
+    }
 
 	private void Update()
     {
@@ -108,10 +115,31 @@ public class PlayerCore : Core
 			jump = true;
 		}
 	}
+	public IEnumerator SlideFunc()
+	{
+		Debug.Log("Slide");
+        canSlide = false;
+        Slide = true;
+		Renderer render = gameObject.GetComponent<Renderer>();
+        render.material.SetColor("_Color", Color.red);
+        //transform.localScale = new Vector3(1, 0.5f, 1);//reduce player height
+        PlayerRB.velocity = new Vector3(PlayerRB.velocity.x, -20f, PlayerRB.velocity.z);
+		float StartSpeed = MoveSpeed;
+        MoveSpeed *= SlideForce;
+        PlayerRB.AddForce(Velocity.normalized, ForceMode.Force);
+        yield return new WaitForSeconds(SlideTime);
+        Slide = false;
+        render.material.SetColor("_Color", Color.grey);
+        //transform.localScale = new Vector3(1, 1, 1);//return player height
+        MoveSpeed = StartSpeed;
+        yield return new WaitForSeconds(SlideCooldown);
+        canSlide = true;
+        yield return null;  
+    }
 
 	private void FixedUpdate()
 	{
-		if (grounded)
+		if (grounded && !Slide)
 		{
 			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
 		}
@@ -174,7 +202,7 @@ public class PlayerCore : Core
 	//TODO: Move this to UIHandler
 	public void DrawCrosshair()
 	{
-		Vector2 CrosshairScreenSpace = Camera.main.WorldToScreenPoint(RotatedCrosshairPoint);
+		Vector2 CrosshairScreenSpace = UnityEngine.Camera.main.WorldToScreenPoint(RotatedCrosshairPoint);
 		Crosshair.transform.position = CrosshairScreenSpace;
 	}
 
