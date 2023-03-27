@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6507164790757471099
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,12 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: clouds
-  m_Shader: {fileID: -6465566751694194690, guid: 3678b8738aad03044b46b21c3022b00d,
+  m_Name: glass
+  m_Shader: {fileID: -6465566751694194690, guid: 9e42d33b48d683044a499f55ee3ed9fd,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,25 +50,12 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _cloud_height: 1.01
-    - _cloud_power: 2.44
-    - _cloud_scale: 64.77
-    - _cloud_transparency: 0.56
+    - _alpha_adjust: 0.08
+    - _edge: 5
+    - _smoothness: 1
     m_Colors:
-    - _cloud_color: {r: 0.40943396, g: 0.44607964, b: 1, a: 1}
-    - _cloud_color1: {r: 0.9376909, g: 1, b: 0.86226416, a: 1}
-    - _cloud_speed: {r: 0.01, g: 0.003, b: 0, a: 0}
+    - _color: {r: 0, g: 0, b: 0, a: 0}
+    - _emission_color_adjust: {r: 0.6698113, g: 0.6583508, b: 0.48908862, a: 0.2}
+    - _specular_color_adjust: {r: 0.7234069, g: 0.8773585, b: 0.79553646, a: 0.3137255}
+    - _tint: {r: 0.7264151, g: 0.694722, b: 0.22888926, a: 0.24313726}
   m_BuildTextureStacks: []
---- !u!114 &2043711315177256727
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
