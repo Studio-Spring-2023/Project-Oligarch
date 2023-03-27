@@ -22,7 +22,6 @@ public class projectiles : MonoBehaviour
     public bool CanShoot;
     private bool reloading;
 
-
     //These are different things that will be refenced in the code
     public Transform AttackPoint;
     public RaycastHit Hit;
@@ -109,7 +108,6 @@ public class projectiles : MonoBehaviour
         CanShoot = true;
     }
 
-
     //This is the autoreload function and makes it so that the bursts happen without the player having to reload
     private void reload()
     {
@@ -123,13 +121,12 @@ public class projectiles : MonoBehaviour
         reloading = false;
     }
 
-
     private void OnDrawGizmos ( )
     {
         Gizmos.color = Color.black;
         Gizmos.DrawRay(AttackPoint.transform.position, AttackPoint.transform.forward );
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere ( Hit.point , .1f );        
+        Gizmos.DrawSphere ( Hit.point , .1f );
     }
 }

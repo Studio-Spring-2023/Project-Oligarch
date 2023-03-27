@@ -11,7 +11,7 @@ public class HomingMissile : MonoBehaviour
     //These are different things that will be referenced in the code
     public GameObject target;
     private Rigidbody rb;
-    public projectiles projectiles;
+    public FieldofView FOV;
 
     //These are missile stats
     public float force;
@@ -22,23 +22,22 @@ public class HomingMissile : MonoBehaviour
     {
         //This makes sure that there is a rigidbody and that the missile is a child of the weapon that fired it and that it has the necessary script to find it's target
         rb = this.GetComponent<Rigidbody>();
-        transform.SetParent ( GameObject.FindGameObjectWithTag ( "Pistol" ).transform );
-        projectiles=GetComponentInParent<projectiles> ();
+        transform.SetParent ( GameObject.FindGameObjectWithTag ( "Player" ).transform );
     }
 
     private void Update ( )
     {
-        //This locates it's target
-        target = projectiles.Hit.collider.gameObject;
+        //This is supposed to locate it's target
+        FOV.MissileTargeting ( );
     }
 
     private void FixedUpdate ( )
     {
         //This sends it to it's target
             Vector3 dir = ( target.transform.position - rb.position ).normalized;
-            Vector3 rotationAmount = Vector3.Cross ( transform.forward , dir );
+            Vector3 rotationAmount = Vector3.Cross ( transform.up , dir );
             rb.angularVelocity = rotationAmount * rotationForce;
-            rb.velocity = transform.forward * force;
+            rb.velocity = transform.up * force;
        
     }
 
