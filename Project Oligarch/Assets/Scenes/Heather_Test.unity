@@ -477,9 +477,10 @@ GameObject:
   - component: {fileID: 598858062}
   - component: {fileID: 598858067}
   - component: {fileID: 598858066}
+  - component: {fileID: 598858068}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -565,7 +566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598858061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 3.46, z: 1.071}
+  m_LocalPosition: {x: 0.89, y: 3.46, z: 1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -587,7 +588,7 @@ MonoBehaviour:
   camControl: {fileID: 1863142860}
   camTarget: {fileID: 598858065}
   settings:
-    forwardSpeed: 1
+    forwardSpeed: 5
     playerSmooth: 0.6
   input_Move: {x: 0, y: 0}
   input_Look: {x: 0, y: 0}
@@ -618,6 +619,26 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &598858068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598858061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f368c215400e6dc4f86c674a1b84fdd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 5
+  viewAngle: 100
+  Enemy:
+    serializedVersion: 2
+    m_Bits: 8
+  HomingMissile: {fileID: 5716205272478410715, guid: f539bba57fb96e341abaee2bf945443d,
+    type: 3}
+  missile: {fileID: 5716205272478410712, guid: f539bba57fb96e341abaee2bf945443d, type: 3}
 --- !u!1 &659051516
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659051516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 3.65, z: 10.23}
+  m_LocalPosition: {x: -6, y: 3.65, z: 9.43}
   m_LocalScale: {x: 1, y: 2.2342, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -947,8 +968,6 @@ MonoBehaviour:
   IsEnemy:
     serializedVersion: 2
     m_Bits: 8
-  HomingMissile: {fileID: 5716205272478410715, guid: f539bba57fb96e341abaee2bf945443d,
-    type: 3}
 --- !u!1 &1863142858
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class HomingMissile : MonoBehaviour
 {
 
     //These are different things that will be referenced in the code
-    public GameObject target;
+    public Transform target;
     private Rigidbody rb;
     public FieldofView FOV;
 
@@ -23,6 +23,7 @@ public class HomingMissile : MonoBehaviour
         //This makes sure that there is a rigidbody and that the missile is a child of the weapon that fired it and that it has the necessary script to find it's target
         rb = this.GetComponent<Rigidbody>();
         transform.SetParent ( GameObject.FindGameObjectWithTag ( "Player" ).transform );
+        FOV=GetComponentInParent<FieldofView> ();
     }
 
     private void Update ( )
@@ -38,13 +39,20 @@ public class HomingMissile : MonoBehaviour
             Vector3 rotationAmount = Vector3.Cross ( transform.up , dir );
             rb.angularVelocity = rotationAmount * rotationForce;
             rb.velocity = transform.up * force;
-       
+
     }
 
     private void OnCollisionEnter ( Collision boom )
     {
         //This damages it's target before destroying itself
-        boom.collider.GetComponent<Enemy_health> ( ).LoseLife ( 5 );
-        Destroy ( gameObject );
+        if ( boom.collider.CompareTag ( "Enemy" ) )
+        {
+            boom.collider.GetComponent<Enemy_health> ( ).LoseLife ( 5 );
+            Destroy ( gameObject );
+        }
+        else
+        {
+            Destroy ( gameObject );
+        }
     }
 }

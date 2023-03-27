@@ -26,7 +26,7 @@ public class projectiles : MonoBehaviour
     public Transform AttackPoint;
     public RaycastHit Hit;
     public LayerMask IsEnemy;
-    public GameObject HomingMissile;
+
 
     private void Awake ( )
     {
@@ -48,12 +48,6 @@ public class projectiles : MonoBehaviour
         if ( CanShoot )
         {
             Shooting = Input.GetKey ( KeyCode.Mouse0 );
-        }
-       
-        //This is to launch a missile and that the right mouse button is the one controling it
-        if ( Input.GetKeyDown ( KeyCode.Mouse1 ) )
-        {
-            GameObject.Instantiate ( HomingMissile );
         }
 
         //This is to autoreload so that we can have a burst of 3 bullets
