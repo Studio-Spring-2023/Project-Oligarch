@@ -44,7 +44,7 @@ Material:
     m_Colors:
     - _cloud_color: {r: 0.40943396, g: 0.44607964, b: 1, a: 1}
     - _cloud_color1: {r: 0.9376909, g: 1, b: 0.86226416, a: 1}
-    - _cloud_speed: {r: 0.003, g: 0.003, b: 0, a: 0}
+    - _cloud_speed: {r: 0.01, g: 0.003, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2043711315177256727
 MonoBehaviour:
