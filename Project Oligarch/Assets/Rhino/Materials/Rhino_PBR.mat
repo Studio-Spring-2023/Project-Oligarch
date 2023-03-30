@@ -76,7 +76,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 2.96
+    - _Glossiness: -106.2
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 1
@@ -96,9 +96,10 @@ Material:
     - _AmbientColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
-    - _RimColor: {r: 1, g: 0, b: 0, a: 0}
+    - _MainColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 0}
+    - _RimColor: {r: 0.14572358, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
+    - _specular_adjust: {r: 1, g: 0.5, b: 0.7, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2169915824261174500
 MonoBehaviour:
