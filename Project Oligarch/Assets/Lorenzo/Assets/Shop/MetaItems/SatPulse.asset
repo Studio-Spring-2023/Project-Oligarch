@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adeeedfc72e8d5419b65956986f3167, type: 3}
   m_Name: SatPulse
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Satellite Pulse
   Description1: 
   Description2: 
   Sprite: {fileID: 0}
