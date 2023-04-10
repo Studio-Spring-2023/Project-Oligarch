@@ -10,6 +10,6 @@ public class MetaUpgrade : ScriptableObject
     public string Name;
     public string Description1;
     public string Description2;
-    public Image Sprite;
+    public Sprite Sprite1;
 
 }

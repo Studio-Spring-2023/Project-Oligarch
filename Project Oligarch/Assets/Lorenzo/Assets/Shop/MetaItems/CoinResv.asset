@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CoinResv
   m_EditorClassIdentifier: 
   Name: Coin Reserves
-  Description1: 
+  Description1: qwer543
   Description2: 
-  Sprite: {fileID: 0}
+  Sprite1: {fileID: 21300000, guid: 70727413514eaaa42ae6b10e123e9f94, type: 3}
