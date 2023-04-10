@@ -11,5 +11,6 @@ public class MetaUpgrade : ScriptableObject
     public string Description1;
     public string Description2;
     public Sprite Sprite1;
+    public int price;
 
 }

@@ -7,11 +7,15 @@ using UnityEngine.UI;
 public class MetaShop : Interactable
 {
     [SerializeField] Image Menu;
+    [SerializeField] Money money;
+    [SerializeField] MetaManager manager;
     public List<MetaUpgrade> Upgrades = new List<MetaUpgrade>();
     [SerializeField] Image ItemImage1;
     [SerializeField] Image ItemImage2;
     [SerializeField] TextMeshProUGUI ItemDesc1;
     [SerializeField] TextMeshProUGUI ItemDesc2;
+    [SerializeField] TextMeshProUGUI ItemName1;
+    [SerializeField] TextMeshProUGUI ItemName2;
     public int currIndex1;
     public int currIndex2;
     public float growSpeed;
@@ -21,6 +25,7 @@ public class MetaShop : Interactable
         Menu.gameObject.SetActive(false);
         currIndex1 = 0;
         currIndex2 = 1;
+        manager = GameObject.FindWithTag("Manager").GetComponent<MetaManager>();
     }
     private void Update()
     {
@@ -39,6 +44,8 @@ public class MetaShop : Interactable
         ItemImage2.sprite = Upgrades[currIndex2].Sprite1;
         ItemDesc1.text = Upgrades[currIndex1].Description1;
         ItemDesc2.text = Upgrades[currIndex2].Description1;
+        ItemName1.text = Upgrades[currIndex1].Name;
+        ItemName2.text = Upgrades[currIndex2].Name;
     }
 
     // Update is called once per frame
@@ -84,8 +91,24 @@ public class MetaShop : Interactable
     public void CloseShop()
     {
         Menu.gameObject.SetActive(false);
-        Menu.rectTransform.localScale = new Vector3(0.27f, 0.27f, 0.27f);
+        Menu.rectTransform.localScale = Menu.rectTransform.localScale/3f;
+    }
+    public void BuyLeft()
+    {
+        if (Upgrades[currIndex1].price <= money.Credits)
+        {
+            manager.MetaDict[Upgrades[currIndex1].Name] += 1;
+            money.Credits -= Upgrades[currIndex1].price;
+        }
+    }
+    public void BuyRight()
+    {
+        if (Upgrades[currIndex2].price <= money.Credits)
+        {
+            manager.MetaDict[Upgrades[currIndex2].Name] += 1;
+            money.Credits -= Upgrades[currIndex2].price;
+        }
     }
 
-    
+
 }
