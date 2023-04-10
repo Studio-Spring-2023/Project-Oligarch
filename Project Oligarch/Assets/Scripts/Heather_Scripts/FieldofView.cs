@@ -46,6 +46,7 @@ public class FieldofView : MonoBehaviour
                 if ( disToTarget < 5 && Input.GetKeyDown ( KeyCode.Mouse1 ) )
                 {
                     GameObject.Instantiate ( HomingMissile );
+                    HomingMissile.transform.position = transform.position;
                     missile.target = target.transform;
                 }
             }
