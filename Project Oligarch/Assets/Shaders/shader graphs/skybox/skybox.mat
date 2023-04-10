@@ -39,8 +39,8 @@ Material:
     - _QueueOffset: 0
     - _cloud_density: 227.5
     m_Colors:
-    - _horizon_color: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
-    - _sky_color: {r: 0.1830188, g: 0.6360391, b: 1, a: 0}
+    - _horizon_color: {r: 1, g: 0.71428573, b: 0, a: 0}
+    - _sky_color: {r: 0.2588235, g: 0.7784409, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3085686997091662042
 MonoBehaviour:
