@@ -5,7 +5,7 @@ using UnityEngine;
 public class MetaManager : MonoBehaviour
 {
 
-    public Dictionary<string, int> MetaDict = new Dictionary<string, int>()
+    public static Dictionary<string, int> MetaDict = new Dictionary<string, int>()
     {
         {"Radar Capabilities", 0 },
         {"High Reputation", 0 },

@@ -8,7 +8,6 @@ public class MetaShop : Interactable
 {
     [SerializeField] Image Menu;
     [SerializeField] Money money;
-    [SerializeField] MetaManager manager;
     public List<MetaUpgrade> Upgrades = new List<MetaUpgrade>();
     [SerializeField] Image ItemImage1;
     [SerializeField] Image ItemImage2;
@@ -18,6 +17,8 @@ public class MetaShop : Interactable
     [SerializeField] TextMeshProUGUI ItemName2;
     [SerializeField] TextMeshProUGUI ItemLVL1;
     [SerializeField] TextMeshProUGUI ItemLVL2;
+    [SerializeField] TextMeshProUGUI Itemprice1;
+    [SerializeField] TextMeshProUGUI Itemprice2;
 
     public int currIndex1;
     public int currIndex2;
@@ -28,7 +29,6 @@ public class MetaShop : Interactable
         Menu.gameObject.SetActive(false);
         currIndex1 = 0;
         currIndex2 = 1;
-        manager = GameObject.FindWithTag("Manager").GetComponent<MetaManager>();
     }
     private void Update()
     {
@@ -49,8 +49,25 @@ public class MetaShop : Interactable
         ItemDesc2.text = Upgrades[currIndex2].Description1;
         ItemName1.text = Upgrades[currIndex1].Name;
         ItemName2.text = Upgrades[currIndex2].Name;
-        ItemLVL1.text = manager.MetaDict[Upgrades[currIndex1].Name].ToString();
-        ItemLVL2.text = manager.MetaDict[Upgrades[currIndex2].Name].ToString();
+        ItemLVL1.text = MetaManager.MetaDict[Upgrades[currIndex1].Name].ToString();
+        ItemLVL2.text = MetaManager.MetaDict[Upgrades[currIndex2].Name].ToString();
+        if(MetaManager.MetaDict[Upgrades[currIndex1].Name] < 1)
+        {
+            Itemprice1.text = Upgrades[currIndex1].price1.ToString();
+        }
+        else if(MetaManager.MetaDict[Upgrades[currIndex1].Name] >= 1)
+        {
+            Itemprice1.text = Upgrades[currIndex1].price2.ToString();
+        }
+
+        if (MetaManager.MetaDict[Upgrades[currIndex2].Name] < 1)
+        {
+            Itemprice2.text = Upgrades[currIndex2].price1.ToString();
+        }
+        else if (MetaManager.MetaDict[Upgrades[currIndex2].Name] >= 1)
+        {
+            Itemprice2.text = Upgrades[currIndex2].price2.ToString();
+        }
     }
 
     // Update is called once per frame
@@ -100,18 +117,30 @@ public class MetaShop : Interactable
     }
     public void BuyLeft()
     {
-        if (Upgrades[currIndex1].price <= money.Credits && manager.MetaDict[Upgrades[currIndex1].Name] < 2)
+        if (Upgrades[currIndex1].price1 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 1)
         {
-            manager.MetaDict[Upgrades[currIndex1].Name] += 1;
-            money.Credits -= Upgrades[currIndex1].price;
+            MetaManager.MetaDict[Upgrades[currIndex1].Name] += 1;
+            money.Credits -= Upgrades[currIndex1].price1;
+        }
+
+        else if (Upgrades[currIndex1].price2 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 2)
+        {
+            MetaManager.MetaDict[Upgrades[currIndex1].Name] += 1;
+            money.Credits -= Upgrades[currIndex1].price2;
         }
     }
     public void BuyRight()
     {
-        if (Upgrades[currIndex2].price <= money.Credits && manager.MetaDict[Upgrades[currIndex2].Name] < 2)
+        if (Upgrades[currIndex2].price1 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 1)
         {
-            manager.MetaDict[Upgrades[currIndex2].Name] += 1;
-            money.Credits -= Upgrades[currIndex2].price;
+            MetaManager.MetaDict[Upgrades[currIndex2].Name] += 1;
+            money.Credits -= Upgrades[currIndex2].price1;
+        }
+
+        else if (Upgrades[currIndex2].price2 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 2)
+        {
+            MetaManager.MetaDict[Upgrades[currIndex2].Name] += 1;
+            money.Credits -= Upgrades[currIndex2].price2;
         }
     }
 
