@@ -14,7 +14,6 @@ public class MetaManager : MonoBehaviour
         {"Coin Reserves", 0 },
         {"Underground Connections", 0 },
     };
-    public List<int> metaInt = new List<int>(); 
     void Start()
     {
         

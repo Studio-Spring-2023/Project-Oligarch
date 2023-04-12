@@ -16,6 +16,9 @@ public class MetaShop : Interactable
     [SerializeField] TextMeshProUGUI ItemDesc2;
     [SerializeField] TextMeshProUGUI ItemName1;
     [SerializeField] TextMeshProUGUI ItemName2;
+    [SerializeField] TextMeshProUGUI ItemLVL1;
+    [SerializeField] TextMeshProUGUI ItemLVL2;
+
     public int currIndex1;
     public int currIndex2;
     public float growSpeed;
@@ -46,6 +49,8 @@ public class MetaShop : Interactable
         ItemDesc2.text = Upgrades[currIndex2].Description1;
         ItemName1.text = Upgrades[currIndex1].Name;
         ItemName2.text = Upgrades[currIndex2].Name;
+        ItemLVL1.text = manager.MetaDict[Upgrades[currIndex1].Name].ToString();
+        ItemLVL2.text = manager.MetaDict[Upgrades[currIndex2].Name].ToString();
     }
 
     // Update is called once per frame
@@ -95,7 +100,7 @@ public class MetaShop : Interactable
     }
     public void BuyLeft()
     {
-        if (Upgrades[currIndex1].price <= money.Credits)
+        if (Upgrades[currIndex1].price <= money.Credits && manager.MetaDict[Upgrades[currIndex1].Name] < 2)
         {
             manager.MetaDict[Upgrades[currIndex1].Name] += 1;
             money.Credits -= Upgrades[currIndex1].price;
@@ -103,7 +108,7 @@ public class MetaShop : Interactable
     }
     public void BuyRight()
     {
-        if (Upgrades[currIndex2].price <= money.Credits)
+        if (Upgrades[currIndex2].price <= money.Credits && manager.MetaDict[Upgrades[currIndex2].Name] < 2)
         {
             manager.MetaDict[Upgrades[currIndex2].Name] += 1;
             money.Credits -= Upgrades[currIndex2].price;
