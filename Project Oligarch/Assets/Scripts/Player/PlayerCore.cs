@@ -10,7 +10,7 @@ public class PlayerCore : Core
 	public static Transform Transform { get; private set; }
 	public static Loadout AssignedLoadout { get; private set; }
 	[Header("Slide Variables")]
-	bool canSlide;
+	public bool canSlide;
 	public bool Slide;
 	public float SlideTime;
 	public float SlideCooldown;
@@ -106,6 +106,10 @@ public class PlayerCore : Core
 			grounded = true;
 			
 		}
+		if(canSlide)
+		{
+			StartCoroutine(SlideFunc());
+		}
 	}
 
 	public void AttemptJump()
@@ -119,21 +123,20 @@ public class PlayerCore : Core
 	{
 		Debug.Log("Slide");
         canSlide = false;
+		Vector3 temp = Velocity;
         Slide = true;
 		Renderer render = gameObject.GetComponent<Renderer>();
         render.material.SetColor("_Color", Color.red);
-        //transform.localScale = new Vector3(1, 0.5f, 1);//reduce player height
         PlayerRB.velocity = new Vector3(PlayerRB.velocity.x, -20f, PlayerRB.velocity.z);
 		float StartSpeed = MoveSpeed;
         MoveSpeed *= SlideForce;
-        PlayerRB.AddForce(Velocity.normalized, ForceMode.Force);
+        PlayerRB.AddForce(temp.normalized, ForceMode.Force);
         yield return new WaitForSeconds(SlideTime);
         Slide = false;
         render.material.SetColor("_Color", Color.grey);
-        //transform.localScale = new Vector3(1, 1, 1);//return player height
         MoveSpeed = StartSpeed;
         yield return new WaitForSeconds(SlideCooldown);
-        canSlide = true;
+        //canSlide = true;
         yield return null;  
     }
 
