@@ -6,20 +6,21 @@ public class projectiles : MonoBehaviour
 {
     //These are the stats for the Gun
     public int Dam;
-    public int BulletsToShoot;
-    public int BulletsPerTap;
+    private int BulletsToShoot;
+    private int BulletsPerTap;
     private int BulletsLeft;
     private int BulletsShot;
 
     public float TimeBetweenShooting;
     public float Spread;
-    public float Range;
+    private float Range;
     private float reloadTime;
     public float TimeBetweenShots;
+    public float bulletsDuration = 0.05f;
 
     //These are the different bools for the Gun
-    public bool Shooting;
-    public bool CanShoot;
+    private bool Shooting;
+    private bool CanShoot;
     private bool reloading;
 
     //These are different things that will be refenced in the code
@@ -27,12 +28,18 @@ public class projectiles : MonoBehaviour
     public RaycastHit Hit;
     public LayerMask IsEnemy;
 
+    LineRenderer bullets;
+
 
     private void Awake ( )
     {
-        //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot
+        bullets = GetComponent<LineRenderer> ( );
+
+        //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot and sets the range for the gun
+        BulletsToShoot = 3;
         BulletsLeft=BulletsToShoot;
         BulletsPerTap = BulletsToShoot;
+        Range = 20;
         CanShoot = true;
     }
 
@@ -70,18 +77,20 @@ public class projectiles : MonoBehaviour
         float x = Random.Range ( -Spread , Spread );
         float y = Random.Range ( -Spread , Spread );
 
+        bullets.SetPosition ( 0 , AttackPoint.position );
+
         //This calculates the diration with the spread as a factor
         Vector3 dir = AttackPoint.transform.forward + new Vector3 ( x , y , 0 );
 
         //This is the raycast for shooting
         if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Range , IsEnemy ) )
         {
-            Debug.Log ( Hit.collider.name );
-
             if ( Hit.collider.CompareTag ( "Enemy" ) )
             {
-                Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( 1 );
+                bullets.SetPosition ( 1 , Hit.point );
+                Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
             }
+            StartCoroutine ( ShotBullet ( ) );
         }
 
         //This tracks how many bullets have been shot and how many are left
@@ -113,6 +122,13 @@ public class projectiles : MonoBehaviour
     {
         BulletsLeft = BulletsToShoot;
         reloading = false;
+    }
+
+    IEnumerator ShotBullet ( )
+    {
+        bullets.enabled = true;
+        yield return new WaitForSeconds ( bulletsDuration );
+        bullets.enabled= false;
     }
 
     private void OnDrawGizmos ( )
