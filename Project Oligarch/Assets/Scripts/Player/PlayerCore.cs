@@ -19,6 +19,7 @@ public class PlayerCore : Core
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
     private Vector3 Forward;
+	private Vector3 temp;
 	[Range(1f, 8f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
@@ -106,7 +107,7 @@ public class PlayerCore : Core
 			grounded = true;
 			
 		}
-		if(canSlide)
+		if(Input.GetButtonDown("Ability1") && canSlide)
 		{
 			StartCoroutine(SlideFunc());
 		}
@@ -123,20 +124,20 @@ public class PlayerCore : Core
 	{
 		Debug.Log("Slide");
         canSlide = false;
-		Vector3 temp = Velocity;
+		temp = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x);
         Slide = true;
-		Renderer render = gameObject.GetComponent<Renderer>();
-        render.material.SetColor("_Color", Color.red);
-        PlayerRB.velocity = new Vector3(PlayerRB.velocity.x, -20f, PlayerRB.velocity.z);
+		//Renderer render = gameObject.GetComponent<Renderer>();
+        //render.material.SetColor("_Color", Color.red);
+        //PlayerRB.velocity = new Vector3(PlayerRB.velocity.x, -20f, PlayerRB.velocity.z);
 		float StartSpeed = MoveSpeed;
         MoveSpeed *= SlideForce;
-        PlayerRB.AddForce(temp.normalized, ForceMode.Force);
+        //PlayerRB.AddForce(temp.normalized, ForceMode.Force);
         yield return new WaitForSeconds(SlideTime);
         Slide = false;
-        render.material.SetColor("_Color", Color.grey);
+        //render.material.SetColor("_Color", Color.grey);
         MoveSpeed = StartSpeed;
         yield return new WaitForSeconds(SlideCooldown);
-        //canSlide = true;
+        canSlide = true;
         yield return null;  
     }
 
@@ -149,6 +150,10 @@ public class PlayerCore : Core
 		else
 		{
 			Velocity += gravity;
+		}
+		if(Slide)
+		{
+			Velocity = (temp * MoveSpeed);
 		}
 
 		if (jump)
