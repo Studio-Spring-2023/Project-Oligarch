@@ -26,12 +26,6 @@ public class HomingMissile : MonoBehaviour
         FOV=GetComponentInParent<FieldofView> ();
     }
 
-    private void Update ( )
-    {
-        //This is supposed to locate it's target
-        FOV.MissileTargeting ( );
-    }
-
     private void FixedUpdate ( )
     {
         //This sends it to it's target

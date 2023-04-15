@@ -17,7 +17,7 @@ public class projectiles : MonoBehaviour
     private float Range;
     private float reloadTime;
     public float TimeBetweenShots;
-    public float bulletsDuration = 0.05f;
+    public float bulletsDuration = 0.1f;
 
     //These are the different bools for the Gun
     private bool Shooting;
@@ -28,6 +28,7 @@ public class projectiles : MonoBehaviour
     public Transform AttackPoint;
     public RaycastHit Hit;
     public LayerMask IsEnemy;
+    public Transform Player;
 
     LineRenderer bullets;
 
@@ -47,6 +48,22 @@ public class projectiles : MonoBehaviour
     private void Update ( )
     {
         ShootingInput ( );
+
+        //fires gun visual even if you miss
+        if(Input.GetKeyDown( KeyCode.Mouse0 ) )
+        {
+            bullets.SetPosition ( 0 , Player.position );
+
+            if(Physics.Raycast(Player.transform.position,Player.transform.forward,out Hit , Range ) )
+            {
+                bullets.SetPosition ( 1 , Hit.point );
+            }
+            else
+            {
+                bullets.SetPosition( 1 , Player.transform.forward*Range );
+            }
+            StartCoroutine ( ShotBullet ( ) );
+        }
     }
 
     private void ShootingInput ( )
@@ -90,6 +107,10 @@ public class projectiles : MonoBehaviour
             {
                 bullets.SetPosition ( 1 , Hit.point );
                 Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
+            }
+            else
+            {
+                bullets.SetPosition ( 1 , AttackPoint.transform.forward * Range );
             }
             StartCoroutine ( ShotBullet ( ) );
         }
