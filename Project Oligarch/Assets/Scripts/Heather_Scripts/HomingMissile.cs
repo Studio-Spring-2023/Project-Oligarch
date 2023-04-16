@@ -21,8 +21,7 @@ public class HomingMissile : MonoBehaviour
     private void Awake ( )
     {
         //This makes sure that there is a rigidbody and that the missile is a child of the weapon that fired it and that it has the necessary script to find it's target
-        rb = this.GetComponent<Rigidbody>();
-        transform.SetParent ( GameObject.FindGameObjectWithTag ( "Player" ).transform );
+        rb = this.GetComponent<Rigidbody> ( );
         FOV=GetComponentInParent<FieldofView> ();
     }
 

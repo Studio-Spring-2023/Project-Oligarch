@@ -14,13 +14,8 @@ public class FieldofView : MonoBehaviour
     //These are refrences for the missile
     public LayerMask Enemy;
     public GameObject HomingMissile;
-    public HomingMissile missile;
-    public Transform Player;
-
-    private void Awake ( )
-    {
-        Player = GetComponent<Transform> ( );
-    }
+    private HomingMissile missile;
+    public GameObject missilePoint;
 
     private void Update ( )
     {
@@ -55,8 +50,8 @@ public class FieldofView : MonoBehaviour
 
                 if ( disToTarget < 5 && Input.GetKeyDown ( KeyCode.Mouse1 ) )
                 {
-                    GameObject.Instantiate ( HomingMissile );
-                    HomingMissile.transform.position = Player.position;
+                    missile=GameObject.Instantiate ( HomingMissile, missilePoint.transform.position, Quaternion.identity ).GetComponent<HomingMissile>();
+                    
                     missile.target = target.transform;
                 }
             }
