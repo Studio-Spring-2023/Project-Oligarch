@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4903567141805183985}
   - component: {fileID: 5850310006058128608}
   - component: {fileID: 7034008743504362156}
+  - component: {fileID: 5070622842745337735}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Manager
@@ -94,6 +95,18 @@ MonoBehaviour:
   Credits: 1000
   Text: {fileID: 0}
 --- !u!114 &7034008743504362156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926274786873992773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8063038166d1e84f81f5ec52650611f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5070622842745337735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

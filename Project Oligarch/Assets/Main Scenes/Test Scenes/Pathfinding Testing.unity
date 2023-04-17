@@ -233,6 +233,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519006131007072690, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
+      propertyPath: Dam
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 519006131007072690, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
+      propertyPath: AttackPoint
+      value: 
+      objectReference: {fileID: 548062322}
     - target: {fileID: 1239547619138709715, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
         type: 3}
       propertyPath: Crosshair
@@ -397,6 +407,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &548062322 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3855526098586253607, guid: 17fa66f3c4b32734caba74b2cc63cb21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1391754513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &765184082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,10 +1309,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid Hulking Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7287250766469212037, guid: ca20326a58ff73647ba4bafbbe5607b0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8816578722606451079, guid: ca20326a58ff73647ba4bafbbe5607b0,
         type: 3}
       propertyPath: Health
-      value: 50
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 8816578722606451079, guid: ca20326a58ff73647ba4bafbbe5607b0,
         type: 3}
@@ -1351,8 +1372,59 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7287250766469212037, guid: ca20326a58ff73647ba4bafbbe5607b0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1608622682096795618}
+    - targetCorrespondingSourceObject: {fileID: 7287250766469212037, guid: ca20326a58ff73647ba4bafbbe5607b0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1608622682096795622}
   m_SourcePrefab: {fileID: 100100000, guid: ca20326a58ff73647ba4bafbbe5607b0, type: 3}
+--- !u!1 &1608622682096795617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7287250766469212037, guid: ca20326a58ff73647ba4bafbbe5607b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1608622682096795616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1608622682096795618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608622682096795617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  currentHealth: 0
+--- !u!136 &1608622682096795622
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608622682096795617}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2031994073473615939
 PrefabInstance:
   m_ObjectHideFlags: 0
