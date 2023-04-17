@@ -894,16 +894,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faab4ad4a2b474448a9b537af57ebd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dam: 1
-  TimeBetweenShooting: 0.5
-  Spread: 0
-  TimeBetweenShots: 0
-  bulletsDuration: 0.1
-  AttackPoint: {fileID: 487603126}
-  IsEnemy:
+  dam: 0
+  magSize: 0
+  bulletsPerTap: 0
+  bulletsLeft: 0
+  bulletsShot: 0
+  timeBetweenShooting: 0
+  spread: 0
+  range: 0
+  reloadTime: 0
+  timeBetweenShots: 0
+  canHold: 0
+  shooting: 0
+  canShoot: 0
+  reloading: 0
+  attackCam: {fileID: 330585545}
+  attackPoint: {fileID: 487603126}
+  isEnemy:
     serializedVersion: 2
-    m_Bits: 8
-  Player: {fileID: 598858065}
+    m_Bits: 512
 --- !u!4 &1207402781
 Transform:
   m_ObjectHideFlags: 0
