@@ -30,6 +30,8 @@ public class PlayerCore : Core
 	[Header("Camera Variables")]
 	public Transform PlayerBody;
     public Transform CameraTransform;
+	[HideInInspector]
+	public Vector3 lookDir;
 	[Range(1f, 2f)]
 	public float CameraAnchorVerticalOffset;
 	[Range(-4f, -8f)]
@@ -48,7 +50,7 @@ public class PlayerCore : Core
 		transform.position.y + CameraAnchorVerticalOffset, 
 		transform.position.z);
 	private Quaternion DesiredRotation => Quaternion.Euler(pitch, wrapPi(yaw), 0);
-	private Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
+	public Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
 	private Vector3 CameraCollisionOffset => CameraTransform.forward * CameraIntersetOffsetDistance;
 
 	[Header("Interact Variables")]
@@ -216,7 +218,7 @@ public class PlayerCore : Core
 
 	public void Interact()
     {
-		Vector3 lookDir = RotatedCrosshairPoint - CameraTransform.position;
+		lookDir = RotatedCrosshairPoint - CameraTransform.position;
 
 		Ray interRay = new Ray(CameraTransform.position, lookDir);
 		if (Physics.Raycast(interRay, out RaycastHit hit, InterCheckMaxDistance, Interactables))

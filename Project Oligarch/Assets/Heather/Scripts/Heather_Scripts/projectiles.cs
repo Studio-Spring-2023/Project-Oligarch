@@ -32,11 +32,14 @@ public class projectiles : MonoBehaviour
 
     LineRenderer bullets;
 
+    private PlayerCore player;
 
-    private void Awake ( )
+
+    private void Start ( )
     {
+        
         bullets = GetComponent<LineRenderer> ( );
-
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
         //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot and sets the range for the gun
         BulletsToShoot = 3;
         BulletsLeft=BulletsToShoot;
@@ -47,6 +50,7 @@ public class projectiles : MonoBehaviour
 
     private void Update ( )
     {
+        AttackPoint.rotation = player.CameraTransform.rotation;
         ShootingInput ( );
 
         //fires gun visual even if you miss
@@ -108,11 +112,12 @@ public class projectiles : MonoBehaviour
                 bullets.SetPosition ( 1 , Hit.point );
                 Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
             }
-            else
-            {
-                bullets.SetPosition ( 1 , AttackPoint.transform.forward * Range );
-            }
+            
             StartCoroutine ( ShotBullet ( ) );
+        }
+        else
+        {
+            bullets.SetPosition(1, AttackPoint.transform.forward * Range);
         }
 
         //This tracks how many bullets have been shot and how many are left
