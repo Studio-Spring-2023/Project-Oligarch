@@ -98,7 +98,7 @@ public class projectiles : MonoBehaviour
         bullets.SetPosition ( 0 , AttackPoint.position );
 
         //This calculates the diration with the spread as a factor
-        Vector3 dir = AttackPoint.transform.forward + new Vector3 ( x , y , 0 );
+        Vector3 dir = AttackPoint.transform.forward;
 
         //This is the raycast for shooting
         if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Range , IsEnemy ) )
