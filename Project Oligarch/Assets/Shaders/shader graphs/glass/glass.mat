@@ -50,12 +50,14 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alpha_adjust: 0.08
+    - _Smoothness: 62.76
+    - _alpha_adjust: 0.05
+    - _ambient_occlusion: 0.05
     - _edge: 5
     - _smoothness: 1
     m_Colors:
     - _color: {r: 0, g: 0, b: 0, a: 0}
-    - _emission_color_adjust: {r: 0.6698113, g: 0.6583508, b: 0.48908862, a: 0.2}
-    - _specular_color_adjust: {r: 0.7234069, g: 0.8773585, b: 0.79553646, a: 0.3137255}
-    - _tint: {r: 0.7264151, g: 0.694722, b: 0.22888926, a: 0.24313726}
+    - _emission_color_adjust: {r: 0.23435386, g: 0.48971385, b: 0.5471698, a: 0.24705882}
+    - _specular_color_adjust: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 0.3137255}
+    - _tint: {r: 0, g: 0.8915043, b: 1, a: 0.24313726}
   m_BuildTextureStacks: []
