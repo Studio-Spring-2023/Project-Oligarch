@@ -105,7 +105,7 @@ public class HumanoidSimpleHulking : MobCore
 			Vector3 dirToPlayer = (PlayerCore.Transform.position - (ThrowablePos + transform.position));
 			Gizmos.DrawRay(ThrowablePos + transform.position, dirToPlayer);
 			float? angle = CalculateAngle(dirToPlayer);
-			Debug.Log(angle);
+			//Debug.Log(angle);
 			if (angle != null)
 			{
 				Gizmos.color = Color.red;

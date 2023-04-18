@@ -39,7 +39,7 @@ public class projectiles : MonoBehaviour
     {
         
         bullets = GetComponent<LineRenderer> ( );
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerCore> ( );
         //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot and sets the range for the gun
         BulletsToShoot = 3;
         BulletsLeft=BulletsToShoot;
@@ -107,11 +107,9 @@ public class projectiles : MonoBehaviour
         //This is the raycast for shooting
         if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Range , IsEnemy ) )
         {
-            if ( Hit.collider.CompareTag ( "Enemy" ) )
-            {
-                bullets.SetPosition ( 1 , Hit.point );
-                Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
-            }
+            Debug.Log(Hit.collider.gameObject.name);
+            bullets.SetPosition ( 1 , Hit.point );
+            Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
             
             StartCoroutine ( ShotBullet ( ) );
         }
