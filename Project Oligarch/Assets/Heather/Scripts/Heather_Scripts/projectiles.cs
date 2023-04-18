@@ -50,7 +50,7 @@ public class projectiles : MonoBehaviour
 
     private void Update ( )
     {
-        AttackPoint.rotation = player.CameraTransform.rotation;
+        //AttackPoint.rotation = player.CameraTransform.rotation;
         ShootingInput ( );
 
         //fires gun visual even if you miss

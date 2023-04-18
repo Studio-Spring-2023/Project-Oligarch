@@ -25,5 +25,17 @@ public class HealthShield : MonoBehaviour
         Healthbar.fillAmount = Health / maxHealth;
         Shieldbar.fillAmount = Shield / maxShield;
     }
+
+    void Damage (float damage)
+    {
+        if(Shield > 0)
+        {
+            Shield -= damage;
+        }
+        else
+        {
+            Health -= damage;
+        }
+    }
     
 }

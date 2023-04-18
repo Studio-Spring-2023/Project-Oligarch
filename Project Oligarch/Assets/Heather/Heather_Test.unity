@@ -421,16 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a41f410295e4243b7ce1d4707df082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMove: {fileID: 598858066}
-  settings:
-    sensX: 10
-    sensY: 10
-    invertX: 0
-    invertY: 0
-    yClampMin: -60
-    yClampMax: 50
-    playerRotateSmooth: 1
-  yGimbal: {fileID: 843520049}
 --- !u!1 &598858061
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,14 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781a95409256f16468db5c6a1308c410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camControl: {fileID: 1863142860}
-  camTarget: {fileID: 598858065}
-  settings:
-    forwardSpeed: 5
-    playerSmooth: 0.6
-  input_Move: {x: 0, y: 0}
-  input_Look: {x: 0, y: 0}
-  isLookTarget: 1
 --- !u!143 &598858067
 CharacterController:
   m_ObjectHideFlags: 0
@@ -621,7 +603,7 @@ GameObject:
   - component: {fileID: 659051518}
   - component: {fileID: 659051517}
   - component: {fileID: 659051521}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -894,25 +876,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faab4ad4a2b474448a9b537af57ebd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dam: 0
-  magSize: 0
-  bulletsPerTap: 0
-  bulletsLeft: 0
-  bulletsShot: 0
-  timeBetweenShooting: 0
-  spread: 0
-  range: 0
-  reloadTime: 0
-  timeBetweenShots: 0
-  canHold: 0
-  shooting: 0
-  canShoot: 0
-  reloading: 0
-  attackCam: {fileID: 330585545}
-  attackPoint: {fileID: 487603126}
-  isEnemy:
+  Dam: 1
+  TimeBetweenShooting: 0.2
+  Spread: 0
+  TimeBetweenShots: 0
+  bulletsDuration: 0.1
+  AttackPoint: {fileID: 487603126}
+  IsEnemy:
     serializedVersion: 2
     m_Bits: 512
+  Player: {fileID: 598858065}
 --- !u!4 &1207402781
 Transform:
   m_ObjectHideFlags: 0
@@ -941,7 +914,7 @@ GameObject:
   - component: {fileID: 1357636027}
   - component: {fileID: 1357636026}
   - component: {fileID: 1357636025}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Enemy (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1041,7 +1014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357636024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92558, y: 0.006180525, z: 9.602792}
+  m_LocalPosition: {x: -0.2, y: 0.006180525, z: 9.602792}
   m_LocalScale: {x: 1, y: 2.2342, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1124,16 +1097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a41f410295e4243b7ce1d4707df082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMove: {fileID: 598858066}
-  settings:
-    sensX: 10
-    sensY: 10
-    invertX: 0
-    invertY: 0
-    yClampMin: -60
-    yClampMax: 50
-    playerRotateSmooth: 1
-  yGimbal: {fileID: 843520049}
 --- !u!1 &2100831321
 GameObject:
   m_ObjectHideFlags: 0
