@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public static GameManager GM;
+    public static GameManager Instance;
     [Range(-0.5f, -9.8f)]
     public float GravityConstant;
     public static float Gravity;
@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
 
     private void InstantiateManager()
     {
-        if (GM != null)
+        if (Instance != null)
             return;
 
         DontDestroyOnLoad(this);
-        GM = this;
+        Instance = this;
         PlayerInputHandler = new InputHandler();
 		UIHandler = new UIHandler();
         Gravity = GravityConstant;

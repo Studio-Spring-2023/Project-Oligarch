@@ -152,21 +152,21 @@ public class InputHandler
 
     private void PrimaryAbilityInput(InputAction.CallbackContext ctx)
     {
-		PlayerCore.AssignedLoadout.Primary();
+		PlayerCore.CurrentLoadout.Primary();
 	}
 
     private void SecondaryAbilityInput(InputAction.CallbackContext ctx)
     {
-		PlayerCore.AssignedLoadout.Secondary();
+		PlayerCore.CurrentLoadout.Secondary();
 	}
 
 	private void SpecialAbilityInput(InputAction.CallbackContext ctx)
     {
-		PlayerCore.AssignedLoadout.Special();
+		PlayerCore.CurrentLoadout.Special();
 	}
 	private void UltimateAbilityInput(InputAction.CallbackContext ctx)
     {
-        PlayerCore.AssignedLoadout.Ultimate();
+        PlayerCore.CurrentLoadout.Ultimate();
 	}
 	#endregion
 

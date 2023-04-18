@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class PlayerCore : Core
 {
 	public static Transform Transform { get; private set; }
-	public static Loadout AssignedLoadout { get; private set; }
+	public static Loadout CurrentLoadout { get; private set; }
 
 	[Header("Movement Variables")]
     private Rigidbody PlayerRB;
@@ -15,7 +15,10 @@ public class PlayerCore : Core
 	[Range(1f, 8f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
-	private bool grounded;
+	[Range(25f, 65f)]
+	public float MaxSlopeAngle;
+	public float SlopeCheckDistance;
+	private bool inAir;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
 
@@ -46,6 +49,7 @@ public class PlayerCore : Core
 	[Header("Interact Variables")]
 	public float InterCheckMaxDistance;
 	public LayerMask Interactables;
+	
 
 	[Header("Crosshair Variables")]
 	public RectTransform Crosshair;
@@ -66,7 +70,7 @@ public class PlayerCore : Core
 		Transform = transform;
 
         //Temporary to avoid Null Reference errors
-        AssignedLoadout = AssignLoadout(LoadoutType.Ranger);
+        CurrentLoadout = AssignLoadout(LoadoutType.Ranger);
 	}
 
     private void Start()
@@ -89,15 +93,36 @@ public class PlayerCore : Core
 		Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
 
 		Ray groundRay = new Ray(transform.position, Vector3.down);
-		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
+		
+		if (Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
 		{
-			//We are floating, get our ass on the ground.
-			grounded = false;
+			inAir = false;
+
+			//We do a different check for the slope since the character model might be slightly different and the collider may cause issues where the slope
+			if (Physics.Raycast(groundRay, out RaycastHit walkableHit, SlopeCheckDistance, Walkable))
+			{
+				float angle = Vector3.Angle(Vector3.up, walkableHit.normal);
+
+				if (angle > MaxSlopeAngle)
+				{
+					//Cannot walk on this slope
+					Debug.Log("Is not Walkable Slope");
+					Debug.Log(angle);
+				}
+				else
+				{
+					//We can walk on this slope
+					Debug.Log("Is Walkable Slope");
+					Debug.Log(angle);
+
+					Forward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+				}
+			}
 		}
 		else
 		{
-			grounded = true;
-			
+			//We are floating, get on ground.
+			inAir = true;
 		}
 	}
 
@@ -111,7 +136,7 @@ public class PlayerCore : Core
 
 	private void FixedUpdate()
 	{
-		if (grounded)
+		if (inAir)
 		{
 			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
 		}
@@ -128,8 +153,6 @@ public class PlayerCore : Core
 
 		//Lerp MoveSpeed based on Acceleration / Deceleration timers.
 		PlayerRB.velocity = Velocity;
-
-		
 	}
 
 	private void LateUpdate()
@@ -202,12 +225,27 @@ public class PlayerCore : Core
 	private void OnDrawGizmos()
     {
 		//Velocity vector
-        //Gizmos.color = Color.white;
-        //Gizmos.DrawRay(transform.position, Velocity);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, Velocity);
 
-		//Forward direction the Player will move in
-		//Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-		//Gizmos.DrawRay(transform.position, forward);
+		//Sloped Walking
+		Ray groundRay = new Ray(transform.position, Vector3.down);
+
+		if (Physics.Raycast(groundRay, out RaycastHit walkableHit, 10f, Walkable))
+		{
+			Gizmos.color = new Color(255f, 205f, 129f);
+			Gizmos.DrawRay(walkableHit.point, walkableHit.normal);
+
+			float angle = Vector3.Angle(Vector3.up, walkableHit.normal);
+
+			if (angle < MaxSlopeAngle)
+			{
+				Vector3 SlopedForward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+
+				Gizmos.color = Color.green;
+				Gizmos.DrawRay(transform.position, SlopedForward);
+			}
+		}
 
 		//CameraPos, Anchor, and the Look Point
 		Quaternion desiredRotation = Quaternion.Euler(pitch, wrapPi(yaw), 0);
@@ -248,23 +286,22 @@ public class PlayerCore : Core
 		Gizmos.DrawRay(rotatedCameraOffset + adjustedCameraAnchor, -adjustedCameraAnchor * CameraIntersectionCheckDistance);
 	}
 
-	float wrapPi(float theta)
+	float wrapPi(float degrees)
 	{
-		theta = theta * Mathf.Deg2Rad;
+		float radians = degrees * Mathf.Deg2Rad;
 
-		if (Mathf.Abs(theta) <= Mathf.PI)
+		if (Mathf.Abs(degrees) <= Mathf.PI)
 		{
 			// One revolution is 2 PI.
 			const float TWOPI = 2.0f * Mathf.PI;
 
-			// Out of range.  Determine how many "revolutions"
-			// we need to add.
-			float revolutions = Mathf.Floor((theta + Mathf.PI) * (1.0f / TWOPI));
+			// Out of range.  Determine how many "revolutions" we need to add.
+			float revolutions = Mathf.Floor((radians + Mathf.PI) * (1.0f / TWOPI));
 
 			// Subtract it off
-			theta -= revolutions * TWOPI;
+			radians -= revolutions * TWOPI;
 		}
 
-		return theta * Mathf.Rad2Deg;
+		return radians * Mathf.Rad2Deg;
 	}
 }

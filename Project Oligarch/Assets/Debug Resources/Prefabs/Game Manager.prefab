@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6802201929886541917}
   - component: {fileID: 7313341849690325107}
   - component: {fileID: 3251694209895283100}
+  - component: {fileID: 4943272429076684675}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7313341849690325107
 MonoBehaviour:
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118317a3404b62145bd84f5b02ec9f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GravityConstant: -0.5
 --- !u!114 &3251694209895283100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,3 +59,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c77af6fb800a024195f8d50480d5eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4943272429076684675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071420448303828917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405217582881401489f8101bb8309adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CommonItems:
+  - {fileID: 11400000, guid: ea9175ee87422bb4db33fd80f69d7370, type: 2}
+  - {fileID: 11400000, guid: 47ad078668a348a45a0a52fce152df8a, type: 2}
+  - {fileID: 11400000, guid: 43cb7db08db38034992ff93984892dde, type: 2}
+  - {fileID: 11400000, guid: c2997b45c6cd81b41a312d7e712f99c2, type: 2}
+  - {fileID: 11400000, guid: bd6397acaca816d4db60dc3a5c460e27, type: 2}
+  - {fileID: 11400000, guid: 73e1b9f895300e44e9c28a4adde8b354, type: 2}
+  - {fileID: 11400000, guid: 4639085c7240f7c4d946d566030d23a2, type: 2}
+  - {fileID: 11400000, guid: 4ab95615615284d4f953955fce0ecc53, type: 2}
+  - {fileID: 11400000, guid: f0ea0d12d1095c949800b645dd445bb8, type: 2}
+  - {fileID: 11400000, guid: 23589fd146095df4cb68b3a4a19c0a92, type: 2}
+  - {fileID: 11400000, guid: 23456003fbb125c4f8014178fa450224, type: 2}
+  - {fileID: 11400000, guid: cf74618d40f94104ea9e2acc9e8ad978, type: 2}
+  - {fileID: 11400000, guid: 0d5765385d4a50044a0429a154bb0e1b, type: 2}
+  - {fileID: 11400000, guid: dd67a6c73852f494aa985f6a904e32a9, type: 2}
+  - {fileID: 11400000, guid: da79acca5147bea48bb4d7bce34f84af, type: 2}
+  - {fileID: 11400000, guid: 897fb8c815b844c41b807ddf6fd0b8a0, type: 2}
+  UncommonItems: []
+  RareItems: []
+  LegendaryItems: []
