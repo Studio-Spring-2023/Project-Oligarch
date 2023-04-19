@@ -211,41 +211,41 @@ public class BountyHandler : MonoBehaviour
 		}
 	}
 
-	private void OnDrawGizmos()
-	{
-		if (!DebugInstantiated)
-		{
-			DebugOrbOrientation = transform.rotation;
-			DebugInstantiated = true;
-		}
+	//private void OnDrawGizmos()
+	//{
+	//	if (!DebugInstantiated)
+	//	{
+	//		DebugOrbOrientation = transform.rotation;
+	//		DebugInstantiated = true;
+	//	}
 
-		Quaternion incrementalRotation = Quaternion.Euler(0, DebugIncrement * Time.deltaTime, 0);
+	//	Quaternion incrementalRotation = Quaternion.Euler(0, DebugIncrement * Time.deltaTime, 0);
 
-		Quaternion desiredRotation = DebugOrbOrientation * incrementalRotation;
+	//	Quaternion desiredRotation = DebugOrbOrientation * incrementalRotation;
 
-		Quaternion slerpedRotation = Quaternion.Slerp(DebugOrbOrientation, desiredRotation, RotationSmoothness);
+	//	Quaternion slerpedRotation = Quaternion.Slerp(DebugOrbOrientation, desiredRotation, RotationSmoothness);
 
-		DebugOrbOrientation = slerpedRotation;
+	//	DebugOrbOrientation = slerpedRotation;
 
-		Matrix4x4 BountyOrbMatrix = Matrix4x4.TRS(transform.position + BountyOrbAnchorPos, slerpedRotation, Vector3.one);
+	//	Matrix4x4 BountyOrbMatrix = Matrix4x4.TRS(transform.position + BountyOrbAnchorPos, slerpedRotation, Vector3.one);
 
-		Gizmos.color = Color.red;
-		Vector3 xAxis = BountyOrbMatrix.GetColumn(0);
-		Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, xAxis.normalized);
-		Gizmos.color = Color.green;
-		Vector3 yAxis = BountyOrbMatrix.GetColumn(1);
-		Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, yAxis.normalized);
-		Gizmos.color = Color.blue;
-		Vector3 zAxis = BountyOrbMatrix.GetColumn(2);
-		Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, zAxis.normalized);
+	//	Gizmos.color = Color.red;
+	//	Vector3 xAxis = BountyOrbMatrix.GetColumn(0);
+	//	Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, xAxis.normalized);
+	//	Gizmos.color = Color.green;
+	//	Vector3 yAxis = BountyOrbMatrix.GetColumn(1);
+	//	Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, yAxis.normalized);
+	//	Gizmos.color = Color.blue;
+	//	Vector3 zAxis = BountyOrbMatrix.GetColumn(2);
+	//	Gizmos.DrawRay(transform.position + BountyOrbAnchorPos, zAxis.normalized);
 
-		Gizmos.color = Color.white;
-		foreach (Vector3 t in BountyOrbPos)
-		{
-			Vector4 t4 = t;
-			t4.w = 1;
+	//	Gizmos.color = Color.white;
+	//	foreach (Vector3 t in BountyOrbPos)
+	//	{
+	//		Vector4 t4 = t;
+	//		t4.w = 1;
 
-			Gizmos.DrawWireSphere(BountyOrbMatrix * t4, 0.5f);
-		}
-	}
+	//		Gizmos.DrawWireSphere(BountyOrbMatrix * t4, 0.5f);
+	//	}
+	//}
 }
