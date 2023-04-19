@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: aliens body diffuse
-  m_Shader: {fileID: -6465566751694194690, guid: b8e09675092463f448783cb326ca6d63,
+  m_Shader: {fileID: -6465566751694194690, guid: 7e1529462a9cdc24f92a83608f3d3fb8,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CrossbowMaterial_RedVar
-  m_Shader: {fileID: 4800000, guid: a863347aa617bcd479606f4f92f51760, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7e1529462a9cdc24f92a83608f3d3fb8,
+    type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -90,11 +91,25 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _dither: 0.5
     m_Colors:
-    - _AmbientColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+    - _AmbientColor: {r: 0.7336055, g: 1, b: 0.67358494, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 2.4502616, g: 0.073298454, b: 0.11428544, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SpecularColor: {r: 0.98322797, g: 1, b: 0.56981134, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &9019314607997508702
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5

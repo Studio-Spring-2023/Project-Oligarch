@@ -51,7 +51,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 62.76
-    - _alpha_adjust: 0.05
+    - _alpha_adjust: 0.12
     - _ambient_occlusion: 0.05
     - _edge: 5
     - _smoothness: 1
