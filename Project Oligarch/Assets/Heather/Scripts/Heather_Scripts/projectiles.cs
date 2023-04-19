@@ -14,10 +14,11 @@ public class projectiles : MonoBehaviour
 
     public float TimeBetweenShooting;
     public float Spread;
-    private float Range;
+    public float Range;
     private float reloadTime;
     public float TimeBetweenShots;
     public float bulletsDuration = 0.1f;
+    private Vector3 dir;
 
     //These are the different bools for the Gun
     private bool Shooting;
@@ -32,19 +33,18 @@ public class projectiles : MonoBehaviour
 
     LineRenderer bullets;
 
-    private PlayerCore player;
+    public PlayerCore player;
 
 
     private void Start ( )
     {
-        
         bullets = GetComponent<LineRenderer> ( );
         player = GameObject.FindWithTag("Player").GetComponent<PlayerCore> ( );
         //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot and sets the range for the gun
         BulletsToShoot = 3;
         BulletsLeft=BulletsToShoot;
         BulletsPerTap = BulletsToShoot;
-        Range = 20;
+        //Range = 20;
         CanShoot = true;
     }
 
@@ -56,17 +56,8 @@ public class projectiles : MonoBehaviour
         //fires gun visual even if you miss
         if(Input.GetKeyDown( KeyCode.Mouse0 ) )
         {
-            bullets.SetPosition ( 0 , Player.position );
 
-            if(Physics.Raycast(Player.transform.position,Player.transform.forward,out Hit , Range ) )
-            {
-                bullets.SetPosition ( 1 , Hit.point );
-            }
-            else
-            {
-                bullets.SetPosition( 1 , Player.transform.forward*Range );
-            }
-            StartCoroutine ( ShotBullet ( ) );
+            //StartCoroutine ( ShotBullet ( ) );
         }
     }
 
@@ -102,20 +93,26 @@ public class projectiles : MonoBehaviour
         bullets.SetPosition ( 0 , AttackPoint.position );
 
         //This calculates the diration with the spread as a factor
-        Vector3 dir = AttackPoint.transform.forward;
+        dir = (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized;
 
         //This is the raycast for shooting
-        if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Range , IsEnemy ) )
+        if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Mathf.Infinity , IsEnemy ) )
         {
             Debug.Log(Hit.collider.gameObject.name);
+            Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
-            Hit.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
-            
+            //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
+            Hit.collider.gameObject.GetComponent<Enemy_health>().LoseLife(Dam);  
             StartCoroutine ( ShotBullet ( ) );
         }
         else
         {
-            bullets.SetPosition(1, AttackPoint.transform.forward * Range);
+            
+            Vector3 temppos =(AttackPoint.position - (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * -Range);
+            bullets.SetPosition(1, temppos);
+            StartCoroutine(ShotBullet());
+
+            
         }
 
         //This tracks how many bullets have been shot and how many are left
@@ -159,7 +156,8 @@ public class projectiles : MonoBehaviour
     private void OnDrawGizmos ( )
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(AttackPoint.transform.position, AttackPoint.transform.forward );
+        Gizmos.DrawRay(AttackPoint.transform.position, (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * Range); ;
+
 
         Gizmos.color = Color.red;
         Gizmos.DrawSphere ( Hit.point , .1f );
