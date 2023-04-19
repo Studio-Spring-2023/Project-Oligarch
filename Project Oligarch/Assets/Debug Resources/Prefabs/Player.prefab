@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 1239547619138709715}
   - component: {fileID: 5609228326831868428}
   - component: {fileID: 519006131007072690}
+  - component: {fileID: 1089643075275784301}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -140,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 1239547620105552869}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &-4280498057574015392
 CapsuleCollider:
@@ -344,15 +345,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dam: 1
-  TimeBetweenShooting: 0.1
-  Spread: 0
-  TimeBetweenShots: 0.1
+  damagemod: 0
+  TimeBetweenShooting: 0.5
+  Spread: 0.01
+  Range: 25
+  TimeBetweenShots: 0.25
   bulletsDuration: 0.3
   AttackPoint: {fileID: 0}
   IsEnemy:
     serializedVersion: 2
     m_Bits: 512
   Player: {fileID: 1239547619138709716}
+  player: {fileID: 1239547619138709715}
+--- !u!114 &1089643075275784301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239547619138709737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f368c215400e6dc4f86c674a1b84fdd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 15.71
+  viewAngle: 103.6
+  Enemy:
+    serializedVersion: 2
+    m_Bits: 512
+  HomingMissile: {fileID: 5716205272478410715, guid: f539bba57fb96e341abaee2bf945443d,
+    type: 3}
+  missilePoint: {fileID: 5203597099020273406}
+  CoolDown: 0
+  CDRpercent: 0
+  CDRflat: 0
 --- !u!1 &1239547620105552870
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +391,7 @@ GameObject:
   - component: {fileID: 1239547620105552869}
   - component: {fileID: 1239547620105552867}
   - component: {fileID: 1239547620105552868}
+  - component: {fileID: 1558655796120362844}
   m_Layer: 8
   m_Name: Player Model
   m_TagString: Untagged
@@ -384,6 +412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1816159062}
+  - {fileID: 9173171703680788186}
   m_Father: {fileID: 1239547619138709716}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -437,3 +466,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1558655796120362844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239547620105552870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88287ad4750c2d4d9c2487b74ed5d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1239547619138709715}
+  FirePoint: {fileID: 1816159062}
+--- !u!1 &5203597099020273406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9173171703680788186}
+  m_Layer: 0
+  m_Name: Missile point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9173171703680788186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203597099020273406}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8999996, y: 1.0699999, z: 0.65999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1239547620105552869}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
