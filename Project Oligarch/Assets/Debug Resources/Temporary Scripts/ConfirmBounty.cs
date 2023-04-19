@@ -7,6 +7,6 @@ public class ConfirmBounty : Interactable
 {
 	public override void InteractedWith()
 	{
-		SceneManager.LoadScene("Decus");
+		SceneManager.LoadScene("Planescape");
 	}
 }
