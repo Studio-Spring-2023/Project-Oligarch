@@ -1,37 +1,39 @@
-using System.Collections;
 using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerCore : Core
 {
 	public static Transform Transform { get; private set; }
-	public static Loadout AssignedLoadout { get; private set; }
-	[Header("Slide Variables")]
-	public bool canSlide;
-	public bool Slide;
-	public float SlideTime;
-	public float SlideCooldown;
-	public float SlideForce;
+	public static Loadout CurrentLoadout { get; private set; }
+
 	[Header("Movement Variables")]
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
     private Vector3 Forward;
-	private Vector3 temp;
-	[Range(1f, 8f)]
+	private Vector3 Right;
+	[Range(1.25f, 2f)]
+	public float SprintMultiplier;
+	[Range(1f, 25f)]
 	public float JumpForce;
+	[Range(5f, 15f)]
+	public float AirStrafeSpeed;
 	public float GroundCheckDistance;
-	private bool grounded;
+	[Range(25f, 65f)]
+	public float MaxSlopeAngle;
+	public float SlopeCheckDistance;
+	private bool inAir;
+	private bool isSprinting;
+	private bool canJump;
+	private int jumpCharges;
+	private int maxJumps => (int)ItemManager.Instance.JumpChargeBonus + CurrentLoadout.BaseJumpCharges;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
 
 	[Header("Camera Variables")]
 	public Transform PlayerBody;
     public Transform CameraTransform;
-	[HideInInspector]
-	public Vector3 lookDir;
 	[Range(1f, 2f)]
 	public float CameraAnchorVerticalOffset;
 	[Range(-4f, -8f)]
@@ -50,7 +52,7 @@ public class PlayerCore : Core
 		transform.position.y + CameraAnchorVerticalOffset, 
 		transform.position.z);
 	private Quaternion DesiredRotation => Quaternion.Euler(pitch, wrapPi(yaw), 0);
-	public Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
+	private Vector3 RotatedCrosshairPoint => (DesiredRotation * CrosshairPoint) + CameraAnchorPos;
 	private Vector3 CameraCollisionOffset => CameraTransform.forward * CameraIntersetOffsetDistance;
 
 	[Header("Interact Variables")]
@@ -59,8 +61,6 @@ public class PlayerCore : Core
 
 	[Header("Crosshair Variables")]
 	public RectTransform Crosshair;
-
-	private bool jump;
 
 	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
@@ -71,24 +71,19 @@ public class PlayerCore : Core
 
     public void Awake()
     {
+		CurrentLoadout = AssignLoadout(LoadoutType.Ranger);
+
 		PlayerRB = GetComponent<Rigidbody>();
 
 		Transform = transform;
-
-        //Temporary to avoid Null Reference errors
-        AssignedLoadout = AssignLoadout(LoadoutType.Ranger);
-	}
-
-    private void Start()
-    {
-        
 	}
 
 	private void OnEnable()
 	{
 		InputHandler.OnJumpInput += AttemptJump;
 		InputHandler.OnInteractInput += Interact;
-    }
+		InputHandler.OnSprintInput += OnSprint;
+	}
 
 	private void Update()
     {
@@ -96,78 +91,85 @@ public class PlayerCore : Core
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
 		pitch = Mathf.Clamp(pitch, -pitchClamp, pitchClamp);
 
-		Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-
 		Ray groundRay = new Ray(transform.position, Vector3.down);
-		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
+		
+		if (Physics.Raycast(groundRay, GroundCheckDistance, Walkable) && !canJump)
 		{
-			//We are floating, get our ass on the ground.
-			grounded = false;
+			jumpCharges = maxJumps;
+
+			inAir = false;
+
+			Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+			Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
+
+			//We do a different check for the slope since the character model might be slightly different and the collider may cause issues where the slope
+			if (Physics.Raycast(groundRay, out RaycastHit walkableHit, SlopeCheckDistance, Walkable))
+			{
+				float angle = Vector3.Angle(Vector3.up, walkableHit.normal);
+
+				if (angle < MaxSlopeAngle)
+				{
+					Forward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+					Right = Vector3.Cross(walkableHit.normal, Forward).normalized;
+				}
+			}
 		}
 		else
 		{
-			grounded = true;
-			
+			//We are floating, get on ground.
+			inAir = true;
+
+			Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+			Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
 		}
-		if(Input.GetButtonDown("Ability1") && canSlide)
-		{
-			StartCoroutine(SlideFunc());
-		}
+	}
+
+	public void OnSprint()
+	{
+		isSprinting = !isSprinting;
 	}
 
 	public void AttemptJump()
 	{
-		if (!jump)
+		if (jumpCharges >= maxJumps)
 		{
-			jump = true;
+			jumpCharges--;
+
+			canJump = true;
 		}
 	}
-	public IEnumerator SlideFunc()
-	{
-		Debug.Log("Slide");
-        canSlide = false;
-		temp = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x);
-        Slide = true;
-		//Renderer render = gameObject.GetComponent<Renderer>();
-        //render.material.SetColor("_Color", Color.red);
-        //PlayerRB.velocity = new Vector3(PlayerRB.velocity.x, -20f, PlayerRB.velocity.z);
-		float StartSpeed = MoveSpeed;
-        MoveSpeed *= SlideForce;
-        //PlayerRB.AddForce(temp.normalized, ForceMode.Force);
-        yield return new WaitForSeconds(SlideTime);
-        Slide = false;
-        //render.material.SetColor("_Color", Color.grey);
-        MoveSpeed = StartSpeed;
-        yield return new WaitForSeconds(SlideCooldown);
-        canSlide = true;
-        yield return null;  
-    }
 
 	private void FixedUpdate()
 	{
-		if (grounded && !Slide)
+		if (!inAir)
 		{
-			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+			Velocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x);
+
+			if (isSprinting)
+				Velocity *= (MoveSpeed * SprintMultiplier);
+			else
+				Velocity *= MoveSpeed;
 		}
 		else
 		{
+			Vector3 flatVelocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * AirStrafeSpeed;
+			Velocity = new Vector3(flatVelocity.x, Velocity.y, flatVelocity.z);
+
 			Velocity += gravity;
 		}
-		if(Slide)
-		{
-			Velocity = (temp * MoveSpeed);
-		}
 
-		if (jump)
+		if (canJump)
 		{
-			Velocity += Vector3.up * JumpForce;
-			jump = false;
+			if (isSprinting)
+				Velocity += Vector3.up * (JumpForce * SprintMultiplier);
+			else
+				Velocity += Vector3.up * JumpForce;
+
+			canJump = false;
 		}
 
 		//Lerp MoveSpeed based on Acceleration / Deceleration timers.
 		PlayerRB.velocity = Velocity;
-
-		
 	}
 
 	private void LateUpdate()
@@ -196,13 +198,9 @@ public class PlayerCore : Core
 		//if the character isnt in your view port, then that's a problem
 		Vector3 adjustedCameraAnchor = (dirFromCameraToCrosshair * 0.5f);
 		Ray hitRay = new Ray(rotatedCameraOffsetPos + adjustedCameraAnchor, -adjustedCameraAnchor.normalized);
-		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
-		{
-			//Debug.Log("Object Obstructing View");
-			Vector3 CameraCollisionOffset = CameraTransform.forward * CameraIntersetOffsetDistance;
 
+		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
 			CameraTransform.position = collidedObj.point + CameraCollisionOffset;
-		}
 
 		//Look in the direction of the crosshair
 		CameraTransform.rotation = Quaternion.LookRotation(dirFromCameraToCrosshair.normalized);
@@ -212,13 +210,13 @@ public class PlayerCore : Core
 	//TODO: Move this to UIHandler
 	public void DrawCrosshair()
 	{
-		Vector2 CrosshairScreenSpace = UnityEngine.Camera.main.WorldToScreenPoint(RotatedCrosshairPoint);
+		Vector2 CrosshairScreenSpace = Camera.main.WorldToScreenPoint(RotatedCrosshairPoint);
 		Crosshair.transform.position = CrosshairScreenSpace;
 	}
 
 	public void Interact()
     {
-		lookDir = RotatedCrosshairPoint - CameraTransform.position;
+		Vector3 lookDir = RotatedCrosshairPoint - CameraTransform.position;
 
 		Ray interRay = new Ray(CameraTransform.position, lookDir);
 		if (Physics.Raycast(interRay, out RaycastHit hit, InterCheckMaxDistance, Interactables))
@@ -234,18 +232,36 @@ public class PlayerCore : Core
 	{
 		InputHandler.OnJumpInput -= AttemptJump;
 		InputHandler.OnInteractInput -= Interact;
+		InputHandler.OnSprintInput -= OnSprint;
 	}
 
 	//Temporary for Debug Display of Abilities
 	private void OnDrawGizmos()
     {
 		//Velocity vector
-        //Gizmos.color = Color.white;
-        //Gizmos.DrawRay(transform.position, Velocity);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, Velocity);
 
-		//Forward direction the Player will move in
-		//Vector3 forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-		//Gizmos.DrawRay(transform.position, forward);
+		//Sloped Walking
+		Ray groundRay = new Ray(transform.position, Vector3.down);
+
+		if (Physics.Raycast(groundRay, out RaycastHit walkableHit, 10f, Walkable))
+		{
+			Gizmos.color = new Color(255f, 205f, 129f);
+			Gizmos.DrawRay(walkableHit.point, walkableHit.normal);
+
+			float angle = Vector3.Angle(Vector3.up, walkableHit.normal);
+
+			if (angle < MaxSlopeAngle)
+			{
+				Vector3 SlopedForward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+				Vector3 SlopedRight = Vector3.Cross(walkableHit.normal, SlopedForward).normalized;
+
+				Gizmos.color = Color.green;
+				Gizmos.DrawRay(transform.position, SlopedForward);
+				Gizmos.DrawRay(transform.position, SlopedRight);
+			}
+		}
 
 		//CameraPos, Anchor, and the Look Point
 		Quaternion desiredRotation = Quaternion.Euler(pitch, wrapPi(yaw), 0);
@@ -286,23 +302,22 @@ public class PlayerCore : Core
 		Gizmos.DrawRay(rotatedCameraOffset + adjustedCameraAnchor, -adjustedCameraAnchor * CameraIntersectionCheckDistance);
 	}
 
-	float wrapPi(float theta)
+	float wrapPi(float degrees)
 	{
-		theta = theta * Mathf.Deg2Rad;
+		float radians = degrees * Mathf.Deg2Rad;
 
-		if (Mathf.Abs(theta) <= Mathf.PI)
+		if (Mathf.Abs(degrees) <= Mathf.PI)
 		{
 			// One revolution is 2 PI.
 			const float TWOPI = 2.0f * Mathf.PI;
 
-			// Out of range.  Determine how many "revolutions"
-			// we need to add.
-			float revolutions = Mathf.Floor((theta + Mathf.PI) * (1.0f / TWOPI));
+			// Out of range.  Determine how many "revolutions" we need to add.
+			float revolutions = Mathf.Floor((radians + Mathf.PI) * (1.0f / TWOPI));
 
 			// Subtract it off
-			theta -= revolutions * TWOPI;
+			radians -= revolutions * TWOPI;
 		}
 
-		return theta * Mathf.Rad2Deg;
+		return radians * Mathf.Rad2Deg;
 	}
 }
