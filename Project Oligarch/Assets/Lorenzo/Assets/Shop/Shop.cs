@@ -60,11 +60,12 @@ public class Shop : MonoBehaviour
         //GenerateShopPool();
 
         float off = 0;
+        Vector3 Offset;
         GameObject currStall;
         Instantiate(ShopStall, shopPosition, Quaternion.identity);
         for (int i = 0; i < shopSize; i++)
         {
-            Vector3 Offset = shopPosition + (transform.right * off);
+            Offset = shopPosition + (transform.right * off);
             currStall = Instantiate(ShopSection, Offset, Quaternion.identity);
             ObjSectionList[i] = currStall;
             off++;
