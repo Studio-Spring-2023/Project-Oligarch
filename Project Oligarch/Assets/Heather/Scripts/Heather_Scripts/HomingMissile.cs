@@ -12,6 +12,8 @@ public class HomingMissile : MonoBehaviour
     public Transform target;
     private Rigidbody rb;
     public FieldofView FOV;
+    public float Dam;
+    public float damagemod;
 
     //These are missile stats
     public float force;
@@ -40,7 +42,7 @@ public class HomingMissile : MonoBehaviour
         //This damages it's target before destroying itself
         if ( boom.collider.CompareTag ( "Enemy" ) )
         {
-            boom.collider.GetComponent<Enemy_health> ( ).LoseLife ( 5 );
+            boom.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam * (1 + damagemod));
             Destroy ( gameObject );
         }
         else

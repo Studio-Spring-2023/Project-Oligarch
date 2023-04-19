@@ -447,6 +447,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435943861}
   m_CullTransparentMesh: 1
+--- !u!114 &460112562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1239547619138709715, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1239547620875702711}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a537242a4036ca8478e91f7ddb4c99ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &464282880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -822,6 +834,121 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShopManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: RareItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: CommonItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d459d0f08d835a341b9b706f777be6b2,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 11f9e8fa47ac3f44990aef2fb8c03071,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b025fe47804981846b519a3699044024,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: db9202983cd52474ebf09e909fc22402,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: e2fe92e151ed709409db28ad8ad8753b,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 714f77246e467a141a588e629d7817c0,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: a9cdeb927d7029f4cad965d0b89954c8,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: c20db34548806a54a8c55bba79652967,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f6a6c77482d5544d9e838d3c31d3402,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e2a2fc1775a022408d5f3de046f79de,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: e31de31d49163434985dac30ac96e86b,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: d381c22870fa6de49b7055eadbaf52f7,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8731ac753716ca84f8be33d117c24e68,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a6580192ae4cf046b1cd72c6eece889,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: ShopList.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: c20db34548806a54a8c55bba79652967,
+        type: 2}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: UnCommonItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903567141805183985, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
+        type: 3}
+      propertyPath: LegendaryItems.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5850310006058128608, guid: 7659cf5d9ffb973488d4bbb1dbcb558e,
         type: 3}
@@ -2361,6 +2488,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519006131007072690, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 460112562}
     - target: {fileID: 519006131007072690, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
         type: 3}
       propertyPath: AttackPoint

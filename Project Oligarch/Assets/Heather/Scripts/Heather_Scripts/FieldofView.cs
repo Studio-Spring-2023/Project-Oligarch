@@ -6,9 +6,9 @@ using UnityEngine;
 public class FieldofView : MonoBehaviour
 {
     //These are for controlling the field of view
-    [Range ( 0 , 5 )]
+    [Range ( 0 , 20 )]
     public float viewRadius;
-    [Range ( 0 , 100 )]
+    [Range ( 0 , 180 )]
     public float viewAngle;
 
     //These are refrences for the missile
@@ -16,10 +16,29 @@ public class FieldofView : MonoBehaviour
     public GameObject HomingMissile;
     private HomingMissile missile;
     public GameObject missilePoint;
+    public float CoolDown;
+    private float startCD;
+    private bool fired;
+    public float CDRpercent;
+    public float CDRflat;
+    private float CDR;
 
+    private void Start()
+    {
+        startCD = CoolDown;
+    }
     private void Update ( )
     {
         MissileTargeting ( );
+        if(fired)
+        {
+            CoolDown -= Time.deltaTime;
+        }
+        if(CoolDown <= 0)
+        {
+            fired = false;
+            CoolDown = startCD;
+        }
     }
 
     public Vector3 DirFromAngle ( float angleInDegrees , bool angleIsGlobal )
@@ -48,13 +67,25 @@ public class FieldofView : MonoBehaviour
             {
                 float disToTarget = Vector3.Distance ( transform.position , target.position );
 
-                if ( disToTarget < 5 && Input.GetKeyDown ( KeyCode.Mouse1 ) )
+                if (disToTarget < 5 && Input.GetKeyDown(KeyCode.Mouse1) && !fired)
                 {
                     missile=GameObject.Instantiate ( HomingMissile, missilePoint.transform.position, Quaternion.identity ).GetComponent<HomingMissile>();
                     
                     missile.target = target.transform;
+
+                    StartCoroutine(CD());
                 }
             }
         }
+    }
+
+    IEnumerator CD()
+    {
+        fired = true;
+        CDR += CDRflat;
+        CDR += CoolDown * CDRpercent;
+        yield return new WaitForSeconds(CoolDown - CDR);
+        fired = false;
+        yield return null;
     }
 }

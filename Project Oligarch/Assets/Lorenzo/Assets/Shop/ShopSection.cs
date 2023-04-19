@@ -126,6 +126,7 @@ public class ShopSection : MonoBehaviour
     {
         if(money.Credits >= Price)
         {
+            ItemManager.Instance.AddItemToInventory(CurrItem.data);
             Destroy(Item);
             money.Credits -= Price;
         }

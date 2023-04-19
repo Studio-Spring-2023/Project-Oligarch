@@ -19,14 +19,5 @@ public class Gun : MonoBehaviour
     {
         
     }
-    
-    public void ShootBullet()
-    {
 
-    }
-
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(FirePoint.position , (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * 10f);
-    }
 }

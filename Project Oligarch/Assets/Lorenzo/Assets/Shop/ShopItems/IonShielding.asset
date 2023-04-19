@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ee37579fc152746be961c020f964c2, type: 3}
+  m_Name: IonShielding
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 4639085c7240f7c4d946d566030d23a2, type: 2}
+  rarity: 0
+  DisplayPrefab: {fileID: 5492167673043509786, guid: 6a2ce96b05bc9164fa469a85c9b3865a,
+    type: 3}
+  DisplayName: Ion Shielding
+  price: 345
+  Description: 

@@ -6,7 +6,8 @@ using UnityEngine;
 public class projectiles : MonoBehaviour
 {
     //These are the stats for the Gun
-    public int Dam;
+    public float Dam;
+    public float damagemod;
     private int BulletsToShoot;
     private int BulletsPerTap;
     private int BulletsLeft;
@@ -41,7 +42,7 @@ public class projectiles : MonoBehaviour
         bullets = GetComponent<LineRenderer> ( );
         player = GameObject.FindWithTag("Player").GetComponent<PlayerCore> ( );
         //This sets up the weapon so that the bullets are set so there will be a burst of 3 and it is ready to shoot and sets the range for the gun
-        BulletsToShoot = 3;
+        BulletsToShoot = 1;
         BulletsLeft=BulletsToShoot;
         BulletsPerTap = BulletsToShoot;
         //Range = 20;
@@ -102,13 +103,13 @@ public class projectiles : MonoBehaviour
             Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
-            Hit.collider.gameObject.GetComponent<Enemy_health>().LoseLife(Dam);  
+            Hit.collider.gameObject.GetComponent<Enemy_health>().LoseLife(Dam * (1 + damagemod ));  
             StartCoroutine ( ShotBullet ( ) );
         }
         else
         {
             
-            Vector3 temppos =(AttackPoint.position - (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * -Range);
+            Vector3 temppos =(AttackPoint.position - (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * - Range);
             bullets.SetPosition(1, temppos);
             StartCoroutine(ShotBullet());
 

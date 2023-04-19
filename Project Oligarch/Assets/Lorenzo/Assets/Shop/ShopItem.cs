@@ -12,6 +12,7 @@ public class ShopItem : ScriptableObject
         Rare,
         Legendary
     }
+    public ItemData data;
     public Rarity rarity;
     public GameObject DisplayPrefab;
     public string DisplayName;
