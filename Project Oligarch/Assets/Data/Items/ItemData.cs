@@ -50,7 +50,8 @@ public enum StatType
 public enum Multiplier
 {
 	Linear,
-	Exponential
+	Exponential,
+	Hyperbolic,
 }
 
 public enum Rarity
@@ -70,6 +71,6 @@ public class ItemData : ScriptableObject
 	public Rarity Rarity;
 	public StatType Modifier;
 	public float BaseStat;
-	public float SubsequentStat;
-	public Multiplier ItemStackMultiplier;
+	public float StackingStat;
+	public Multiplier Multiplier;
 }

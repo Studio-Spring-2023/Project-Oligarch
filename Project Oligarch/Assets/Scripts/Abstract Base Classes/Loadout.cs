@@ -17,7 +17,13 @@ public abstract class Loadout
         this.Player = Player;
     }
 
-    protected float PrimaryCooldown;
+	public float BaseAttackSpeed;
+    public float BaseDamage;
+	public float BaseHealth;
+	public int BaseJumpCharges;
+	public float BaseHealthRegen;
+
+	protected float PrimaryCooldown;
     protected float SeocndaryCooldown;
     protected float SpecialCooldown;
     protected float UltimateCooldown;

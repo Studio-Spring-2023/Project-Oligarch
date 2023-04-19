@@ -12,13 +12,22 @@ public class PlayerCore : Core
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
     private Vector3 Forward;
-	[Range(1f, 8f)]
+	private Vector3 Right;
+	[Range(1.25f, 2f)]
+	public float SprintMultiplier;
+	[Range(1f, 25f)]
 	public float JumpForce;
+	[Range(5f, 15f)]
+	public float AirStrafeSpeed;
 	public float GroundCheckDistance;
 	[Range(25f, 65f)]
 	public float MaxSlopeAngle;
 	public float SlopeCheckDistance;
 	private bool inAir;
+	private bool isSprinting;
+	private bool canJump;
+	private int jumpCharges;
+	private int maxJumps => (int)ItemManager.Instance.JumpChargeBonus + CurrentLoadout.BaseJumpCharges;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
 
@@ -49,12 +58,9 @@ public class PlayerCore : Core
 	[Header("Interact Variables")]
 	public float InterCheckMaxDistance;
 	public LayerMask Interactables;
-	
 
 	[Header("Crosshair Variables")]
 	public RectTransform Crosshair;
-
-	private bool jump;
 
 	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
@@ -65,23 +71,18 @@ public class PlayerCore : Core
 
     public void Awake()
     {
+		CurrentLoadout = AssignLoadout(LoadoutType.Ranger);
+
 		PlayerRB = GetComponent<Rigidbody>();
 
 		Transform = transform;
-
-        //Temporary to avoid Null Reference errors
-        CurrentLoadout = AssignLoadout(LoadoutType.Ranger);
-	}
-
-    private void Start()
-    {
-        
 	}
 
 	private void OnEnable()
 	{
 		InputHandler.OnJumpInput += AttemptJump;
 		InputHandler.OnInteractInput += Interact;
+		InputHandler.OnSprintInput += OnSprint;
 	}
 
 	private void Update()
@@ -90,32 +91,26 @@ public class PlayerCore : Core
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
 		pitch = Mathf.Clamp(pitch, -pitchClamp, pitchClamp);
 
-		Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-
 		Ray groundRay = new Ray(transform.position, Vector3.down);
 		
-		if (Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
+		if (Physics.Raycast(groundRay, GroundCheckDistance, Walkable) && !canJump)
 		{
+			jumpCharges = maxJumps;
+
 			inAir = false;
+
+			Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+			Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
 
 			//We do a different check for the slope since the character model might be slightly different and the collider may cause issues where the slope
 			if (Physics.Raycast(groundRay, out RaycastHit walkableHit, SlopeCheckDistance, Walkable))
 			{
 				float angle = Vector3.Angle(Vector3.up, walkableHit.normal);
 
-				if (angle > MaxSlopeAngle)
+				if (angle < MaxSlopeAngle)
 				{
-					//Cannot walk on this slope
-					Debug.Log("Is not Walkable Slope");
-					Debug.Log(angle);
-				}
-				else
-				{
-					//We can walk on this slope
-					Debug.Log("Is Walkable Slope");
-					Debug.Log(angle);
-
 					Forward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+					Right = Vector3.Cross(walkableHit.normal, Forward).normalized;
 				}
 			}
 		}
@@ -123,32 +118,54 @@ public class PlayerCore : Core
 		{
 			//We are floating, get on ground.
 			inAir = true;
+
+			Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+			Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
 		}
+	}
+
+	public void OnSprint()
+	{
+		isSprinting = !isSprinting;
 	}
 
 	public void AttemptJump()
 	{
-		if (!jump)
+		if (jumpCharges >= maxJumps)
 		{
-			jump = true;
+			jumpCharges--;
+
+			canJump = true;
 		}
 	}
 
 	private void FixedUpdate()
 	{
-		if (inAir)
+		if (!inAir)
 		{
-			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+			Velocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x);
+
+			if (isSprinting)
+				Velocity *= (MoveSpeed * SprintMultiplier);
+			else
+				Velocity *= MoveSpeed;
 		}
 		else
 		{
+			Vector3 flatVelocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * AirStrafeSpeed;
+			Velocity = new Vector3(flatVelocity.x, Velocity.y, flatVelocity.z);
+
 			Velocity += gravity;
 		}
 
-		if (jump)
+		if (canJump)
 		{
-			Velocity += Vector3.up * JumpForce;
-			jump = false;
+			if (isSprinting)
+				Velocity += Vector3.up * (JumpForce * SprintMultiplier);
+			else
+				Velocity += Vector3.up * JumpForce;
+
+			canJump = false;
 		}
 
 		//Lerp MoveSpeed based on Acceleration / Deceleration timers.
@@ -181,13 +198,9 @@ public class PlayerCore : Core
 		//if the character isnt in your view port, then that's a problem
 		Vector3 adjustedCameraAnchor = (dirFromCameraToCrosshair * 0.5f);
 		Ray hitRay = new Ray(rotatedCameraOffsetPos + adjustedCameraAnchor, -adjustedCameraAnchor.normalized);
-		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
-		{
-			//Debug.Log("Object Obstructing View");
-			Vector3 CameraCollisionOffset = CameraTransform.forward * CameraIntersetOffsetDistance;
 
+		if (Physics.Raycast(hitRay, out RaycastHit collidedObj, adjustedCameraAnchor.magnitude * CameraIntersectionCheckDistance))
 			CameraTransform.position = collidedObj.point + CameraCollisionOffset;
-		}
 
 		//Look in the direction of the crosshair
 		CameraTransform.rotation = Quaternion.LookRotation(dirFromCameraToCrosshair.normalized);
@@ -219,6 +232,7 @@ public class PlayerCore : Core
 	{
 		InputHandler.OnJumpInput -= AttemptJump;
 		InputHandler.OnInteractInput -= Interact;
+		InputHandler.OnSprintInput -= OnSprint;
 	}
 
 	//Temporary for Debug Display of Abilities
@@ -241,9 +255,11 @@ public class PlayerCore : Core
 			if (angle < MaxSlopeAngle)
 			{
 				Vector3 SlopedForward = Vector3.Cross(transform.right, walkableHit.normal).normalized;
+				Vector3 SlopedRight = Vector3.Cross(walkableHit.normal, SlopedForward).normalized;
 
 				Gizmos.color = Color.green;
 				Gizmos.DrawRay(transform.position, SlopedForward);
+				Gizmos.DrawRay(transform.position, SlopedRight);
 			}
 		}
 

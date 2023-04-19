@@ -204,9 +204,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 10
   Health: 100
+  SprintMultiplier: 1.25
   JumpForce: 8
+  AirStrafeSpeed: 8
   GroundCheckDistance: 1.08
-  MaxSlopeAngle: 25
+  MaxSlopeAngle: 40
+  SlopeCheckDistance: 1.25
   PlayerBody: {fileID: 1239547620105552869}
   CameraTransform: {fileID: 0}
   CameraAnchorVerticalOffset: 1.4

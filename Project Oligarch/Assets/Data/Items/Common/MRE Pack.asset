@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42707df1bbdb72e4ba866d853b4e4549, type: 3}
   m_Name: MRE Pack
   m_EditorClassIdentifier: 
-  ItemName: MRE Pack
+  ItemName: 0
   Type: 1
+  Rarity: 0
   Modifier: 1
   BaseStat: 3
-  SubsequentStat: 2
-  ItemStackMultiplier: 0
+  StackingStat: 2
+  Multiplier: 0

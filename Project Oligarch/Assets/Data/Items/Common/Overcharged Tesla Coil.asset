@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: 12
   Type: 1
-  Modifier: 512
+  Rarity: 0
+  Modifier: 256
   BaseStat: 10
-  SubsequentStat: 10
-  ItemStackMultiplier: 0
+  StackingStat: 10
+  Multiplier: 0

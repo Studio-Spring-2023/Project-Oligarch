@@ -4,8 +4,12 @@ public class RangerLoadout : Loadout
 {
     public RangerLoadout(PlayerCore Player) : base(Player)
     {
-        
-    }
+		BaseAttackSpeed = 2;
+        BaseDamage = 1;
+		BaseHealth = 25;
+		BaseJumpCharges = 1;
+		BaseHealthRegen = 5;
+	}
 
     public override void Primary()
     {

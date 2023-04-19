@@ -44,6 +44,7 @@ public class InputHandler
 
     #region Events
     public static Action OnJumpInput;
+	public static Action OnSprintInput;
 	public static Action OnInteractInput;
 	#endregion
 
@@ -74,9 +75,10 @@ public class InputHandler
 
         MovementControls.Walk.performed += CacheMovementInput;
         MovementControls.Walk.canceled += ClearMovementInput;
-        MovementControls.Jump.performed += CacheJumpInput;
+        MovementControls.Jump.performed += JumpInput;
+		MovementControls.Sprint.performed += SprintInput;
 
-        InteractControls.Interact.performed += ReceivedInteractInput;
+		InteractControls.Interact.performed += ReceivedInteractInput;
 
         AbilityControls.Primary.performed += PrimaryAbilityInput;
         AbilityControls.Secondary.performed += SecondaryAbilityInput;
@@ -126,14 +128,19 @@ public class InputHandler
         MovementInput = Vector2.zero;
     }
 
-    private void CacheJumpInput(InputAction.CallbackContext ctx)
+    private void JumpInput(InputAction.CallbackContext ctx)
     {
         OnJumpInput?.Invoke();
 	}
-    #endregion
 
-    #region Interact Controls
-    private void ReceivedInteractInput(InputAction.CallbackContext ctx)
+	private void SprintInput(InputAction.CallbackContext ctx)
+	{
+		OnSprintInput?.Invoke();
+	}
+	#endregion
+
+	#region Interact Controls
+	private void ReceivedInteractInput(InputAction.CallbackContext ctx)
     {
 		OnInteractInput?.Invoke();
 	}
@@ -210,9 +217,10 @@ public class InputHandler
 
         MovementControls.Walk.performed -= CacheMovementInput;
         MovementControls.Walk.canceled -= ClearMovementInput;
-        MovementControls.Jump.performed -= CacheJumpInput;
+        MovementControls.Jump.performed -= JumpInput;
+		MovementControls.Sprint.performed -= SprintInput;
 
-        CameraControls.MouseDelta.performed -= CacheMouseDelta;
+		CameraControls.MouseDelta.performed -= CacheMouseDelta;
         CameraControls.MousePos.performed -= CacheMouseScreenPos;
         CameraControls.MouseScroll.performed -= CacheMouseScroll;
 

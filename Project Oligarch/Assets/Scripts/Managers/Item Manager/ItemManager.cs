@@ -1,8 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using UnityEditor.AddressableAssets.BuildReportVisualizer;
 using UnityEngine;
+
+public struct ItemInfo
+{
+	public Item type;
+	public Multiplier scaling;
+}
 
 public class ItemManager : MonoBehaviour
 {
@@ -13,131 +16,201 @@ public class ItemManager : MonoBehaviour
 	public ItemData[] RareItems;
 	public ItemData[] LegendaryItems;
 
-	private Dictionary<Item, int> PlayerInventory;
+	private Dictionary<ItemData, int> PlayerInventory;
 
 	[Header("Stat Modifiers")]
-	public float AttackSpeed;
-	public float FlatHealth;
-	public float PercentHealth;
-	public float PercentMovespeed;
-	public float JumpCharge;
-	public float HealthRegen;
-	public float FlatMitigation;
-	public float PercentMitigation;
-	public float PercentMaxShield;
+	public float PercentAttackSpeedBonus;
+	public float PercentDamageBonus;
+	public float PercentLifeSteal;
+	public float FlatHealthBonus;
+	public float PercentHealthBonus;
+	public float PercentMovespeedBonus;
+	public float JumpChargeBonus;
+	public float HealthRegenBonus;
+	public float FlatDamageMitigation;
+	public float PercentMitigationChance;
 	public float FlatMaxShield;
-	public float PercentCooldown;
-	public float FlatCooldown;
+	public float PercentMaxShieldBonus;
+	public float FlatCooldownReduction;
+	public float PercentCooldownReduction;
 
 	private void Awake()
 	{
 		Instance = this;
 
-		ResetInventory();
+		PlayerInventory = new Dictionary<ItemData, int>();
 
-		PrintInventory();
+		ResetInventory();
 	}
 
 	#region Inventory Helper Functions
-	public bool AddItemToInventory(Item itemToAdd)
+	public bool AddItemToInventory(ItemData itemToAdd)
 	{
 		PlayerInventory[itemToAdd] += 1;
-		RefreshStatModifier(itemToAdd);
+		Debug.Log($"<color=green>[ItemManager]</color>: Successfully added {itemToAdd.ItemName}.");
+		CalculateModifiers(itemToAdd);
+
+		//Debug.Log(PrintInventory());
 
 		return true;
 	}
 
-	public bool RemoveItemFromInventory(Item itemToRemove)
+	public bool RemoveItemFromInventory(ItemData itemToRemove)
 	{
 		if (PlayerInventory[itemToRemove] == 0)
 		{
-			Debug.Log("<color=red[ItemManager]</color>: Tried to remove an item when you had none in the first place.");
+			Debug.Log("<color=red>[ItemManager]</color>: Tried to remove an item when you had none in the first place.");
 			return false;
 		}
 		else
 		{
+			Debug.Log($"<color=green>[ItemManager]</color>: Successfully removed {itemToRemove.ItemName}.");
 			PlayerInventory[itemToRemove] -= 1;
-			RefreshStatModifier(itemToRemove);
+			CalculateModifiers(itemToRemove);
 		}
+
+		//Debug.Log(PrintInventory());
 
 		return true;
 	}
 
-	public void RefreshStatModifier(Item itemToRefresh)
+	private float GetStatModifier(ItemData itemToRefresh)
 	{
-		switch (itemToRefresh)
+		if (PlayerInventory[itemToRefresh] == 0)
+			return 0;
+
+		if (PlayerInventory[itemToRefresh] == 1)
+			return itemToRefresh.BaseStat;
+
+		switch (itemToRefresh.Multiplier)
 		{
-			case Item.Adrenaline:
+			case Multiplier.Linear:
+				return itemToRefresh.BaseStat + (itemToRefresh.StackingStat * PlayerInventory[itemToRefresh]);
+
+			case Multiplier.Exponential:
+				return itemToRefresh.BaseStat + (Mathf.Pow(1 + itemToRefresh.StackingStat, PlayerInventory[itemToRefresh] - 1) - 1);
+
+			case Multiplier.Hyperbolic:
+				Debug.Log("Hyperbolic not implemented");
+				return 0;
+
+			default:
+				Debug.Log($"<color=red>[ItemManager]</color>: Reached default case when trying to refresh item modifiers. What type of multiplier did you pass?");
+				return 0;
+		}
+	}
+
+	private void CalculateModifiers(ItemData itemToCalculate)
+	{
+		float totalModifier = 0;
+
+		foreach (KeyValuePair<ItemData, int> item in PlayerInventory)
+			if (item.Key.Modifier == itemToCalculate.Modifier)
+				totalModifier += GetStatModifier(item.Key);
+
+		switch (itemToCalculate.Modifier)
+		{
+			case StatType.AttackSpeed:
+				PercentAttackSpeedBonus = (1 + totalModifier);
 				break;
 
-			case Item.ArmorPlating:
+			case StatType.Damage:
+				PercentDamageBonus = (1 + totalModifier);
 				break;
 
-			case Item.Bandoiler:
+			case StatType.FlatCooldown:
+				FlatCooldownReduction = totalModifier;
 				break;
 
-			case Item.Cleaver:
+			case StatType.PercentCooldown:
+				PercentCooldownReduction = (1 + totalModifier);
 				break;
 
-			case Item.HiddenKnife:
+			case StatType.FlatMaxShield:
+				FlatMaxShield = totalModifier;
 				break;
 
-			case Item.IonShielding:
+			case StatType.PercentMaxShield:
+				PercentMaxShieldBonus = (1 + totalModifier);
 				break;
 
-			case Item.Medkit:
+			case StatType.FlatMitigation:
+				FlatDamageMitigation = totalModifier;
 				break;
 
-			case Item.MRE:
+			case StatType.PercentMitigation:
+				PercentMitigationChance = (1 + totalModifier);
 				break;
 
-			case Item.Soda:
+			case StatType.HealthRegen:
+				HealthRegenBonus = totalModifier;
 				break;
 
-			case Item.SteelBoots:
+			case StatType.JumpCharge:
+				JumpChargeBonus = totalModifier;
 				break;
 
-			case Item.Supercharger:
+			case StatType.MaxHealthFlat:
+				FlatHealthBonus = totalModifier;
 				break;
 
-			case Item.SyntheticWeave:
+			case StatType.MaxHealthPercent:
+				PercentHealthBonus = (1 + totalModifier);
 				break;
 
-			case Item.TacGloves:
+			case StatType.MovementSpeed:
+				PercentMovespeedBonus = (1 + totalModifier);
 				break;
 
-			case Item.TeslaCoil:
-				break;
-
-			case Item.ThrusterPack:
-				break;
-
-			case Item.Trinket:
+			case StatType.PercentLifeSteal:
+				PercentLifeSteal = totalModifier;
 				break;
 
 			default:
-				Debug.Log($"<color=red>[ItemManager]</color>: Reached default case when trying to refresh item modifiers. Did you pass the wrong integer?");
 				break;
-		}		
+		}
+
+		Debug.Log($"<color=orange>[ItemManager]</color>: Updated item modifiers based on {itemToCalculate.ItemName}.");
+		//Debug.Log(PrintModifiers());
 	}
 
 	public void ResetInventory()
 	{
 		PlayerInventory.Clear();
 
-		for (int i = 0; i < (int)Item.Max; i++)
-			PlayerInventory.Add((Item)i, 0);
+		for (int i = 0; i < CommonItems.Length; i++)
+			PlayerInventory.Add(CommonItems[i], 0);
+
+		for (int i = 0; i < UncommonItems.Length; i++)
+			PlayerInventory.Add(UncommonItems[i], 0);
+
+		for (int i = 0; i < RareItems.Length; i++)
+			PlayerInventory.Add(RareItems[i], 0);
+
+		for (int i = 0; i < LegendaryItems.Length; i++)
+			PlayerInventory.Add(LegendaryItems[i], 0);
+
+		Debug.Log("<color=red>[Reset Inventory]</color>: " + PrintInventory());
 	}
 
-	public void PrintInventory()
+	public string PrintInventory()
 	{
 		string s = "";
-		foreach (KeyValuePair<Item, int> item in PlayerInventory)
+		foreach (KeyValuePair<ItemData, int> item in PlayerInventory)
 		{
-			s += $"{item.Key}: {item.Value}; ";
+			s += $"{item.Key.ItemName}: {item.Value}; ";
 		}
 
-		Debug.Log(s);
+		return s;
+	}
+
+	public string PrintModifiers()
+	{
+		return $"PercentAttackSpeedBonus: {PercentAttackSpeedBonus}; PercentDamageBonus: {PercentDamageBonus}; PercentLifeSteal: {PercentLifeSteal}; " +
+			$"FlatHealthBonus: {FlatHealthBonus}; PercentHealthBonus: {PercentHealthBonus}; PercentMovespeedBonus: {PercentMovespeedBonus}; " +
+			$"JumpChargeBonus: {JumpChargeBonus}; HealthRegenBonus: {HealthRegenBonus}; FlatDamageMitigation: {FlatDamageMitigation}; " +
+			$"PercentMitigationChance: {PercentMitigationChance}; FlatMaxShield: {FlatMaxShield}; PercentMaxShieldBonus: {PercentMaxShieldBonus}; " +
+			$"FlatCooldownReduction: {FlatCooldownReduction}; PercentCooldownReduction: {PercentCooldownReduction};";
 	}
 	#endregion
 

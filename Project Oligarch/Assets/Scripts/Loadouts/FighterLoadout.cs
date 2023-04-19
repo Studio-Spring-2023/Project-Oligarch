@@ -6,8 +6,11 @@ public class FighterLoadout : Loadout
 {
     public FighterLoadout(PlayerCore Player) : base(Player)
     {
-
-    }
+        BaseAttackSpeed = 2;
+        BaseHealth = 25;
+		BaseJumpCharges = 1;
+		BaseHealthRegen = 5;
+	}
 
     public override void Primary()
     {
