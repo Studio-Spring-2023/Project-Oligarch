@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4278149628457139053}
   m_Layer: 9
   m_Name: Humanoid Ranged Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 2
   currentHealth: 0
 --- !u!136 &4278149628457139053
 CapsuleCollider:
