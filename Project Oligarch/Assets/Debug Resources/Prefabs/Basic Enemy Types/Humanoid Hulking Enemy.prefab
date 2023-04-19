@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3804066309031672931}
   - component: {fileID: 2794123724362711954}
   - component: {fileID: 2605172722446784774}
+  - component: {fileID: 8377196324282257083}
   m_Layer: 9
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +108,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8377196324282257083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426093898769420577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  currentHealth: 0
 --- !u!1 &7287250766469212037
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +133,7 @@ GameObject:
   - component: {fileID: 4531406069368129891}
   - component: {fileID: 3282270679915276905}
   - component: {fileID: 8816578722606451079}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Humanoid Hulking Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,12 +190,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7946d455f02b7654183d09e196a915c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
-  Health: 0
+  MoveSpeed: 2.5
+  Health: 49
   Damage: 0
-  MaxMovementOffset: 0
+  MaxMovementOffset: 3.5
   MinMovementOffset: 0
   attackHitBox:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: 1, z: 2.08}
+    m_Extent: {x: 0.94, y: 1.4, z: 1}
+  ThrowStrength: 15
+  ThrowableCheckRadius: 9.64
+  ThrowablePos: {x: 0, y: 4, z: 0}
   rotationStep: 0

@@ -14,13 +14,14 @@ GameObject:
   - component: {fileID: 1709918479857849776}
   - component: {fileID: 8514406429616735542}
   - component: {fileID: 3708986001538678712}
+  - component: {fileID: 2878319626188384480}
   m_Layer: 9
   m_Name: Humanoid Melee Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &740292526868094466
 Transform:
   m_ObjectHideFlags: 0
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4694445979816320639
 MeshFilter:
@@ -152,3 +153,17 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0.25, z: 1.2}
     m_Extent: {x: 0.65, y: 0.65, z: 0.7}
   rotationStep: 0.69
+--- !u!114 &2878319626188384480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705223805051777721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
