@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: MRE Pack
   price: 787
-  Description: 
+  Description: Increases the player health regen by 3HP/second

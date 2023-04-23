@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Lucky Trinket
   price: 554
-  Description: 
+  Description: +5% to Player Mitigation Chance

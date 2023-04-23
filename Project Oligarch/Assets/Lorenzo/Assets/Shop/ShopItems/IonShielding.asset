@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Ion Shielding
   price: 345
-  Description: 
+  Description: +5 Max Shield HP and +10 Max HP

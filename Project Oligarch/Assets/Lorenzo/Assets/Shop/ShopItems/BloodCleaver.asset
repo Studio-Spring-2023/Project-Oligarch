@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Blood Cleaver
   price: 3
-  Description: 
+  Description: Killing an enemy heals 10 HP plus 5% max health of the enemy

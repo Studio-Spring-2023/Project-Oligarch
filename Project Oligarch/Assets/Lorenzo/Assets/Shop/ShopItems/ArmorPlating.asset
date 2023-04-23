@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: armor plating
   price: 123
-  Description: 
+  Description: -5 All incoming damage

@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Overcharged tesla
   price: 98
-  Description: 
+  Description: +10 Max Shields HP. 10% More damage dealt when shields are up

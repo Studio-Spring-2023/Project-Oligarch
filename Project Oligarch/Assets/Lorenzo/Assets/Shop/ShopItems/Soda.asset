@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Soda
   price: 89
-  Description: 
+  Description: Reduces Ability Cooldown by 20%

@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   DisplayName: Adrenaline
   price: 12
-  Description: asdf
+  Description: +5% Movement Speed
