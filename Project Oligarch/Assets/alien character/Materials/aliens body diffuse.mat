@@ -46,17 +46,17 @@ Material:
     - _Glossiness: 2.78
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RimAmount: 7.56
-    - _RimThreshhold: -25.1
+    - _RimAmount: 79.07
+    - _RimThreshhold: -5.37
     - _Shininess: 0.3435202
     - _dither: 0.5
     m_Colors:
-    - _AmbientColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0}
+    - _AmbientColor: {r: 0.12660906, g: 0.3679245, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 0}
+    - _RimColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0}
     - _SpecColor: {r: 0.2205882, g: 0.2205882, b: 0.2205882, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SpecularColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1102296088383782757
 MonoBehaviour:

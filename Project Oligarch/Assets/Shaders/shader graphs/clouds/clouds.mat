@@ -38,7 +38,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _cloud_height: 1.01
-    - _cloud_power: 2.44
+    - _cloud_power: 3.51
     - _cloud_scale: 64.77
     - _cloud_transparency: 0.56
     m_Colors:

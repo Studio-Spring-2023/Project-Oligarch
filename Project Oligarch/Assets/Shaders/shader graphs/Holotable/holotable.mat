@@ -53,11 +53,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Density: 0.95
+    - _Fresnel_Strength: 5.72
     - _Hologram_Tiling: 67.46
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll_Speed: 0.5
-    - _ambient_occlusion: 0.593
+    - _ambient_occlusion: 0
     - _angle_offset: 3.63
     - _dither: 0.39
     - _smoothness: 0

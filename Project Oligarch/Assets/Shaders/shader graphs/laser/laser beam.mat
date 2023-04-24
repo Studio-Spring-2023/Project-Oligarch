@@ -57,11 +57,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dither: 1.085
+    - _Fresnel_Strength: 9.65
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0
-    - _multiply_emission: 0.43
-    - _saturation: 4
+    - _Smoothness: 0.488
+    - _multiply_emission: 3.59
+    - _saturation: 4.11
     m_Colors:
     - _Laser_Color: {r: 0.6698113, g: 0.034122407, b: 0.034122407, a: 0}
     - _fresnel_color: {r: 56.218662, g: 20.285084, b: 0.883014, a: 0}
