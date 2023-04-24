@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 5778793856270576642, guid: fc8a3dcf67dea3c4691181d399e82140,
     type: 3}
   DisplayName: Lucky Trinket
-  price: 554
-  Description: +5% to Player Mitigation Chance
+  price: 50
+  Description: Increase Mitigation Chance by 5%

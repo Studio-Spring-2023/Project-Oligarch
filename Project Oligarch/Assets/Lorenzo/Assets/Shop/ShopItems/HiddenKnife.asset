@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 919132149155446097, guid: 34d91d1baa1a17548b161c557e614e67,
     type: 3}
   DisplayName: Hidden Knife
-  price: 45
-  Description: Each attack reduces secondary and special attack cooldown by 0.5 seconds
+  price: 50
+  Description: Each attack reduces secondary and special attack cooldown by 0.5s

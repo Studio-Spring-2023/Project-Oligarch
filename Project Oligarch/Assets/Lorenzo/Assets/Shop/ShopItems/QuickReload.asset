@@ -16,6 +16,6 @@ MonoBehaviour:
   rarity: 0
   DisplayPrefab: {fileID: 8269756622731048974, guid: e84577c7117e3244ab74d17866eeeafe,
     type: 3}
-  DisplayName: Quick Reload
-  price: 890
-  Description: +15% Attack Speed Increase
+  DisplayName: Quick Reload Bandolier
+  price: 50
+  Description: +15% Attack Speed

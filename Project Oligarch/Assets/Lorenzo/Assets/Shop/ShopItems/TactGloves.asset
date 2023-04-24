@@ -16,6 +16,6 @@ MonoBehaviour:
   rarity: 0
   DisplayPrefab: {fileID: 2544711566124356543, guid: f743e6068f05dbe41b83b8fe5e2cf99a,
     type: 3}
-  DisplayName: Tacticle Gloves
-  price: 9
-  Description: Increase Attack Speed by 10%
+  DisplayName: Tactical Gloves
+  price: 50
+  Description: +10% Attack Speed

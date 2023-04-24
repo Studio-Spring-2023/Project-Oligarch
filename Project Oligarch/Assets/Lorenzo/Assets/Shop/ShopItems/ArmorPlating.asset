@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ArmorPlating
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 47ad078668a348a45a0a52fce152df8a, type: 2}
-  rarity: 1
+  rarity: 0
   DisplayPrefab: {fileID: 5492167673043509786, guid: 6a2ce96b05bc9164fa469a85c9b3865a,
     type: 3}
-  DisplayName: armor plating
-  price: 123
-  Description: -5 All incoming damage
+  DisplayName: Armor Plating
+  price: 50
+  Description: Reduce all incoming damage by 5

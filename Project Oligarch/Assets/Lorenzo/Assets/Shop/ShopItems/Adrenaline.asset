@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 6284427928675920144, guid: a54854d3dcf4b1844a7b2d55e16b4c59,
     type: 3}
   DisplayName: Adrenaline
-  price: 12
-  Description: +5% Movement Speed
+  price: 50
+  Description: +5% Movement Speed and +5% Attack Speed

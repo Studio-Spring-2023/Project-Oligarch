@@ -16,6 +16,7 @@ MonoBehaviour:
   rarity: 0
   DisplayPrefab: {fileID: 1148705960293882855, guid: 2fb3f3c1e5fef134a8d2693b14f6a096,
     type: 3}
-  DisplayName: Overcharged tesla
-  price: 98
-  Description: +10 Max Shields HP. 10% More damage dealt when shields are up
+  DisplayName: Overcharged Tesla Coil
+  price: 50
+  Description: +10 Max Shields HP. Player deals 10% more damage when shields are
+    up

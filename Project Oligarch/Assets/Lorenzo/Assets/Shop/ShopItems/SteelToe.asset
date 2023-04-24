@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 2544711566124356543, guid: f743e6068f05dbe41b83b8fe5e2cf99a,
     type: 3}
   DisplayName: Steel Toed Boot
-  price: 123
-  Description: 10% Increase to Player Movement Speed
+  price: 50
+  Description: 10% Movement Speed

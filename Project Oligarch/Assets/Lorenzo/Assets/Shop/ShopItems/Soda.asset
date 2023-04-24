@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 2835248580535660352, guid: c8228b6035557b240b1341a9fdc2fa71,
     type: 3}
   DisplayName: Soda
-  price: 89
+  price: 90
   Description: Reduces Ability Cooldown by 20%

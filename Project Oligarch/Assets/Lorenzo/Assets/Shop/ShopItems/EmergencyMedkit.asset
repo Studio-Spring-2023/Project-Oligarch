@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: EmergencyMedkit
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c2997b45c6cd81b41a312d7e712f99c2, type: 2}
-  rarity: 3
+  rarity: 0
   DisplayPrefab: {fileID: 7364750677779952624, guid: 711ecb242edc0ff469299078d9bbc723,
     type: 3}
   DisplayName: Emergency Medkit
-  price: 300
-  Description: Regenerate health at 30 HP per second (after 5 seconds of not being
-    hit)
+  price: 50
+  Description: +20 Max HP

@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 5753574309039923486, guid: 538477c492a37ae4bbb6c02f252e879d,
     type: 3}
   DisplayName: Synthetic Weave
-  price: 456
-  Description: 10% Increase to Player's Max Health
+  price: 50
+  Description: +10% Max Health

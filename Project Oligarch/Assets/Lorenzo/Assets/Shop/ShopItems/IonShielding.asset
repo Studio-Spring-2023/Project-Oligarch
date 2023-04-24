@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 5492167673043509786, guid: 6a2ce96b05bc9164fa469a85c9b3865a,
     type: 3}
   DisplayName: Ion Shielding
-  price: 345
-  Description: +5 Max Shield HP and +10 Max HP
+  price: 50
+  Description: +5 Max Shield and +10 Max HP

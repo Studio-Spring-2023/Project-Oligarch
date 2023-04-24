@@ -17,5 +17,5 @@ MonoBehaviour:
   DisplayPrefab: {fileID: 7364750677779952624, guid: 711ecb242edc0ff469299078d9bbc723,
     type: 3}
   DisplayName: MRE Pack
-  price: 787
-  Description: Increases the player health regen by 3HP/second
+  price: 50
+  Description: Increases health regen by 3HP/second

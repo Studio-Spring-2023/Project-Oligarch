@@ -16,6 +16,6 @@ MonoBehaviour:
   rarity: 2
   DisplayPrefab: {fileID: 6284427928675920144, guid: a54854d3dcf4b1844a7b2d55e16b4c59,
     type: 3}
-  DisplayName: Blood Cleaver
-  price: 3
-  Description: Killing an enemy heals 10 HP plus 5% max health of the enemy
+  DisplayName: Bloodthirsty Cleaver
+  price: 90
+  Description: Killing an enemy heals 10 HP plus enemy's 5% max health
