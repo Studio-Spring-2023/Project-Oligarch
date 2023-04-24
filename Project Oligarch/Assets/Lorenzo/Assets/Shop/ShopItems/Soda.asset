@@ -16,6 +16,6 @@ MonoBehaviour:
   rarity: 0
   DisplayPrefab: {fileID: 2835248580535660352, guid: c8228b6035557b240b1341a9fdc2fa71,
     type: 3}
-  DisplayName: Soda
+  DisplayName: Exotipop
   price: 90
   Description: Reduces Ability Cooldown by 20%

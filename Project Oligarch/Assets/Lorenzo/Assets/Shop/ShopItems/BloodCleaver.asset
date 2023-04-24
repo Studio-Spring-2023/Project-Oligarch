@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 43cb7db08db38034992ff93984892dde, type: 2}
   rarity: 2
-  DisplayPrefab: {fileID: 6284427928675920144, guid: a54854d3dcf4b1844a7b2d55e16b4c59,
+  DisplayPrefab: {fileID: 3787607978784397391, guid: 7a8800e36615b444fab2e69e5d19ed54,
     type: 3}
   DisplayName: Bloodthirsty Cleaver
   price: 90
