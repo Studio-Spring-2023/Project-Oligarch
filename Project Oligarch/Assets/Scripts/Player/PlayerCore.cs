@@ -84,7 +84,8 @@ public class PlayerCore : Core
 
     private void Start()
     {
-        
+		SprintSpeed *= MoveSpeed;
+		StartSpeed = MoveSpeed;
 	}
 
 	private void OnEnable()
@@ -125,13 +126,13 @@ public class PlayerCore : Core
 		{
 			StartCoroutine(SlideFunc());
 		}
-		if(Input.GetButtonDown("Sprint"))
+		if(Input.GetButtonDown("Sprint") && ydirection > 0)
 		{
-			MoveSpeed *= SprintSpeed;
+			MoveSpeed = SprintSpeed;
 		}
 		else if(Input.GetButtonUp("Sprint"))
 		{
-			MoveSpeed /= SprintSpeed;
+			MoveSpeed = StartSpeed;
 		}
 	}
 

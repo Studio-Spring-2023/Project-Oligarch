@@ -22,7 +22,7 @@ public class PointOfIntrest : MonoBehaviour
         {
             StartEncounter();
         }
-        if(spawnenemies.Finish == true)
+        if(spawnenemies.Finish == true && startedPOI)
         {
             CalcReward();
         }
@@ -46,10 +46,11 @@ public class PointOfIntrest : MonoBehaviour
 
     private void CalcReward()
     {
+        spawnenemies.Finish = false;
         int randIndex = Random.Range(0, 100);
         if(randIndex <= 50)
         {
-            Debug.Log("SpawnShop");
+            shop.GenerateShop(transform.position, 3);
         }
         else if (randIndex > 50)
         {
