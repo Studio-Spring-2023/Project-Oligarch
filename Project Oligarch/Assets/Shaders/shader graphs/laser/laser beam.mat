@@ -56,14 +56,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dither: 1.085
-    - _Fresnel_Strength: 9.65
+    - _Dither: 1.043
+    - _Fresnel_Strength: 14.6
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.488
-    - _multiply_emission: 3.59
-    - _saturation: 4.11
+    - _multiply_emission: 62
+    - _saturation: 6.12
     m_Colors:
-    - _Laser_Color: {r: 0.6698113, g: 0.034122407, b: 0.034122407, a: 0}
-    - _fresnel_color: {r: 56.218662, g: 20.285084, b: 0.883014, a: 0}
+    - _Laser_Color: {r: 1, g: 0.33406883, b: 0, a: 0}
+    - _fresnel_color: {r: 3.9533494, g: 2.5665724, b: 0, a: 0}
   m_BuildTextureStacks: []
