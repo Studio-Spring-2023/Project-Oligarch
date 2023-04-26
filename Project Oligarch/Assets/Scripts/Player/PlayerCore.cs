@@ -20,7 +20,7 @@ public class PlayerCore : Core
 	private Vector3 Velocity;
     private Vector3 Forward;
 	private Vector3 temp;
-	[Range(1f, 8f)]
+	[Range(1f, 20f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
 	private bool grounded;
@@ -124,6 +124,14 @@ public class PlayerCore : Core
 		if(Input.GetButtonDown("Ability1") && canSlide)
 		{
 			StartCoroutine(SlideFunc());
+		}
+		if(Input.GetButtonDown("Sprint"))
+		{
+			MoveSpeed *= 1.5f;
+		}
+		else if(Input.GetButtonUp("Sprint"))
+		{
+			MoveSpeed /= 1.5f;
 		}
 	}
 
