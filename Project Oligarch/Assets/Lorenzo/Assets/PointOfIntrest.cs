@@ -7,6 +7,8 @@ public class PointOfIntrest : MonoBehaviour
     public float Range;
     private Transform Playertrans;
     private Shop shop;
+    public SpawnEnemies spawnenemies;
+    private bool startedPOI = false;
     void Start()
     {
         Playertrans = GameObject.FindWithTag("Player").transform;
@@ -16,7 +18,14 @@ public class PointOfIntrest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(InRange());
+        if(InRange() && !startedPOI)
+        {
+            StartEncounter();
+        }
+        if(spawnenemies.Finish == true)
+        {
+            CalcReward();
+        }
     }
 
     private bool InRange()
@@ -31,7 +40,8 @@ public class PointOfIntrest : MonoBehaviour
 
     private void StartEncounter()
     {
-
+        startedPOI = true;
+        spawnenemies.SpawnEnemiesFunc();
     }
 
     private void CalcReward()
