@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnEnemies : MonoBehaviour
 {
     public List<GameObject> enemies = new List<GameObject>();
-    private bool started;
-    [HideInInspector]
+    [SerializeField] bool started;
+   // [HideInInspector]
     public bool Finish = false;
     void Start()
     {
@@ -20,7 +20,14 @@ public class SpawnEnemies : MonoBehaviour
     {
         if(!Finish && started)
         {
-            if(enemies.Count >= 0)
+            foreach (GameObject enemy in enemies)
+            {
+                if(enemy == null)
+                {
+                    enemies.Remove(enemy);
+                }
+            }
+            if(enemies.Count <= 0)
               {
                   Finish = true;
               }
