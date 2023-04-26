@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: cf74618d40f94104ea9e2acc9e8ad978, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 2835248580535660352, guid: c8228b6035557b240b1341a9fdc2fa71,
+  DisplayPrefab: {fileID: 726067311802020593, guid: d822cc8b041792b4f90b8751054fdf95,
     type: 3}
   DisplayName: Exotipop
   price: 90
