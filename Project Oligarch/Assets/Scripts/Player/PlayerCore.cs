@@ -125,6 +125,14 @@ public class PlayerCore : Core
 		{
 			StartCoroutine(SlideFunc());
 		}
+		if(Input.GetButtonDown("Sprint"))
+		{
+			MoveSpeed *= 1.5f;
+		}
+		else if(Input.GetButtonUp("Sprint"))
+		{
+			MoveSpeed /= 1.5f;
+		}
 	}
 
 	public void AttemptJump()
