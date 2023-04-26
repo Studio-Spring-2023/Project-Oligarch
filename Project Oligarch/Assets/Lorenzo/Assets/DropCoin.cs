@@ -8,9 +8,10 @@ public class DropCoin : MonoBehaviour
     public float Force;
 
     // Update is called once per frame
-    void Coin()
+    public void Coin(int amount)
     {
-        Instantiate(CoinObj, transform.position, Quaternion.identity);
+        GameObject coin = Instantiate(CoinObj, transform.position, Quaternion.identity);
+        coin.GetComponent<Coin>().worth = amount;
         CoinObj.GetComponent<Rigidbody>().AddForce(transform.up * Force);
     }
 }

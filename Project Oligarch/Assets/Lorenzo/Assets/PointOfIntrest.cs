@@ -8,11 +8,13 @@ public class PointOfIntrest : MonoBehaviour
     private Transform Playertrans;
     private Shop shop;
     public SpawnEnemies spawnenemies;
+    private DropCoin coin;
     private bool startedPOI = false;
     void Start()
     {
         Playertrans = GameObject.FindWithTag("Player").transform;
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
+        coin = GameObject.FindWithTag("Manager").GetComponent<DropCoin>();
     }
 
     // Update is called once per frame
@@ -61,7 +63,15 @@ public class PointOfIntrest : MonoBehaviour
 
     private void AltReward()
     {
-        Debug.Log("randomly choose a reward");
+        int randIndex = Random.Range(0, 100);
+        if(randIndex <= 40)
+        {
+            coin.Coin(50);
+        }
+        else if( randIndex > 40)
+        {
+            Debug.Log("Spawn Item");
+        }
     }
 
 

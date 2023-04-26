@@ -28,9 +28,10 @@ public class HumanoidSimpleRanged : MobCore
 		Vector3 dirFromTargetToEntity = (transform.position - action.TargetObject.transform.position).normalized;
 		Vector3 offsetAttackPos = (dirFromTargetToEntity * MaxMovementOffset) + action.TargetObject.transform.position;
 		Vector3 dirFromEntityToAttackPos = (offsetAttackPos - transform.position).normalized;
+        Vector3 dirFromEntityToTarget = (action.TargetObject.transform.position - transform.position).normalized;
 
-		//Are we in range and is our orientation looking at the Target?
-		if ((offsetAttackPos - transform.position).sqrMagnitude <= 0.01f)
+        //Are we in range and is our orientation looking at the Target?
+        if ((offsetAttackPos - transform.position).sqrMagnitude <= 0.01f)
 		{
 			Debug.Log("<color=yellow>[HumanoidSimpleRanged]</color>: Made it to action target.");
 
@@ -45,8 +46,9 @@ public class HumanoidSimpleRanged : MobCore
 		//Can we see the Target? If not, move through our points.
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
+			Debug.Log("Look at player");
 			EntityNavAgent.velocity = dirFromEntityToAttackPos * MoveSpeed;
-			Quaternion lookRotation = Quaternion.LookRotation(-dirFromTargetToEntity);
+			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;
 		}
@@ -70,6 +72,7 @@ public class HumanoidSimpleRanged : MobCore
 
 		return false;
 	}
+
 
 	protected override void GenerateAvailableEntityActions()
 	{

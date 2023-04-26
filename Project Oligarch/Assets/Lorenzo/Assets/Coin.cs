@@ -14,7 +14,10 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
     {
-        money.Credits += worth;
-        Destroy(gameObject);
+        if(collision.gameObject.tag == "Player")
+        {
+            money.Credits += worth;
+            Destroy(gameObject);
+        }
     }
 }
