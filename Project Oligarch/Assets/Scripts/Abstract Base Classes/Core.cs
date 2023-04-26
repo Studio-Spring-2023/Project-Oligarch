@@ -10,8 +10,10 @@ public abstract class Core : MonoBehaviour
 	[Header("Movement Variables")]
 	[Range(1f, 10f)]
 	public float MoveSpeed;
+    [Range(0f, 3f)]
+    public float SprintSpeed;
 
-	[Header("Combat Variables")]
+    [Header("Combat Variables")]
 	[Range(25, 100)]
 	public int Health;
     

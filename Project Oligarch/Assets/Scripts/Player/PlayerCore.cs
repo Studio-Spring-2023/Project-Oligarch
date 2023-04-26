@@ -127,11 +127,11 @@ public class PlayerCore : Core
 		}
 		if(Input.GetButtonDown("Sprint"))
 		{
-			MoveSpeed *= 1.5f;
+			MoveSpeed *= SprintSpeed;
 		}
 		else if(Input.GetButtonUp("Sprint"))
 		{
-			MoveSpeed /= 1.5f;
+			MoveSpeed /= SprintSpeed;
 		}
 	}
 
