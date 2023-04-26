@@ -62,6 +62,9 @@ public class PlayerCore : Core
 
 	private bool jump;
 
+	//zach animation ref
+	public Animator playerRanged;
+
 	public Loadout AssignLoadout(LoadoutType SelectedLoadout) => SelectedLoadout switch
     {
         LoadoutType.Ranger => new RangerLoadout(this),
@@ -92,6 +95,14 @@ public class PlayerCore : Core
 
 	private void Update()
     {
+		//animation controls
+		float ydirection = Input.GetAxis("Vertical");
+		playerRanged.SetFloat("y", ydirection);
+		float xdirection = Input.GetAxis("Horizontal");
+		playerRanged.SetFloat("x", xdirection);
+		//
+
+
 		yaw += InputHandler.MouseDelta.x * MouseSensitivity;
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
 		pitch = Mathf.Clamp(pitch, -pitchClamp, pitchClamp);
@@ -108,6 +119,7 @@ public class PlayerCore : Core
 		{
 			grounded = true;
 			
+
 		}
 		if(Input.GetButtonDown("Ability1") && canSlide)
 		{
@@ -125,7 +137,8 @@ public class PlayerCore : Core
 	public IEnumerator SlideFunc()
 	{
 		Debug.Log("Slide");
-        canSlide = false;
+		playerRanged.SetInteger("Actions", 2);
+		canSlide = false;
 		temp = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x);
         Slide = true;
 		//Renderer render = gameObject.GetComponent<Renderer>();
@@ -135,7 +148,8 @@ public class PlayerCore : Core
         MoveSpeed *= SlideForce;
         //PlayerRB.AddForce(temp.normalized, ForceMode.Force);
         yield return new WaitForSeconds(SlideTime);
-        Slide = false;
+		playerRanged.SetInteger("Actions", 0);
+		Slide = false;
         //render.material.SetColor("_Color", Color.grey);
         MoveSpeed = StartSpeed;
         yield return new WaitForSeconds(SlideCooldown);
@@ -148,6 +162,7 @@ public class PlayerCore : Core
 		if (grounded && !Slide)
 		{
 			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
+			playerRanged.SetInteger("Actions", 0);
 		}
 		else
 		{
@@ -160,6 +175,7 @@ public class PlayerCore : Core
 
 		if (jump)
 		{
+			playerRanged.SetInteger("Actions", 1);
 			Velocity += Vector3.up * JumpForce;
 			jump = false;
 		}
