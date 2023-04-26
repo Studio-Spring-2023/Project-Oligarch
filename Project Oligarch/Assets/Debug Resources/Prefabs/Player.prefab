@@ -115,8 +115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1239547619138709716}
   - component: {fileID: -4280498057574015392}
+  - component: {fileID: 7213237913662585703}
   - component: {fileID: 1239547619138709713}
-  - component: {fileID: 1239547619138709715}
   - component: {fileID: 5609228326831868428}
   - component: {fileID: 519006131007072690}
   - component: {fileID: 1089643075275784301}
@@ -141,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 1239547620105552869}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &-4280498057574015392
 CapsuleCollider:
@@ -166,6 +166,41 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7213237913662585703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239547619138709737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a537242a4036ca8478e91f7ddb4c99ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 10
+  Health: 100
+  canSlide: 0
+  Slide: 0
+  SlideTime: 0
+  SlideCooldown: 0
+  SlideForce: 0
+  JumpForce: 8
+  GroundCheckDistance: 1.08
+  PlayerBody: {fileID: 1239547620105552869}
+  CameraTransform: {fileID: 0}
+  lookDir: {x: 0, y: 0, z: 0}
+  CameraAnchorVerticalOffset: 1.4
+  CameraDistance: -4.5
+  CrosshairPoint: {x: 0, y: 0.75, z: 4}
+  MouseSensitivity: 0.37
+  CameraIntersectionCheckDistance: 1.26
+  CameraIntersetOffsetDistance: 1
+  InterCheckMaxDistance: 9.86
+  Interactables:
+    serializedVersion: 2
+    m_Bits: 128
+  Crosshair: {fileID: 0}
 --- !u!54 &1239547619138709713
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -192,42 +227,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &1239547619138709715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239547619138709737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a537242a4036ca8478e91f7ddb4c99ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  Health: 100
-  canSlide: 1
-  Slide: 0
-  SlideTime: 1
-  SlideCooldown: 1
-  SlideForce: 2
-  JumpForce: 8
-  GroundCheckDistance: 1.08
-  PlayerBody: {fileID: 1239547620105552869}
-  CameraTransform: {fileID: 0}
-  lookDir: {x: 0, y: 0, z: 0}
-  CameraAnchorVerticalOffset: 1.4
-  CameraDistance: -4.5
-  CrosshairPoint: {x: 0, y: 0.75, z: 4}
-  MouseSensitivity: 0.37
-  CameraIntersectionCheckDistance: 1.26
-  CameraIntersetOffsetDistance: 1
-  InterCheckMaxDistance: 9.68
-  Interactables:
-    serializedVersion: 2
-    m_Bits: 128
-  Crosshair: {fileID: 0}
+  m_CollisionDetection: 1
 --- !u!120 &5609228326831868428
 LineRenderer:
   serializedVersion: 2
@@ -351,12 +351,12 @@ MonoBehaviour:
   Range: 25
   TimeBetweenShots: 0.25
   bulletsDuration: 0.3
-  AttackPoint: {fileID: 0}
+  AttackPoint: {fileID: 1816159062}
   IsEnemy:
     serializedVersion: 2
     m_Bits: 512
   Player: {fileID: 1239547619138709716}
-  player: {fileID: 1239547619138709715}
+  player: {fileID: 7213237913662585703}
 --- !u!114 &1089643075275784301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88287ad4750c2d4d9c2487b74ed5d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1239547619138709715}
+  player: {fileID: 0}
   FirePoint: {fileID: 1816159062}
 --- !u!1 &5203597099020273406
 GameObject:
