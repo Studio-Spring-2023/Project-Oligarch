@@ -51,7 +51,7 @@ public class PointOfIntrest : MonoBehaviour
         int randIndex = Random.Range(0, 100);
         if(randIndex <= 50)
         {
-           // shop.GenerateShop(transform.position, 3);
+           shop.GenerateShop(transform.position, 3);
         }
         else if (randIndex > 50)
         {

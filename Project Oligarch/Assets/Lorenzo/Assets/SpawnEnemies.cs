@@ -27,9 +27,11 @@ public class SpawnEnemies : MonoBehaviour
                     enemies.Remove(enemy);
                 }
             }
+
             if(enemies.Count <= 0)
               {
                   Finish = true;
+                  started = false;
               }
         }
         
