@@ -14,6 +14,9 @@ public abstract class Core : MonoBehaviour
 	[Header("Combat Variables")]
 	[Range(25, 100)]
 	public int Health;
+
+	[Range(0,100)]
+	public int Shield;
     
 
 }
