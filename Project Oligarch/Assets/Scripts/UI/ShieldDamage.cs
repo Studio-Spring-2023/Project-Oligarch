@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldDamage : MonoBehaviour
 {
-    public int maxShield = 100;
+   /* public int maxShield = 100;
     public int currentShield;
 
     public ShieldBar shieldBar;
@@ -28,5 +28,5 @@ public class ShieldDamage : MonoBehaviour
     {
         currentShield -= damage;
         shieldBar.SetShield(currentShield);
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShieldBar : MonoBehaviour
 {
 
-    public Slider slider;
+    /*public Slider slider;
 
     public void SetMaxShield(int shield)
     {
@@ -17,5 +17,5 @@ public class ShieldBar : MonoBehaviour
     public void SetShield(int shield)
     {
         slider.value = shield;
-    }
+    }*/
 }
