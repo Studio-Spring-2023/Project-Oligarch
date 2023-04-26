@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4903567141805183985}
   - component: {fileID: 5850310006058128608}
   - component: {fileID: 7034008743504362156}
-  - component: {fileID: 5070622842745337735}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Manager
@@ -33,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4903567141805183985
 MonoBehaviour:
@@ -52,18 +51,21 @@ MonoBehaviour:
   ShopSection: {fileID: 659012831578490827, guid: 4bd921fec9da0c74cb813d7d73bb077a,
     type: 3}
   ShopList:
-  - {fileID: 11400000, guid: d47ef2541d204704c992aa2be4778725, type: 2}
-  - {fileID: 11400000, guid: b1960a2a219b1b542a2ffce365006591, type: 2}
-  - {fileID: 11400000, guid: 8519ea4b813deec4489161f14a7b5921, type: 2}
-  - {fileID: 11400000, guid: bf8516a011cabec4a899c92baccee478, type: 2}
-  - {fileID: 11400000, guid: 74793031db20f354ea6c693b9fa2d3c3, type: 2}
-  - {fileID: 11400000, guid: ffcd8e5065e698246afa92c07b762196, type: 2}
-  - {fileID: 11400000, guid: bf1bb783da0e4fb4c8e59b104b283f0f, type: 2}
-  - {fileID: 11400000, guid: aac9ab5e3dfa1d04ea08c88a2cb6da4f, type: 2}
+  - {fileID: 11400000, guid: d459d0f08d835a341b9b706f777be6b2, type: 2}
+  - {fileID: 11400000, guid: 11f9e8fa47ac3f44990aef2fb8c03071, type: 2}
+  - {fileID: 11400000, guid: b025fe47804981846b519a3699044024, type: 2}
+  - {fileID: 11400000, guid: db9202983cd52474ebf09e909fc22402, type: 2}
+  - {fileID: 11400000, guid: e2fe92e151ed709409db28ad8ad8753b, type: 2}
+  - {fileID: 11400000, guid: 714f77246e467a141a588e629d7817c0, type: 2}
+  - {fileID: 11400000, guid: a9cdeb927d7029f4cad965d0b89954c8, type: 2}
   - {fileID: 11400000, guid: 2e825d48dd3f7ae4c9a1d236db4df170, type: 2}
-  - {fileID: 11400000, guid: ccc70bc2aa456434b95a3809b16e9c32, type: 2}
-  - {fileID: 11400000, guid: 5dbd3fd8a0f7d794bbeefe64b65a95ba, type: 2}
-  - {fileID: 11400000, guid: dd73755ce81677e439ad06d6765fece3, type: 2}
+  - {fileID: 11400000, guid: 6f6a6c77482d5544d9e838d3c31d3402, type: 2}
+  - {fileID: 11400000, guid: 5e2a2fc1775a022408d5f3de046f79de, type: 2}
+  - {fileID: 11400000, guid: e31de31d49163434985dac30ac96e86b, type: 2}
+  - {fileID: 11400000, guid: d381c22870fa6de49b7055eadbaf52f7, type: 2}
+  - {fileID: 11400000, guid: 8731ac753716ca84f8be33d117c24e68, type: 2}
+  - {fileID: 11400000, guid: 2a6580192ae4cf046b1cd72c6eece889, type: 2}
+  - {fileID: 11400000, guid: c20db34548806a54a8c55bba79652967, type: 2}
   CommonItems: []
   UnCommonItems: []
   RareItems: []
@@ -95,18 +97,6 @@ MonoBehaviour:
   Credits: 1000
   Text: {fileID: 0}
 --- !u!114 &7034008743504362156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926274786873992773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8063038166d1e84f81f5ec52650611f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5070622842745337735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
