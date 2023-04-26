@@ -93,18 +93,18 @@ public class PlayerCore : Core
 		InputHandler.OnJumpInput += AttemptJump;
 		InputHandler.OnInteractInput += Interact;
     }
-
-	private void Update()
+    float ydirection;
+    float xdirection;
+    bool sprinting = false;
+    private void Update()
     {
 		//animation controls
-		float ydirection = Input.GetAxis("Vertical");
-		playerRanged.SetFloat("y", ydirection);
-		float xdirection = Input.GetAxis("Horizontal");
-		playerRanged.SetFloat("x", xdirection);
-		//
 
 
-		yaw += InputHandler.MouseDelta.x * MouseSensitivity;
+        //
+
+
+        yaw += InputHandler.MouseDelta.x * MouseSensitivity;
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
 		pitch = Mathf.Clamp(pitch, -pitchClamp, pitchClamp);
 
@@ -129,11 +129,27 @@ public class PlayerCore : Core
 		if(Input.GetButtonDown("Sprint") && ydirection > 0)
 		{
 			MoveSpeed = SprintSpeed;
-		}
+
+            sprinting = true;
+            ydirection = Input.GetAxis("Vertical") + 1f;
+            xdirection = Input.GetAxis("Horizontal");
+            playerRanged.SetFloat("x", xdirection);
+            playerRanged.SetFloat("y", ydirection);
+
+        }
 		else if(Input.GetButtonUp("Sprint"))
 		{
 			MoveSpeed = StartSpeed;
-		}
+			sprinting = false;
+
+        }
+		if (sprinting == false)
+		{
+            ydirection = Input.GetAxis("Vertical");
+            xdirection = Input.GetAxis("Horizontal");
+            playerRanged.SetFloat("x", xdirection);
+            playerRanged.SetFloat("y", ydirection);
+        }
 	}
 
 	public void AttemptJump()
