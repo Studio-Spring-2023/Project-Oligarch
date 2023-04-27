@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class TakeHealthDamage : MonoBehaviour
 {
-    /*public int maxHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth;
-
-    public HealthBar healthBar;
-
     public int maxShield = 100;
     public int currentShield;
 
+    public HealthBar healthBar;
     public ShieldBar shieldBar;
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-
-        currentShield = maxShield;
-        shieldBar.SetMaxShield(maxHealth);
     }
 
     // Update is called once per frame
@@ -47,5 +42,5 @@ public class TakeHealthDamage : MonoBehaviour
     {
         currentShield -= damage;
         shieldBar.SetShield(currentShield);
-    }*/
+    }
 }
