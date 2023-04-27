@@ -6,8 +6,11 @@ public class TakeHealthDamage : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+    public int maxShield = 100;
+    public int currentShield;
 
     public HealthBar healthBar;
+    public ShieldBar shieldBar;
 
     void Start()
     {
@@ -22,6 +25,11 @@ public class TakeHealthDamage : MonoBehaviour
         {
             TakeHealth(5);
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TakeShield(5);
+        }
     }
 
     void TakeHealth(int damage)
@@ -30,4 +38,9 @@ public class TakeHealthDamage : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
+    void TakeShield(int damage)
+    {
+        currentShield -= damage;
+        shieldBar.SetShield(currentShield);
+    }
 }
