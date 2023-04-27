@@ -8,13 +8,18 @@ public class PointOfIntrest : MonoBehaviour
     private Transform Playertrans;
     private Shop shop;
     public SpawnEnemies spawnenemies;
+    public GameObject Section;
+    public Transform Point2;
     private DropCoin coin;
+    private DropHealth health;
     private bool startedPOI = false;
     void Start()
     {
         Playertrans = GameObject.FindWithTag("Player").transform;
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         coin = GameObject.FindWithTag("Manager").GetComponent<DropCoin>();
+        health = GameObject.FindWithTag("Manager").GetComponent<DropHealth>();
+        
     }
 
     // Update is called once per frame
@@ -24,6 +29,7 @@ public class PointOfIntrest : MonoBehaviour
         {
             StartEncounter();
             startedPOI = true;
+            shop.SingleSection(Shop.ShopRarity.Common, Section, transform.position);
         }
         if(spawnenemies.Finish == true && startedPOI)
         {
@@ -67,13 +73,34 @@ public class PointOfIntrest : MonoBehaviour
         if(randIndex <= 40)
         {
             coin.Coin(50);
+            health.Health(50, Point2.position);
         }
         else if( randIndex > 40)
         {
-            Debug.Log("Spawn Item");
+            ItemRarity();
         }
     }
 
+    void ItemRarity()
+    {
+        int randIndex = Random.Range(0, 100);
+        if(randIndex <= 40)
+        {
+            shop.SingleSection(Shop.ShopRarity.Common, Section, transform.position);
+        }
+        else if(randIndex >= 40 && randIndex < 70)
+        {
+            shop.SingleSection(Shop.ShopRarity.Uncommon, Section, transform.position);
+        }
+        else if (randIndex >= 70 && randIndex < 90)
+        {
+            shop.SingleSection(Shop.ShopRarity.Rare, Section, transform.position);
+        }
+        else if(randIndex >= 90)
+        {
+            shop.SingleSection(Shop.ShopRarity.Legendary, Section, transform.position);
+        }
+    }
 
     private void OnDrawGizmos()
     {

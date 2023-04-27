@@ -11,7 +11,8 @@ public class ShopSection : MonoBehaviour
     private Vector3 startPoint;
     public float HoverHeight;
     public float HoverSpeed;
-    private int Price;
+    [HideInInspector]
+    public int Price;
     [SerializeField] TextMeshPro priceText;
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemDesc;

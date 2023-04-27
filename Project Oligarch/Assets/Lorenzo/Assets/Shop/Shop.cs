@@ -48,6 +48,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         ShopCount = ObjSectionList.Count;
+        AssignShopItems();
     }
 
 
@@ -95,6 +96,15 @@ public class Shop : MonoBehaviour
             Debug.Log(StallList[i].CurrItem);
         }
         
+    }
+
+    public void SingleSection(ShopRarity rarity, GameObject Section, Vector3 Position)
+    {
+        ShopSection sec = Section.GetComponent<ShopSection>();
+
+        sec.CurrItem = RollItem(rarity);
+        sec.Price = 0;
+        Instantiate(sec, Position, Quaternion.identity);
     }
 
     public void ReplaceItem(int stallNum)
