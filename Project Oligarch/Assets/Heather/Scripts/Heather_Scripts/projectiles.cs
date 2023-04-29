@@ -14,6 +14,7 @@ public class projectiles : MonoBehaviour
     public float Dam;
     public float damMod;
     public float atkSpeedMod;
+    public float coolDownMod;
     public float TimeBetweenShooting;
     public float Spread;
     public float Range;
@@ -120,7 +121,7 @@ public class projectiles : MonoBehaviour
         BulletsShot--;
 
         //This Resets the CanShoot Bool
-        Invoke ( "resetShot" , TimeBetweenShooting );
+        Invoke ( "resetShot" , TimeBetweenShooting + coolDownMod );
 
 
         //This keeps track of the bursts
