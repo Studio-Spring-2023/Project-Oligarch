@@ -18,4 +18,15 @@ public class HealthBar : MonoBehaviour
     {
         slider.value = health;
     }
+
+    public void SetMaxShield(int shield)
+    {
+        slider.maxValue = shield;
+        slider.value = shield;
+    }
+
+    public void SetShield(int shield)
+    {
+        slider.value = shield;
+    }
 }

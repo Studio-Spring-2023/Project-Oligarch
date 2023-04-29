@@ -10,15 +10,18 @@ public class TakeHealthDamage : MonoBehaviour
     public int currentShield;
 
     public HealthBar healthBar;
-    public ShieldBar shieldBar;
+    public HealthBar shieldbar;
+
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        currentShield = maxShield;
+        shieldbar.SetMaxShield(maxShield);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
@@ -41,7 +44,7 @@ public class TakeHealthDamage : MonoBehaviour
     void TakeShield(int damage)
     {
         currentShield -= damage;
-        shieldBar.SetShield(currentShield);
+        shieldbar.SetShield(currentShield);
     }
 
     public void TakeDamage(int Damage)
@@ -49,7 +52,7 @@ public class TakeHealthDamage : MonoBehaviour
         if(currentShield >= 0)
         {
             currentShield -= Damage;
-            shieldBar.SetShield(currentShield);
+            shieldbar.SetShield(currentShield);
 
         }
         else
@@ -57,5 +60,14 @@ public class TakeHealthDamage : MonoBehaviour
             currentHealth -= Damage;
             healthBar.SetHealth(currentHealth);
         }
+    }
+
+    public void GameOver()
+    {
+        if(currentHealth <= 0) 
+        {
+            Debug.Log("GameOver");
+        }
+            
     }
 }
