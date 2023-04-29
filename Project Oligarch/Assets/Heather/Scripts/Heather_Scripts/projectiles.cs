@@ -6,13 +6,14 @@ using UnityEngine;
 public class projectiles : MonoBehaviour
 {
     //These are the stats for the Gun
-    public float Dam;
-    public float damagemod;
     private int BulletsToShoot;
     private int BulletsPerTap;
     private int BulletsLeft;
     private int BulletsShot;
 
+    public float Dam;
+    public float damMod;
+    public float atkSpeedMod;
     public float TimeBetweenShooting;
     public float Spread;
     public float Range;
@@ -31,10 +32,10 @@ public class projectiles : MonoBehaviour
     public RaycastHit Hit;
     public LayerMask IsEnemy;
     public Transform Player;
+    public PlayerCore player;
 
     LineRenderer bullets;
 
-    public PlayerCore player;
 
 
     private void Start ( )
@@ -103,7 +104,7 @@ public class projectiles : MonoBehaviour
             Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
-            Hit.collider.gameObject.GetComponent<Enemy_health>().LoseLife(Dam * (1 + damagemod ));  
+            Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam * ( 1 + damMod ) );
             StartCoroutine ( ShotBullet ( ) );
         }
         else
@@ -111,9 +112,7 @@ public class projectiles : MonoBehaviour
             
             Vector3 temppos =(AttackPoint.position - (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * - Range);
             bullets.SetPosition(1, temppos);
-            StartCoroutine(ShotBullet());
-
-            
+            StartCoroutine(ShotBullet());            
         }
 
         //This tracks how many bullets have been shot and how many are left
@@ -126,7 +125,7 @@ public class projectiles : MonoBehaviour
 
         //This keeps track of the bursts
         if ( BulletsShot > 0 && BulletsLeft > 0 )
-            Invoke ( "bang" , TimeBetweenShots );
+            Invoke ( "bang" , TimeBetweenShots * ( 1 + atkSpeedMod ) );
     }
 
     private void resetShot ( )
@@ -157,8 +156,7 @@ public class projectiles : MonoBehaviour
     private void OnDrawGizmos ( )
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(AttackPoint.transform.position, (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * Range); ;
-
+        Gizmos.DrawRay(AttackPoint.transform.position, (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized * Range); 
 
         Gizmos.color = Color.red;
         Gizmos.DrawSphere ( Hit.point , .1f );

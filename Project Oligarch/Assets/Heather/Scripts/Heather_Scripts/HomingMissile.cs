@@ -12,10 +12,12 @@ public class HomingMissile : MonoBehaviour
     public Transform target;
     private Rigidbody rb;
     public FieldofView FOV;
-    public float Dam;
-    public float damagemod;
+
 
     //These are missile stats
+    public float Dam;
+    public float damagemod;
+    public float atkSpeedMod;
     public float force;
     public float rotationForce;
 
@@ -33,8 +35,7 @@ public class HomingMissile : MonoBehaviour
             Vector3 dir = ( target.transform.position - rb.position ).normalized;
             Vector3 rotationAmount = Vector3.Cross ( transform.up , dir );
             rb.angularVelocity = rotationAmount * rotationForce;
-            rb.velocity = transform.up * force;
-
+            rb.velocity = transform.up * force * ( 1 + atkSpeedMod );
     }
 
     private void OnCollisionEnter ( Collision boom )
