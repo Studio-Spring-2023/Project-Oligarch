@@ -20,6 +20,7 @@ public class PlayerCore : Core
 	private Vector3 Velocity;
     private Vector3 Forward;
 	private Vector3 temp;
+	public float moveMod;
 	[Range(1f, 20f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
@@ -79,13 +80,13 @@ public class PlayerCore : Core
 		Transform = transform;
 
         //Temporary to avoid Null Reference errors
-        AssignedLoadout = AssignLoadout(LoadoutType.Ranger);
+        AssignedLoadout = AssignLoadout ( LoadoutType.Ranger );
 	}
 
     private void Start()
     {
 		SprintSpeed *= MoveSpeed;
-		StartSpeed = MoveSpeed;
+        StartSpeed = MoveSpeed * ( 1 + moveMod );
 	}
 
 	private void OnEnable()
