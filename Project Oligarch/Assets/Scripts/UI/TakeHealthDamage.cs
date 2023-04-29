@@ -23,7 +23,7 @@ public class TakeHealthDamage : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            TakeHealth(5);
+            TakeDamage(5);
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -42,5 +42,20 @@ public class TakeHealthDamage : MonoBehaviour
     {
         currentShield -= damage;
         shieldBar.SetShield(currentShield);
+    }
+
+    public void TakeDamage(int Damage)
+    {
+        if(currentShield >= 0)
+        {
+            currentShield -= Damage;
+            shieldBar.SetShield(currentShield);
+
+        }
+        else
+        {
+            currentHealth -= Damage;
+            healthBar.SetHealth(currentHealth);
+        }
     }
 }
