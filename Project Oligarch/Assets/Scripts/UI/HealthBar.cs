@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-
     public Slider slider;
+    public PlayerCore playerCore;
+
 
     public void SetMaxHealth(int health)
     {
@@ -16,7 +17,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        slider.value = health;
+        slider.value = health + playerCore.healthFlatMod * ( 1 + playerCore.healthPercentMod );
     }
 
     public void SetMaxShield(int shield)
@@ -27,6 +28,6 @@ public class HealthBar : MonoBehaviour
 
     public void SetShield(int shield)
     {
-        slider.value = shield;
+        slider.value = shield + playerCore.shieldMod;
     }
 }

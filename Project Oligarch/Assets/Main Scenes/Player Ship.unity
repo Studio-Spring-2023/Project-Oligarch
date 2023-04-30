@@ -331,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7213237913662585703, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
         type: 3}
+      propertyPath: canSlide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213237913662585703, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 1776529492}

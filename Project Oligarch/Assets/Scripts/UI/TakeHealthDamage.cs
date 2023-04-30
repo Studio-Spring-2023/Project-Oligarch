@@ -13,7 +13,7 @@ public class TakeHealthDamage : MonoBehaviour
     public HealthBar shieldbar;
 
 
-    void Start()
+    void Start ()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

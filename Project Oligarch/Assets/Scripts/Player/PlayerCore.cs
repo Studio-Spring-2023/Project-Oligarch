@@ -8,8 +8,16 @@ using UnityEngine.UIElements;
 public class PlayerCore : Core
 {
 	public static Transform Transform { get; private set; }
-	public static Loadout AssignedLoadout { get; private set; }
-	[Header("Slide Variables")]
+    public static Loadout AssignedLoadout { get; private set; }
+
+	[Header("Mods")]
+    public float moveMod;
+    public int healthPercentMod;
+    public int healthFlatMod;
+	public int shieldMod;
+	public int jumpMod;
+
+    [Header ("Slide Variables")]
 	public bool canSlide;
 	public bool Slide;
 	public float SlideTime;
@@ -20,7 +28,6 @@ public class PlayerCore : Core
 	private Vector3 Velocity;
     private Vector3 Forward;
 	private Vector3 temp;
-	public float moveMod;
 	[Range(1f, 20f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
@@ -86,7 +93,7 @@ public class PlayerCore : Core
     private void Start()
     {
 		SprintSpeed *= MoveSpeed;
-        StartSpeed = MoveSpeed * ( 1 + moveMod );
+        StartSpeed = MoveSpeed;
 	}
 
 	private void OnEnable()
@@ -97,7 +104,8 @@ public class PlayerCore : Core
     float ydirection;
     float xdirection;
     bool sprinting = false;
-    private void Update()
+    
+	private void Update()
     {
 		//animation controls
 
@@ -109,7 +117,7 @@ public class PlayerCore : Core
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
 		pitch = Mathf.Clamp(pitch, -pitchClamp, pitchClamp);
 
-		Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+        Forward = new Vector3 ( transform.forward.x , 0 , transform.forward.z ).normalized;
 
 		Ray groundRay = new Ray(transform.position, Vector3.down);
 		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))

@@ -10,11 +10,11 @@ public class projectiles : MonoBehaviour
     private int BulletsPerTap;
     private int BulletsLeft;
     private int BulletsShot;
+    public int coolDownMod;
 
     public float Dam;
     public float damMod;
     public float atkSpeedMod;
-    public float coolDownMod;
     public float TimeBetweenShooting;
     public float Spread;
     public float Range;
