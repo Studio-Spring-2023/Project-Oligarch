@@ -27,8 +27,11 @@ public class PlayerCore : Core
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
     private Vector3 Forward;
-	private Vector3 temp;
-	[Range(1f, 20f)]
+    private Vector3 Right;
+    private Vector3 temp;
+    [Range(5f, 15f)]
+    public float AirStrafeSpeed;
+    [Range(1f, 20f)]
 	public float JumpForce;
 	public float GroundCheckDistance;
 	private bool grounded;
@@ -107,9 +110,10 @@ public class PlayerCore : Core
     
 	private void Update()
     {
-		//animation controls
+        //animation controls
 
-
+        Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
+        Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
         //
 
 
@@ -195,13 +199,15 @@ public class PlayerCore : Core
 	{
 		if (grounded && !Slide)
 		{
-			Velocity = (Forward * InputHandler.MovementInput.z + transform.right * InputHandler.MovementInput.x) * MoveSpeed;
-			playerRanged.SetInteger("Actions", 0);
+            Velocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * MoveSpeed;
+            playerRanged.SetInteger("Actions", 0);
 		}
-		else
+		else if(!grounded)
 		{
-			Velocity += gravity;
-		}
+            Vector3 flatVelocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * AirStrafeSpeed;
+            Velocity = new Vector3(flatVelocity.x, Velocity.y, flatVelocity.z);
+            Velocity += gravity;
+        }
 		if(Slide)
 		{
 			Velocity = (temp * MoveSpeed);
