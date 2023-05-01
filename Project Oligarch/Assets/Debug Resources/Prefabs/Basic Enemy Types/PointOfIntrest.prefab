@@ -65,7 +65,7 @@ Transform:
   m_Children:
   - {fileID: 2943775031276636413}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8206381780074546591
 MeshFilter:
@@ -132,7 +132,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   started: 0
   Finish: 0
 --- !u!114 &4029630721587201655
@@ -150,4 +149,6 @@ MonoBehaviour:
   Range: 10
   spawnenemies: {fileID: 7564661254197956160}
   Section: {fileID: 659012831578490827, guid: 4bd921fec9da0c74cb813d7d73bb077a, type: 3}
+  TP: {fileID: 4576831875251834964, guid: 41742167211ea1d4d8b8ed0b12a5cb5d, type: 3}
   Point2: {fileID: 2943775031276636413}
+  Boss: 0
