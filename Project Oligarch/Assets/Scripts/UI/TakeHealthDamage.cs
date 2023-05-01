@@ -16,10 +16,9 @@ public class TakeHealthDamage : MonoBehaviour
     void Start ()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
 
         currentShield = maxShield;
-        shieldbar.SetMaxShield(maxShield);
+
     }
 
     void Update()
@@ -28,23 +27,8 @@ public class TakeHealthDamage : MonoBehaviour
         {
             TakeDamage(5);
         }
+        GameOver();
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TakeShield(5);
-        }
-    }
-
-    void TakeHealth(int damage)
-    {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-    }
-
-    void TakeShield(int damage)
-    {
-        currentShield -= damage;
-        shieldbar.SetShield(currentShield);
     }
 
     public void TakeDamage(int Damage)
@@ -52,13 +36,11 @@ public class TakeHealthDamage : MonoBehaviour
         if(currentShield >= 0)
         {
             currentShield -= Damage;
-            shieldbar.SetShield(currentShield);
 
         }
         else
         {
             currentHealth -= Damage;
-            healthBar.SetHealth(currentHealth);
         }
     }
 

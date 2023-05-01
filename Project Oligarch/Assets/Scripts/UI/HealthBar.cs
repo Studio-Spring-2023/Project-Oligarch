@@ -2,32 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    public Slider healthSlider;
+    public Slider ShieldSlider;
     public PlayerCore playerCore;
+    public TakeHealthDamage HP;
 
 
-    public void SetMaxHealth(int health)
+    public void Start()
     {
-        slider.maxValue = health;
-        slider.value = health;
+        HP = GameObject.FindWithTag("Player").GetComponent<TakeHealthDamage>();
+        playerCore = GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
     }
 
-    public void SetHealth(int health)
+    private void Update()
     {
-        slider.value = health + playerCore.healthFlatMod * ( 1 + playerCore.healthPercentMod );
-    }
-
-    public void SetMaxShield(int shield)
-    {
-        slider.maxValue = shield;
-        slider.value = shield;
-    }
-
-    public void SetShield(int shield)
-    {
-        slider.value = shield + playerCore.shieldMod;
+        healthSlider.maxValue = HP.maxHealth;
+        healthSlider.value = HP.currentHealth + playerCore.healthFlatMod * ( 1 + playerCore.healthPercentMod );
+        ShieldSlider.maxValue = HP.maxShield;
+        ShieldSlider.value = HP.currentShield + playerCore.shieldMod;
     }
 }
