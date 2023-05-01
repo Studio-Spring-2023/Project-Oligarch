@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TakeHealthDamage : MonoBehaviour
 {
@@ -10,37 +11,47 @@ public class TakeHealthDamage : MonoBehaviour
     public int currentShield;
 
     public HealthBar healthBar;
-    public ShieldBar shieldBar;
+    public HealthBar shieldbar;
 
-    void Start()
+
+    void Start ()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+
+        currentShield = maxShield;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            TakeHealth(5);
+            TakeDamage(5);
         }
+        GameOver();
 
-        if (Input.GetKeyDown(KeyCode.P))
+    }
+
+    public void TakeDamage(int Damage)
+    {
+        if(currentShield >= 0)
         {
-            TakeShield(5);
+            currentShield -= Damage;
+
+        }
+        else
+        {
+            currentHealth -= Damage;
         }
     }
 
-    void TakeHealth(int damage)
+    public void GameOver()
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-    }
-
-    void TakeShield(int damage)
-    {
-        currentShield -= damage;
-        shieldBar.SetShield(currentShield);
+        if(currentHealth <= 0) 
+        {
+            Debug.Log("GameOver");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+            
     }
 }

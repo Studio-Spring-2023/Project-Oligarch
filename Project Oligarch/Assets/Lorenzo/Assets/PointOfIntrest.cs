@@ -29,7 +29,6 @@ public class PointOfIntrest : MonoBehaviour
         {
             StartEncounter();
             startedPOI = true;
-            shop.SingleSection(Shop.ShopRarity.Common, Section, transform.position);
         }
         if(spawnenemies.Finish == true && startedPOI)
         {

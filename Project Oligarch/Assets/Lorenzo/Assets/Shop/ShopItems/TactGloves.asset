@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: da79acca5147bea48bb4d7bce34f84af, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 2544711566124356543, guid: f743e6068f05dbe41b83b8fe5e2cf99a,
+  DisplayPrefab: {fileID: 5190183562123942093, guid: 9d676c9b6a5112741878b11f967a913d,
     type: 3}
   DisplayName: Tactical Gloves
   price: 50

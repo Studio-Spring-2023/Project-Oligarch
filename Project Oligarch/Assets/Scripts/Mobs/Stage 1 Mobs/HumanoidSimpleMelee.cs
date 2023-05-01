@@ -85,16 +85,16 @@ public class HumanoidSimpleMelee : MobCore
 
 	private void OnDrawGizmos()
 	{
-		if (EntityNavPath != null)
-		{
-			Vector3 lastCorner = EntityNavPath.corners[0];
-			Gizmos.DrawLine(transform.position, lastCorner);
-			foreach (Vector3 corner in EntityNavPath.corners)
-			{
-				Gizmos.DrawLine(lastCorner, corner);
-				lastCorner = corner;
-			}
-		}
+		//if (EntityNavPath != null)
+		//{
+		//	//Vector3 lastCorner = EntityNavPath.corners[0];
+		//	Gizmos.DrawLine(transform.position, lastCorner);
+		//	foreach (Vector3 corner in EntityNavPath.corners)
+		//	{
+		//		Gizmos.DrawLine(lastCorner, corner);
+		//		lastCorner = corner;
+		//	}
+		//}
 
 		//Debug Melee Attack View
 		Gizmos.matrix = transform.localToWorldMatrix;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4ab95615615284d4f953955fce0ecc53, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 5778793856270576642, guid: fc8a3dcf67dea3c4691181d399e82140,
+  DisplayPrefab: {fileID: 2958885292166680774, guid: fd18eb13d5bcdec4c9bd40ea6a5507e4,
     type: 3}
   DisplayName: Lucky Trinket
   price: 50

@@ -27,6 +27,7 @@ public class FieldofView : MonoBehaviour
     {
         startCD = CoolDown;
     }
+
     private void Update ( )
     {
         MissileTargeting ( );
