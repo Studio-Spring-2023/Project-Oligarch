@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TakeHealthDamage : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class TakeHealthDamage : MonoBehaviour
         if(currentHealth <= 0) 
         {
             Debug.Log("GameOver");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
             
     }

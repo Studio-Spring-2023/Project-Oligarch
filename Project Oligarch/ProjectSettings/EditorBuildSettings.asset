@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Blue Assets/Assets/Level Design Scenes/Planescape.unity
     guid: 612a3c869e1762541bbaf07aedc446c7
+  - enabled: 1
+    path: Assets/Main Scenes/Game Over.unity
+    guid: c3a8d69dbd6b5d84298d0ef9570a395d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1e558ea12b5c20e45aef58e87a7044b6,
       type: 2}
