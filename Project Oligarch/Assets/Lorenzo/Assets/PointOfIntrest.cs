@@ -9,17 +9,18 @@ public class PointOfIntrest : MonoBehaviour
     private Shop shop;
     public SpawnEnemies spawnenemies;
     public GameObject Section;
+    public GameObject TP;
     public Transform Point2;
     private DropCoin coin;
     private DropHealth health;
     private bool startedPOI = false;
+    public bool Boss = false;
     void Start()
     {
         Playertrans = GameObject.FindWithTag("Player").transform;
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         coin = GameObject.FindWithTag("Manager").GetComponent<DropCoin>();
         health = GameObject.FindWithTag("Manager").GetComponent<DropHealth>();
-        
     }
 
     // Update is called once per frame
@@ -30,9 +31,14 @@ public class PointOfIntrest : MonoBehaviour
             StartEncounter();
             startedPOI = true;
         }
-        if(spawnenemies.Finish == true && startedPOI)
+
+        if(spawnenemies.Finish == true && startedPOI && !Boss)
         {
             CalcReward();
+        }
+        else if (spawnenemies.Finish == true && startedPOI && Boss)
+        {
+            BossEncounter();
         }
     }
 
@@ -99,6 +105,13 @@ public class PointOfIntrest : MonoBehaviour
         {
             shop.SingleSection(Shop.ShopRarity.Legendary, Section, transform.position);
         }
+    }
+
+    private void BossEncounter()
+    {
+        Debug.Log("Beat Boss");
+        spawnenemies.Finish = false;
+        Instantiate(TP, transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()
