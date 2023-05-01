@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 47ad078668a348a45a0a52fce152df8a, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 5492167673043509786, guid: 6a2ce96b05bc9164fa469a85c9b3865a,
+  DisplayPrefab: {fileID: 6312692275765366506, guid: c994fde33a528674bab5fa414be307b3,
     type: 3}
   DisplayName: Armor Plating
   price: 50
