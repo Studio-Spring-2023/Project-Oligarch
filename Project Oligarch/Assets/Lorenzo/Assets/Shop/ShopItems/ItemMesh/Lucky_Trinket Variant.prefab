@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lucky_Trinket Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8388675095447f4e8540afc447c2700,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
