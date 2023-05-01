@@ -49,6 +49,7 @@ public class Shop : MonoBehaviour
     {
         ShopCount = ObjSectionList.Count;
         AssignShopItems();
+        GenerateShop(transform.position, 3);
     }
 
 
