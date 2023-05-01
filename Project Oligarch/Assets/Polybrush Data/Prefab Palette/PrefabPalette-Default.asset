@@ -86,12 +86,12 @@ MonoBehaviour:
     settings:
       m_Strength: 100
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 169.85916, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
       m_UniformScale: {x: 0.5, y: 2}
       m_UniformBool: 1
-      m_XRotationBool: 0
+      m_XRotationBool: 1
       m_YRotationBool: 0
       m_ZRotationBool: 0
       m_XScaleBool: 0
@@ -132,3 +132,20 @@ MonoBehaviour:
       m_YScaleBool: 0
       m_ZScaleBool: 0
     name: Tree Base Variant
+  - gameObject: {fileID: 5120921579676574927, guid: 2e5c9f1931f8e8446b5519058df92dda,
+      type: 3}
+    settings:
+      m_Strength: 49
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 157.1831, y: 164.78874, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1.1923077, y: 1.7692307}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 1
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: LARGE Grass Cluster
