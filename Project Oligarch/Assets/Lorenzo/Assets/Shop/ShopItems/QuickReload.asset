@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 23456003fbb125c4f8014178fa450224, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 8269756622731048974, guid: e84577c7117e3244ab74d17866eeeafe,
+  DisplayPrefab: {fileID: 2534513935665352500, guid: 018b935d8804f8944a45d1b0ada7e0af,
     type: 3}
   DisplayName: Quick Reload Bandolier
   price: 50

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 897fb8c815b844c41b807ddf6fd0b8a0, type: 2}
   rarity: 1
-  DisplayPrefab: {fileID: 5199140078162997931, guid: 8ca226af9835e114fa2a40a98cc54449,
+  DisplayPrefab: {fileID: 8748916543165808144, guid: 2396da03b94120d41b3b13f4983f0640,
     type: 3}
   DisplayName: Thruster Pack
   price: 90

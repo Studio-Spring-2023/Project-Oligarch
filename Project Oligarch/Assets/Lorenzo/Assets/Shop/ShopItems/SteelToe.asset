@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 0d5765385d4a50044a0429a154bb0e1b, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 2544711566124356543, guid: f743e6068f05dbe41b83b8fe5e2cf99a,
+  DisplayPrefab: {fileID: 7424331768096803506, guid: a80ba3a2143fd2f4ead0e0f2ef3c4919,
     type: 3}
   DisplayName: Steel Toed Boot
   price: 50
