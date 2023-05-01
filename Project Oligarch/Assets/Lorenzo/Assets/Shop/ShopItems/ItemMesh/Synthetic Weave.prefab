@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3873316494519066192}
   - component: {fileID: 3215829810518202110}
   - component: {fileID: -6411359488485858804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Synthetic Weave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
