@@ -149,10 +149,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idol
+      name: Idle
       takeName: CINEMA_4D_Main
       internalID: 7281255294880080156
-      firstFrame: 118
+      firstFrame: 117
       lastFrame: 118
       wrapMode: 0
       orientationOffsetY: 0
