@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SimpleMeleeAttack : GoapAction
 {
+	
 	bool hasAttacked = false;
 	bool isAttacking = false;
+
+	//animatir variable
+	public static int action;
 
 	Bounds hitBoxBounds;
 
@@ -35,6 +39,9 @@ public class SimpleMeleeAttack : GoapAction
 		if (CanAttack() && !isAttacking)
 		{
 			isAttacking = true;
+			
+			//animation action variable
+			action = 1;
 
 			if (Physics.CheckBox(entity.transform.localToWorldMatrix.MultiplyPoint3x4(hitBoxBounds.center), hitBoxBounds.extents, entity.transform.rotation, PlayerMask))
 			{
@@ -82,6 +89,9 @@ public class SimpleMeleeAttack : GoapAction
 		hasAttacked = false;
 		isAttacking = false;
 		meleeTimer = 0;
+
+		//animation action variable
+		action = 0;
 	}
 
 	//Used by the FSM to keep track of whether the action it's been performing is complete or not.
@@ -112,6 +122,9 @@ public class SimpleRangedAttack : GoapAction
 
 	float shotCooldownTimer;
 	float shotCooldown = 0.75f;
+
+	//animatir variable
+	public static int action;
 
 	public SimpleRangedAttack()
 	{
@@ -144,6 +157,9 @@ public class SimpleRangedAttack : GoapAction
 		{
 			shotsFired++;
 			isFiring = true;
+
+			//animation action variable
+			action = 1;
 
 			Ray ray = new Ray(entity.transform.position, (TargetObject.transform.position - entity.transform.position).normalized);
 			if (Physics.Raycast(ray, entity.MaxMovementOffset, PlayerMask))
@@ -192,11 +208,18 @@ public class SimpleRangedAttack : GoapAction
 		hasFired = false;
 		shotsFired = 0;
 		shotCooldownTimer = 0;
+
+		//animation action variable
+		action = 0;
 	}
 }
 
 public class SimpleThrow : GoapAction
 {
+
+	//animatir variable
+	public static int action;
+
 	bool hasThrown;
 
 	bool tryingToThrow;
@@ -271,6 +294,9 @@ public class SimpleThrow : GoapAction
 
 			tryingToThrow = true;
 
+			//animation action variable
+			action = 2;
+
 			Vector3 dirFromEntityToPlayer = PlayerCore.Transform.position - adjustedThrowPos;
 			float? angle = CalculateAngle(dirFromEntityToPlayer);
 
@@ -340,5 +366,8 @@ public class SimpleThrow : GoapAction
 		throwingDurationTimer = 0;
 		TargetObject = null;
 		tryingToThrow = false;
+
+		//animation action variable
+		action = 0;
 	}
 }

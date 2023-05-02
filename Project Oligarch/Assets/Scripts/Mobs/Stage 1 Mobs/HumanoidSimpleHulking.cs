@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 public class HumanoidSimpleHulking : MobCore
 {
+	//Animator Reference
+	public Animator hulkAnim;
+
+	public void FixedUpdate()
+	{
+		hulkAnim.SetInteger("action", SimpleThrow.action);
+	}
+
 	public Bounds attackHitBox;
 
 	[Range(5f, 15f)]

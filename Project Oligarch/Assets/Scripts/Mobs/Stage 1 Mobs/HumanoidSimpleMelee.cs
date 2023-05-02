@@ -6,16 +6,23 @@ using UnityEngine.AI;
 
 public class HumanoidSimpleMelee : MobCore
 {
+	//Animator Reference
+	public Animator meleeAnim;
+	
+
 	public Bounds attackHitBox;
 
 	[Range(0.25f, 1f)]
 	public float rotationStep;
-	//[Range(0.05f, 0.25f)]
-	//public float reducedRotationStep;
-	//[Range(0f, 0.25f)]
-	//public float angleStepCutoff;
-
-	protected override void Awake()
+    //[Range(0.05f, 0.25f)]
+    //public float reducedRotationStep;
+    //[Range(0f, 0.25f)]
+    //public float angleStepCutoff;
+    public void FixedUpdate()
+    {
+		meleeAnim.SetInteger("action", SimpleMeleeAttack.action);
+	}
+    protected override void Awake()
 	{
 		base.Awake();
 

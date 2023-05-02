@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 public class HumanoidSimpleRanged : MobCore
 {
+	//Animator Reference
+	public Animator rangedAnim;
+
+	public void FixedUpdate()
+	{
+		rangedAnim.SetInteger("action", SimpleRangedAttack.action);
+	}
+
 	[Range(1f, 15f)]
 	public float RangedAttackRadius;
 
