@@ -125,11 +125,11 @@ public class ShopSection : MonoBehaviour
     }
     public void Bought()
     {
-        if(money.Credits >= Price)
+        if(Money.Credits >= Price)
         {
             ItemManager.Instance.AddItemToInventory(CurrItem.data);
             Destroy(Item);
-            money.Credits -= Price;
+            Money.Credits -= Price;
         }
         
     }

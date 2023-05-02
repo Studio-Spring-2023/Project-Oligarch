@@ -5,7 +5,7 @@ using TMPro;
 
 public class Money : MonoBehaviour
 {
-    public int Credits;
+    public static int Credits;
     [SerializeField] TextMeshProUGUI Text;
 
     void Update()

@@ -146,6 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
+  worth: 10
+  money: {fileID: 0}
 --- !u!136 &4278149628457139053
 CapsuleCollider:
   m_ObjectHideFlags: 0

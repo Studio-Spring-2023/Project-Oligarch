@@ -170,3 +170,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
+  worth: 15
+  money: {fileID: 0}

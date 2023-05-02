@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MetaShop : Interactable
 {
     [SerializeField] Image Menu;
-    [SerializeField] Money money;
+    [SerializeField] Money Money;
     public List<MetaUpgrade> Upgrades = new List<MetaUpgrade>();
     [SerializeField] Image ItemImage1;
     [SerializeField] Image ItemImage2;
@@ -117,30 +117,30 @@ public class MetaShop : Interactable
     }
     public void BuyLeft()
     {
-        if (Upgrades[currIndex1].price1 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 1)
+        if (Upgrades[currIndex1].price1 <= Money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 1)
         {
             MetaManager.MetaDict[Upgrades[currIndex1].Name] += 1;
-            money.Credits -= Upgrades[currIndex1].price1;
+            Money.Credits -= Upgrades[currIndex1].price1;
         }
 
-        else if (Upgrades[currIndex1].price2 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 2)
+        else if (Upgrades[currIndex1].price2 <= Money.Credits && MetaManager.MetaDict[Upgrades[currIndex1].Name] < 2)
         {
             MetaManager.MetaDict[Upgrades[currIndex1].Name] += 1;
-            money.Credits -= Upgrades[currIndex1].price2;
+            Money.Credits -= Upgrades[currIndex1].price2;
         }
     }
     public void BuyRight()
     {
-        if (Upgrades[currIndex2].price1 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 1)
+        if (Upgrades[currIndex2].price1 <= Money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 1)
         {
             MetaManager.MetaDict[Upgrades[currIndex2].Name] += 1;
-            money.Credits -= Upgrades[currIndex2].price1;
+            Money.Credits -= Upgrades[currIndex2].price1;
         }
 
-        else if (Upgrades[currIndex2].price2 <= money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 2)
+        else if (Upgrades[currIndex2].price2 <= Money.Credits && MetaManager.MetaDict[Upgrades[currIndex2].Name] < 2)
         {
             MetaManager.MetaDict[Upgrades[currIndex2].Name] += 1;
-            money.Credits -= Upgrades[currIndex2].price2;
+            Money.Credits -= Upgrades[currIndex2].price2;
         }
     }
 

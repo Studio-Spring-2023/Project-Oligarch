@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            money.Credits += worth;
+            Money.Credits += worth;
             Destroy(gameObject);
         }
     }
