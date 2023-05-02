@@ -72,7 +72,7 @@ public class PlayerCore : Core
 	public RectTransform Crosshair;
 
 	private bool jump;
-
+	public TakeHealthDamage HP;
 	//zach animation ref
 	public Animator playerRanged;
 
@@ -283,7 +283,7 @@ public class PlayerCore : Core
 
 	public static void Damaged(int damage)
 	{
-		Debug.Log($"<color=green>[PlayerCore]</color>: Player took {damage} damage.");
+		TakeHealthDamage.TakeDamage(damage);		
 	}
 
 	private void OnDisable()

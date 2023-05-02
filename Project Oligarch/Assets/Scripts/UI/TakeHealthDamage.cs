@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class TakeHealthDamage : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth;
+    public static int currentHealth;
     public int maxShield = 100;
-    public int currentShield;
+    public static int currentShield;
 
     public HealthBar healthBar;
     public HealthBar shieldbar;
@@ -32,7 +32,7 @@ public class TakeHealthDamage : MonoBehaviour
 
     }
 
-    public void TakeDamage(int Damage)
+    public static void TakeDamage(int Damage)
     {
         if(currentShield >= 0)
         {
