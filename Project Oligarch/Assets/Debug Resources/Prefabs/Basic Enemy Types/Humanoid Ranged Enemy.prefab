@@ -130,6 +130,8 @@ MonoBehaviour:
   Damage: 2
   MaxMovementOffset: 12
   MinMovementOffset: 6
+  Action: 0
+  rangedAnim: {fileID: 4928516825563771373}
   RangedAttackRadius: 12
   rotationStep: 0.65
 --- !u!114 &797814560689231928
@@ -147,7 +149,9 @@ MonoBehaviour:
   maxHealth: 2
   currentHealth: 0
   worth: 10
-  money: {fileID: 0}
+  enemyAnim: {fileID: 4928516825563771373}
+  death_despawn: 6
+  death_action_number: 2
 --- !u!136 &4278149628457139053
 CapsuleCollider:
   m_ObjectHideFlags: 0
