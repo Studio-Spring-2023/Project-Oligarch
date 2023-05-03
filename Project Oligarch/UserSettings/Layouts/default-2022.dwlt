@@ -338,9 +338,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 9c9e0200
-    m_LastClickedID: 171676
-    m_ExpandedIDs: 000000009c9e02004ca102001ca4020000ca9a3bffffff7f
+    m_SelectedIDs: ea240200
+    m_LastClickedID: 140522
+    m_ExpandedIDs: 00000000ea24020000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -368,7 +368,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009c9e0200
+    m_ExpandedIDs: 00000000ea240200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -510,23 +510,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 66270200
       m_LastClickedID: 0
-      m_ExpandedIDs: faf1fbffa208fcffe608fcff1809fcff9609fcff7074fdffca74fdff0ae1feff
+      m_ExpandedIDs: 2afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Crash Site
-        m_OriginalName: Crash Site
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -358648
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -930,11 +930,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.15401077, y: -0.8416296, z: 0.3131343, w: 0.4125842}
     speed: 2
-    m_Value: {x: 0.1535149, y: -0.842105, z: 0.31331193, w: 0.41125166}
+    m_Value: {x: 0.15398471, y: -0.84148717, z: 0.31308132, w: 0.41251436}
   m_Size:
     m_Target: 0.8660254
     speed: 2
-    m_Value: 0.86602825
+    m_Value: 0.8660254
   m_Ortho:
     m_Target: 0
     speed: 2
