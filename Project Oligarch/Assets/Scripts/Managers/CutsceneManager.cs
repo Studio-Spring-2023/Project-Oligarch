@@ -11,7 +11,7 @@ public class CutsceneManager : MonoBehaviour
     List<GameObject> disableOnEnd = new List<GameObject>();
     [SerializeField]
     float time;
-    void Start()
+    void Awake()
     {
         foreach (GameObject obj in enableOnEnd)
         {
