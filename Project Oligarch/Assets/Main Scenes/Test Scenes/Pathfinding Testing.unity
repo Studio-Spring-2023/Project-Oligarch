@@ -405,7 +405,7 @@ MonoBehaviour:
   worth: 0
   enemyAnim: {fileID: 13799858}
   death_despawn: 3
-  death_action_number: 3
+  death_action_number: 5
 --- !u!23 &362433716
 MeshRenderer:
   m_ObjectHideFlags: 0
