@@ -42,6 +42,8 @@ public class BountyHandler : MonoBehaviour
 
 	private BountyOrb ActiveBounty;
 
+	public ConfirmBounty ConBounty;
+
 	[Range(0f, 1f)]
 	public float RotationSmoothness;
 	[Range(0.25f, 3.5f)]
@@ -126,6 +128,7 @@ public class BountyHandler : MonoBehaviour
 
 	private void AssignActiveBounty(BountyObject orbInstance)
 	{
+		ConBounty.Planet = orbInstance.Planet;
 		foreach (BountyOrb orb in BountyOrbs)
 		{
 			if (orb.Instance == orbInstance)
@@ -171,14 +174,17 @@ public class BountyHandler : MonoBehaviour
 			switch (orb.Bounty.Planet)
 			{
 				case PlanetType.Decus:
+					orb.Instance.Planet = "Planet1";
 					orbRenderer.material = Resources.Load<Material>("Materials/Bounty Decus");
 					break;
 
 				case PlanetType.Snow:
+					orb.Instance.Planet = "Planet2";
 					orbRenderer.material = Resources.Load<Material>("Materials/Bounty Snow");
 					break;
 
 				case PlanetType.Magma:
+					orb.Instance.Planet = "Planet3";
 					orbRenderer.material = Resources.Load<Material>("Materials/Bounty Magma");
 					break;
 			}

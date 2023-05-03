@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364a6a3706e078840a9dc9393b5f0a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Planet: 
 --- !u!1 &878330464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,6 +2368,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Holotable
       objectReference: {fileID: 0}
+    - target: {fileID: 5300433611992048901, guid: 243758013b6b4734d91cf3637f49b104,
+        type: 3}
+      propertyPath: ConBounty
+      value: 
+      objectReference: {fileID: 781217895}
     - target: {fileID: 5300433611992048901, guid: 243758013b6b4734d91cf3637f49b104,
         type: 3}
       propertyPath: CockpitConsole

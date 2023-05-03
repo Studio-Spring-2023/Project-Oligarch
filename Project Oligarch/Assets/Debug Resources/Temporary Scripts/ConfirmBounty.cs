@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ConfirmBounty : Interactable
 {
+	public string Planet;
 	public override void InteractedWith()
 	{
-		SceneManager.LoadScene("Planescape");
+		SceneManager.LoadScene(Planet);
 	}
 }
