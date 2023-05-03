@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: steel_toed_boots Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d4a16e7e2d9c1b845b1b0224ffb1e6ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
