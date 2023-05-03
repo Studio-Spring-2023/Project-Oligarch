@@ -334,6 +334,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 797814560689231928, guid: 52cae4cbebf43d14bb7820f8871d7501,
+        type: 3}
+      propertyPath: death_despawn
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 845909382505556768, guid: 52cae4cbebf43d14bb7820f8871d7501,
         type: 3}
       propertyPath: m_Name
@@ -496,6 +501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239547619138709737, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7213237913662585703, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
         type: 3}
@@ -1359,6 +1369,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5846914338546063928, guid: ca20326a58ff73647ba4bafbbe5607b0,
+        type: 3}
+      propertyPath: death_despawn
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7287250766469212037, guid: ca20326a58ff73647ba4bafbbe5607b0,
         type: 3}
       propertyPath: m_Name
@@ -1617,6 +1632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781274406264749533, guid: 17fa66f3c4b32734caba74b2cc63cb21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2173,6 +2193,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878319626188384480, guid: 2a05e85b6ecbd1c4f96a94a87ce400f2,
+        type: 3}
+      propertyPath: death_despawn
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6705223805051777721, guid: 2a05e85b6ecbd1c4f96a94a87ce400f2,
         type: 3}
