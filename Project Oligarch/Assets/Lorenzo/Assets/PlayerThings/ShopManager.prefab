@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4903567141805183985
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c39d5c26ae15f547a50c4d52ae20708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinObj: {fileID: 0}
+  CoinObj: {fileID: 2087274141928831977, guid: 820e5dd3fe91d764d8b917ea1728c8e8, type: 3}
   Force: 3
 --- !u!114 &4116255280786073468
 MonoBehaviour:
@@ -135,5 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1719ece9232d4594ea5403cc83bccaae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthObj: {fileID: 0}
+  HealthObj: {fileID: 4133988763696313069, guid: db01df834c81a5943b2e2456123090fa,
+    type: 3}
   Force: 5

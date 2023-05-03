@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7313341849690325107}
   - component: {fileID: 3251694209895283100}
   - component: {fileID: 6683250036648674884}
-  - component: {fileID: 6343536819905567125}
+  - component: {fileID: 9197936435387003887}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7313341849690325107
 MonoBehaviour:
@@ -106,7 +106,7 @@ MonoBehaviour:
   PercentMaxShieldBonus: 0
   FlatCooldownReduction: 0
   PercentCooldownReduction: 0
---- !u!114 &6343536819905567125
+--- !u!114 &9197936435387003887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
