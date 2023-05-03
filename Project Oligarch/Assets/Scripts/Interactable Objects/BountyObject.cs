@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BountyObject : Interactable
 {
+    public string Planet;
     public static Action<BountyObject> BountyInteracted;
     public override void InteractedWith()
     {
