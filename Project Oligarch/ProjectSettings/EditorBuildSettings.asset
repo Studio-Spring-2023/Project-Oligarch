@@ -11,27 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Scenes/Test Scenes/Movement Testing.unity
     guid: 004bd9ebffd7ae648a41cde4185f0314
-  - enabled: 0
-    path: Assets/Main Scenes/Player Ship.unity
-    guid: bddec381a9043554da948b9abfa2bb11
-  - enabled: 0
-    path: Assets/Main Scenes/Decus.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Main Scenes/Olympia.unity
-    guid: 897fa13e05991414ab192f2109c83957
   - enabled: 1
     path: Assets/Planet1.unity
     guid: 10e5b57a2aee7d942951fb9c863b8db4
   - enabled: 1
     path: Assets/Planet2.unity
-    guid: 5a4968e6d1ec06e49801a55c532adbf4
+    guid: ba2ad1592662d4542a61e66873ed3502
   - enabled: 1
     path: Assets/Planet3.unity
-    guid: b4a88cf1ea3ec7249a6215abaa93c44e
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: 5837f30c8ba21044f820ade9adfab368
   - enabled: 1
     path: Assets/Main Scenes/Game Over.unity
     guid: c3a8d69dbd6b5d84298d0ef9570a395d
