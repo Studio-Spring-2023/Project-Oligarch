@@ -102,10 +102,9 @@ public class Shop : MonoBehaviour
     public void SingleSection(ShopRarity rarity, GameObject Section, Vector3 Position)
     {
         ShopSection sec = Section.GetComponent<ShopSection>();
-
+        Instantiate(sec, Position, Quaternion.identity);
         sec.CurrItem = RollItem(rarity);
         sec.Price = 0;
-        Instantiate(sec, Position, Quaternion.identity);
     }
 
     public void ReplaceItem(int stallNum)

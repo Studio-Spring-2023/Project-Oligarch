@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ShipTP : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string scene;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            SceneManager.LoadScene("Movement Testing", LoadSceneMode.Single);
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
     }
 }
