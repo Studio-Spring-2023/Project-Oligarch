@@ -50,7 +50,7 @@ public class TakeHealthDamage : MonoBehaviour
         if(currentHealth <= 0) 
         {
             Debug.Log("GameOver");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
         }
             
     }
