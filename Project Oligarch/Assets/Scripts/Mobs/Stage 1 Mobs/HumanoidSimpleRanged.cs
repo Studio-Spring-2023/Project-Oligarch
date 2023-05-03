@@ -10,7 +10,7 @@ public class HumanoidSimpleRanged : MobCore
 
 	public void FixedUpdate()
 	{
-		rangedAnim.SetInteger("action", SimpleRangedAttack.action);
+		rangedAnim.SetInteger("action", Action);
 	}
 
 	[Range(1f, 15f)]

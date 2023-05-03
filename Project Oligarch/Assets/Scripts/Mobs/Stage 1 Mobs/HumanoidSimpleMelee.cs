@@ -20,7 +20,7 @@ public class HumanoidSimpleMelee : MobCore
     //public float angleStepCutoff;
     public void FixedUpdate()
     {
-		meleeAnim.SetInteger("action", SimpleMeleeAttack.action);
+		meleeAnim.SetInteger("action", Action);
 	}
     protected override void Awake()
 	{

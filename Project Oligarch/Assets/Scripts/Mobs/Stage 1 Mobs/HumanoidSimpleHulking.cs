@@ -10,7 +10,7 @@ public class HumanoidSimpleHulking : MobCore
 
 	public void FixedUpdate()
 	{
-		hulkAnim.SetInteger("action", SimpleThrow.action);
+		hulkAnim.SetInteger("action", Action);
 	}
 
 	public Bounds attackHitBox;

@@ -17,6 +17,7 @@ public abstract class MobCore : Core, IGoap
 	public float MaxMovementOffset;
 	[Range(1f, 25f)]
 	public float MinMovementOffset;
+	public int Action;
 
 	protected NavMeshAgent EntityNavAgent;
 	protected NavMeshPath EntityNavPath;

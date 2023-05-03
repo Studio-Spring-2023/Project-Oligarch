@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SimpleMeleeAttack : GoapAction
 {
@@ -9,7 +10,7 @@ public class SimpleMeleeAttack : GoapAction
 	bool isAttacking = false;
 
 	//animatir variable
-	public static int action;
+	public static int action = 0;
 
 	Bounds hitBoxBounds;
 
@@ -34,9 +35,9 @@ public class SimpleMeleeAttack : GoapAction
 	//state and does the unique behavior that this action has tied to it. 
 	public override bool PerformAction(MobCore entity)
 	{
-		//Attack the player!
-
-		if (CanAttack() && !isAttacking)
+        //Attack the player!
+        entity.Action = action;
+        if (CanAttack() && !isAttacking)
 		{
 			isAttacking = true;
 			
@@ -48,9 +49,9 @@ public class SimpleMeleeAttack : GoapAction
 				PlayerCore.Damaged(entity.Damage);
 				//Could add a goal state here that we hit the player, so we could make them do a combo attack after?
 			}
-		}	
-
-		return true;
+		}
+        entity.Action = action;
+        return true;
 	}
 
 	private bool CanAttack()
@@ -77,8 +78,9 @@ public class SimpleMeleeAttack : GoapAction
 	//otherwise this action will be removed from the possibilites by the planner
 	public override bool CheckProceduralPrecondition(MobCore entity)
 	{
-		//Can do world state checks here!
-		return true;
+        //Can do world state checks here!
+        entity.Action = action;
+        return true;
 	}
 
 	//Some actions may need to have their internal state reset, so we do that here.
@@ -124,7 +126,7 @@ public class SimpleRangedAttack : GoapAction
 	float shotCooldown = 0.75f;
 
 	//animatir variable
-	public static int action;
+	public static int action = 0;
 
 	public SimpleRangedAttack()
 	{
@@ -138,7 +140,8 @@ public class SimpleRangedAttack : GoapAction
 
 	public override bool CheckProceduralPrecondition(MobCore entity)
 	{
-		return true;
+        entity.Action = action;
+        return true;
 	}
 
 	public override bool isDone()
@@ -153,7 +156,8 @@ public class SimpleRangedAttack : GoapAction
 
 	public override bool PerformAction(MobCore entity)
 	{
-		if (CanFire() && !isFiring)
+        entity.Action = action;
+        if (CanFire() && !isFiring)
 		{
 			shotsFired++;
 			isFiring = true;
@@ -179,8 +183,8 @@ public class SimpleRangedAttack : GoapAction
 		{
 			entity.MoveSelf(this);
 		}
-
-		return true;
+        entity.Action = action;
+        return true;
 	}
 
 	private bool CanFire()
@@ -218,7 +222,7 @@ public class SimpleThrow : GoapAction
 {
 
 	//animatir variable
-	public static int action;
+	public static int action = 0;
 
 	bool hasThrown;
 
@@ -236,7 +240,7 @@ public class SimpleThrow : GoapAction
 
 	public SimpleThrow(float radiusToCheck, float throwSpeed, Vector3 throwPos)
 	{
-		preconditions.Add(new KeyValuePair<string, object>("playerAlive", true));
+        preconditions.Add(new KeyValuePair<string, object>("playerAlive", true));
 		effects.Add(new KeyValuePair<string, object>("playerAlive", false));
 
 		TargetObject = null;
@@ -250,7 +254,8 @@ public class SimpleThrow : GoapAction
 
 	public override bool CheckProceduralPrecondition(MobCore entity)
 	{
-		Collider[] foundThrowables = Physics.OverlapSphere(entity.transform.position, checkRadius, Throwables);
+        entity.Action = action;
+        Collider[] foundThrowables = Physics.OverlapSphere(entity.transform.position, checkRadius, Throwables);
 
 		if (foundThrowables == null)
 			return false;
@@ -271,8 +276,8 @@ public class SimpleThrow : GoapAction
 				TargetObject = throwable.gameObject;
 			}
 		}
-
-		return (TargetObject != null);
+        entity.Action = action;
+        return (TargetObject != null);
 	}
 
 	public override bool isDone()
@@ -287,8 +292,9 @@ public class SimpleThrow : GoapAction
 
 	public override bool PerformAction(MobCore entity)
 	{
-		//THROW THE BARREL AT THE PLAYER
-		if (CanThrow() && !tryingToThrow)
+        entity.Action = action;
+        //THROW THE BARREL AT THE PLAYER
+        if (CanThrow() && !tryingToThrow)
 		{
 			Vector3 adjustedThrowPos = throwPos + entity.transform.position;
 
@@ -313,8 +319,8 @@ public class SimpleThrow : GoapAction
 			TargetRB.constraints = RigidbodyConstraints.None;
 			TargetRB.velocity = throwVelocity;
 		}
-
-		return true;
+        entity.Action = action;
+        return true;
 	}
 
 	bool CanThrow()
