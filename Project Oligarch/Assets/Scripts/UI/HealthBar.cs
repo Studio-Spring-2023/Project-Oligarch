@@ -20,9 +20,13 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        healthSlider.maxValue = HP.maxHealth;
-        healthSlider.value = TakeHealthDamage.currentHealth + playerCore.healthFlatMod * ( 1 + playerCore.healthPercentMod );
-        ShieldSlider.maxValue = HP.maxShield;
-        ShieldSlider.value = TakeHealthDamage.currentShield + playerCore.shieldMod;
+        if(healthSlider != null && ShieldSlider != null)
+        {
+            healthSlider.maxValue = HP.maxHealth;
+            healthSlider.value = TakeHealthDamage.currentHealth + playerCore.healthFlatMod * (1 + playerCore.healthPercentMod);
+            ShieldSlider.maxValue = HP.maxShield;
+            ShieldSlider.value = TakeHealthDamage.currentShield + playerCore.shieldMod;
+        }
+
     }
 }
