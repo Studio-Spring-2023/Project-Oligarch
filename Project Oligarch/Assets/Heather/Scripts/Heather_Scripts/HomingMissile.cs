@@ -20,10 +20,12 @@ public class HomingMissile : MonoBehaviour
     public float atkSpeedMod;
     public float force;
     public float rotationForce;
+    public bool missileWait = true;
 
 
     private void Awake ( )
     {
+        StartCoroutine(waitToHit());
         //This makes sure that there is a rigidbody and that the missile is a child of the weapon that fired it and that it has the necessary script to find it's target
         rb = this.GetComponent<Rigidbody> ( );
         FOV=GetComponentInParent<FieldofView> ();
@@ -41,14 +43,23 @@ public class HomingMissile : MonoBehaviour
     private void OnCollisionEnter ( Collision boom )
     {
         //This damages it's target before destroying itself
-        if ( boom.collider.CompareTag ( "Enemy" ) )
+        if (missileWait == false)
         {
-            boom.collider.GetComponent<Enemy_health> ( ).LoseLife ( Dam * ( 1 + damMod ) );
-            Destroy ( gameObject );
+            if (boom.collider.CompareTag("Enemy"))
+            {
+                boom.collider.GetComponent<Enemy_health>().LoseLife(Dam * (1 + damMod));
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy ( gameObject );
-        }
+    }
+
+    IEnumerator waitToHit()
+    {
+        yield return new WaitForSeconds(.2f);
+        missileWait = false;
     }
 }

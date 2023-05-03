@@ -6,7 +6,7 @@ using UnityEngine;
 public class FieldofView : MonoBehaviour
 {
     //These are for controlling the field of view
-    [Range ( 0 , 20 )]
+    [Range ( 0 , 100 )]
     public float viewRadius;
     [Range ( 0 , 180 )]
     public float viewAngle;
@@ -68,7 +68,7 @@ public class FieldofView : MonoBehaviour
             {
                 float disToTarget = Vector3.Distance ( transform.position , target.position );
 
-                if (disToTarget < 5 && Input.GetKeyDown(KeyCode.Mouse1) && !fired)
+                if (disToTarget < viewRadius && Input.GetKeyDown(KeyCode.Mouse1) && !fired)
                 {
                     missile=GameObject.Instantiate ( HomingMissile, missilePoint.transform.position, Quaternion.identity ).GetComponent<HomingMissile>();
                     

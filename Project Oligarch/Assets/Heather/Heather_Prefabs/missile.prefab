@@ -150,7 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   FOV: {fileID: 0}
-  Dam: 5
-  damagemod: 0
+  Dam: 3
+  damMod: 0
+  atkSpeedMod: 0
   force: 15
   rotationForce: 20
+  missileWait: 1
