@@ -14,7 +14,6 @@ public class projectiles : MonoBehaviour
 
     public float Dam;
     public float damMod;
-    public float atkSpeedMod;
     public float TimeBetweenShooting;
     public float Spread;
     public float Range;
@@ -126,7 +125,7 @@ public class projectiles : MonoBehaviour
 
         //This keeps track of the bursts
         if ( BulletsShot > 0 && BulletsLeft > 0 )
-            Invoke ( "bang" , TimeBetweenShots * ( 1 + atkSpeedMod ) );
+            Invoke ( "bang" , TimeBetweenShots);
     }
 
     private void resetShot ( )

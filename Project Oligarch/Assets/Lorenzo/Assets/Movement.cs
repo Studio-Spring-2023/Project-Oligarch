@@ -7,7 +7,6 @@ public class Movement : MonoBehaviour
     public float moveSpeed;
     private float StartSpeed;
 
-    public PlayerCore PlayerCore;
     public Transform orientation;
 
     [Tooltip("This should be a smaller number as this is what movespeed is multiplied by to get how far you travel in a slide")]
@@ -109,7 +108,7 @@ public class Movement : MonoBehaviour
         if(!OnSlope())
             moveDirection.y = rb.velocity.y;
         if(grounded && !OnSlope())
-            rb.velocity = moveDirection.normalized * moveSpeed * ( 1 + PlayerCore.moveMod); //grounded movement
+            rb.velocity = moveDirection.normalized * moveSpeed; //grounded movement
         else if(OnSlope())
         {
             SlopeForward = SlopeDir(moveDirection , slopeHit.normal);
@@ -125,7 +124,7 @@ public class Movement : MonoBehaviour
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
                 }
-        rb.AddForce ( transform.up * jumpForce , ForceMode.Impulse + PlayerCore.jumpMod );
+        rb.AddForce ( transform.up * jumpForce , ForceMode.Impulse);
 
             yield return new WaitForSeconds(0.5f);
             Active = true;

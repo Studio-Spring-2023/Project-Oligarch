@@ -15,7 +15,7 @@ public class PlayerCore : Core
     public int healthPercentMod;
     public int healthFlatMod;
 	public int shieldMod;
-	public int jumpMod;
+	public float jumpMod;
 
     [Header ("Slide Variables")]
 	public bool canSlide;
@@ -172,6 +172,7 @@ public class PlayerCore : Core
 			jump = true;
 		}
 	}
+
 	public IEnumerator SlideFunc()
 	{
 		Debug.Log("Slide");
@@ -199,7 +200,7 @@ public class PlayerCore : Core
 	{
 		if (grounded && !Slide)
 		{
-            Velocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * MoveSpeed;
+            Velocity = ( Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x ) * MoveSpeed * ( 1 + moveMod );
             playerRanged.SetInteger("Actions", 0);
 		}
 		else if(!grounded)
@@ -216,12 +217,12 @@ public class PlayerCore : Core
 		if (jump)
 		{
 			playerRanged.SetInteger("Actions", 1);
-			Velocity += Vector3.up * JumpForce;
+            Velocity += Vector3.up * JumpForce*jumpMod;
 			jump = false;
-		}
+        }
 
-		//Lerp MoveSpeed based on Acceleration / Deceleration timers.
-		PlayerRB.velocity = Velocity;
+        //Lerp MoveSpeed based on Acceleration / Deceleration timers.
+        PlayerRB.velocity = Velocity;
 
 		
 	}
