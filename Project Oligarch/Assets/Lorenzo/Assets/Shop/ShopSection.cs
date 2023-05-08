@@ -60,7 +60,7 @@ public class ShopSection : MonoBehaviour
             HoverItem();
             SpinItem();
         }
-        if(inFront())
+        if(inFront() && priceText != null)
         {
             priceText.text = Price.ToString();
             priceText.gameObject.SetActive(true);
@@ -69,7 +69,7 @@ public class ShopSection : MonoBehaviour
             itemName.enabled = true;
             itemDesc.enabled = true;
         }
-        else
+        else if(priceText != null)
         {
             priceText.gameObject.SetActive(false);
             priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
