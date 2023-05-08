@@ -12,9 +12,6 @@ public class PlayerCore : Core
 
 	[Header("Mods")]
     public float moveMod;
-    public int healthPercentMod;
-    public int healthFlatMod;
-	public int shieldMod;
 	public float jumpMod;
 
     [Header ("Slide Variables")]
@@ -23,6 +20,7 @@ public class PlayerCore : Core
 	public float SlideTime;
 	public float SlideCooldown;
 	public float SlideForce;
+
 	[Header("Movement Variables")]
     private Rigidbody PlayerRB;
 	private Vector3 Velocity;
