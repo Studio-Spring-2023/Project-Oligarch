@@ -16,7 +16,7 @@ public class HealthPickUp : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.Health += amount;
+            Core.Health += amount;
             Destroy(gameObject);
         }
     }

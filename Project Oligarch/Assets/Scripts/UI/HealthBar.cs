@@ -22,9 +22,9 @@ public class HealthBar : MonoBehaviour
     {
         if(healthSlider != null && ShieldSlider != null)
         {
-            healthSlider.maxValue = HP.maxHealth;
+            healthSlider.maxValue = TakeHealthDamage.maxHealth;
             healthSlider.value = TakeHealthDamage.currentHealth;
-            ShieldSlider.maxValue = HP.maxShield;
+            ShieldSlider.maxValue = TakeHealthDamage.maxShield;
             ShieldSlider.value = TakeHealthDamage.currentShield;
         }
 
