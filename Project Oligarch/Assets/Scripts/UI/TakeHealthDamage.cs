@@ -5,14 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TakeHealthDamage : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public static int maxHealth = 100;
     public static int currentHealth;
-    public int maxShield = 100;
+    public static int maxShield = 100;
     public static int currentShield;
-
-    public int healthPercentMod;
-    public int healthFlatMod;
-    public int shieldMod;
 
     public HealthBar healthBar;
     public HealthBar shieldbar;
@@ -28,9 +24,6 @@ public class TakeHealthDamage : MonoBehaviour
 
     void Update()
     {
-        currentHealth = maxHealth * ( 1 + healthPercentMod ) + healthFlatMod;
-        currentShield = maxShield + shieldMod;
-
         if (Input.GetKeyDown(KeyCode.O))
         {
             TakeDamage(5);

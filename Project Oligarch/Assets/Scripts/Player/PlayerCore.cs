@@ -10,10 +10,6 @@ public class PlayerCore : Core
 	public static Transform Transform { get; private set; }
     public static Loadout AssignedLoadout { get; private set; }
 
-	[Header("Mods")]
-    public float moveMod;
-	public float jumpMod;
-
     [Header ("Slide Variables")]
 	public bool canSlide;
 	public bool Slide;
@@ -30,7 +26,7 @@ public class PlayerCore : Core
     [Range(5f, 15f)]
     public float AirStrafeSpeed;
     [Range(1f, 20f)]
-	public float JumpForce;
+	public static float JumpForce;
 	public float GroundCheckDistance;
 	private bool grounded;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
@@ -198,7 +194,7 @@ public class PlayerCore : Core
 	{
 		if (grounded && !Slide)
 		{
-            Velocity = ( Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x ) * MoveSpeed * ( 1 + moveMod );
+            Velocity = ( Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x ) * MoveSpeed;
             playerRanged.SetInteger("Actions", 0);
 		}
 		else if(!grounded)
@@ -215,7 +211,7 @@ public class PlayerCore : Core
 		if (jump)
 		{
 			playerRanged.SetInteger("Actions", 1);
-            Velocity += Vector3.up * JumpForce*jumpMod;
+            Velocity += Vector3.up * JumpForce;
 			jump = false;
         }
 

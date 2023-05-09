@@ -10,12 +10,10 @@ public class projectiles : MonoBehaviour
     private int BulletsPerTap;
     private int BulletsLeft;
     private int BulletsShot;
-    public int coolDownMod;
+    
 
-    public float Dam;
-    public float damMod;
-    public float atkSpeedMod;
-    public float TimeBetweenShooting;
+    public static float Dam;   
+    public static float TimeBetweenShooting;
     public float Spread;
     public float Range;
     private float reloadTime;
@@ -105,7 +103,7 @@ public class projectiles : MonoBehaviour
             Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
-            Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam * ( 1 + damMod ) );
+            Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
             StartCoroutine ( ShotBullet ( ) );
         }
         else
@@ -121,7 +119,7 @@ public class projectiles : MonoBehaviour
         BulletsShot--;
 
         //This Resets the CanShoot Bool
-        Invoke ( "resetShot" , TimeBetweenShooting - coolDownMod * ( 1 + atkSpeedMod ) );
+        Invoke ( "resetShot" , TimeBetweenShooting );
 
 
         //This keeps track of the bursts
