@@ -23,9 +23,9 @@ public class StatMods : MonoBehaviour
 
     public static void StatsMod ( )
     {
-        TakeHealthDamage.currentHealth = TakeHealthDamage.maxHealth * ( 1 + healthPercentMod ) + healthFlatMod;
-        TakeHealthDamage.currentHealth = Core.Health + ( healthRegen * secForRegen );
+        TakeHealthDamage.currentHealth = ( TakeHealthDamage.maxHealth * ( 1 + healthPercentMod ) ) + healthFlatMod + ( healthRegen * secForRegen );
         TakeHealthDamage.currentShield = TakeHealthDamage.maxShield + shieldMod;
+        
 
         projectiles.Dam = projectiles.Dam * ( 1 + damMod );
         projectiles.TimeBetweenShooting = projectiles.TimeBetweenShooting - coolDownMod * ( 1 + atkSpeedMod );
