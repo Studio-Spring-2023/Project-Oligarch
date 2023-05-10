@@ -35,6 +35,7 @@ public class projectiles : MonoBehaviour
 
     LineRenderer bullets;
 
+    public Animator playerRanged;
 
 
     private void Start ( )
@@ -64,10 +65,19 @@ public class projectiles : MonoBehaviour
 
     private void ShootingInput ( )
     {
-
+            if (Shooting)
+            {
+                playerRanged.SetBool("Shooting", true);
+            }
+            else
+            {
+                playerRanged.SetBool("Shooting", false);
+            }
+        
         //This is to make sure that the left mouse button is the one that controls the gun
         if ( CanShoot )
         {
+            
             Shooting = Input.GetKey ( KeyCode.Mouse0 );
         }
 
@@ -85,7 +95,7 @@ public class projectiles : MonoBehaviour
 
     private void bang ( )
     {
-        CanShoot= false;
+        CanShoot = false;
 
         //This is the spread
         float x = Random.Range ( -Spread , Spread );

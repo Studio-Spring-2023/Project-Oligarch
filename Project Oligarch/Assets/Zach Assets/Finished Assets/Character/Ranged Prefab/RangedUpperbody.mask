@@ -14,17 +14,17 @@ AvatarMask:
   - m_Path: metarig
     m_Weight: 0
   - m_Path: metarig/Gun1
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/Gun1/gun
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/Gun1/gun/Barrel_L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/Gun1/gun/Barrel_R
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/Gun1/gun2
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/Gun1/gun2/Cylinder
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: metarig/heelIK.L
     m_Weight: 0
   - m_Path: metarig/heelIK.L/foot.L
