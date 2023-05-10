@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8979373189980405966}
   - component: {fileID: 797814560689231928}
   - component: {fileID: 4278149628457139053}
+  - component: {fileID: 5975899713806722144}
   m_Layer: 9
   m_Name: Humanoid Ranged Enemy
   m_TagString: Enemy
@@ -36,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 846814464389818774}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1109954808729644456
 MeshFilter:
@@ -122,10 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2157156f611d074e9734545a9802147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3.5
   StartSpeed: 0
   SprintSpeed: 0
-  Health: 0
   Shield: 0
   Damage: 2
   MaxMovementOffset: 12
@@ -175,6 +174,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5975899713806722144
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845909382505556768}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 32
+  m_CollisionDetection: 0
 --- !u!1001 &885736028812562045
 PrefabInstance:
   m_ObjectHideFlags: 0
