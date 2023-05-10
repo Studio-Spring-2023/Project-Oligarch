@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f0ea0d12d1095c949800b645dd445bb8, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 5521143063811593294, guid: f3f0538b3f297134392f81204b1cd57d,
-    type: 3}
+  DisplayPrefab: {fileID: 0}
   DisplayName: MRE Pack
   price: 50
   Description: Increases health regen by 3HP/second

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ea9175ee87422bb4db33fd80f69d7370, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 6284427928675920144, guid: a54854d3dcf4b1844a7b2d55e16b4c59,
+  DisplayPrefab: {fileID: 5409845368464088904, guid: 2814e0af7d75e84469dedd0e532b8598,
     type: 3}
   DisplayName: Adrenaline
   price: 50

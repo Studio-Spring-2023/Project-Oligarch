@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 73e1b9f895300e44e9c28a4adde8b354, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 7965089698698090304, guid: 1cc2d343ad19f7948a02b2dd8946e73c,
-    type: 3}
+  DisplayPrefab: {fileID: 0}
   DisplayName: Hidden Knife
   price: 50
   Description: Each attack reduces secondary and special attack cooldown by 0.5s

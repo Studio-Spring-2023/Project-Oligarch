@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c2997b45c6cd81b41a312d7e712f99c2, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 9108627590986875589, guid: 51f1cec603ae6e748a0b51abbdba84a3,
-    type: 3}
+  DisplayPrefab: {fileID: 0}
   DisplayName: Emergency Medkit
   price: 50
   Description: +20 Max HP
