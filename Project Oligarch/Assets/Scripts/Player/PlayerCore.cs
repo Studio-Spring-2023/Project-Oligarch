@@ -26,7 +26,7 @@ public class PlayerCore : Core
     [Range(5f, 15f)]
     public float AirStrafeSpeed;
     [Range(1f, 20f)]
-	public static float JumpForce;
+	public static float JumpForce = 8f;
 	public float GroundCheckDistance;
 	private bool grounded;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
@@ -118,7 +118,7 @@ public class PlayerCore : Core
 
         Forward = new Vector3 ( transform.forward.x , 0 , transform.forward.z ).normalized;
 
-		Ray groundRay = new Ray(transform.position, Vector3.down);
+		Ray groundRay = new Ray(transform.position, Vector3.down * 1.1f);
 		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
 		{
 			//We are floating, get our ass on the ground.
