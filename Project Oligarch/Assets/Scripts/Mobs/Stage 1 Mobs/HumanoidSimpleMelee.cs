@@ -11,7 +11,7 @@ public class HumanoidSimpleMelee : MobCore
 	
 
 	public Bounds attackHitBox;
-
+	
 	[Range(0.25f, 1f)]
 	public float rotationStep;
     //[Range(0.05f, 0.25f)]
@@ -32,6 +32,7 @@ public class HumanoidSimpleMelee : MobCore
 
 	public override bool MoveSelf(GoapAction action)
 	{
+		
 		//First we get the offset position from our target, since we need space to do an attack
 		Vector3 dirFromEntityToTarget = (action.TargetObject.transform.position - transform.position).normalized;
 		Vector3 offsetAttackPos = (-dirFromEntityToTarget * MaxMovementOffset) + action.TargetObject.transform.position;
@@ -52,7 +53,7 @@ public class HumanoidSimpleMelee : MobCore
 		//Can we see the Player? If not, move through our points.
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
-			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * MoveSpeed;
+			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * 5f;
 			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;

@@ -34,6 +34,6 @@ public class StatMods : MonoBehaviour
         HomingMissile.force = HomingMissile.force * ( 1 + atkSpeedMod );
 
         PlayerCore.JumpForce = PlayerCore.JumpForce * jumpMod;
-        PlayerCore.MoveSpeed = Core.MoveSpeed * ( 1 + moveMod );
+        PlayerCore.MoveSpeed = PlayerCore.MoveSpeed * ( 1 + moveMod );
     }
 }

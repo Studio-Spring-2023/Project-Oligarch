@@ -55,7 +55,7 @@ public class HumanoidSimpleRanged : MobCore
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
 			Debug.Log("Look at player");
-			EntityNavAgent.velocity = dirFromEntityToAttackPos * MoveSpeed;
+			EntityNavAgent.velocity = dirFromEntityToAttackPos * 5f;
 			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;
