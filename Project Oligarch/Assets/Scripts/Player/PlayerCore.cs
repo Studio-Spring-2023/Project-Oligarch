@@ -85,6 +85,8 @@ public class PlayerCore : Core
 
         //Temporary to avoid Null Reference errors
         AssignedLoadout = AssignLoadout ( LoadoutType.Ranger );
+
+		MoveSpeed = 6f;
 	}
 
     private void Start()
@@ -108,8 +110,7 @@ public class PlayerCore : Core
 
         Forward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
         Right = new Vector3(transform.right.x, 0, transform.right.z).normalized;
-        //
-
+		//
 
         yaw += InputHandler.MouseDelta.x * MouseSensitivity;
 		pitch += -InputHandler.MouseDelta.y * MouseSensitivity;
