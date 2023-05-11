@@ -19,3 +19,4 @@ MonoBehaviour:
   BaseStat: 0.05
   StackingStat: 0.01
   Multiplier: 0
+  DisplaySprite: {fileID: 21300000, guid: 52391ef3cae40484481b5e659d29760a, type: 3}

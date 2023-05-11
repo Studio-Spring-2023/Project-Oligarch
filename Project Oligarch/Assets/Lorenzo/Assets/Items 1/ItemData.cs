@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Item
 {
@@ -73,4 +74,5 @@ public class ItemData : ScriptableObject
 	public float BaseStat;
 	public float StackingStat;
 	public Multiplier Multiplier;
+	public Sprite DisplaySprite;
 }

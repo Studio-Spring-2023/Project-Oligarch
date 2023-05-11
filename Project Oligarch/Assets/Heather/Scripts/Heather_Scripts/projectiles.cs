@@ -12,8 +12,8 @@ public class projectiles : MonoBehaviour
     private int BulletsShot;
     
 
-    public static float Dam;   
-    public static float TimeBetweenShooting;
+    public static float Dam = 2f;   
+    public static float TimeBetweenShooting = 0.5f;
     public float Spread;
     public float Range;
     private float reloadTime;
