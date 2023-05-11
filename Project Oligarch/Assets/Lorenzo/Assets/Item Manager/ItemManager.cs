@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct ItemInfo
 {
@@ -15,6 +16,10 @@ public class ItemManager : MonoBehaviour
 	public ItemData[] UncommonItems;
 	public ItemData[] RareItems;
 	public ItemData[] LegendaryItems;
+
+	public Transform OriginalInventoryPos;
+	private float rightOff;
+	public GameObject ImagePrefab;
 
 	private Dictionary<ItemData, int> PlayerInventory;
 
@@ -49,7 +54,10 @@ public class ItemManager : MonoBehaviour
 		PlayerInventory[itemToAdd] += 1;
 		Debug.Log($"<color=green>[ItemManager]</color>: Successfully added {itemToAdd.ItemName}.");
 		CalculateModifiers(itemToAdd);
-
+		Vector3 inventoryPos = OriginalInventoryPos.position;
+		inventoryPos.x += rightOff;
+		Image inventoryDisplay = Instantiate(ImagePrefab, inventoryPos, Quaternion.identity).GetComponent<Image>();
+		inventoryDisplay.sprite = itemToAdd.DisplaySprite;
 		//Debug.Log(PrintInventory());
 
 		return true;
