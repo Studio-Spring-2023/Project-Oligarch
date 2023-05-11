@@ -55,7 +55,7 @@ public class HumanoidSimpleHulking : MobCore
 		//Can we see the Player? If not, move through our points.
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
-			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * MoveSpeed;
+			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * 4f;
 			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;

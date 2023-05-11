@@ -1083,6 +1083,7 @@ GameObject:
   - component: {fileID: 699394263}
   - component: {fileID: 699394262}
   - component: {fileID: 699394264}
+  - component: {fileID: 699394265}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1107,8 +1108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 34.059, y: -33}
-  m_SizeDelta: {x: 1106.6316, y: 468.2836}
+  m_AnchoredPosition: {x: 0, y: -675}
+  m_SizeDelta: {x: 1240.023, y: 1912.1001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699394262
 MonoBehaviour:
@@ -1161,6 +1162,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 699394260}
+--- !u!95 &699394265
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699394260}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee18a47e99799d744b23e7fbbc609ad7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &910561180
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: cf74618d40f94104ea9e2acc9e8ad978, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 726067311802020593, guid: d822cc8b041792b4f90b8751054fdf95,
-    type: 3}
+  DisplayPrefab: {fileID: 0}
   DisplayName: Exotipop
   price: 90
   Description: Reduces Ability Cooldown by 20%

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8816578722606451079}
   - component: {fileID: 5846914338546063928}
   - component: {fileID: 2990973925946276207}
+  - component: {fileID: 1355104474838446544}
   m_Layer: 9
   m_Name: Humanoid Hulking Enemy
   m_TagString: Enemy
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 2052241185663145816}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &711183552847548949
 MeshRenderer:
@@ -113,10 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7946d455f02b7654183d09e196a915c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2.5
   StartSpeed: 0
   SprintSpeed: 0
-  Health: 49
   Shield: 0
   Damage: 0
   MaxMovementOffset: 3.5
@@ -171,6 +170,33 @@ CapsuleCollider:
   m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.36, z: 0}
+--- !u!54 &1355104474838446544
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7287250766469212037}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 32
+  m_CollisionDetection: 0
 --- !u!1001 &2013600520741957811
 PrefabInstance:
   m_ObjectHideFlags: 0

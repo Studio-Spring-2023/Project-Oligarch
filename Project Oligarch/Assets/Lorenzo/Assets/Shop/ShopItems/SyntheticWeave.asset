@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: dd67a6c73852f494aa985f6a904e32a9, type: 2}
   rarity: 0
-  DisplayPrefab: {fileID: 8711942242486260263, guid: 4926c31f75c6f0249bc2c7ecdc6d9779,
-    type: 3}
+  DisplayPrefab: {fileID: 0}
   DisplayName: Synthetic Weave
   price: 50
   Description: +10% Max Health

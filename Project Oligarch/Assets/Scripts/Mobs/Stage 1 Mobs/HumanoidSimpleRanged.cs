@@ -55,7 +55,7 @@ public class HumanoidSimpleRanged : MobCore
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
 			Debug.Log("Look at player");
-			EntityNavAgent.velocity = dirFromEntityToAttackPos * MoveSpeed;
+			EntityNavAgent.velocity = dirFromEntityToAttackPos * 5f;
 			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;
@@ -93,21 +93,21 @@ public class HumanoidSimpleRanged : MobCore
 		currentGoalPool.Add(new KeyValuePair<string, object>("playerAlive", false));
 	}
 
-	private void OnDrawGizmos()
-	{
-		if (EntityNavPath != null)
-		{
-			Vector3 lastCorner = EntityNavPath.corners[0];
-			Gizmos.DrawLine(transform.position, lastCorner);
-			foreach (Vector3 corner in EntityNavPath.corners)
-			{
-				Gizmos.DrawLine(lastCorner, corner);
-				lastCorner = corner;
-			}
-		}
+	//private void OnDrawGizmos()
+	//{
+	//	if (EntityNavPath != null)
+	//	{
+	//		Vector3 lastCorner = EntityNavPath.corners[0];
+	//		Gizmos.DrawLine(transform.position, lastCorner);
+	//		foreach (Vector3 corner in EntityNavPath.corners)
+	//		{
+	//			Gizmos.DrawLine(lastCorner, corner);
+	//			lastCorner = corner;
+	//		}
+	//	}
 
-		Gizmos.DrawWireSphere(transform.position, MaxMovementOffset);
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, MinMovementOffset);
-	}
+	//	Gizmos.DrawWireSphere(transform.position, MaxMovementOffset);
+	//	Gizmos.color = Color.red;
+	//	Gizmos.DrawWireSphere(transform.position, MinMovementOffset);
+	//}
 }
