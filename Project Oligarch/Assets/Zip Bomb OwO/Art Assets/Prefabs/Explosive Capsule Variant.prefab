@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdaf45ee30fa0d499270b9567dd9be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neededSpeed: 9
+  neededSpeed: 12
   explosion: {fileID: 2804389982972638203, guid: 7a0ee944d873cd04585204a5d6f4e0c6,
     type: 3}
   force: 1000
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 3
   currentHealth: 0
   worth: 0
   enemyAnim: {fileID: 0}
