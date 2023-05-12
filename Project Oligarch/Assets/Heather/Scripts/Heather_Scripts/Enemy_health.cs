@@ -13,7 +13,7 @@ public class Enemy_health : MonoBehaviour
     public Animator enemyAnim;
     public float death_despawn = 3;
     public int death_action_number = 2;
-   
+    public bool isBarrel;
 
 
     //GameObject enemy;
@@ -27,10 +27,13 @@ public class Enemy_health : MonoBehaviour
     public void LoseLife(float amount )
     {
         currentHealth -= amount;
-        if( currentHealth <= 0f )
+        if( currentHealth <= 0f && isBarrel == false)
         {
             Money.Credits += worth;
             StartCoroutine(Die());
+        } else if (currentHealth <= 0f && isBarrel == true)
+        {
+            gameObject.GetComponent<ExplosiveBarrel>().Explode();
         }
     }
 
