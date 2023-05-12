@@ -109,8 +109,8 @@ public class projectiles : MonoBehaviour
         //This is the raycast for shooting
         if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Mathf.Infinity , IsEnemy ) )
         {
-            Debug.Log(Hit.collider.gameObject.name);
-            Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            //Debug.Log(Hit.collider.gameObject.name);
+            //Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
             Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
