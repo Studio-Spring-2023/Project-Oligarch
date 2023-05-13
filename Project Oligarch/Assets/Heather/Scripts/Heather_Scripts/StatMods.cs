@@ -19,7 +19,7 @@ public class StatMods : MonoBehaviour
     public static float moveMod;
     public static float jumpMod;
     public static float mitiChance; //TODO
-    public static float lifeSteal; //TODO
+    public static float lifeSteal; //TODO - mod implementation
 
     public static void StatsMod ( )
     {
