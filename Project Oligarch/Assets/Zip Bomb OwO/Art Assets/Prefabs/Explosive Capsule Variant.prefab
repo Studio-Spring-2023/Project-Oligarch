@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 2
   currentHealth: 0
   worth: 0
   enemyAnim: {fileID: 0}
