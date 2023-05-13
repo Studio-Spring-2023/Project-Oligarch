@@ -34,7 +34,7 @@ public class ShopSection : MonoBehaviour
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
         Item.GetComponent<InteractableItem>().Section = this;
         startPoint = HoverPoint.position;
-        priceText = GetComponentInChildren<TextMeshPro>();
+        priceText = this.gameObject.transform.GetChild(1).GetComponent<TextMeshPro>();
         priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         priceText.gameObject.SetActive(false);
         itemName.enabled = false;
