@@ -20,6 +20,7 @@ public class projectiles : MonoBehaviour
     public float TimeBetweenShots;
     public float bulletsDuration = 0.1f;
     private Vector3 dir;
+    public static float LifeSteal = 0f;
 
     //These are the different bools for the Gun
     private bool Shooting;
@@ -114,6 +115,7 @@ public class projectiles : MonoBehaviour
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
             Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
+            TakeHealthDamage.currentHealth += (int)(LifeSteal);
             StartCoroutine ( ShotBullet ( ) );
         }
         else
