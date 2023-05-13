@@ -12,14 +12,14 @@ public class StatMods : MonoBehaviour
     public static int healthRegen;
     public static int secForRegen;
     public static int shieldMod;
-    public static int damMiti;
+    public static int damMiti; //TODO
 
     public static float damMod;
     public static float atkSpeedMod;
     public static float moveMod;
     public static float jumpMod;
-    public static float mitiChance; 
-    public static float lifeSteal;
+    public static float mitiChance; //TODO
+    public static float lifeSteal; //TODO
 
     public static void StatsMod ( )
     {
