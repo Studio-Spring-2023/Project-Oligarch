@@ -55,6 +55,7 @@ public class Shop : MonoBehaviour
 
     public void GenerateShop(Vector3 shopPosition, int shopSize)
     {
+        AssignShopItems();
         GenerateShopPool();
         float off = 0;
         Vector3 Offset;

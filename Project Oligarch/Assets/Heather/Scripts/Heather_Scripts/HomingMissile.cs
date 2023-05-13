@@ -17,7 +17,7 @@ public class HomingMissile : MonoBehaviour
     //These are missile stats
     public static float Dam = 1;
     public float atkSpeedMod;
-    public static float force = 3;
+    public static float force = 10f;
     public float rotationForce;
     public bool missileWait = true;
 
