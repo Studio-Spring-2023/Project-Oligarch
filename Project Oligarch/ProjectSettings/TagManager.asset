@@ -8,6 +8,7 @@ TagManager:
   - ItemName
   - Manager
   - Enemy
+  - Price
   layers:
   - Default
   - TransparentFX
