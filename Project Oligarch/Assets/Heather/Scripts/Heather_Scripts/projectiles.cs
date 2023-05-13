@@ -155,8 +155,12 @@ public class projectiles : MonoBehaviour
         reloading = false;
     }
 
+    public GameObject muzzleflash;
+    public GameObject gunEnd;
     IEnumerator ShotBullet ( )
     {
+        GameObject _exp = Instantiate(muzzleflash, gunEnd.transform.position, gunEnd.transform.rotation);
+        Destroy(_exp, 1.5f);
         bullets.enabled = true;
         yield return new WaitForSeconds ( bulletsDuration );
         bullets.enabled= false;
