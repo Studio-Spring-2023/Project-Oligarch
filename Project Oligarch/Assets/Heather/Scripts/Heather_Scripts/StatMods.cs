@@ -25,11 +25,15 @@ public class StatMods : MonoBehaviour
     {
         coolDownMod = (int)items.FlatCooldownReduction;
         healthPercentMod = items.PercentHealthBonus;
-        items.FlatHealthBonus = healthFlatMod;
-        items.FlatMaxShield = shieldMod;
-        items.FlatDamageMitigation = damMiti;
-        items.PercentDamageBonus = damMod;
-        items.PercentLifeSteal = lifeSteal;
+        healthFlatMod = (int)items.FlatHealthBonus;
+        shieldMod = (int)items.FlatMaxShield;
+        damMiti = (int)items.FlatDamageMitigation;
+        damMod = items.PercentDamageBonus;
+        lifeSteal = items.PercentLifeSteal;
+        atkSpeedMod = items.PercentAttackSpeedBonus;
+        moveMod = items.PercentMovespeedBonus;
+        jumpMod = items.JumpChargeBonus;
+        mitiChance = items.PercentMitigationChance;
     }
 
     public static void StatsMod ( )
