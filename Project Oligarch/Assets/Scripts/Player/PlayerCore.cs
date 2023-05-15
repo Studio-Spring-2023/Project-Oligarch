@@ -39,7 +39,7 @@ public class PlayerCore : Core
 	public Vector3 lookDir;
 	[Range(1f, 2f)]
 	public float CameraAnchorVerticalOffset;
-	[Range(-4f, -8f)]
+	[Range(-1f, -8f)]
 	public float CameraDistance;
 	public Vector3 CrosshairPoint;
 	[Range(0.01f, 1f)]

@@ -192,8 +192,8 @@ MonoBehaviour:
   PlayerBody: {fileID: 1239547620105552869}
   CameraTransform: {fileID: 0}
   lookDir: {x: 0, y: 0, z: 0}
-  CameraAnchorVerticalOffset: 1.4
-  CameraDistance: -4.5
+  CameraAnchorVerticalOffset: 1.2
+  CameraDistance: -3
   CrosshairPoint: {x: 0, y: 0.75, z: 4}
   MouseSensitivity: 0.37
   CameraIntersectionCheckDistance: 1.26
