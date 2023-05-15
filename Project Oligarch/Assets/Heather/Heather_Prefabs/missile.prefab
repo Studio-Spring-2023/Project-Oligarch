@@ -4858,7 +4858,7 @@ Transform:
   m_GameObject: {fileID: 5716205272478410715}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -7.592324, y: -0.029214367, z: 4.066253}
-  m_LocalScale: {x: 0.10667555, y: 0.16976862, z: 0.10667555}
+  m_LocalScale: {x: 0.07780347, y: 0.17628248, z: 0.07780347}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6476830958467932205}
@@ -4995,6 +4995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562352308879216804, guid: 98226486180987843bf9cbe6e7ab96a6,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2724947440310223065, guid: 98226486180987843bf9cbe6e7ab96a6,
         type: 3}
