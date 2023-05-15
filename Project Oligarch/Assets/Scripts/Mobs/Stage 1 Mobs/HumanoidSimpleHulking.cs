@@ -15,7 +15,7 @@ public class HumanoidSimpleHulking : MobCore
 
 	public Bounds attackHitBox;
 
-	[Range(5f, 15f)]
+	[Range(5f, 30f)]
 	public float ThrowStrength;
 	[Range(3f, 15f)]
 	public float ThrowableCheckRadius;

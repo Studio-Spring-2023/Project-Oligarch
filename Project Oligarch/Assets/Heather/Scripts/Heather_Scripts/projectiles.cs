@@ -20,6 +20,7 @@ public class projectiles : MonoBehaviour
     public float TimeBetweenShots;
     public float bulletsDuration = 0.1f;
     private Vector3 dir;
+    public static float LifeSteal = 0f;
 
     //These are the different bools for the Gun
     private bool Shooting;
@@ -109,11 +110,12 @@ public class projectiles : MonoBehaviour
         //This is the raycast for shooting
         if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Mathf.Infinity , IsEnemy ) )
         {
-            Debug.Log(Hit.collider.gameObject.name);
-            Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            //Debug.Log(Hit.collider.gameObject.name);
+            //Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
             Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
+            TakeHealthDamage.currentHealth += (int)(LifeSteal * Dam);
             StartCoroutine ( ShotBullet ( ) );
         }
         else
@@ -155,8 +157,12 @@ public class projectiles : MonoBehaviour
         reloading = false;
     }
 
+    public GameObject muzzleflash;
+    public GameObject gunEnd;
     IEnumerator ShotBullet ( )
     {
+        GameObject _exp = Instantiate(muzzleflash, gunEnd.transform.position, gunEnd.transform.rotation);
+        Destroy(_exp, 1.5f);
         bullets.enabled = true;
         yield return new WaitForSeconds ( bulletsDuration );
         bullets.enabled= false;
