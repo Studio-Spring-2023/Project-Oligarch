@@ -11,7 +11,6 @@ public class ShopSection : MonoBehaviour
     private Vector3 startPoint;
     public float HoverHeight;
     public float HoverSpeed;
-    [HideInInspector]
     public int Price;
     [SerializeField] TextMeshPro priceText;
     [SerializeField] TextMeshProUGUI itemName;
@@ -26,15 +25,16 @@ public class ShopSection : MonoBehaviour
     
     void Start()
     {
+        priceText = this.gameObject.transform.GetChild(1).GetComponent<TextMeshPro>();
         itemName = GameObject.FindWithTag("ItemName").GetComponent<TextMeshProUGUI>(); //yeah I know this is pretty bad
         itemDesc = GameObject.FindWithTag("ItemDesc").GetComponent<TextMeshProUGUI>();
         money = GameObject.FindWithTag("Manager").GetComponent<Money>();
         shop = GameObject.FindWithTag("Manager").GetComponent<Shop>();
         Price = CurrItem.price;
         Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
+        Item.transform.position = HoverPoint.position;
         Item.GetComponent<InteractableItem>().Section = this;
         startPoint = HoverPoint.position;
-        priceText = this.gameObject.transform.GetChild(1).GetComponent<TextMeshPro>();
         priceText.rectTransform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         priceText.gameObject.SetActive(false);
         itemName.enabled = false;
@@ -44,14 +44,14 @@ public class ShopSection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Item == null && shop.ShopPool.Count > 0)
-        {
-            shop.ReplaceItem(placeInList);
-            Price = CurrItem.price;
-            Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
-            Item.GetComponent<InteractableItem>().Section = this;
-        }
-        else if (Item == null)
+        //if (Item == null && shop.ShopPool.Count > 0)
+        //{
+        //    //shop.ReplaceItem(placeInList);
+        //    //Price = CurrItem.price;
+        //    //Item = Instantiate(CurrItem.DisplayPrefab, HoverPoint.position, Quaternion.identity);
+        //    //Item.GetComponent<InteractableItem>().Section = this;
+        //}
+        if (Item == null)
         {
             DestroySelf();
         }

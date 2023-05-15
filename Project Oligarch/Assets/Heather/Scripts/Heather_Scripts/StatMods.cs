@@ -8,10 +8,10 @@ public class StatMods : MonoBehaviour
     [SerializeField] ItemManager items;
     public static int coolDownMod;
     public static float healthPercentMod;
-    public static int healthFlatMod;
+    public static float healthFlatMod;
     public static int healthRegen;
     public static int secForRegen;
-    public static int shieldMod;
+    public static float shieldMod;
     public static int damMiti; 
 
     public static float damMod;
@@ -21,12 +21,17 @@ public class StatMods : MonoBehaviour
     public static float mitiChance; 
     public static float lifeSteal;
 
+    public void Awake()
+    {
+        itemManager = this.gameObject.GetComponent<ItemManager>();
+        StatsMod();
+    }
     public void Update()
     {
         coolDownMod = (int)items.FlatCooldownReduction;
         healthPercentMod = items.PercentHealthBonus;
-        healthFlatMod = (int)items.FlatHealthBonus;
-        shieldMod = (int)items.FlatMaxShield;
+        healthFlatMod = items.FlatHealthBonus;
+        shieldMod = items.FlatMaxShield;
         damMiti = (int)items.FlatDamageMitigation;
         damMod = items.PercentDamageBonus;
         lifeSteal = items.PercentLifeSteal;
@@ -38,7 +43,7 @@ public class StatMods : MonoBehaviour
 
     public static void StatsMod ( )
     {
-        TakeHealthDamage.currentHealth = ( TakeHealthDamage.maxHealth * (int)( 1 + healthPercentMod ) ) + healthFlatMod + ( healthRegen * secForRegen );
+        TakeHealthDamage.currentHealth = ( TakeHealthDamage.maxHealth * ( 1 + healthPercentMod ) ) + healthFlatMod + ( healthRegen * secForRegen );
         TakeHealthDamage.currentShield = TakeHealthDamage.maxShield + shieldMod;
         
 
