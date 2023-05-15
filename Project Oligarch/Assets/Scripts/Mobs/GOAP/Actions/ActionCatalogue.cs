@@ -125,6 +125,8 @@ public class SimpleRangedAttack : GoapAction
 	float shotCooldownTimer;
 	float shotCooldown = 0.75f;
 
+	Ray ray;
+
 	//animatir variable
 	public static int action = 0;
 
@@ -157,24 +159,26 @@ public class SimpleRangedAttack : GoapAction
 	public override bool PerformAction(MobCore entity)
 	{
         entity.Action = action;
-        if (CanFire() && !isFiring)
+		
+		if (CanFire(entity) && !isFiring)
 		{
 			shotsFired++;
 			isFiring = true;
-
 			//animation action variable
 			action = 1;
 
-			Ray ray = new Ray(entity.transform.position, (TargetObject.transform.position - entity.transform.position).normalized);
+			ray = new Ray(entity.transform.position, (TargetObject.transform.position - entity.transform.position).normalized);
+
 			if (Physics.Raycast(ray, entity.MaxMovementOffset, PlayerMask))
 			{
 				PlayerCore.Damaged(entity.Damage);
-				//Could add a goal state here that we hit the player, so we could make them do a combo attack after?
 			}
 
 			if (shotsFired > 5)
 				hasFired = true;
 		}
+
+		
 
 		if ((TargetObject.transform.position - entity.transform.position).magnitude > entity.MaxMovementOffset)
 			SetInProximity(false);
@@ -187,14 +191,27 @@ public class SimpleRangedAttack : GoapAction
         return true;
 	}
 
-	private bool CanFire()
+	private bool CanFire(MobCore entity)
 	{
-		if (isFiring)
+		//LayerMask mask = LayerMask.GetMask("Player"); 
+
+		RaycastHit hitInfo;
+		Physics.Raycast(entity.transform.position, (TargetObject.transform.position - entity.transform.position).normalized, out hitInfo, Mathf.Infinity); //
+
+		if (isFiring && hitInfo.collider.CompareTag("Player")) //
 		{
-			if (shotCooldownTimer > shotCooldown)
+            //Sam's Code for trynig to get a linerender to display ranged units shooting
+            LineRenderer line = entity.gameObject.GetComponent<LineRenderer>(); //Lorenzo made a get lineRenderer object for me
+            Transform barrel_tip = entity.transform.Find("Barrel_Tip");
+            line.SetPosition(0, entity.transform.position);
+            line.SetPosition(1, TargetObject.transform.position);
+            line.enabled = true;
+
+            if (shotCooldownTimer > shotCooldown)
 			{
 				shotCooldownTimer = 0;
 				isFiring = false;
+				line.enabled = false;
 				return false;
 			}
 			else
@@ -203,7 +220,7 @@ public class SimpleRangedAttack : GoapAction
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
 
