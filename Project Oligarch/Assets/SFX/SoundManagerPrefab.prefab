@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 5843887714540669566}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3541849886726431882
 GameObject:
@@ -182,8 +182,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee923cdb4cac0fb44b30e0e957357708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - clips: []
-    loop: 0
-    volume: 0
-    source: {fileID: 0}
+  sounds: []

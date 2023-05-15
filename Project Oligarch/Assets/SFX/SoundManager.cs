@@ -3,15 +3,17 @@ using UnityEngine;
 [System.Serializable]
 public class Sound
 {
-    public AudioClip[] clips;
+    public AudioClip clip;
     public bool loop;
     [Range(0f, 1f)] public float volume = 1f;
-    [HideInInspector] public AudioSource source;
+    [HideInInspector] public AudioSource source; // Add AudioSource reference
 }
 
 public class SoundManager : MonoBehaviour
 {
+
     public static SoundManager instance;
+
     public Sound[] sounds;
 
     void Awake()
@@ -23,46 +25,33 @@ public class SoundManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
         DontDestroyOnLoad(gameObject);
 
+        // Create AudioSources and assign them to each sound
         foreach (Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
-
-            if (sound.clips.Length > 0)
-            {
-                int randomIndex = Random.Range(0, sound.clips.Length);
-                sound.source.clip = sound.clips[randomIndex];
-            }
-
+            sound.source.clip = sound.clip;
             sound.source.loop = sound.loop;
             sound.source.volume = sound.volume;
         }
     }
 
-    public void PlaySound(AudioSource audioSource, float maxDistance)
+    public void PlaySound(int index, Vector3 sourcePosition)
     {
-        if (sounds.Length > 0)
+        if (index >= 0 && index < sounds.Length)
         {
-            Sound sound = sounds[Random.Range(0, sounds.Length)];
+            Sound sound = sounds[index];
+            AudioSource audioSource = sound.source;
 
-            if (sound.clips.Length > 0)
-            {
-                int randomIndex = Random.Range(0, sound.clips.Length);
-                audioSource.clip = sound.clips[randomIndex];
-            }
-
+            audioSource.clip = sound.clip;
             audioSource.loop = sound.loop;
             audioSource.volume = sound.volume;
-            audioSource.spatialBlend = 1f;
-            audioSource.minDistance = 1f;
-            audioSource.maxDistance = maxDistance;
+            audioSource.pitch = 1f;
 
+            audioSource.transform.position = sourcePosition;
             audioSource.Play();
-
-            Debug.Log("Playing sound: " + audioSource.clip.name);
         }
     }
 
@@ -74,32 +63,31 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void StopSound(int index, GameObject obj)
+    public void StopSound(int index)
     {
         if (index >= 0 && index < sounds.Length)
         {
             Sound sound = sounds[index];
-            AudioSource audioSource = obj.GetComponent<AudioSource>();
-            if (audioSource != null && audioSource.clip == sound.source.clip)
-            {
-                audioSource.Stop();
-            }
+            sound.source.Stop();
         }
     }
 
-    public void SetSoundSpeed(AudioSource audioSource, float newSpeed)
+    public void SetSoundSpeed(int index, float newSpeed)
     {
-        if (audioSource != null)
+        if (index >= 0 && index < sounds.Length)
         {
-            audioSource.pitch = newSpeed;
+            Sound sound = sounds[index];
+            sound.source.pitch = newSpeed;
         }
     }
 
-    public void SetSoundVolume(AudioSource audioSource, float volume)
+    public void SetSoundVolume(int index, float volume)
     {
-        if (audioSource != null)
+        if (index >= 0 && index < sounds.Length)
         {
-            audioSource.volume = volume;
+            Sound sound = sounds[index];
+            sound.volume = volume;
+            sound.source.volume = volume;
         }
     }
 }
