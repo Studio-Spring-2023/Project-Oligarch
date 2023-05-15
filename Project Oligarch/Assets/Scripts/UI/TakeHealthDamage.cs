@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TakeHealthDamage : MonoBehaviour
 {
-    public static int maxHealth = 100;
-    public static int currentHealth;
-    public static int maxShield = 100;
-    public static int currentShield;
+    public static float maxHealth = 100;
+    public static float currentHealth;
+    public static float maxShield = 100;
+    public static float currentShield;
     public static bool dodge = false;
 
     public HealthBar healthBar;
@@ -33,7 +33,7 @@ public class TakeHealthDamage : MonoBehaviour
 
     }
 
-    public static void TakeDamage(int Damage)
+    public static void TakeDamage(float Damage)
     {
         TakeHealthDamage.RollDamage();
         if(!TakeHealthDamage.dodge)
