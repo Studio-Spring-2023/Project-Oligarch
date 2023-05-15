@@ -10,6 +10,9 @@ public class ExplosiveBarrel : MonoBehaviour
     public float force, radius;
     public float lingerTime = 3;
 
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +33,12 @@ public class ExplosiveBarrel : MonoBehaviour
         }
     }
 
-    void Explode()
+    public void Explode()
     {
         GameObject _exp = Instantiate(explosion, transform.position, transform.rotation);
         Destroy(_exp, lingerTime);
         knockBack();
-        Destroy(gameObject, .2f);
+        Destroy(gameObject);
     }
 
     void knockBack()

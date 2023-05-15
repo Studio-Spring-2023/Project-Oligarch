@@ -55,6 +55,7 @@ public class Shop : MonoBehaviour
 
     public void GenerateShop(Vector3 shopPosition, int shopSize)
     {
+        AssignShopItems();
         GenerateShopPool();
         float off = 0;
         Vector3 Offset;
@@ -68,7 +69,6 @@ public class Shop : MonoBehaviour
             off++;
         }
         NewShop(shopSize);
-        
     }
     private void GenerateShopPool()
     {
@@ -125,6 +125,10 @@ public class Shop : MonoBehaviour
 
     private void AssignShopItems()
     {
+        CommonItems.Clear();
+        UnCommonItems.Clear();
+        RareItems.Clear();
+        LegendaryItems.Clear();
         foreach (ShopItem i in ShopList)
         {
             if(i.rarity == ShopItem.Rarity.Common)

@@ -9,6 +9,7 @@ public class TakeHealthDamage : MonoBehaviour
     public static int currentHealth;
     public static int maxShield = 100;
     public static int currentShield;
+    public static bool dodge = false;
 
     public HealthBar healthBar;
     public HealthBar shieldbar;
@@ -34,15 +35,21 @@ public class TakeHealthDamage : MonoBehaviour
 
     public static void TakeDamage(int Damage)
     {
-        if(currentShield >= 0)
+        TakeHealthDamage.RollDamage();
+        if(!TakeHealthDamage.dodge)
         {
-            currentShield -= Damage;
+            if (currentShield >= 0)
+            {
+                currentShield -= (Damage - StatMods.damMiti);
 
+            }
+            else
+            {
+                currentHealth -= (Damage - StatMods.damMiti);
+            }
+            TakeHealthDamage.dodge = false;
         }
-        else
-        {
-            currentHealth -= Damage;
-        }
+
     }
 
     public void GameOver()
@@ -53,5 +60,15 @@ public class TakeHealthDamage : MonoBehaviour
             SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
         }
             
+    }
+
+    public static void RollDamage()
+    {
+        int rand = Random.Range(1, 100);
+        if(rand < StatMods.mitiChance)
+        {
+            TakeHealthDamage.dodge = true;
+            Debug.Log("Dodged");
+        }
     }
 }

@@ -35,7 +35,7 @@ Transform:
   - {fileID: 3630544017715044188}
   - {fileID: 906225101712653300}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &996088845450414249
 MeshFilter:
@@ -121,14 +121,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrItem: {fileID: 0}
+  shop: {fileID: 0}
   HoverPoint: {fileID: 3630544017715044188}
   HoverHeight: 0.3
   HoverSpeed: 2
+  Price: 0
   priceText: {fileID: 0}
+  itemName: {fileID: 0}
+  itemDesc: {fileID: 0}
   Item: {fileID: 0}
+  money: {fileID: 0}
   RotateSpeed: 50
   growSpeed: 3
   distCheck: 5
+  placeInList: 0
 --- !u!1 &1037791898264941169
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,8 +178,8 @@ GameObject:
   - component: {fileID: 1031093118932559784}
   - component: {fileID: 2064676308513897490}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
-  m_TagString: Untagged
+  m_Name: PriceText
+  m_TagString: Price
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
