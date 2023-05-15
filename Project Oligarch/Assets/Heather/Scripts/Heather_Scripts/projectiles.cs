@@ -97,6 +97,8 @@ public class projectiles : MonoBehaviour
     private void bang ( )
     {
         CanShoot = false;
+        Vector3 sourcePosition = gameObject.transform.position; 
+        SoundManager.instance.PlaySound(0, sourcePosition);
 
         //This is the spread
         float x = Random.Range ( -Spread , Spread );

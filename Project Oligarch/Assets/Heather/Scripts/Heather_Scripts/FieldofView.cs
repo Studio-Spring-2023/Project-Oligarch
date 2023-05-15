@@ -79,9 +79,9 @@ public class FieldofView : MonoBehaviour
                     missile.target = target.transform;
 
                     StartCoroutine(CD());
-                    
-                    GameObject _sfx = Instantiate(sfx, parent.transform);
-                    Destroy(_sfx, 4);
+
+                    Vector3 sourcePosition = transform.position;
+                    SoundManager.instance.PlaySound(1, sourcePosition);
                 }
             }
         }

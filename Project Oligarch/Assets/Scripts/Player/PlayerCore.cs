@@ -197,7 +197,8 @@ public class PlayerCore : Core
 		{
             Velocity = ( Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x ) * MoveSpeed;
             playerRanged.SetInteger("Actions", 0);
-		}
+            SoundManager.instance.StopSound(3);
+        }
 		else if(!grounded)
 		{
             Vector3 flatVelocity = (Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x) * AirStrafeSpeed;
@@ -206,7 +207,9 @@ public class PlayerCore : Core
         }
 		if(Slide)
 		{
-			Velocity = (temp * MoveSpeed);
+            Vector3 sourcePosition = transform.position;
+            SoundManager.instance.PlaySound(3, sourcePosition);
+            Velocity = (temp * MoveSpeed);
 		}
 
 		if (jump)

@@ -53,6 +53,8 @@ public class HomingMissile : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            Vector3 sourcePosition = transform.position;
+            SoundManager.instance.PlaySound(2, sourcePosition);
         }
     }
 

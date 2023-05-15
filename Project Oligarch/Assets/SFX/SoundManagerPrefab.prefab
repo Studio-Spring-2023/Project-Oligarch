@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 5843887714540669566}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3541849886726431882
 GameObject:
@@ -182,4 +182,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee923cdb4cac0fb44b30e0e957357708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - clips:
+    - {fileID: 8300000, guid: 66285ec2b3253a64f93599f02fe54184, type: 3}
+    - {fileID: 8300000, guid: c4913e742ddf4114aafe6a1aad8c7b31, type: 3}
+    - {fileID: 8300000, guid: 53e3731e74147ec4b89d19f8ba6b5d23, type: 3}
+    - {fileID: 8300000, guid: dcb4de748804a4849b202cf5cd1c972d, type: 3}
+    - {fileID: 8300000, guid: c8d84bf5f60cb40448d187ecc90827aa, type: 3}
+    - {fileID: 8300000, guid: 6b3f680d42ca1784bbb637a5c1581857, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - clips:
+    - {fileID: 8300000, guid: a3b16cb16eb9d644295e5c8a5a06c233, type: 3}
+    - {fileID: 8300000, guid: 39b1c28d708bad24da4316636dd325e5, type: 3}
+    - {fileID: 8300000, guid: 388f678f6e7b71c4b963d4d62e453fb2, type: 3}
+    - {fileID: 8300000, guid: 8eb44d6fcdbc2884bb3726adb42851af, type: 3}
+    - {fileID: 8300000, guid: fd85f4c0eaa8ecb409afdfd3aa061743, type: 3}
+    - {fileID: 8300000, guid: 941d238a9899aca488fec055527a18aa, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - clips:
+    - {fileID: 8300000, guid: 321d0548440315e45b4bd7db1d73cba1, type: 3}
+    - {fileID: 8300000, guid: 73fabfc21e414ac489031ee455caf1bc, type: 3}
+    - {fileID: 8300000, guid: 56bf0a5780915a64bbc6f1cd1167eb8b, type: 3}
+    - {fileID: 8300000, guid: 19d004abc70b2934ebc9c373070007c1, type: 3}
+    - {fileID: 8300000, guid: ff6a0479e22f0914385c5055cce67356, type: 3}
+    - {fileID: 8300000, guid: 61bacffda062edc4c93c0d8d4a4392d5, type: 3}
+    - {fileID: 8300000, guid: a44b4fcf1b19e3447878e21ef45088ed, type: 3}
+    - {fileID: 8300000, guid: 6e62f06699efecf4b8a6687ca4145c62, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - clips:
+    - {fileID: 8300000, guid: 5b679106529e81547b2eb342a4053a82, type: 3}
+    - {fileID: 8300000, guid: 12ce71d205d2013489306ebb6d689cca, type: 3}
+    - {fileID: 8300000, guid: 08241e80fd74661408366650b935c5fb, type: 3}
+    - {fileID: 8300000, guid: 0e0cea5c64d000a439235b2ef1a843a4, type: 3}
+    - {fileID: 8300000, guid: 076aeb388f217294aba5e777843110fc, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
+  - clips:
+    - {fileID: 8300000, guid: 4ff132bb8e63dea43ad3104e59a3ea9f, type: 3}
+    - {fileID: 8300000, guid: 84e4c4ab68b9ea849bbfd149610fdb63, type: 3}
+    - {fileID: 8300000, guid: 8efa1680c54ba7c489830cf3fdd6a476, type: 3}
+    loop: 0
+    volume: 1
+    source: {fileID: 0}
