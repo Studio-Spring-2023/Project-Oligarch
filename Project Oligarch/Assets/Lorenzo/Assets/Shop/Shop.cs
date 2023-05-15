@@ -48,13 +48,14 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         ShopCount = ObjSectionList.Count;
-        AssignShopItems();
         GenerateShop(transform.position, 3);
     }
 
 
     public void GenerateShop(Vector3 shopPosition, int shopSize)
     {
+        //ObjSectionList.Clear();
+        ShopPool.Clear();
         AssignShopItems();
         GenerateShopPool();
         float off = 0;
