@@ -5,9 +5,9 @@ using UnityEngine;
 public class StatMods : MonoBehaviour
 {
     ItemManager itemManager;
-
+    [SerializeField] ItemManager items;
     public static int coolDownMod;
-    public static int healthPercentMod;
+    public static float healthPercentMod;
     public static int healthFlatMod;
     public static int healthRegen;
     public static int secForRegen;
@@ -19,11 +19,22 @@ public class StatMods : MonoBehaviour
     public static float moveMod;
     public static float jumpMod;
     public static float mitiChance; 
-    public static float lifeSteal; 
+    public static float lifeSteal;
+
+    public void Update()
+    {
+        coolDownMod = (int)items.FlatCooldownReduction;
+        healthPercentMod = items.PercentHealthBonus;
+        items.FlatHealthBonus = healthFlatMod;
+        items.FlatMaxShield = shieldMod;
+        items.FlatDamageMitigation = damMiti;
+        items.PercentDamageBonus = damMod;
+        items.PercentLifeSteal = lifeSteal;
+    }
 
     public static void StatsMod ( )
     {
-        TakeHealthDamage.currentHealth = ( TakeHealthDamage.maxHealth * ( 1 + healthPercentMod ) ) + healthFlatMod + ( healthRegen * secForRegen );
+        TakeHealthDamage.currentHealth = ( TakeHealthDamage.maxHealth * (int)( 1 + healthPercentMod ) ) + healthFlatMod + ( healthRegen * secForRegen );
         TakeHealthDamage.currentShield = TakeHealthDamage.maxShield + shieldMod;
         
 

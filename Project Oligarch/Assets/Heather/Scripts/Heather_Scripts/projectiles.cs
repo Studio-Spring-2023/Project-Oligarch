@@ -115,7 +115,7 @@ public class projectiles : MonoBehaviour
             bullets.SetPosition ( 1 , Hit.point );
             //Debug.Log(Hit.collider.gameObject.GetComponent<Enemy_health>());
             Hit.collider.gameObject.GetComponent<Enemy_health> ( ).LoseLife ( Dam );
-            TakeHealthDamage.currentHealth += (int)(LifeSteal);
+            TakeHealthDamage.currentHealth += (int)(LifeSteal * Dam);
             StartCoroutine ( ShotBullet ( ) );
         }
         else

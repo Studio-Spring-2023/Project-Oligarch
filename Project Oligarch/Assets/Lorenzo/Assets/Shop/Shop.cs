@@ -55,6 +55,8 @@ public class Shop : MonoBehaviour
 
     public void GenerateShop(Vector3 shopPosition, int shopSize)
     {
+        AssignShopItems();
+        GenerateShopPool();
         float off = 0;
         Vector3 Offset;
         GameObject currStall;
@@ -66,10 +68,7 @@ public class Shop : MonoBehaviour
             ObjSectionList[i] = currStall;
             off++;
         }
-        AssignShopItems();
-        GenerateShopPool();
         NewShop(shopSize);
-        
     }
     private void GenerateShopPool()
     {
