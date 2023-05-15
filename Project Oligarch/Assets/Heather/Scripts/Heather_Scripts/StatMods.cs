@@ -12,14 +12,14 @@ public class StatMods : MonoBehaviour
     public static int healthRegen;
     public static int secForRegen;
     public static int shieldMod;
-    public static int damMiti; //TODO
+    public static int damMiti; 
 
     public static float damMod;
     public static float atkSpeedMod;
     public static float moveMod;
     public static float jumpMod;
-    public static float mitiChance; //TODO
-    public static float lifeSteal; //TODO - mod implementation
+    public static float mitiChance; 
+    public static float lifeSteal; 
 
     public static void StatsMod ( )
     {
@@ -35,5 +35,7 @@ public class StatMods : MonoBehaviour
 
         PlayerCore.JumpForce = PlayerCore.JumpForce * jumpMod;
         PlayerCore.MoveSpeed = PlayerCore.MoveSpeed * ( 1 + moveMod );
+
+        projectiles.LifeSteal = lifeSteal;
     }
 }
