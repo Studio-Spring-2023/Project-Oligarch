@@ -61,15 +61,23 @@ public class Shop : MonoBehaviour
         float off = 0;
         Vector3 Offset;
         GameObject currStall;
+        ShopSection currentSec;
         Instantiate(ShopStall, shopPosition, Quaternion.identity);
         for (int i = 0; i < shopSize; i++)
         {
             Offset = shopPosition + (transform.right * off);
             currStall = Instantiate(ShopSection, Offset, Quaternion.identity);
+            currentSec = currStall.GetComponent<ShopSection>();
+            AddItem(currentSec);
             ObjSectionList[i] = currStall;
             off++;
         }
-        NewShop(shopSize);
+        //NewShop(shopSize);
+        for (int i = 0; i < shopSize; i++)
+        {
+            StallList[i] = ObjSectionList[i].GetComponent<ShopSection>();
+            StallList[i].placeInList = i;
+        }
     }
     private void GenerateShopPool()
     {
@@ -97,6 +105,16 @@ public class Shop : MonoBehaviour
             Debug.Log(StallList[i].CurrItem);
         }
         
+    }
+
+    public void AddItem(ShopSection section)
+    {
+        int randIndex;
+        randIndex = Random.Range(0, ShopPool.Count);
+        section.CurrItem = ShopPool[randIndex];
+        CurrentItems.Add(ShopPool[randIndex]);
+        ShopPool.RemoveAt(randIndex);
+       // Debug.Log(StallList[i].CurrItem);
     }
 
     public void SingleSection(ShopRarity rarity, GameObject Section, Vector3 Position)

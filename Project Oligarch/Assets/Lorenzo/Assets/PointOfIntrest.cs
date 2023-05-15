@@ -82,7 +82,8 @@ public class PointOfIntrest : MonoBehaviour
         }
         else if( randIndex > 40)
         {
-            ItemRarity();
+            //ItemRarity();
+            shop.GenerateShop(transform.position, 1);
         }
     }
 
