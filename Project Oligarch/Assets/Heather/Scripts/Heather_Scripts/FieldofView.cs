@@ -23,9 +23,13 @@ public class FieldofView : MonoBehaviour
     public float CDRflat;
     private float CDR;
 
+    public GameObject sfx;
+    GameObject parent;
+
     private void Start()
     {
         startCD = CoolDown;
+        parent = this.gameObject; 
     }
 
     private void Update ( )
@@ -75,6 +79,9 @@ public class FieldofView : MonoBehaviour
                     missile.target = target.transform;
 
                     StartCoroutine(CD());
+                    
+                    GameObject _sfx = Instantiate(sfx, parent.transform);
+                    Destroy(_sfx, 4);
                 }
             }
         }

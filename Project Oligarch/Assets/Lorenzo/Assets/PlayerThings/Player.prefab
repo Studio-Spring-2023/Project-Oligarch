@@ -142,7 +142,7 @@ Transform:
   - {fileID: 1239547620105552869}
   - {fileID: 7921568803576370439}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &-4280498057574015392
 CapsuleCollider:
@@ -385,6 +385,7 @@ MonoBehaviour:
   CoolDown: 0
   CDRpercent: 0
   CDRflat: 0
+  sfx: {fileID: 7044357960314134348, guid: 031d7355d05930942ab037bb9e2ba7b8, type: 3}
 --- !u!1 &1239547620105552870
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +418,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1816159062}
-  - {fileID: 9173171703680788186}
   m_Father: {fileID: 1239547619138709716}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -539,12 +539,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5203597099020273406}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8999996, y: 1.0699999, z: 0.65999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.082520165, y: 0.09882669, z: 0.4531561, w: -0.88208455}
+  m_LocalPosition: {x: -0.013, y: 0.147, z: -0.037}
+  m_LocalScale: {x: 1.5274173, y: 1.5274177, z: 1.5274177}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1239547620105552869}
+  m_Father: {fileID: 2071604806172310767}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1960588545887902468
@@ -663,7 +663,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -4219859510393569081, guid: 81c4489f280bcc048bc016910f2c761e, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81c4489f280bcc048bc016910f2c761e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9173171703680788186}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81c4489f280bcc048bc016910f2c761e, type: 3}
 --- !u!4 &2071604806172310767 stripped

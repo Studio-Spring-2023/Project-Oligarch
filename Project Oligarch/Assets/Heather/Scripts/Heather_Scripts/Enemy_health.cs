@@ -17,11 +17,12 @@ public class Enemy_health : MonoBehaviour
 
 
     //GameObject enemy;
-
+    Collider m_Collider;
 
     private void Awake ( )
     {
         currentHealth = maxHealth;
+        m_Collider = GetComponent<Collider>();
     }
 
     public void LoseLife(float amount )
@@ -43,6 +44,7 @@ public class Enemy_health : MonoBehaviour
         foreach (MobCore script in scripts)
         {
             script.enabled = false;
+            m_Collider.enabled = !m_Collider.enabled;
         }
 
         enemyAnim.SetInteger("action", death_action_number);
