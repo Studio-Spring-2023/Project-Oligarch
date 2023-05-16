@@ -213,7 +213,11 @@ public class PlayerCore : Core
 		{
             Velocity = ( Forward * InputHandler.MovementInput.z + Right * InputHandler.MovementInput.x ) * MoveSpeed;
             playerRanged.SetInteger("Actions", 0);
-            SoundManager.instance.StopSound(3);
+			if(SoundManager.instance != null)
+			{
+                SoundManager.instance.StopSound(3);
+            }
+            
         }
 		else if(!grounded)
 		{
