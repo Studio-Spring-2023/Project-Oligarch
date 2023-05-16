@@ -5513,6 +5513,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1567371937 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2085828500351057570, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1239547620875702711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1576089783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7425,6 +7431,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519006131007072690, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
+        type: 3}
+      propertyPath: AttackPoint
+      value: 
+      objectReference: {fileID: 1567371937}
     - target: {fileID: 1239547619138709716, guid: d55023ce1c3473e4d848f4c02cdd0c9a,
         type: 3}
       propertyPath: m_RootOrder
