@@ -28,6 +28,7 @@ public class PlayerCore : Core
     [Range(1f, 20f)]
 	public static float JumpForce = 8f;
 	public float GroundCheckDistance;
+	public Transform GroundCheckTrans;
 	private bool grounded;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
@@ -118,6 +119,7 @@ public class PlayerCore : Core
 
         Forward = new Vector3 ( transform.forward.x , 0 , transform.forward.z ).normalized;
 
+		/*
 		Ray groundRay = new Ray(transform.position, Vector3.down);
 		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
 		{
@@ -128,8 +130,11 @@ public class PlayerCore : Core
 		{
 			grounded = true;
 			
-
 		}
+		*/
+
+		GroundCheck ( );
+
 		if(Input.GetButtonDown("Ability1") && canSlide)
 		{
 			StartCoroutine(SlideFunc());
@@ -157,6 +162,17 @@ public class PlayerCore : Core
             xdirection = Input.GetAxis("Horizontal");
             playerRanged.SetFloat("x", xdirection);
             playerRanged.SetFloat("y", ydirection);
+        }
+	}
+
+	public void GroundCheck ( )
+	{
+		grounded = false;
+        Collider [ ] colliders = Physics.OverlapSphere ( GroundCheckTrans.position , GroundCheckDistance , Walkable );
+
+		if(colliders.Length > 0 )
+		{
+            grounded = true;
         }
 	}
 
@@ -222,7 +238,6 @@ public class PlayerCore : Core
         //Lerp MoveSpeed based on Acceleration / Deceleration timers.
         PlayerRB.velocity = Velocity;
 
-		
 	}
 
 	private void LateUpdate()
