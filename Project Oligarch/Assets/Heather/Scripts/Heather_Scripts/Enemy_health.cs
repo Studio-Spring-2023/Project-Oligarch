@@ -38,6 +38,18 @@ public class Enemy_health : MonoBehaviour
         }
     }
 
+    public void GainLife(float amount)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += amount;
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+        }
+    }
+
     IEnumerator Die()
     {
         MobCore[] scripts = gameObject.GetComponents<MobCore>();
@@ -46,6 +58,7 @@ public class Enemy_health : MonoBehaviour
             script.enabled = false;
             m_Collider.enabled = !m_Collider.enabled;
         }
+        this.gameObject.tag = "dead";
 
         enemyAnim.SetInteger("action", death_action_number);
         yield return new WaitForSeconds(death_despawn);

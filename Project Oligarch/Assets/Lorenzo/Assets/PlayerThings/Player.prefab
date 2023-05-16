@@ -189,6 +189,7 @@ MonoBehaviour:
   SlideForce: 2.75
   AirStrafeSpeed: 5
   GroundCheckDistance: 1.2
+  GroundCheckTrans: {fileID: 0}
   PlayerBody: {fileID: 1239547620105552869}
   CameraTransform: {fileID: 0}
   lookDir: {x: 0, y: 0, z: 0}
@@ -375,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 15.71
-  viewAngle: 103.6
+  viewAngle: 35
   Enemy:
     serializedVersion: 2
     m_Bits: 512

@@ -170,12 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbedb3fe83f26c748a2eb58351e7cc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 5
   currentHealth: 0
   worth: 15
   enemyAnim: {fileID: 2365048902577694734}
-  death_despawn: 6
+  death_despawn: 7
   death_action_number: 2
+  isBarrel: 0
 --- !u!54 &8703174612154103673
 Rigidbody:
   m_ObjectHideFlags: 0

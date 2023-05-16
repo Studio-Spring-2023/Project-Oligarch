@@ -125,7 +125,7 @@ MonoBehaviour:
   attackHitBox:
     m_Center: {x: 0, y: 1, z: 2.08}
     m_Extent: {x: 0.94, y: 1.4, z: 1}
-  ThrowStrength: 15
+  ThrowStrength: 25
   ThrowableCheckRadius: 9.64
   ThrowablePos: {x: 0, y: 4, z: 0}
   rotationStep: 0.7
@@ -145,8 +145,9 @@ MonoBehaviour:
   currentHealth: 0
   worth: 0
   enemyAnim: {fileID: 520217087424486014}
-  death_despawn: 3
+  death_despawn: 10
   death_action_number: 5
+  isBarrel: 0
 --- !u!136 &2990973925946276207
 CapsuleCollider:
   m_ObjectHideFlags: 0

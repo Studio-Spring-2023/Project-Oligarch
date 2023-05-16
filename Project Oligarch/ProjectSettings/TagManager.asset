@@ -9,6 +9,7 @@ TagManager:
   - Manager
   - Enemy
   - Price
+  - dead
   layers:
   - Default
   - TransparentFX

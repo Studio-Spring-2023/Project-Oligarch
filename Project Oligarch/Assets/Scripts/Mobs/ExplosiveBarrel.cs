@@ -7,7 +7,8 @@ public class ExplosiveBarrel : MonoBehaviour
     
     public float neededSpeed;
     public GameObject explosion;
-    public float force, radius;
+    public float force, radius, enemydamage;
+    public int playerdamage;
     public float lingerTime = 3;
 
     
@@ -22,7 +23,7 @@ public class ExplosiveBarrel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Velocity:" + this.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
+        //Debug.Log("Velocity:" + this.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
     }
 
     void OnTriggerEnter()
@@ -39,9 +40,10 @@ public class ExplosiveBarrel : MonoBehaviour
         Destroy(_exp, lingerTime);
         knockBack();
         Destroy(gameObject);
+
     }
 
-    void knockBack()
+    public void knockBack()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
@@ -52,7 +54,17 @@ public class ExplosiveBarrel : MonoBehaviour
             {
                 rigg.AddExplosionForce(force, transform.position, radius);
             }
+            if (nearby.gameObject.tag == "Enemy")
+            {
+                nearby.GetComponent<Enemy_health>().LoseLife(enemydamage);
+            }
+            if (nearby.gameObject.tag == "Player")
+            {
+                PlayerCore.Damaged(playerdamage);
+            }
+
 
         }
+
     }
 }

@@ -110,7 +110,7 @@ public class projectiles : MonoBehaviour
         dir = (player.RotatedCrosshairPoint - player.CameraTransform.position).normalized;
 
         //This is the raycast for shooting
-        if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Mathf.Infinity , IsEnemy ) )
+        if ( Physics.Raycast ( AttackPoint.transform.position , dir , out Hit , Mathf.Infinity , IsEnemy, QueryTriggerInteraction.Ignore) )
         {
             //Debug.Log(Hit.collider.gameObject.name);
             //Hit.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
