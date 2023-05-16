@@ -12,6 +12,7 @@ public class HomingMissile : MonoBehaviour
     public Transform target;
     private Rigidbody rb;
     public FieldofView FOV;
+    public GameObject explosion;
 
 
     //These are missile stats
@@ -47,10 +48,14 @@ public class HomingMissile : MonoBehaviour
             if (boom.collider.CompareTag("Enemy"))
             {
                 boom.collider.GetComponent<Enemy_health>().LoseLife(Dam);
+                GameObject _exp = Instantiate(explosion, transform.position, transform.rotation);
+                Destroy(_exp, 2);
                 Destroy(gameObject);
             }
             else
             {
+                GameObject _exp = Instantiate(explosion, transform.position, transform.rotation);
+                Destroy(_exp, 2);
                 Destroy(gameObject);
             }
             Vector3 sourcePosition = transform.position;

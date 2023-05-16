@@ -36,6 +36,9 @@ public class ExplosiveBarrel : MonoBehaviour
 
     public void Explode()
     {
+        Vector3 sourcePosition = transform.position;
+        SoundManager.instance.PlaySound(5, sourcePosition);
+
         GameObject _exp = Instantiate(explosion, transform.position, transform.rotation);
         Destroy(_exp, lingerTime);
         knockBack();
