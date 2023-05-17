@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,10 +19,11 @@ public class ItemManager : MonoBehaviour
 	public ItemData[] LegendaryItems;
 
 	public Transform OriginalInventoryPos;
-	private float rightOff;
+	public GameObject canvas;
+	public float rightOff;
 	public GameObject ImagePrefab;
 
-	private Dictionary<ItemData, int> PlayerInventory;
+	public Dictionary<ItemData, int> PlayerInventory;
 
 	[Header("Stat Modifiers")]
 	public float PercentAttackSpeedBonus;
@@ -42,7 +44,7 @@ public class ItemManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-
+		//canvas = GameObject.FindWithTag("canvas");
 		PlayerInventory = new Dictionary<ItemData, int>();
 
 		ResetInventory();
@@ -55,11 +57,19 @@ public class ItemManager : MonoBehaviour
 		Debug.Log($"<color=green>[ItemManager]</color>: Successfully added {itemToAdd.ItemName}.");
 		CalculateModifiers(itemToAdd);
 		Vector3 inventoryPos = OriginalInventoryPos.position;
-		inventoryPos.x += rightOff;
-		Image inventoryDisplay = Instantiate(ImagePrefab, inventoryPos, Quaternion.identity).GetComponent<Image>();
-		inventoryDisplay.sprite = itemToAdd.DisplaySprite;
-		//Debug.Log(PrintInventory());
-
+		if (PlayerInventory[itemToAdd] < 2)
+		{
+            Image inventoryDisplay = Instantiate(ImagePrefab, inventoryPos, Quaternion.identity).GetComponent<Image>();
+            TextMeshProUGUI modnum = inventoryDisplay.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            inventoryDisplay.sprite = itemToAdd.DisplaySprite;
+            inventoryDisplay.gameObject.transform.SetParent(canvas.transform, false);
+            inventoryDisplay.transform.position = inventoryPos;
+            inventoryDisplay.transform.position += rightOff * transform.right;
+            rightOff += 50f;
+			ModifierValueDisplay mod = modnum.gameObject.GetComponent<ModifierValueDisplay>();
+			mod.item = itemToAdd;
+            Debug.Log(itemToAdd.ToString());
+        }
 		return true;
 	}
 

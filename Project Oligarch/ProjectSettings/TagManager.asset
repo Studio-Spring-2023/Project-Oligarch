@@ -11,6 +11,8 @@ TagManager:
   - Price
   - dead
   - cockpit
+  - canvas
+  - GameManager
   layers:
   - Default
   - TransparentFX
