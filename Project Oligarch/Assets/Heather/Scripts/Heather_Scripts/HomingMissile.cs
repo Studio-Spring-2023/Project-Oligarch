@@ -45,7 +45,7 @@ public class HomingMissile : MonoBehaviour
         //This damages it's target before destroying itself
         if (missileWait == false)
         {
-            if (boom.collider.CompareTag("Enemy"))
+            if (boom.collider.CompareTag("Enemy") || boom.collider.CompareTag("Drone"))
             {
                 boom.collider.GetComponent<Enemy_health>().LoseLife(Dam);
                 GameObject _exp = Instantiate(explosion, transform.position, transform.rotation);

@@ -127,7 +127,7 @@ MonoBehaviour:
   force: 1000
   radius: 8
   enemydamage: 5
-  playerdamage: 100
+  playerdamage: 70
   lingerTime: 4
 --- !u!114 &2592465807424423403
 MonoBehaviour:
