@@ -46,12 +46,18 @@ public class PointOfIntrest : MonoBehaviour
 
     private bool InRange()
     {
-        if(Vector3.Distance(transform.position, Playertrans.position) < Range )
+        if (Playertrans != null)
         {
-            return true;
+            if (Vector3.Distance(transform.position, Playertrans.position) < Range)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
+        
     }
 
     private void StartEncounter()
