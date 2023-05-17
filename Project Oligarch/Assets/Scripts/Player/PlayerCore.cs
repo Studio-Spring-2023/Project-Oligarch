@@ -26,7 +26,7 @@ public class PlayerCore : Core
     [Range(5f, 15f)]
     public float AirStrafeSpeed;
     [Range(1f, 20f)]
-	public static float JumpForce = 128f;
+	public static float JumpForce = 8f;
 	public float GroundCheckDistance;
 	public Transform GroundCheckTrans;
 	public bool grounded;
