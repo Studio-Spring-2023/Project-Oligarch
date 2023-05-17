@@ -286,7 +286,7 @@ Transform:
   - {fileID: 3791775445187925497}
   - {fileID: 4899823714729984784}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &-4280498057574015392
 CapsuleCollider:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSpeed: 0
-  SprintSpeed: 2
+  SprintSpeed: 3
   Shield: 0
   canSlide: 1
   Slide: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   AirStrafeSpeed: 10
   GroundCheckDistance: 0.1
   GroundCheckTrans: {fileID: 4899823714729984784}
+  grounded: 0
   PlayerBody: {fileID: 1239547620105552869}
   CameraTransform: {fileID: 0}
   lookDir: {x: 0, y: 0, z: 0}
