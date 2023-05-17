@@ -36,7 +36,8 @@ public class CutsceneManager : MonoBehaviour
 
         foreach (GameObject obj in disableOnEnd)
         {
-            obj.SetActive(false);
+            Destroy(obj);
+            //obj.SetActive(false);
         }
 
     }
