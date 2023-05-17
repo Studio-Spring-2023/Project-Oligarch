@@ -7,6 +7,7 @@ public class MissionWaypoint : MonoBehaviour
     public Image img;
     public Transform target;
     public Text meter;
+    public Vector3 offset;
 
     // Update is called once per frame
     void Update()
@@ -14,6 +15,7 @@ public class MissionWaypoint : MonoBehaviour
         if (target == null)
         {
             Destroy(img);
+            Destroy(meter);
         }
 
         float minX = img.GetPixelAdjustedRect().width / 2;
@@ -21,7 +23,7 @@ public class MissionWaypoint : MonoBehaviour
 
         float minY = img.GetPixelAdjustedRect().height / 2;
         float maxY = Screen.height - minY;
-        Vector2 pos = Camera.main.WorldToScreenPoint(target.position);
+        Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
 
         if(Vector3.Dot((target.position - transform.position), transform.forward) < 0)
         {

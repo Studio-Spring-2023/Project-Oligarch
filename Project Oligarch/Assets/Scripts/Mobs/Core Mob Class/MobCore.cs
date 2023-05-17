@@ -10,7 +10,7 @@ using UnityEngine.Rendering.Universal;
 /// </summary>
 public abstract class MobCore : Core, IGoap
 {
-	[Range(1f, 25f)]
+	[Range(1f, 30f)]
 	public int Damage;
 
 	[Range(1f, 25f)]
