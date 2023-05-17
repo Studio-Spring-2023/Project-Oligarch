@@ -6,6 +6,8 @@ public class LevelProgress : MonoBehaviour
 {
     public List<PointOfIntrest> POIs = new List<PointOfIntrest>();
 
+    public MissionWaypoint waypoint;
+
     public int currentPOI;
     void Start()
     {
@@ -19,5 +21,6 @@ public class LevelProgress : MonoBehaviour
         {
             currentPOI += 1;
         }
+        waypoint.target = POIs[currentPOI].transform;
     }
 }

@@ -23,6 +23,7 @@ public class HumanoidSimpleHulking : MobCore
 
 	[Range(0.25f, 1f)]
 	public float rotationStep;
+	public float speed = 5;
 	
 
 	protected override void Awake()
@@ -55,7 +56,7 @@ public class HumanoidSimpleHulking : MobCore
 		//Can we see the Player? If not, move through our points.
 		if (!EntityNavAgent.Raycast(offsetAttackPos, out NavMeshHit hit))
 		{
-			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * 4f;
+			EntityNavAgent.velocity = dirFromEntityToTarget.normalized * speed;
 			Quaternion lookRotation = Quaternion.LookRotation(dirFromEntityToTarget);
 			Quaternion slerpedRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationStep);
 			transform.rotation = slerpedRotation;
