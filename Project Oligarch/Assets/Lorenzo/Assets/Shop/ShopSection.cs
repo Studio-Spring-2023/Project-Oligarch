@@ -131,6 +131,9 @@ public class ShopSection : MonoBehaviour
             Destroy(Item);
             Money.Credits -= Price;
             StatMods.StatsMod();
+            Vector3 sourcePosition = gameObject.transform.position;
+            SoundManager.instance.PlaySound(10, sourcePosition);
+
         }
         
     }
