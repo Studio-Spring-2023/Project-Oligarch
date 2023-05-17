@@ -117,7 +117,7 @@ public class BountyHandler : MonoBehaviour
 	public void Awake()
 	{
 		BountyOrbOrientation = Quaternion.identity;
-
+		ConBounty = GameObject.FindWithTag("cockpit").GetComponent<ConfirmBounty>();
 		PopulateHolotable();
 	}
 
@@ -145,7 +145,7 @@ public class BountyHandler : MonoBehaviour
 		}
 
 		ActiveBounty.GameObject.SetActive(false);
-		Instantiate(BountyOrbPrefab).transform.position = CockpitConsole.transform.position;
+		//Instantiate(BountyOrbPrefab).transform.position = CockpitConsole.transform.position;
 	}
 
 	public void PopulateHolotable()

@@ -10,11 +10,12 @@ TagManager:
   - Enemy
   - Price
   - dead
+  - cockpit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Walkable
   - Water
   - UI
   - Ground

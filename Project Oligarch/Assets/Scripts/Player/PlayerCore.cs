@@ -26,10 +26,10 @@ public class PlayerCore : Core
     [Range(5f, 15f)]
     public float AirStrafeSpeed;
     [Range(1f, 20f)]
-	public static float JumpForce = 8f;
+	public static float JumpForce = 16f;
 	public float GroundCheckDistance;
 	public Transform GroundCheckTrans;
-	private bool grounded;
+	public bool grounded;
 	private Vector3 gravity => new Vector3(0, GameManager.Gravity, 0);
 	private LayerMask Walkable => LayerMask.GetMask("Ground");
 
@@ -87,7 +87,7 @@ public class PlayerCore : Core
         //Temporary to avoid Null Reference errors
         AssignedLoadout = AssignLoadout ( LoadoutType.Ranger );
 
-		MoveSpeed = 6f;
+		MoveSpeed = 8f;
 	}
 
     private void Start()
@@ -119,19 +119,19 @@ public class PlayerCore : Core
 
         Forward = new Vector3 ( transform.forward.x , 0 , transform.forward.z ).normalized;
 
-		/*
-		Ray groundRay = new Ray(transform.position, Vector3.down);
-		if (!Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
-		{
-			//We are floating, get our ass on the ground.
-			grounded = false;
-		}
-		else
-		{
-			grounded = true;
+		
+		//Ray groundRay = new Ray(transform.position, Vector3.down);
+		//if (Physics.Raycast(groundRay, GroundCheckDistance, Walkable))
+		//{
 			
-		}
-		*/
+		//	grounded = true;
+		//}
+		//else
+		//{
+		//	grounded = false;
+			
+		//}
+		
 
 		GroundCheck ( );
 
@@ -165,20 +165,20 @@ public class PlayerCore : Core
         }
 	}
 
-	public void GroundCheck ( )
+	public void GroundCheck()
 	{
 		grounded = false;
-        Collider [ ] colliders = Physics.OverlapSphere ( GroundCheckTrans.position , GroundCheckDistance , Walkable );
+		Collider[] colliders = Physics.OverlapSphere(GroundCheckTrans.position, GroundCheckDistance, Walkable);
 
-		if(colliders.Length > 0 )
+		if (colliders.Length > 0)
 		{
-            grounded = true;
-        }
+			grounded = true;
+		}
 	}
 
 	public void AttemptJump()
 	{
-		if (!jump)
+		if (!jump && grounded)
 		{
 			jump = true;
 		}
@@ -228,7 +228,8 @@ public class PlayerCore : Core
 		if(Slide)
 		{
             Vector3 sourcePosition = transform.position;
-            SoundManager.instance.PlaySound(3, sourcePosition);
+			if(SoundManager.instance != null)
+				SoundManager.instance.PlaySound(3, sourcePosition);
             Velocity = (temp * MoveSpeed);
 		}
 
