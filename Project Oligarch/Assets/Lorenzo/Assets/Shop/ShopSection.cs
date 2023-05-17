@@ -130,6 +130,7 @@ public class ShopSection : MonoBehaviour
             ItemManager.Instance.AddItemToInventory(CurrItem.data);
             Destroy(Item);
             Money.Credits -= Price;
+            StatMods.StatsMod();
         }
         
     }
