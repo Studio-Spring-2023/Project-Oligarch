@@ -15,6 +15,7 @@ public class PointOfIntrest : MonoBehaviour
     private DropHealth health;
     private bool startedPOI = false;
     public bool Boss = false;
+    public bool completed = false;
     void Start()
     {
         Playertrans = GameObject.FindWithTag("Player").transform;
@@ -35,6 +36,7 @@ public class PointOfIntrest : MonoBehaviour
         if(spawnenemies.Finish == true && startedPOI && !Boss)
         {
             CalcReward();
+            completed = true;
         }
         else if (spawnenemies.Finish == true && startedPOI && Boss)
         {
