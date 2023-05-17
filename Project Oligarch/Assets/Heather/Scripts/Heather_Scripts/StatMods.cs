@@ -16,7 +16,7 @@ public class StatMods : MonoBehaviour
 
     public static float damMod;
     public static float atkSpeedMod;
-    public static float moveMod;
+    public static float moveMod = 1;
     public static float jumpMod;
     public static float mitiChance; 
     public static float lifeSteal;
@@ -24,7 +24,7 @@ public class StatMods : MonoBehaviour
     public void Awake()
     {
         itemManager = this.gameObject.GetComponent<ItemManager>();
-        StatsMod();
+        //StatsMod();
     }
     public void Update()
     {
@@ -53,7 +53,7 @@ public class StatMods : MonoBehaviour
         HomingMissile.Dam = projectiles.Dam * ( 1 + damMod );
         HomingMissile.force = HomingMissile.force * ( 1 + atkSpeedMod );
 
-        PlayerCore.JumpForce = PlayerCore.JumpForce * jumpMod;
+        PlayerCore.JumpForce = PlayerCore.JumpForce * (1 + jumpMod);
         PlayerCore.MoveSpeed = PlayerCore.MoveSpeed * ( 1 + moveMod );
 
         projectiles.LifeSteal = lifeSteal;

@@ -26,7 +26,7 @@ public class PlayerCore : Core
     [Range(5f, 15f)]
     public float AirStrafeSpeed;
     [Range(1f, 20f)]
-	public static float JumpForce = 16f;
+	public static float JumpForce = 128f;
 	public float GroundCheckDistance;
 	public Transform GroundCheckTrans;
 	public bool grounded;
@@ -180,7 +180,8 @@ public class PlayerCore : Core
 	{
 		if (!jump && grounded)
 		{
-			jump = true;
+            Debug.Log(JumpForce);
+            jump = true;
 		}
 	}
 
@@ -347,8 +348,9 @@ public class PlayerCore : Core
 		Gizmos.DrawWireSphere(RotatedCrosshairPoint, 0.25f);
 
 		//Ground ray
-		Gizmos.color = Color.white;
-		Gizmos.DrawRay(transform.position, Vector3.down * GroundCheckDistance);
+		Gizmos.color = Color.red;
+		//Gizmos.DrawRay(transform.position, Vector3.down * GroundCheckDistance);
+		Gizmos.DrawWireSphere(GroundCheckTrans.position, GroundCheckDistance);
 
 		//Interact Ray
         Vector3 dirFromCameraToCrosshair = RotatedCrosshairPoint - CameraTransform.position;
