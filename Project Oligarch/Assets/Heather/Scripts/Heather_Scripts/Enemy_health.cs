@@ -27,6 +27,8 @@ public class Enemy_health : MonoBehaviour
 
     public void LoseLife(float amount )
     {
+        Vector3 sourcePosition = gameObject.transform.position; 
+        SoundManager.instance.PlaySound(4, sourcePosition);
         currentHealth -= amount;
         if( currentHealth <= 0f && isBarrel == false)
         {
@@ -59,6 +61,8 @@ public class Enemy_health : MonoBehaviour
             m_Collider.enabled = !m_Collider.enabled;
         }
         this.gameObject.tag = "dead";
+        Vector3 sourcePosition = gameObject.transform.position;
+        SoundManager.instance.PlaySound(6, sourcePosition);
 
         enemyAnim.SetInteger("action", death_action_number);
         yield return new WaitForSeconds(death_despawn);

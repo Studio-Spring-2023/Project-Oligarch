@@ -18,6 +18,7 @@ public class CutsceneManager : MonoBehaviour
             obj.SetActive(false);
         }
         StartCoroutine(cutsceneTimer());
+
     }
 
     // Update is called once per frame
@@ -28,10 +29,12 @@ public class CutsceneManager : MonoBehaviour
 
     IEnumerator cutsceneTimer()
     {
+                    
         yield return new WaitForSeconds(time);
         foreach(GameObject obj in enableOnEnd)
         {
             obj.SetActive(true);
+
         }
 
         foreach (GameObject obj in disableOnEnd)
@@ -39,6 +42,7 @@ public class CutsceneManager : MonoBehaviour
             Destroy(obj);
             //obj.SetActive(false);
         }
+        SoundManager.instance.StopSound(8);
 
     }
 }
